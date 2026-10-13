@@ -1,0 +1,13 @@
+---
+const { items } = Astro.props;
+---
+<div class="faq-list">
+  {items.map((item, index) => (
+    <div class:list={["faq-item", { open: index === 0 }]}>
+      <button type="button" data-faq-button aria-expanded={index === 0 ? "true" : "false"}>
+        <span>{item.q}</span><span data-icon>{index === 0 ? "−" : "+"}</span>
+      </button>
+      <div class="faq-answer"><p>{item.a}</p></div>
+    </div>
+  ))}
+</div>

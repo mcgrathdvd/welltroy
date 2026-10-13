@@ -1,0 +1,9 @@
+---
+import { minimumOrder } from "../ordering.mjs";
+const { slug } = Astro.props;
+---
+<dl class="order-summary" aria-label="Ordering at a glance">
+  <div><dt>Minimum order</dt><dd>{minimumOrder(slug)}</dd></div>
+  <div><dt>Samples</dt><dd>Free samples</dd></div>
+  <div><dt>Production</dt><dd>Approx. 15–20 days after payment</dd></div>
+</dl>

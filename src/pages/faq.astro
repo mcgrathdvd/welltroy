@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Faq from "../components/Faq.astro";
+import { orderTerms } from "../ordering.mjs";
+
+const groups = [
+  { id: "ordering", title: "Ordering & Quotation", items: [
+    { q: "What details do you need to quote?", a: "Send the product type or catalogue model, size or packed dimensions, estimated quantity, printing needs and destination country. If the size is uncertain, describe what you plan to pack." },
+    { q: "What is the minimum order quantity?", a: "Most bags and mailers start at 500 pieces for eligible specifications. Honeycomb paper starts at 500 rolls. Thermal labels start at 500 units; confirm whether the quoted unit is a roll or fanfold pack and how many labels it contains." },
+    { q: "Can I order several packaging products together?", a: "Select Multiple products on the enquiry form, then list each product, size and quantity in the requirements field. Minimum quantities apply to each product, not to the combined enquiry total." },
+    { q: "Can I request a sample?", a: orderTerms.sample },
+    { q: "Which payment method do you accept?", a: "We accept T/T (bank transfer or wire transfer). Payment details and the agreed order terms are included in your quotation." }
+  ] },
+  { id: "specifications", title: "Product Specifications", items: [
+    { q: "Are catalogue dimensions internal or external?", a: "Dimension labels differ by product. Mailer listings identify outer dimensions; ask for usable inner space and tolerance before confirming a close fit." },
+    { q: "Can you make a custom size?", a: "Custom dimensions can be discussed for selected products. Provide the required size and quantity so production feasibility can be checked." },
+    { q: "How do I choose between a poly mailer and a bubble mailer?", a: "Poly mailers suit many lightweight, non-fragile goods. Bubble mailers add an internal cushioning layer. Test the complete pack with the actual product and shipping method." },
+    { q: "Are stand-up pouches suitable for food?", a: "Food suitability depends on the exact material structure, contents and destination market. Request product-specific compliance documents before ordering for food use." }
+  ] },
+  { id: "customization", title: "Printing & Materials", items: [
+    { q: "Can you print our logo?", a: "Logo printing is available for selected products. Provide artwork, desired colors, print coverage and quantity for a product-specific review." },
+    { q: "How quickly can I receive a design draft?", a: "Welltroy offers a free initial design draft within 24 hours after receiving a clear packaging and artwork brief. Complex requirements may need additional discussion." },
+    { q: "Can you match a brand color?", a: "Supply a Pantone or other color reference. Matching depends on the substrate and print process; request a physical approval reference where color accuracy matters." },
+    { q: "What documents support environmental claims?", a: "Request the material composition and relevant test documents for the exact product. Recycling and disposal routes depend on local facilities and regulations." },
+    { q: "Can I upload artwork on this website?", a: "Yes. You can attach your logo, reference images or customization brief to the Request a Quote form. Upload up to 3 files, with a combined size of 10 MB or less. Supported formats are PNG, JPG, WEBP, PDF, AI, PSD, DOCX, XLSX, TXT and CSV. For larger files, email info@welltroy.com to arrange sharing and include your enquiry reference if available." }
+  ] },
+  { id: "shipping", title: "Production & Delivery", items: [
+    { q: "How long does production take?", a: "Bulk production typically takes about 15–20 days after payment. Confirm the schedule for your product, printing and quantity in the final quotation." },
+    { q: "Can you discuss delivery to Europe, North America or the Middle East?", a: "Include the destination country or port with your enquiry. Available shipping arrangements and terms can then be confirmed with the quotation." },
+    { q: "What should I approve before production?", a: "Confirm dimensions, material, print artwork, colors, quantity, packing details and agreed shipping terms in writing." }
+  ] }
+];
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: groups.flatMap((group) => group.items).map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
+---
+<Layout title="Packaging FAQ | Welltroy" description="Answers about packaging specifications, custom printing, minimum order quantities, samples, production and international shipping enquiries." canonicalPath="/faq/" schemas={[faqSchema]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / FAQ</div><p class="eyebrow">Frequently asked questions</p><h1>Answers for Packaging Buyers</h1><p class="lead">Use these answers to prepare your specification. Product-specific details are on each catalogue page.</p><nav class="anchor-links" aria-label="FAQ categories">{groups.map((group) => <a href={`#${group.id}`}>{group.title} ↗</a>)}</nav></div></section>
+  {groups.map((group, index) => <section class:list={["section", { "section-soft": index % 2 === 1 }]} id={group.id}><div class="container"><div class="section-head"><div><p class="eyebrow">FAQ 0{index + 1}</p><h2>{group.title}</h2></div></div><Faq items={group.items} /></div></section>)}
+  <section class="cta-band"><div class="container inner"><div><h2>Have a Product-Specific Question?</h2><p>Share the catalogue model and how the packaging will be used.</p></div><a class="button button-light" href="/quote/">Ask Welltroy</a></div></section>
+</Layout>

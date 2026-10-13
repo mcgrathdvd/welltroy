@@ -1,0 +1,11 @@
+---
+import { factoryPhotos, getFactoryVisual } from "../factory-images.mjs";
+const photo = factoryPhotos.find((item) => item.image === Astro.props.image);
+if (!photo) throw new Error(`Unknown production image: ${Astro.props.image}`);
+const { alt = photo.alt, title = photo.title, detail = photo.detail, number = photo.number } = Astro.props;
+const visual = await getFactoryVisual(photo.source);
+---
+<figure class="production-photo">
+  <a class="production-photo-media" href={visual.full} target="_blank" rel="noopener" aria-label={`View a larger image of ${title.toLowerCase()}`}><img src={visual.image} srcset={visual.srcset} sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 980px) calc(100vw - 60px), 600px" alt={alt} loading="lazy" decoding="async" width={visual.width} height={visual.height} /></a>
+  <figcaption><span class="production-photo-number" aria-hidden="true">{number}</span><div><strong>{title}</strong>{detail && <span>{detail}</span>}</div></figcaption>
+</figure>

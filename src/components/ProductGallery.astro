@@ -1,0 +1,6 @@
+---
+import { getProductVisual } from "../product-images.mjs";
+const { product } = Astro.props;
+const photos = await Promise.all(product.gallery.map(async (photo) => ({ ...photo, visual: await getProductVisual(photo.imageSource) })));
+---
+<section class="section section-soft"><div class="container"><div class="section-head"><div><p class="eyebrow">Product views</p><h2>Details & Packing Examples</h2></div></div><div class="product-gallery">{photos.map((photo) => <figure><a href={photo.visual.imageFull} target="_blank" rel="noopener" aria-label={`View a larger image: ${photo.caption}`}><img src={photo.visual.image} srcset={photo.visual.imageSrcSet} sizes="(max-width: 640px) calc(100vw - 28px), 570px" alt={photo.caption} width={photo.visual.imageWidth} height={photo.visual.imageHeight} loading="lazy" decoding="async" /><span class="image-zoom-label">View larger image ↗</span></a><figcaption>{photo.caption}</figcaption></figure>)}</div></div></section>

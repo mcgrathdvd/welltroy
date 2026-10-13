@@ -1,0 +1,9 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { reviews } from "../reviews.mjs";
+---
+<Layout title="Buyer Reviews | Welltroy" description="Read selected buyer feedback about Welltroy packaging quality, service and samples." canonicalPath="/reviews/">
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / Buyer Reviews</div><p class="eyebrow">Buyer feedback</p><h1>What Buyers Said About Their Orders</h1><p class="lead">Six selected comments from verified purchases shared by Welltroy.</p></div></section>
+  <section class="section"><div class="container"><div class="review-grid">{reviews.map((review) => <article class="review-card" id={`review-${review.country.toLowerCase().replaceAll(" ", "-")}`}><div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“{review.quote}”</blockquote><div class="review-meta"><strong>{review.country}</strong><span>{review.date} · {review.note}</span></div></article>)}</div><p class="review-source-note">These are individual reviews, not an overall rating or a promise of the same outcome for every order.</p></div></section>
+  <section class="cta-band"><div class="container inner"><div><h2>Discuss Your Packaging Order</h2><p>Send your product, quantity and destination to start a specification review.</p></div><a class="button button-light" href="/quote/">Request a Quote</a></div></section>
+</Layout>

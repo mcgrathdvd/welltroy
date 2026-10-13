@@ -1,0 +1,44 @@
+---
+import { products, site } from "../data.mjs";
+import { catalogue } from "../ordering.mjs";
+const { quoteHref = "/quote/#quote-form" } = Astro.props;
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="footer-logo" href="/" aria-label="Welltroy home"><img src="/images/welltroy-logo.svg" alt="Welltroy" width="770" height="456" /></a>
+        <p>Custom e-commerce packaging for shipping, protection, presentation and fulfillment.</p>
+        <p>{site.address}</p>
+      </div>
+      <div>
+        <h3>Products</h3>
+        <div class="footer-links">
+          {products.slice(0, 5).map((product) => <a href={`/products/${product.slug}/`}>{product.name}</a>)}
+          <a href="/products/">View all products</a><a href={catalogue.path} download>Download 2025 catalogue (PDF)</a>
+        </div>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <div class="footer-links">
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <a href="tel:+8619864656856">{site.phone}</a>
+          <a href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a>
+          <a href={quoteHref}>Request a Quote</a>
+        </div>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <div class="footer-links">
+          <a href="/industries/">Industries</a>
+          <a href="/why-welltroy/">Why Welltroy</a>
+          <a href="/reviews/">Buyer Reviews</a>
+          <a href="/guides/choose-a-mailer/">Buying Guide</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/about/">About Welltroy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} {site.legalName}</span><span>E-commerce Packaging Solutions</span></div>
+  </div>
+</footer>

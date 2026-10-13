@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { products, catalogueProducts, newProducts, productGroups, site } from "../../data.mjs";
+import { catalogue } from "../../ordering.mjs";
+const schema = { "@context": "https://schema.org", "@type": "ItemList", itemListElement: products.map((product, index) => ({ "@type": "ListItem", position: index + 1, url: `${site.origin}/products/${product.slug}/`, name: product.name })) };
+---
+<Layout title="Packaging Products | Welltroy" description="Browse Welltroy poly mailers, bubble mailers, zipper bags, paper bags, pouches, thermal labels and honeycomb paper rolls." canonicalPath="/products/" schemas={[schema]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / Products</div><p class="eyebrow">Complete product range</p><h1>Packaging for Shipping, Presentation and Fulfillment</h1><p class="lead">Explore {newProducts.length} new products alongside our {catalogueProducts.length} catalogue ranges. Compare packaging formats, printing examples and specification options, then send your requirements for a quotation.</p><nav class="anchor-links" data-product-jumps aria-label="Product groups"><a href="#new-products">New Products · {newProducts.length}</a>{productGroups.map((group, index) => <a href={`#group-${index + 1}`}>{group.name}</a>)}</nav><p class="catalogue-download"><a class="button button-secondary" href={catalogue.path} download>Download the 2025 catalogue (PDF) ↓</a><small>The PDF covers our original catalogue ranges. New products are listed on this page; final specifications are confirmed with your quotation.</small></p></div></section>
+  <section class="product-browser container" id="product-browser" data-product-browser hidden aria-label="Find packaging products">
+    <h2>Find Your Packaging</h2><p>Search by product or use, then narrow the results. Categories include both catalogue ranges and new products.</p>
+    <form role="search"><div class="product-filters">
+      <label for="product-search">Search products<input id="product-search" type="search" name="q" placeholder="e.g. apparel, bubble, paper bags" autocomplete="off" /></label>
+      <label for="product-category">Category<select id="product-category" name="category"><option value="">All categories</option>{productGroups.map(group => <option value={group.name}>{group.name}</option>)}</select></label>
+      <label for="product-range">Range<select id="product-range" name="range"><option value="">All products</option><option value="new">New products</option><option value="catalogue">Catalogue ranges</option></select></label>
+    </div><div class="filter-status"><p data-result-count role="status" aria-live="polite" aria-atomic="true">18 products</p><button class="button button-secondary" type="button" data-clear-filters>Clear filters</button></div></form>
+    <div class="filter-empty" data-no-results hidden><h3>No matching products</h3><p>Try a broader search or clear your filters. We can also help you choose packaging.</p><a class="text-link" href="/quote/?product=not-sure#quote-form">Help me choose →</a></div>
+  </section>
+  <script src="../../product-filter.js"></script>
+  <section class="section section-soft" id="new-products" data-product-section><div class="container"><div class="section-head"><div><p class="eyebrow">New arrivals</p><h2>New Products</h2><p class="lead">More shipping, retail and wrapping options for your packaging range.</p></div></div><div class="product-grid">{newProducts.map((product) => <ProductCard product={product} filterable />)}</div></div></section>
+  {productGroups.map((group, index) => <section class:list={["section", { "section-soft": index % 2 === 1 }]} id={`group-${index + 1}`} data-product-section><div class="container"><div class="section-head"><div><p class="eyebrow">Catalogue group 0{index + 1}</p><h2>{group.name}</h2><p class="lead">{group.short}</p></div></div><div class="product-grid">{group.slugs.map((slug) => products.find((product) => product.slug === slug)).filter((product) => !product.isNew).map((product) => <ProductCard product={product} filterable />)}</div></div></section>)}
+  <section class="cta-band"><div class="container inner"><div><h2>Need More Than One Packaging Product?</h2><p>List the products, quantities and destination in one enquiry.</p></div><a class="button button-light" href="/quote/?product=multiple-products#quote-form">Start an Enquiry</a></div></section>
+</Layout>
+
