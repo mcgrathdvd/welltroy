@@ -113,9 +113,12 @@ document.querySelectorAll('[data-faq-button]').forEach((button) => {
 
 const quoteForm = document.querySelector('[data-quote-form]');
 if (quoteForm) {
-  const requestedProduct = new URLSearchParams(window.location.search).get('product');
+  const quoteParams = new URLSearchParams(window.location.search);
+  const requestedProduct = quoteParams.get('product');
   const productSelect = quoteForm.querySelector('[name="product"]');
   if (requestedProduct && [...productSelect.options].some((option) => option.value === requestedProduct)) productSelect.value = requestedProduct;
+  const requestedSize = quoteParams.get('size');
+  if (productSelect.value && requestedSize) quoteForm.querySelector('[name="size"]').value = requestedSize.slice(0, 160);
   const quantityInput = quoteForm.querySelector('[name="quantity"]');
   const messageInput = quoteForm.querySelector('[name="message"]');
   const updateGuidance = () => {
@@ -219,11 +222,13 @@ if (quoteForm) {
   const showService = (message, state, canRetry = false) => {
     serviceStatus.textContent = message;
     servicePanel.dataset.state = state;
+    quoteForm.querySelector('[data-check-verification]').hidden = state === 'ready';
     serviceActions.hidden = !canRetry;
     retryService.disabled = initializing;
     const needsHelp = state === 'error' || state === 'expired';
-    fallback.hidden = !needsHelp && !hasSubmissionError;
-    submitHint.textContent = state === 'ready' ? '' : needsHelp ? 'Submission is unavailable until the connection and security check are ready. Use the contact options below or check the status at the top of this form.' : 'Complete the security check at the top of this form before sending.';
+    fallback.hidden = false;
+    if (needsHelp || hasSubmissionError) fallback.open = true;
+    submitHint.textContent = state === 'ready' ? '' : needsHelp ? 'Submission is unavailable until the connection and security check are ready. Use the contact options below or check the status in this form.' : 'Complete the security check in this form before sending.';
   };
   const loadVerification = () => {
     if (window.turnstile?.render) return Promise.resolve();
@@ -269,7 +274,8 @@ if (quoteForm) {
       await loadVerification();
       showService('Complete the security check to enable online submission. You can fill in your details below.', 'waiting');
       widget = window.turnstile.render('[data-turnstile]', {
-        sitekey: config.siteKey, action: 'quote', size: 'flexible',
+        // Compact fits 320px screens and stays safe when a desktop window is narrowed.
+        sitekey: config.siteKey, action: 'quote', size: 'compact', theme: 'light',
         callback: () => {
           if (completed) return;
           ready = true;
@@ -281,6 +287,18 @@ if (quoteForm) {
           ready = false;
           submit.disabled = true;
           showService('The security check has expired. Select Try again to verify. Your details and files remain on this page.', 'expired', true);
+        },
+        'timeout-callback': () => {
+          if (completed) return;
+          ready = false;
+          submit.disabled = true;
+          showService('The security check timed out. Try again, or use email or WhatsApp below. Your details and files remain on this page.', 'expired', true);
+        },
+        'unsupported-callback': () => {
+          if (completed) return;
+          ready = false;
+          submit.disabled = true;
+          showService('This browser could not complete the security check. Open this page in an up-to-date browser, or copy your enquiry below to contact us.', 'error', true);
         },
         'error-callback': () => {
           if (completed) return;
@@ -298,6 +316,10 @@ if (quoteForm) {
   };
   retryService.addEventListener('click', initializeService);
   initializeService();
+  quoteForm.querySelector('[data-check-verification]').addEventListener('click', () => {
+    servicePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    servicePanel.focus({ preventScroll: true });
+  });
   document.querySelectorAll('a[href="#quote-form"]').forEach((link) => {
     link.addEventListener('click', () => quoteForm.querySelector('input[name="name"]')?.focus({ preventScroll: true }));
   });
@@ -346,7 +368,7 @@ if (quoteForm) {
     if (!ready || sending || completed || !quoteForm.reportValidity()) return;
     sending = true;
     hasSubmissionError = false;
-    fallback.hidden = true;
+    fallback.open = false;
     status.classList.remove('show');
     submit.disabled = true;
     submit.textContent = selectedFiles.length ? 'Sending enquiry and files…' : 'Sending…';
@@ -383,6 +405,7 @@ if (quoteForm) {
     } catch {
       hasSubmissionError = true;
       fallback.hidden = false;
+      fallback.open = true;
       formFields.inert = false;
       showStatus(`${failureMessage} Your details and selected files have been kept on this page. You can copy your requirements below to contact us.`);
     } finally {
