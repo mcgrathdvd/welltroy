@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { products, catalogueProducts, newProducts } from '../data.mjs';
+import { catalogue, minimumOrder, orderTerms } from '../ordering.mjs';
+---
+<Layout title="Current Packaging Product Guide | Welltroy" description="Compare all 18 Welltroy packaging ranges, published dimensions, MOQ and enquiry requirements in the October 2026 product guide." canonicalPath="/catalogue/">
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / Product guide</div><p class="eyebrow">October 2026 · Current range</p><h1>Your Packaging Product Guide</h1><p class="lead">All {products.length} product listings in one place: {catalogueProducts.length} original catalogue ranges and {newProducts.length} newer products.</p><p class="catalogue-edition">The original 2025 PDF remains available for its published size tables. This online guide also includes the newer listings; it does not add unconfirmed material specifications or certifications.</p><div class="button-row"><a class="button" href="/quote/?product=multiple-products#quote-form">Enquire about several products</a><a class="button button-secondary" href={catalogue.path} download>Original 2025 catalogue (PDF) ↓</a><button class="service-retry" type="button" data-print-guide>Print / save this guide as PDF</button></div></div></section>
+  <section class="section"><div class="container"><div class="guide-callout"><h2>Plan Your Order</h2><p><strong>Payment:</strong> {orderTerms.payment}</p><p><strong>Production:</strong> {orderTerms.production}</p><p>Choose existing or custom printed samples and confirm courier charges. <a href="/ordering/">Read samples, payment &amp; delivery details →</a></p></div>
+    {products.map((product) => <article class="catalogue-entry" id={product.slug}><p class="eyebrow">{product.group} · {product.isNew ? 'Newer listing' : '2025 catalogue range'}</p><h2><a href={`/products/${product.slug}/`}>{product.name}</a></h2><p>{product.intro}</p><p><strong>Minimum order:</strong> {minimumOrder(product.slug)}.</p><p><strong>Useful enquiry details:</strong> {product.specNeeds.join('; ')}.</p><div class="table-wrap" role="region" tabindex="0" aria-label={`${product.name} guide specifications`}><table><thead><tr><th>{product.isNew ? 'Feature' : 'Model'}</th><th>{product.sizeLabel}</th></tr></thead><tbody>{product.sizes.map(([model,size])=><tr><td>{model}</td><td>{size}</td></tr>)}</tbody></table></div>{product.alert && <p>{product.alert}</p>}<a class="text-link" href={`/quote/?product=${product.slug}#quote-form`}>Request pricing for {product.name} →</a></article>)}
+    <p>Confirm current availability, usable dimensions, materials, printing and tolerances in your written quotation before ordering.</p>
+  </div></section>
+</Layout>
+<script>document.querySelector('[data-print-guide]')?.addEventListener('click', () => window.print());</script>
+<style>
+  .catalogue-entry { padding: 36px 0; border-bottom: 1px solid var(--line); }
+  .catalogue-entry h2 a { color: inherit; text-decoration: none; }
+  @media print {
+    :global(.site-header), :global(.site-footer), :global(.desktop-actions), :global(.mobile-actions), :global(.skip-link), .button-row { display: none !important; }
+    :global(body) { padding: 0 !important; font-size: 10pt; }
+    :global(.container) { width: 100%; max-width: none; }
+    :global(.page-hero), :global(.section) { padding: 12pt 0; }
+    .catalogue-entry { break-before: page; }
+    .table-wrap { overflow: visible; }
+    table { min-width: 0; }
+    tr { break-inside: avoid; }
+  }
+</style>
