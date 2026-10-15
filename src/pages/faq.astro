@@ -9,7 +9,8 @@ const groups = [
     { q: "What is the minimum order quantity?", a: "Most bags and mailers start at 500 pieces for eligible specifications. Honeycomb paper starts at 500 rolls. Thermal labels start at 500 units; confirm whether the quoted unit is a roll or fanfold pack and how many labels it contains." },
     { q: "Can I order several packaging products together?", a: "Select Multiple products on the enquiry form, then list each product, size and quantity in the requirements field. Minimum quantities apply to each product, not to the combined enquiry total." },
     { q: "Can I request a sample?", a: orderTerms.sample },
-    { q: "Which payment method do you accept?", a: "We accept T/T (bank transfer or wire transfer). Payment details and the agreed order terms are included in your quotation." }
+    { q: "Is the sample shipping also free?", a: "Free samples do not automatically include delivery. Confirm whether you need an existing product sample or a custom printed sample, what is included, and any courier charge before dispatch." },
+    { q: "Which payment method do you accept?", a: orderTerms.payment }
   ] },
   { id: "specifications", title: "Product Specifications", items: [
     { q: "Are catalogue dimensions internal or external?", a: "Dimension labels differ by product. Mailer listings identify outer dimensions; ask for usable inner space and tolerance before confirming a close fit." },
@@ -25,7 +26,9 @@ const groups = [
     { q: "Can I upload artwork on this website?", a: "Yes. You can attach your logo, reference images or customization brief to the Request a Quote form. Upload up to 3 files, with a combined size of 10 MB or less. Supported formats are PNG, JPG, WEBP, PDF, AI, PSD, DOCX, XLSX, TXT and CSV. For larger files, email info@welltroy.com to arrange sharing and include your enquiry reference if available." }
   ] },
   { id: "shipping", title: "Production & Delivery", items: [
-    { q: "How long does production take?", a: "Bulk production typically takes about 15–20 days after payment. Confirm the schedule for your product, printing and quantity in the final quotation." },
+    { q: "How long does production take?", a: orderTerms.production },
+    { q: "Does production time include delivery?", a: "No. Production and transport are separate. Include your destination, postcode or port, and required arrival date. Ask for the shipping method, freight, duties and taxes to be itemized in your quotation." },
+    { q: "What should I do if there is a quality issue?", a: "Contact info@welltroy.com with your order reference, affected quantity, photos or video, and the agreed specification. Keep the packaging and affected goods available for review. The remedy and any inspection requirements depend on your written order terms." },
     { q: "Can you discuss delivery to Europe, North America or the Middle East?", a: "Include the destination country or port with your enquiry. Available shipping arrangements and terms can then be confirmed with the quotation." },
     { q: "What should I approve before production?", a: "Confirm dimensions, material, print artwork, colors, quantity, packing details and agreed shipping terms in writing." }
   ] }

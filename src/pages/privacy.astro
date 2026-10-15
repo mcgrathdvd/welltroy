@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data.mjs';
+---
+<Layout title="Enquiry Privacy Notice | Welltroy" description="How Welltroy's website handles packaging enquiries, contact details and attached artwork, and how to contact us about your information." canonicalPath="/privacy/">
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / Privacy Notice</div><p class="eyebrow">Your enquiry information</p><h1>Privacy Notice</h1><p class="lead">This notice explains the information you share through the Welltroy packaging enquiry form.</p><p>Updated 14 October 2026</p></div></section>
+  <section class="section"><div class="container policy-content">
+    <h2>Who to Contact</h2><p>{site.legalName}<br />{site.address}<br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+    <h2>What the Form Collects</h2><p>The form asks for your name, email, product, estimated quantity and destination. Company, WhatsApp number, size, sample preference, requirements and artwork files are optional, except that assisted enquiries need a description of what you want to pack.</p><p>Only include information and artwork needed to discuss your packaging. Do not send payment-card details, identity documents or unrelated personal information.</p>
+    <h2>How Your Enquiry Is Handled</h2><p>The form sends your details and selected files to Welltroy's enquiry email address so the team can respond and prepare a quotation. Files are sent as email attachments; this form does not publish them in a public website folder. If you require a confidentiality agreement for artwork, contact us before sending the files.</p>
+    <h2>Website and Email Providers</h2><p>Cloudflare serves the website and provides the Turnstile security check, which processes browser and connection information to help prevent abuse. Enquiries are sent through Tencent enterprise email. These services process information needed to deliver the website, security check and email.</p><p><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy ↗</a></p><p>If you choose WhatsApp or your email application, that service handles your message under its own privacy terms.</p>
+    <h2>Retention, Corrections and Deletion Requests</h2><p>Your submitted enquiry and attachments become email correspondence. Contact <a href={`mailto:${site.email}`}>{site.email}</a> to ask about retention, correct your details, or request deletion. Include your enquiry reference if available, and use the email address supplied with the enquiry where possible so the relevant record can be located. Any order-record obligations or other retention requirements can be explained in response to your request.</p>
+    <h2>Before You Submit</h2><p>You can change the form fields or remove selected attachments before sending. If a submission cannot be confirmed, contact us before sending it again to avoid a duplicate enquiry.</p><a class="button" href="/quote/#quote-form">Return to the enquiry form</a>
+  </div></section>
+</Layout>

@@ -64,15 +64,15 @@ export async function onRequest({ request, env }) {
     return reply(400, { ok: false, message: 'Please describe your products or what you need to pack in the requirements field.' });
   }
   const token = payload['cf-turnstile-response'];
-  if (typeof token !== 'string' || !token || token.length > 2048) return reply(400, { ok: false });
+  if (typeof token !== 'string' || !token || token.length > 2048) return reply(400, { ok: false, message: 'Complete the security check, then send your enquiry.' });
   try {
     const verification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST', body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token }),
       signal: AbortSignal.timeout(10000)
     });
     const result = await verification.json();
-    if (!result.success || result.hostname !== new URL(request.url).hostname || result.action !== 'quote') return reply(403, { ok: false });
-  } catch { return reply(503, { ok: false }); }
+    if (!result.success || result.hostname !== new URL(request.url).hostname || result.action !== 'quote') return reply(403, { ok: false, message: 'The security check could not be verified. Complete a new check and try again.' });
+  } catch { return reply(503, { ok: false, message: 'The security service could not be reached. Please try again or contact us by email or WhatsApp.' }); }
 
   const reference = crypto.randomUUID();
   const transport = nodemailer.createTransport({

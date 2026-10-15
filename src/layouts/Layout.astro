@@ -3,6 +3,7 @@ import "../styles.css";
 import { site } from "../data.mjs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import WhatsAppContact from "../components/WhatsAppContact.astro";
 
 interface Props {
   title: string;
@@ -56,6 +57,8 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
       <a class="desktop-quote" href={quoteHref}>Get a Free Quote<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 12 9-9h7l2 2v7l-9 9-9-9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /><circle cx="16.5" cy="7.5" r="1.4" fill="currentColor" /></svg></a>
     </div>
     <div class="mobile-actions" aria-label="Quick contact"><a href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a><a href={quoteHref}>Request a Quote</a></div>
+    <WhatsAppContact />
     <script src="../main.js"></script>
+    <script src="../whatsapp.js"></script>
   </body>
 </html>
