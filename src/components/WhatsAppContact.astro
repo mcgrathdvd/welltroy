@@ -1,0 +1,16 @@
+---
+import { site } from '../data.mjs';
+---
+<dialog class="contact-dialog" data-whatsapp-dialog aria-labelledby="whatsapp-title">
+  <div class="contact-dialog-header"><span class="eyebrow">Talk to Welltroy</span><button class="contact-close" type="button" data-whatsapp-close aria-label="Close WhatsApp contact">×</button></div>
+  <h2 id="whatsapp-title">Let's Discuss Your Packaging</h2>
+  <p>Continue to WhatsApp with a message ready to review. You can edit it before sending.</p>
+  <p class="contact-number"><strong>{site.phone}</strong><button type="button" class="service-retry" data-copy-whatsapp>Copy number</button></p>
+  <label class="contact-message-label" for="whatsapp-message">Your message</label>
+  <textarea id="whatsapp-message" data-whatsapp-message maxlength="5000" rows="5"></textarea>
+  <label class="contact-include" data-whatsapp-include-wrap hidden><input type="checkbox" data-whatsapp-include /> Include the product, quantity, size and destination from my enquiry</label>
+  <p class="form-note">Attachments stay on this website. Add any files separately in WhatsApp.</p>
+  <a class="button whatsapp-continue" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" data-whatsapp-continue>Continue to WhatsApp ↗</a>
+  <div class="button-row"><button class="service-retry" type="button" data-copy-whatsapp-message>Copy message</button><a class="text-link" href={`mailto:${site.email}`}>Email instead ↗</a></div>
+  <p class="form-note" data-whatsapp-status role="status" aria-live="polite"></p>
+</dialog>
