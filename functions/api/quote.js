@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { Buffer } from 'node:buffer';
+import { connect as connectTls } from 'node:tls';
 import { products } from '../../src/product-data.mjs';
 import { assistedChoices } from '../../src/quote-options.mjs';
 import { uploadLimits, uploadTypes, validateUploadFiles, attachmentName } from '../../src/quote-upload.mjs';
@@ -75,19 +76,33 @@ export async function onRequest({ request, env }) {
   } catch { return reply(503, { ok: false, message: 'The security service could not be reached. Please try again or contact us by email or WhatsApp.' }); }
 
   const reference = crypto.randomUUID();
-  const transport = nodemailer.createTransport({
-    host: 'smtp.exmail.qq.com', port: 465, secure: true,
-    auth: { user: env.SMTP_USER, pass: env.SMTP_PASSWORD },
-    connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 60000,
-    disableFileAccess: true, disableUrlAccess: true
-  });
+  let transport;
+  let deliveryStarted = false;
   try {
+    transport = nodemailer.createTransport({
+      host: 'smtp.exmail.qq.com', port: 465, secure: true,
+      auth: { user: env.SMTP_USER, pass: env.SMTP_PASSWORD },
+      connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 60000,
+      disableFileAccess: true, disableUrlAccess: true,
+      // Let the Workers TLS socket resolve the host. Nodemailer's separate
+      // Node DNS lookup can fail before the SMTP connection is opened.
+      getSocket(_options, callback) {
+        try {
+          const connection = connectTls({
+            host: 'smtp.exmail.qq.com', port: 465,
+            servername: 'smtp.exmail.qq.com', rejectUnauthorized: true
+          });
+          callback(null, { connection, secured: true });
+        } catch (error) { callback(error); }
+      }
+    });
     const attachments = await Promise.all(files.map(async (file) => ({
       filename: attachmentName(file.name),
       content: Buffer.from(await file.arrayBuffer()),
       contentType: uploadTypes[file.name.split('.').pop().toLowerCase()],
       contentDisposition: 'attachment'
     })));
+    deliveryStarted = true;
     const result = await transport.sendMail({
       from: { name: 'Welltroy Website', address: env.SMTP_USER },
       to: 'info@welltroy.com', replyTo: fields.email,
@@ -95,10 +110,25 @@ export async function onRequest({ request, env }) {
       text: `Reference: ${reference}\n\n${Object.entries(fields).map(([key, value]) => `${key}: ${key === 'product' ? product.name : value}`).join('\n')}\n\nAttachments: ${files.length ? files.map((file) => `${attachmentName(file.name)} (${file.size} bytes)`).join(', ') : 'None'}`,
       attachments
     });
-    if (!result.accepted?.length) return reply(502, { ok: false });
+    if (!result.accepted?.length) throw Object.assign(new Error('No recipient accepted'), { code: 'EENVELOPE', command: 'RCPT' });
     return reply(200, { ok: true, reference });
-  } catch {
-    // Do not log SMTP credentials or buyer contact details.
-    return reply(502, { ok: false });
-  } finally { transport.close(); }
+  } catch (error) {
+    // Log only bounded error identifiers, never the SMTP response/message,
+    // credentials, buyer fields or attachments.
+    const code = /^[A-Z0-9_]{1,40}$/.test(error?.code || '') ? error.code : 'UNKNOWN';
+    const command = String(error?.command || '').split(' ')[0];
+    const safeCommand = ['CONN', 'AUTH', 'EHLO', 'HELO', 'MAIL', 'RCPT', 'DATA'].includes(command) ? command : 'UNKNOWN';
+    console.error('quote_delivery_failed', JSON.stringify({
+      reference, code, command: safeCommand,
+      responseCode: Number.isInteger(error?.responseCode) ? error.responseCode : undefined
+    }));
+    const notSent = !deliveryStarted || ['CONN', 'AUTH', 'EHLO', 'HELO', 'MAIL', 'RCPT'].includes(safeCommand) || ['EDNS', 'EAUTH'].includes(code);
+    return reply(502, {
+      ok: false, reference,
+      code: notSent ? 'EMAIL_SERVICE_UNAVAILABLE' : 'DELIVERY_UNCONFIRMED',
+      message: notSent
+        ? 'We could not send your enquiry because our email service is unavailable. Please email info@welltroy.com or contact us on WhatsApp.'
+        : 'We could not confirm whether your enquiry was sent. Please contact us before resubmitting to avoid a duplicate.'
+    });
+  } finally { transport?.close(); }
 }
