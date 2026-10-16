@@ -11,10 +11,11 @@ function request(body = valid, origin = 'https://welltroy.example') {
  return new Request(url,{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});
 }
 test('quote delivery and validation contract',async t=>{
- let messages=[], verify={success:true,hostname:'welltroy.example',action:'quote'}, mailError=false;
- const originalFetch=globalThis.fetch, originalTransport=nodemailer.createTransport;
+ let messages=[], verify={success:true,hostname:'welltroy.example',action:'quote'}, mailError=false, transportError=false, logs=[];
+ const originalFetch=globalThis.fetch, originalTransport=nodemailer.createTransport, originalError=console.error;
+ console.error=(...args)=>logs.push(args.join(' '));
  globalThis.fetch=async()=>Response.json(verify);
- nodemailer.createTransport=()=>({sendMail:async message=>{if(mailError)throw new Error('Simulated SMTP failure');messages.push(message);return {accepted:['info@welltroy.com']};},close(){}});
+ nodemailer.createTransport=()=>{if(transportError)throw new Error('Simulated transport initialization failure');return {sendMail:async message=>{if(mailError)throw mailError;messages.push(message);return {accepted:['info@welltroy.com']};},close(){}};};
  try {
   await t.test('availability does not claim delivery and never exposes server secrets',async()=>{
    const response=await onRequest({request:new Request(url),env});const data=await response.json();
@@ -35,6 +36,23 @@ test('quote delivery and validation contract',async t=>{
    const response=await onRequest({request:new Request(url,{method:'POST',headers:{Origin:'https://welltroy.example'},body:form}),env});
    assert.equal(response.status,200);assert.equal(messages.at(-1).attachments[0].content.toString(),'QA artwork notes');assert.equal(messages.at(-1).attachments[0].filename,'notes.txt');
   });
-  await t.test('SMTP failure does not show a false success',async()=>{mailError=true;const response=await onRequest({request:request(),env});assert.equal(response.status,502);assert.equal((await response.json()).ok,false)});
- } finally {globalThis.fetch=originalFetch;nodemailer.createTransport=originalTransport}
+  await t.test('DNS failure confirms no send without exposing server details',async()=>{
+   const count=messages.length;
+   mailError=Object.assign(new Error('secret SMTP detail test@example.com local-test'),{code:'EDNS',command:'CONN'});
+   const response=await onRequest({request:request(),env});const data=await response.json();
+   assert.equal(response.status,502);assert.equal(data.ok,false);assert.equal(data.code,'EMAIL_SERVICE_UNAVAILABLE');
+   assert.match(data.message,/could not send/);assert.ok(data.reference);assert.equal(messages.length,count);
+   assert.match(logs.at(-1),/EDNS/);assert.ok(!logs.at(-1).includes('local-test'));assert.ok(!JSON.stringify(data).includes('test@example.com'));
+  });
+  await t.test('authentication rejection is distinguished from an uncertain DATA result',async()=>{
+   mailError=Object.assign(new Error('Authentication failed'),{code:'EAUTH',command:'AUTH LOGIN',responseCode:535});
+   let data=await (await onRequest({request:request(),env})).json();assert.equal(data.code,'EMAIL_SERVICE_UNAVAILABLE');
+   mailError=Object.assign(new Error('Lost connection after sending body'),{code:'ESOCKET',command:'DATA'});
+   data=await (await onRequest({request:request(),env})).json();assert.equal(data.code,'DELIVERY_UNCONFIRMED');assert.match(data.message,/avoid a duplicate/);
+  });
+  await t.test('transport initialization failure returns JSON instead of an uncaught exception',async()=>{
+   transportError=true;const response=await onRequest({request:request(),env});const data=await response.json();
+   assert.equal(response.status,502);assert.equal(data.ok,false);assert.equal(data.code,'EMAIL_SERVICE_UNAVAILABLE');
+  });
+ } finally {globalThis.fetch=originalFetch;nodemailer.createTransport=originalTransport;console.error=originalError}
 });
