@@ -72,7 +72,16 @@ export async function onRequest({ request, env }) {
       signal: AbortSignal.timeout(10000)
     });
     const result = await verification.json();
-    if (!result.success || result.hostname !== new URL(request.url).hostname || result.action !== 'quote') return reply(403, { ok: false, message: 'The security check could not be verified. Complete a new check and try again.' });
+    if (!result.success || result.hostname !== new URL(request.url).hostname || result.action !== 'quote') {
+      const knownErrors = ['missing-input-secret', 'invalid-input-secret', 'missing-input-response', 'invalid-input-response', 'bad-request', 'timeout-or-duplicate', 'internal-error'];
+      console.error('quote_verification_failed', JSON.stringify({
+        success: result.success === true,
+        hostnameMatches: result.hostname === new URL(request.url).hostname,
+        actionMatches: result.action === 'quote',
+        errorCodes: Array.isArray(result['error-codes']) ? result['error-codes'].filter(code => knownErrors.includes(code)) : []
+      }));
+      return reply(403, { ok: false, message: 'The security check could not be verified. Complete a new check and try again.' });
+    }
   } catch { return reply(503, { ok: false, message: 'The security service could not be reached. Please try again or contact us by email or WhatsApp.' }); }
 
   const reference = crypto.randomUUID();
