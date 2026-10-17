@@ -15,9 +15,21 @@ export function getStaticPaths() {
 const { product } = Astro.props;
 const visual = await getProductVisual(product.imageSource);
 const related = products.filter((item) => item.group === product.group && item.slug !== product.slug).sort((a, b) => Number(b.slug === product.parentSlug) - Number(a.slug === product.parentSlug)).slice(0, 3);
-const productSchema = { "@context": "https://schema.org", "@type": "Product", name: product.name, image: `${site.origin}${visual.imageFull}`, description: product.intro, brand: { "@type": "Brand", name: "Welltroy" } };
+// These made-to-order ranges have no public price or product-specific ratings.
+// Describe the catalogue page without claiming eligibility for Product rich results.
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${site.origin}/products/${product.slug}/#webpage`,
+  url: `${site.origin}/products/${product.slug}/`,
+  name: `${product.name} | Welltroy`,
+  description: product.intro,
+  image: `${site.origin}${visual.imageFull}`,
+  about: { "@type": "Thing", name: product.name, description: product.intro },
+  breadcrumb: { "@id": `${site.origin}/products/${product.slug}/#breadcrumb` }
+};
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: product.faqs.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
-const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", "@id": `${site.origin}/products/${product.slug}/#breadcrumb`, itemListElement: [
   { "@type": "ListItem", position: 1, name: "Home", item: site.origin },
   { "@type": "ListItem", position: 2, name: "Products", item: `${site.origin}/products/` },
   { "@type": "ListItem", position: 3, name: product.name, item: `${site.origin}/products/${product.slug}/` }
@@ -26,7 +38,7 @@ const cataloguePage = String(catalogueProducts.findIndex((item) => item.slug ===
 const catalogueImage = `/images/catalog-pages/page-${cataloguePage}.jpg`;
 const whatsappText = encodeURIComponent(`Hi Welltroy, I am interested in ${product.name}. Could we discuss specifications and pricing?`);
 ---
-<Layout title={`${product.name} | Custom Packaging | Welltroy`} description={product.meta} canonicalPath={`/products/${product.slug}/`} schemas={[productSchema, faqSchema, breadcrumbSchema]} ogImage={visual.imageFull} ogImageAlt={`Welltroy ${product.name} ${product.isNew ? "product reference" : "custom branding illustration"}`}>
+<Layout title={`${product.name} | Custom Packaging | Welltroy`} description={product.meta} canonicalPath={`/products/${product.slug}/`} schemas={[pageSchema, faqSchema, breadcrumbSchema]} ogImage={visual.imageFull} ogImageAlt={`Welltroy ${product.name} ${product.isNew ? "product reference" : "custom branding illustration"}`}>
   <section class="page-hero"><div class="container page-hero-grid"><div><div class="breadcrumbs"><a href="/">Home</a> / <a href="/products/">Products</a> / {product.name}</div><p class="eyebrow">{product.eyebrow}</p><h1>{product.name}</h1><p class="lead">{product.intro}</p><OrderSummary slug={product.slug} /><div class="button-row"><a class="button" href={`/quote/?product=${product.slug}#quote-form`}>Request Pricing</a><a class="button button-secondary" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} rel="noopener">Ask on WhatsApp</a></div></div><div class="product-visual"><a class="page-product-image" href={visual.imageFull} target="_blank" rel="noopener" aria-label={`View a larger image of ${product.name}`}><img src={visual.image} srcset={visual.imageSrcSet} sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 980px) calc(100vw - 40px), (max-width: 1220px) 44vw, 494px" alt={`Welltroy ${product.name} ${product.isNew ? "product reference" : "custom branding illustration"}`} width={visual.imageWidth} height={visual.imageHeight} fetchpriority="high" decoding="async" /><span class="image-zoom-label">View larger product image ↗</span></a><p class="product-detail-links"><a href="#product-features">Features &amp; sizes ↓</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}</p><p class="product-image-note">{product.isNew ? "Product reference" : "Custom branding illustration"}. Confirm colors, materials and construction with your quotation.</p></div></div></section>
   <div class="container section-tight" id="product-features"><div class="highlight-grid">{product.highlights.map((highlight) => <div class="highlight">{highlight}</div>)}</div></div>
   {product.gallery?.length > 0 && <div id="product-gallery"><ProductGallery product={product} /></div>}
