@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data.mjs';
+import { orderTerms } from '../../ordering.mjs';
+const path = '/guides/custom-packaging-500-pieces/';
+const title = 'Custom Packaging from 500 Pieces: What to Prepare for a Quote';
+const schema = {
+  '@context': 'https://schema.org', '@type': 'Article', headline: title,
+  author: { '@type': 'Organization', name: 'Welltroy' },
+  publisher: { '@type': 'Organization', name: 'Welltroy' },
+  mainEntityOfPage: `${site.origin}${path}`,
+  datePublished: '2026-10-18', dateModified: '2026-10-18'
+};
+const breadcrumbs = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.origin },
+    { '@type': 'ListItem', position: 2, name: 'Buying Guide', item: `${site.origin}/guides/choose-a-mailer/` },
+    { '@type': 'ListItem', position: 3, name: '500-piece quote checklist', item: `${site.origin}${path}` }
+  ]
+};
+const brief = `Product / catalogue model:
+What will go inside (packed dimensions if known):
+Bag dimensions and units (or help needed with sizing):
+Quantity for each size and design:
+Material, closure and protection requirements:
+Logo / artwork available and print sides:
+Sample required:
+Destination country, postcode or port:
+Required arrival date:`;
+---
+<Layout title="Custom Packaging from 500 Pieces: Quote Checklist | Welltroy" description="Prepare a useful custom packaging enquiry: quantity per design, bag dimensions, artwork, sample needs and destination. Check what a 500-piece MOQ includes." canonicalPath={path} schemas={[schema, breadcrumbs]}>
+  <section class="page-hero"><div class="container">
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/choose-a-mailer/">Buying Guide</a> / Quote checklist</div>
+    <p class="eyebrow">Planning your first custom order</p><h1>{title}</h1>
+    <p class="lead">For eligible Welltroy bags and mailers, 500 pieces is a starting point for a quotation. Send the product, quantity per size and design, dimensions, artwork and destination. If a detail is undecided, say so: you can start an enquiry before you have a final specification.</p>
+    <nav class="anchor-links" aria-label="In this guide"><a href="#minimum">Check the minimum</a><a href="#details">Prepare the details</a><a href="#example">See an example</a><a href="#brief">Use the brief</a></nav>
+  </div></section>
+  <section class="section"><div class="container article-layout">
+    <article class="article-main">
+      <h2 id="minimum">What Does “From 500 Pieces” Mean?</h2>
+      <p>The available size, material, printing and construction need to be confirmed for your order. Do not assume that 500 pieces can be divided across several sizes, colors or artworks and still qualify for the same minimum. List the split and ask us to confirm the minimum for each specification.</p>
+      <div class="guide-callout"><strong>Check the sales unit.</strong> Bags and mailers start from 500 pieces for eligible specifications. Honeycomb paper starts from 500 rolls. Thermal labels need the roll or fanfold configuration and sales unit confirmed separately. This guide does not promise every packaging format at a 500-piece minimum.</div>
+      <h2 id="details">Six Details That Make a Quote Useful</h2>
+      <h3>1. Product and intended use</h3><p>Name the catalogue model or link to the product page. Explain what goes inside and how you pack it. If you are deciding between a plain mailer and a cushioned format, describe the contents and protection needs. Our <a href="/guides/choose-a-mailer/">mailer selection guide</a> can help you frame that question.</p>
+      <h3>2. Dimensions, with units and measurement notes</h3><p>Write dimensions in mm or cm and identify width, height, gusset and flap where relevant. Say whether the figures describe the outside of the bag, the usable space or the packed contents. If you only know the packed item size, send that rather than guessing a bag size. A catalogue dimension is a reference to confirm, not a fit guarantee.</p>
+      <h3>3. Quantity for each size and design</h3><p>Separate the quantity for each version. “500 pieces, one size, one design” is different from “250 pieces of each of two designs.” If you want price comparisons, request alternative quantities using the same specification so the quotations can be compared.</p>
+      <h3>4. Material, closure and printing requirements</h3><p>Describe any required thickness, paper weight, closure, finish or print sides. If these are not decided, explain the job the packaging must do. Send the logo or an artwork preview and tell us whether an editable file is available. Ask for the applicable print template, safe area, bleed and color requirements before preparing final production artwork.</p>
+      <p>For food contact or environmental requirements, identify the exact intended use and destination market. Ask for documents for the proposed material and construction; a product name, image or generic claim is not enough to confirm suitability.</p>
+      <h3>5. Sample route</h3><p>Tell us whether you want an existing product sample to review construction, or a custom printed sample to assess your artwork and specification. Samples are free; confirm availability, preparation, artwork or setup arrangements and courier charges. Free samples do not automatically include free delivery.</p>
+      <h3>6. Destination and arrival deadline</h3><p>Include the country and postcode or port, plus any required arrival date. Ask for production and transport estimates separately. {orderTerms.production} Freight, duties and taxes should be identified in the quotation rather than assumed to be included.</p>
+      <h2 id="example">Example: A Clear 500-piece Mailer Enquiry</h2>
+      <p>This is an illustrative brief, not a completed customer project or a confirmed specification:</p>
+      <blockquote>We are comparing 500 poly mailers in one size and one artwork for folded clothing. The packed item measures 24 × 30 × 4 cm. Please recommend a suitable bag size and confirm usable space, material, closure and logo printing options. We have an editable AI logo and need a sample before confirming the bulk order. Delivery is to our stated country and postcode; please quote production and transport separately.</blockquote>
+      <p>The packed measurements in this example are not a recommended bag size. In your own enquiry, replace them with your measurements and include your actual destination and timing.</p>
+      <h2>Compare the Whole Quotation</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Packaging quotation comparison checklist"><table><thead><tr><th>Check</th><th>Confirm in writing</th></tr></thead><tbody>
+        <tr><td>Specification</td><td>Size, usable dimensions, material, closure, print and artwork reference</td></tr>
+        <tr><td>Quantity</td><td>Pieces per size and design, packing and the agreed minimum</td></tr>
+        <tr><td>Costs</td><td>Packaging, any setup or sample charges, freight, duties and taxes</td></tr>
+        <tr><td>Timing</td><td>Approval steps, production start milestone, dispatch and transit estimates</td></tr>
+        <tr><td>Payment</td><td>T/T: 30% deposit and 70% balance; confirm the balance milestone in the written quotation</td></tr>
+      </tbody></table></div>
+      <p>See <a href="/ordering/">samples, payment and delivery</a> for the current ordering process. Submitting an enquiry requests a quotation; it does not place an order or take payment.</p>
+      <h2 id="brief">Your Ready-to-use Quote Brief</h2><p>Copy the prompts below into your enquiry. Mark unknown details as “please advise” and include a reply email.</p>
+      <pre class="quote-brief">{brief}</pre>
+      <p>The website accepts AI, PSD, PDF, PNG, JPG, WEBP, DOCX, XLSX, TXT and CSV files: up to three files, with a combined limit of 10 MB. File acceptance does not confirm that artwork is ready to print. Keep the original editable file and ask us to review it.</p>
+      <a class="button" href="/quote/?product=multiple-products#quote-form">Send your packaging brief</a>
+    </article>
+    <aside class="side-card"><p class="eyebrow">Start with a product</p><h2>Related Packaging</h2><div class="guide-options">
+      <a href="/products/poly-mailers/"><strong>Poly Mailers</strong><span>Clothing and other lightweight, non-fragile goods</span></a>
+      <a href="/products/poly-bubble-mailers/"><strong>Poly Bubble Mailers</strong><span>Compare cushioning, closure and usable inner space</span></a>
+      <a href="/products/kraft-paper-bags/"><strong>Kraft Paper Bags</strong><span>Retail presentation, bag dimensions and handle requirements</span></a>
+    </div><p>Confirm the eligible specification and minimum for your project.</p><a class="text-link" href="/ordering/">Review the order steps →</a></aside>
+  </div></section>
+</Layout>
+<style>
+  .article-main {min-width:0;}
+  .article-main h3 {margin:28px 0 12px;}
+  .article-main blockquote {margin:24px 0;padding:20px 24px;border-left:4px solid var(--orange);background:var(--cream);line-height:1.8;}
+  .quote-brief {white-space:pre-wrap;overflow-wrap:anywhere;padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--cream);font:inherit;line-height:1.8;}
+  .article-main td {min-width:140px;vertical-align:top;}
+  h2[id] {scroll-margin-top:120px;}
+</style>
