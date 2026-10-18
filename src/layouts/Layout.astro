@@ -4,6 +4,7 @@ import { site } from "../data.mjs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsAppContact from "../components/WhatsAppContact.astro";
+import AnalyticsConsent from "../components/AnalyticsConsent.astro";
 
 interface Props {
   title: string;
@@ -58,6 +59,7 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
     </div>
     <div class="mobile-actions" aria-label="Quick contact"><a href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a><a href={quoteHref}>Request a Quote</a></div>
     <WhatsAppContact />
+    <AnalyticsConsent />
     <script src="../main.js"></script>
     <script src="../whatsapp.js"></script>
   </body>

@@ -1,4 +1,7 @@
 import { selectionGuidance } from "./quote-options.mjs";
+import { initializeAnalytics, track } from "./analytics.js";
+import { confirmedQuote, errorCategory } from "./analytics-core.mjs";
+initializeAnalytics();
 
 const toggle = document.querySelector('[data-menu-toggle]');
 const nav = document.querySelector('[data-nav]');
@@ -349,6 +352,7 @@ if (quoteForm) {
   quoteForm.querySelector('[data-new-enquiry]').addEventListener('click', () => {
     if (!completed) return;
     completed = false;
+    quoteForm.dispatchEvent(new Event("welltroy:new-enquiry"));
     hasSubmissionError = false;
     quoteForm.reset();
     selectedFiles = [];
@@ -374,8 +378,10 @@ if (quoteForm) {
     submit.textContent = selectedFiles.length ? 'Sending enquiry and files…' : 'Sending…';
     quoteForm.setAttribute('aria-busy', 'true');
     formFields.inert = true;
+    const submittedProductSlug = productSelect.value;
     const submittedProduct = productSelect.selectedOptions[0].textContent;
     const submittedEmail = quoteForm.elements.namedItem('email').value.trim();
+    let analyticsFailure = 'delivery_unconfirmed';
     let failureMessage = 'We could not confirm whether your enquiry was sent. Please contact us before resubmitting to avoid a duplicate.';
     try {
       const payload = new FormData(quoteForm);
@@ -386,13 +392,15 @@ if (quoteForm) {
         body: payload,
         signal: AbortSignal.timeout(90000)
       });
+      analyticsFailure = errorCategory(response.status);
       const result = await response.json();
       if (!response.ok || !result.ok) {
         failureMessage = result.message || (response.status < 500 ? 'Your enquiry could not be submitted. Check your details and complete a new security check.' : failureMessage);
         throw new Error();
       }
-      if (typeof result.reference !== 'string' || !result.reference || result.reference.length > 100) throw new Error();
+      if (!confirmedQuote(response,result)) throw new Error();
       completed = true;
+      track('quote_submit_success',{product_slug:submittedProductSlug});
       quoteForm.querySelector('[data-enquiry-reference]').textContent = result.reference;
       quoteForm.querySelector('[data-success-summary]').textContent = `Your enquiry about ${submittedProduct} has been sent. Reply email: ${submittedEmail}.`;
       formFields.hidden = true;
@@ -403,6 +411,7 @@ if (quoteForm) {
         widget = undefined;
       }
     } catch {
+      if (!completed) track("quote_submit_error",{product_slug:submittedProductSlug,error_category:analyticsFailure});
       hasSubmissionError = true;
       fallback.hidden = false;
       fallback.open = true;
