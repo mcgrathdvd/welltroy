@@ -383,6 +383,7 @@ if (quoteForm) {
     const submittedEmail = quoteForm.elements.namedItem('email').value.trim();
     let analyticsFailure = 'delivery_unconfirmed';
     let failureMessage = 'We could not confirm whether your enquiry was sent. Please contact us before resubmitting to avoid a duplicate.';
+    let emailUnavailable = false;
     try {
       const payload = new FormData(quoteForm);
       payload.delete('files');
@@ -395,6 +396,7 @@ if (quoteForm) {
       analyticsFailure = errorCategory(response.status);
       const result = await response.json();
       if (!response.ok || !result.ok) {
+        emailUnavailable = result.code === 'EMAIL_SERVICE_UNAVAILABLE';
         failureMessage = result.message || (response.status < 500 ? 'Your enquiry could not be submitted. Check your details and complete a new security check.' : failureMessage);
         throw new Error();
       }
@@ -425,7 +427,9 @@ if (quoteForm) {
       submit.textContent = 'Send My Enquiry';
       quoteForm.removeAttribute('aria-busy');
       if (!completed && widget !== undefined) {
-        showService('Complete a new security check before trying again. Your details and files remain on this page.', 'waiting', true);
+        showService(emailUnavailable
+          ? 'Your enquiry was not sent because our email service could not connect. Please use email or WhatsApp below. Your details and files remain on this page.'
+          : 'Complete a new security check before trying again. Your details and files remain on this page.', 'waiting', true);
         window.turnstile.reset(widget);
       }
     }
