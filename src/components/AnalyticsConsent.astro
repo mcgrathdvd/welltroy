@@ -1,0 +1,19 @@
+---
+// Public measurement identifier confirmed in the user's GA4 Web stream.
+const raw = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID ?? 'G-R2B5B1072P';
+const measurementId = /^G-[A-Z0-9]{5,20}$/.test(raw) ? raw : '';
+---
+<span hidden data-analytics-config data-measurement-id={measurementId}></span>
+<section class="analytics-choice" data-analytics-banner hidden aria-label="Optional website analytics">
+  <div><strong>Optional website analytics</strong><p>Allow Google Analytics cookies to help us understand product visits and enquiry steps. Analytics events exclude your contact details, messages and attachments. You can decline and still use the enquiry form. <a href="/privacy/#website-analytics">Details</a></p></div>
+  <div class="analytics-choice-actions"><button type="button" data-analytics-reject>Decline analytics</button><button type="button" data-analytics-accept>Allow analytics</button></div>
+</section>
+<style>
+  .analytics-choice[hidden] {display:none;}
+  .analytics-choice {position:fixed;z-index:1100;bottom:0;left:0;right:0;background:#fff;color:#203c30;border-top:2px solid #203c30;box-shadow:0 -4px 20px #203c3020;padding:20px max(20px,calc((100vw - 1160px)/2));display:flex;align-items:center;gap:24px;max-height:60vh;overflow:auto;}
+  .analytics-choice p {font-size:.88rem;line-height:1.55;margin:6px 0 0;max-width:760px;}
+  .analytics-choice-actions {display:flex;gap:12px;flex-shrink:0;}
+  .analytics-choice button {background:#fff;border:1px solid #203c30;color:#203c30;padding:12px 16px;min-height:44px;border-radius:8px;cursor:pointer;font:inherit;}
+  .analytics-choice a {text-decoration:underline;}
+  @media(max-width:800px) {.analytics-choice {display:block;padding:16px;}.analytics-choice-actions {margin-top:12px;flex-wrap:wrap;}.analytics-choice button {flex:1;}}
+</style>
