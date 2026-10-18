@@ -575,3 +575,6 @@ html:has(.contact-dialog[open]) { overflow: hidden; }
   .table-scroll-hint { display: block; color: var(--muted); font-size: .88rem; margin-bottom: -16px; }
   .table-wrap:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 }
+
+.analytics-settings { background:none;border:0;padding:0;color:inherit;text-align:left;font:inherit;cursor:pointer;text-decoration:underline;min-height:44px;}
+.analytics-settings[hidden] {display:none;}
