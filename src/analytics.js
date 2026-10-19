@@ -77,7 +77,7 @@ export function initializeAnalytics() {
         // A loaded third-party script cannot be unloaded. Reload into the blocked state.
         if (loaded) location.reload();
       }
-      if (next === 'granted' || !loaded) settings.focus();
+      if (next === 'granted' || !loaded) settings.focus({preventScroll:true});
     };
     settings.hidden = false;
     settings.addEventListener('click',() => {banner.hidden = false;banner.querySelector('button')?.focus();});

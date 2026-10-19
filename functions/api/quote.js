@@ -84,7 +84,11 @@ export async function onRequest({ request, env }) {
     }
   } catch { return reply(503, { ok: false, message: 'The security service could not be reached. Please try again or contact us by email or WhatsApp.' }); }
 
-  const reference = crypto.randomUUID();
+  // China business date plus 50 random bits, grouped for phone notes and records.
+  const referenceDate = new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(2, 10).replaceAll('-', '');
+  const alphabet = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+  const suffix = [...crypto.getRandomValues(new Uint8Array(10))].map(byte => alphabet[byte & 31]).join('');
+  const reference = `WT-${referenceDate}-${suffix.slice(0, 5)}-${suffix.slice(5)}`;
   let transport;
   let deliveryStarted = false;
   try {
