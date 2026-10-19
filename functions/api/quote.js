@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import { Buffer } from 'node:buffer';
-import { connect as connectTls } from 'node:tls';
+import { smtpHost, openSmtpSocket } from '../../src/quote-smtp.mjs';
 import { products } from '../../src/product-data.mjs';
 import { assistedChoices } from '../../src/quote-options.mjs';
 import { uploadLimits, uploadTypes, validateUploadFiles, attachmentName } from '../../src/quote-upload.mjs';
@@ -89,20 +89,14 @@ export async function onRequest({ request, env }) {
   let deliveryStarted = false;
   try {
     transport = nodemailer.createTransport({
-      host: 'smtp.exmail.qq.com', port: 465, secure: true,
+      host: smtpHost, port: 465, secure: true,
       auth: { user: env.SMTP_USER, pass: env.SMTP_PASSWORD },
-      connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 60000,
+      connectionTimeout: 15000, greetingTimeout: 15000, socketTimeout: 45000,
       disableFileAccess: true, disableUrlAccess: true,
       // Let the Workers TLS socket resolve the host. Nodemailer's separate
       // Node DNS lookup can fail before the SMTP connection is opened.
       getSocket(_options, callback) {
-        try {
-          const connection = connectTls({
-            host: 'smtp.exmail.qq.com', port: 465,
-            servername: 'smtp.exmail.qq.com', rejectUnauthorized: true
-          });
-          callback(null, { connection, secured: true });
-        } catch (error) { callback(error); }
+        openSmtpSocket(callback);
       }
     });
     const attachments = await Promise.all(files.map(async (file) => ({
