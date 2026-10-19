@@ -349,6 +349,18 @@ if (quoteForm) {
       copyStatus.textContent = 'Select and copy the details below, then attach your files separately.';
     }
   });
+  quoteForm.querySelector('[data-copy-reference]').addEventListener('click', async () => {
+    const referenceInput = quoteForm.querySelector('[data-enquiry-reference]');
+    const copyStatus = quoteForm.querySelector('[data-reference-status]');
+    try {
+      await navigator.clipboard.writeText(referenceInput.value);
+      copyStatus.textContent = 'Reference copied.';
+    } catch {
+      referenceInput.focus();
+      referenceInput.select();
+      copyStatus.textContent = 'Select and copy the reference above.';
+    }
+  });
   quoteForm.querySelector('[data-new-enquiry]').addEventListener('click', () => {
     if (!completed) return;
     completed = false;
@@ -403,8 +415,14 @@ if (quoteForm) {
       if (!confirmedQuote(response,result)) throw new Error();
       completed = true;
       track('quote_submit_success',{product_slug:submittedProductSlug});
-      quoteForm.querySelector('[data-enquiry-reference]').textContent = result.reference;
-      quoteForm.querySelector('[data-success-summary]').textContent = `Your enquiry about ${submittedProduct} has been sent. Reply email: ${submittedEmail}.`;
+      quoteForm.querySelector('[data-enquiry-reference]').value = result.reference;
+      quoteForm.querySelector('[data-reference-status]').textContent = '';
+      quoteForm.querySelector('.success-reference').open = false;
+      quoteForm.querySelector('[data-success-summary]').textContent = `Your ${submittedProduct} enquiry has been sent. We’ll reply to ${submittedEmail}.`;
+      quoteForm.querySelector('[data-success-quantity]').textContent = quoteForm.elements.namedItem('quantity').value.trim();
+      quoteForm.querySelector('[data-success-destination]').textContent = quoteForm.elements.namedItem('destination').value.trim();
+      quoteForm.querySelector('[data-success-files]').textContent = selectedFiles.length ? `${selectedFiles.length} ${selectedFiles.length === 1 ? 'file' : 'files'}` : 'None';
+      quoteForm.querySelector('[data-follow-up]').href = `mailto:info@welltroy.com?subject=${encodeURIComponent(`Follow-up: ${result.reference}`)}`;
       formFields.hidden = true;
       successPanel.hidden = false;
       quoteForm.querySelector('#enquiry-success-title').focus();
