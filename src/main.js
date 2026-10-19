@@ -3,6 +3,45 @@ import { initializeAnalytics, track } from "./analytics.js";
 import { confirmedQuote, errorCategory } from "./analytics-core.mjs";
 initializeAnalytics();
 
+const emailDialog = document.querySelector('[data-email-dialog]');
+if (emailDialog && typeof emailDialog.showModal === 'function') {
+  const address = emailDialog.querySelector('[data-email-address]');
+  const copyStatus = emailDialog.querySelector('[data-email-copy-status]');
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest?.('a[href]');
+    if (!link || link.hasAttribute('data-native-email') || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    let url, recipient;
+    try { url = new URL(link.href); recipient = decodeURIComponent(url.pathname).toLowerCase(); } catch { return; }
+    if (url.protocol !== 'mailto:' || recipient !== 'info@welltroy.com') return;
+    event.preventDefault();
+    emailDialog.querySelector('[data-native-email]').href = url.href;
+    const subject = url.searchParams.get('subject') || '';
+    emailDialog.querySelector('[data-email-subject]').value = subject;
+    emailDialog.querySelector('[data-email-subject-wrap]').hidden = !subject;
+    copyStatus.textContent = '';
+    if (!emailDialog.open) emailDialog.showModal();
+  });
+  emailDialog.querySelector('[data-email-close]').addEventListener('click', () => emailDialog.close());
+  emailDialog.querySelector('[data-email-form]').addEventListener('click', () => {
+    emailDialog.close();
+    document.querySelector('[data-whatsapp-dialog][open]')?.close();
+  });
+  emailDialog.addEventListener('click', (event) => {
+    const rect = emailDialog.getBoundingClientRect();
+    if (event.target === emailDialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) emailDialog.close();
+  });
+  emailDialog.querySelector('[data-copy-email]').addEventListener('click', async () => {
+    track('email_click');
+    try {
+      await navigator.clipboard.writeText(address.value);
+      copyStatus.textContent = 'Email address copied. Paste it into your email service.';
+    } catch {
+      address.focus(); address.select();
+      copyStatus.textContent = 'Select and copy the email address above.';
+    }
+  });
+}
+
 const toggle = document.querySelector('[data-menu-toggle]');
 const nav = document.querySelector('[data-nav]');
 const desktopNavigation = window.matchMedia('(min-width: 981px)');
@@ -417,7 +456,7 @@ if (quoteForm) {
       track('quote_submit_success',{product_slug:submittedProductSlug});
       quoteForm.querySelector('[data-enquiry-reference]').value = result.reference;
       quoteForm.querySelector('[data-reference-status]').textContent = '';
-      quoteForm.querySelector('.success-reference').open = false;
+      quoteForm.querySelector('.success-reference').open = true;
       quoteForm.querySelector('[data-success-summary]').textContent = `Your ${submittedProduct} enquiry has been sent. We’ll reply to ${submittedEmail}.`;
       quoteForm.querySelector('[data-success-quantity]').textContent = quoteForm.elements.namedItem('quantity').value.trim();
       quoteForm.querySelector('[data-success-destination]').textContent = quoteForm.elements.namedItem('destination').value.trim();
