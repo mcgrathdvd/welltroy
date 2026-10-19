@@ -29,6 +29,9 @@ test('quote delivery and validation contract',async t=>{
   await t.test('valid enquiry delivers selected model and reply address',async()=>{
    const response=await onRequest({request:request({...valid,size:'P03 — 25 × 30 + 5 cm'}),env});const data=await response.json();
    assert.equal(response.status,200);assert.equal(data.ok,true);assert.ok(data.reference);
+   assert.match(data.reference,/^WT-\d{6}-[2-9A-HJ-NP-Z]{5}-[2-9A-HJ-NP-Z]{5}$/);
+   assert.ok(messages.at(-1).subject.includes(data.reference));
+   assert.ok(messages.at(-1).text.startsWith(`Reference: ${data.reference}\n`));
    assert.equal(messages.at(-1).replyTo,'qa@example.com');assert.match(messages.at(-1).text,/P03 — 25 × 30 \+ 5 cm/);
   });
   await t.test('multipart attachment bytes and name reach mail transport',async()=>{
