@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data.mjs";
+const path = "/guides/logo-artwork-checklist/";
+const title = "Logo Artwork Checklist for Custom Packaging";
+const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@type": "Organization", name: "Welltroy" }, publisher: { "@type": "Organization", name: "Welltroy" }, mainEntityOfPage: `${site.origin}${path}`, datePublished: "2026-10-20", dateModified: "2026-10-20" };
+const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: site.origin }, { "@type": "ListItem", position: 2, name: "Buying Guide", item: `${site.origin}/guides/choose-a-mailer/` }, { "@type": "ListItem", position: 3, name: "Logo artwork checklist", item: `${site.origin}${path}` }] };
+---
+<Layout title={`${title} | Welltroy`} description="Prepare logo files, colors, placement and approval notes for custom mailers, paper bags and hang tags. Learn what to confirm before production artwork is approved." canonicalPath={path} schemas={[schema, breadcrumbs]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/choose-a-mailer/">Buying Guide</a> / Logo artwork</div><p class="eyebrow">Custom printing guide</p><h1>{title}</h1><p class="lead">Send an editable logo if you have one, plus a clear preview, intended packaging product, print colors and placement. A supplier can then confirm the print method, usable print area, template and proof for your exact material, size and quantity. A file accepted by the enquiry form is a starting point, not production artwork approval.</p><nav class="anchor-links" aria-label="In this guide"><a href="#files">Files</a><a href="#specification">Specification</a><a href="#example">Example</a><a href="#approval">Approval</a></nav></div></section>
+  <section class="section"><div class="container article-layout"><article class="article-main">
+    <h2 id="files">Which Logo Files Should You Send?</h2>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Logo artwork file checklist"><table><thead><tr><th>Item</th><th>Useful to send</th><th>Why it matters</th></tr></thead><tbody>
+      <tr><td>Editable logo</td><td>Original vector artwork, such as AI or an editable PDF, where available</td><td>Allows scale and print preparation without relying on a small screenshot</td></tr>
+      <tr><td>Visual reference</td><td>A PDF, PNG or JPG showing the intended appearance and orientation</td><td>Helps check that the editable art matches your approved brand design</td></tr>
+      <tr><td>Fonts and images</td><td>Identify fonts and supply or embed linked artwork; ask whether text should be outlined</td><td>Reduces missing-font and missing-image changes when the file is opened</td></tr>
+      <tr><td>Color references</td><td>Named brand colors or reference codes, plus a sample if exact matching matters</td><td>Color reproduction depends on substrate and print method; a screen preview is not a physical color standard</td></tr>
+    </tbody></table></div>
+    <p>If you only have a low-resolution image, send it for an initial review and say that an editable master is unavailable. Do not assume it can be enlarged for sharp printing. Ask whether the artwork needs to be redrawn before a print-ready proof can be prepared.</p>
+    <h2 id="specification">Match the Artwork to the Packaging</h2>
+    <ol><li><strong>Name the product and size.</strong> Include the catalogue model or target dimensions, material and finish. A print area cannot be inferred from the outer bag size alone.</li><li><strong>Describe placement.</strong> Identify front/back, orientation, approximate logo position and whether the art should avoid handles, seams, folds, windows or seals.</li><li><strong>Count the designs and colors.</strong> State quantity per size, design and print-color version. Ask for the printing method and any setup or minimum-order difference for each version.</li><li><strong>Request the exact template.</strong> Confirm printable area, safe area, bleed, color format, white-ink or underprint needs, and file export settings for the approved material and method. Do not use a guessed template.</li></ol>
+    <div class="guide-callout"><strong>Material changes the result.</strong> Light artwork on natural kraft paper, fine detail on film and printing near a handle or seal each need a product-specific review. Ask for a proof and, when appearance is critical, a physical sample.</div>
+    <h2 id="example">Example: One Logo Across Two Packaging Formats</h2>
+    <p>Suppose a brand is comparing poly mailer P04 (catalogue outer size 28 × 37 + 5 cm) with kraft paper bag KP06-V (catalogue size 25 × 13 × 32 cm). These are size references, not print templates. Send one editable logo and a preview for each intended placement. Ask Welltroy to confirm the usable print area, colors, orientation and production method for each product separately; the same artwork dimensions and ink appearance may not transfer between film and kraft paper.</p>
+    <h2 id="approval">Before You Approve a Proof</h2>
+    <ul><li>Check the correct product, size, material, front/back orientation, logo version and spelling.</li><li>Check the dimensions and placement against the supplied production template, including the safe area, folds, seams and closure.</li><li>Confirm colors, whether a physical reference or sample is needed, and what variation is acceptable.</li><li>Confirm the final proof version, quantity for each design, and who on your team can approve production.</li></ul>
+    <p>A digital mockup helps assess layout but cannot by itself verify print color, substrate texture or finished fit. Keep a copy of the approved specification and proof. For the rest of the enquiry, see our <a href="/guides/custom-packaging-500-pieces/">custom packaging quote checklist</a>.</p>
+    <a class="button" href="/quote/?product=multiple-products#quote-form">Send your artwork for review</a>
+  </article><aside class="side-card"><p class="eyebrow">Product-specific review</p><h2>Where to Start</h2><div class="guide-options">
+    <a href="/products/poly-mailers/"><strong>Poly Mailers</strong><span>Confirm film, print area and seal clearance</span></a>
+    <a href="/products/kraft-paper-bags/"><strong>Kraft Paper Bags</strong><span>Confirm paper, handles and color appearance</span></a>
+    <a href="/products/custom-paper-hang-tags/"><strong>Custom Paper Hang Tags</strong><span>Confirm both sides, hole position and finish</span></a>
+  </div><p>Share the product and quantity with your artwork so the review applies to an actual specification.</p></aside></div></section>
+</Layout>
+<style>.article-main{min-width:0}.article-main td{min-width:145px;vertical-align:top}.article-main li{margin:0 0 10px}h2[id]{scroll-margin-top:120px}</style>
