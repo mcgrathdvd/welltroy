@@ -27,8 +27,8 @@ export const catalogueProducts = [
     name: "Poly Mailers",
     group: "Mailing & Protective Packaging",
     eyebrow: "Lightweight shipping packaging",
-    intro: "Lightweight mailing bags for apparel, accessories and other non-fragile products. Choose from multiple catalogue sizes or discuss a custom size and branded finish for your shipping operation.",
-    meta: "Explore poly mailers in standard and custom sizes for apparel, accessories and e-commerce shipping. Ask Welltroy for printing options, MOQ and pricing.",
+    intro: "Lightweight shipping bags for folded apparel, accessories and other non-fragile goods. Compare 13 catalogue outer sizes, then tell us your packed item dimensions, quantity and artwork to discuss a custom size or printed finish.",
+    meta: "Compare 13 poly mailer catalogue sizes for apparel and e-commerce shipping. Ask about custom dimensions, logo printing and a quote from 500 pieces for eligible specifications.",
     highlights: ["13 catalogue sizes", "Compact shipping format", "Multiple colors shown", "Custom enquiries supported"],
     sizeLabel: "Outer dimension (Width × Length + Flap)",
     sizes: [["P01","17 × 25 + 5 cm"],["P02","20 × 25 + 5 cm"],["P03","25 × 30 + 5 cm"],["P04","28 × 37 + 5 cm"],["P05","32 × 40 + 5 cm"],["P06","35 × 40 + 5 cm"],["P07","38 × 47 + 5 cm"],["P08","40 × 50 + 5 cm"],["P09","45 × 55 + 5 cm"],["P10","50 × 55 + 5 cm"],["P12","50 × 65 + 5 cm"],["P13","55 × 60 + 5 cm"],["P14","60 × 75 + 5 cm"]],
@@ -36,7 +36,10 @@ export const catalogueProducts = [
     specNeeds: ["Film material and thickness", "Adhesive strip configuration", "Printing method and coverage", "Custom dimensions and colors", "Carton packing details"],
     faqs: [
       {q:"How do I choose a poly mailer size?",a:"Measure the product after folding or packing, then allow room for insertion and sealing. Share the packed dimensions if you would like help comparing catalogue sizes."},
+      {q:"Does the listed length include the sealing flap?",a:"The catalogue table shows outer width × length plus a separately listed flap. The usable space inside can be smaller. Send the packed width, length and thickness so we can confirm fit and usable inner dimensions before you order."},
       {q:"Are poly mailers suitable for fragile products?",a:"Poly mailers are a lightweight outer format and do not provide the cushioning of a bubble mailer. Fragile items may need additional protective packaging."},
+      {q:"What artwork should I send for logo printing?",a:"Share an editable logo file where possible, your preferred print colors, placement and approximate print area. We will confirm the suitable printing method, artwork requirements and coverage for the selected bag specification."},
+      {q:"Can I start with 500 custom poly mailers?",a:"A 500-piece starting quantity applies to eligible bag specifications. Tell us the quantity for each size, color and design so we can confirm the minimum for your exact request."},
       commonFaq.print
     ]
   },
