@@ -67,8 +67,8 @@ export const catalogueProducts = [
     name: "Poly Bubble Mailers",
     group: "Mailing & Protective Packaging",
     eyebrow: "Cushioned mailing protection",
-    intro: "Combine a mailing bag exterior with an internal cushioning layer for products that need more protection than a standard poly mailer. Available in 15 catalogue sizes for compact and medium-sized shipments.",
-    meta: "Explore protective poly bubble mailers in 15 catalogue sizes for accessories, beauty products and e-commerce shipping. Request custom options and pricing.",
+    intro: "Poly bubble mailers combine a flexible outer bag with an internal cushioning layer for compact goods that need more protection than a plain mailer. Compare 15 catalogue outer sizes, then confirm usable inner space and test the complete pack with your product.",
+    meta: "Compare 15 poly bubble mailer outer sizes for cushioned shipping. Check usable inner dimensions, bubble structure, sealing and custom printing before requesting a quote.",
     highlights: ["15 catalogue sizes", "Internal cushioning", "Multiple exterior colors", "Compact to medium formats"],
     sizeLabel: "Outer dimension (Width × Length + Flap)",
     sizes: [["BM01","11 × 13 + 4 cm"],["BM02","13 × 15 + 4 cm"],["BM03","15 × 18 + 4 cm"],["BM04","15 × 20 + 4 cm"],["BM05","18 × 23 + 4 cm"],["BM06","20 × 25 + 4 cm"],["BM07","23 × 28 + 5 cm"],["BM08","25 × 30 + 5 cm"],["BM09","26 × 32 + 5 cm"],["BM10","29 × 36 + 5 cm"],["BM11","32 × 40 + 5 cm"],["BM12","35 × 43 + 5 cm"],["BM13","38 × 47 + 5 cm"],["BM14","40 × 45 + 5 cm"],["BM15","40 × 50 + 5 cm"]],
@@ -77,7 +77,10 @@ export const catalogueProducts = [
     faqs: [
       {q:"What is the difference between a poly mailer and a bubble mailer?",a:"A poly mailer is a lightweight shipping bag. A bubble mailer adds an internal cushioning layer for products needing more surface and impact protection."},
       {q:"Are the listed dimensions internal or external?",a:"The catalogue identifies them as outer dimensions. Ask for usable inner dimensions before choosing a model, especially for thicker products."},
-      {q:"How much protection does a bubble mailer provide?",a:"Protection depends on the bubble structure, packed product, empty space and shipping conditions. Share the product details so the complete packing method can be reviewed."}
+      {q:"How much protection does a bubble mailer provide?",a:"Protection depends on the bubble structure, packed product, empty space and shipping conditions. Share the product details so the complete packing method can be reviewed."},
+      {q:"Does the listed length include the closing flap?",a:"The catalogue lists outer width and length plus a separate flap measurement. The bubble liner and sealed edges reduce usable space, so confirm the inner dimensions and closure clearance for your packed item."},
+      {q:"What should I provide for a printed bubble mailer quote?",a:"Send the packed item's width, length and thickness, expected quantity per size and design, destination, logo artwork and desired print colors. We will confirm print area, method and suitable construction for that specification."},
+      {q:"Can I order 500 bubble mailers?",a:"A 500-piece starting quantity applies to eligible bag specifications. Share the exact size, construction and print design so we can confirm the minimum for each version."}
     ]
   },
   {
@@ -121,8 +124,8 @@ export const catalogueProducts = [
     name: "Kraft Paper Bags",
     group: "Retail & Product Packaging",
     eyebrow: "Natural retail presentation",
-    intro: "Paper carrier bags in vertical and horizontal formats for retail purchases, gifts and customer presentation. Select a catalogue size or discuss a custom format for your products.",
-    meta: "Explore kraft paper bags in vertical and horizontal catalogue formats for retail, gifts and customer presentation. Request custom printing and pricing.",
+    intro: "Kraft paper carrier bags in 17 catalogue entries for retail purchases, gifts and branded customer presentation. Compare vertical and horizontal formats against the size of the item or presentation box, then confirm the handle, paper and logo finish for your order.",
+    meta: "Compare 17 kraft paper bag catalogue entries in vertical and horizontal formats. Confirm bag depth, handles, paper and logo printing for a custom retail bag quote.",
     highlights: ["17 catalogue entries", "Vertical and horizontal formats", "Handled construction shown", "Retail and gifting uses"],
     sizeLabel: "Catalogue dimension",
     sizes: [["KP01-V","12 × 5.7 × 16 cm"],["KP02-V","15 × 6 × 20 cm"],["KP03-V","16 × 8 × 22 cm"],["KP04-V","18 × 10 × 23 cm"],["KP05-V","20 × 10 × 28 cm"],["KP06-V","25 × 13 × 32 cm"],["KP07-V","26 × 8 × 35 cm"],["KP08-V","28 × 10 × 33 cm"],["KP09-V","30 × 10 × 40 cm"],["KP10-H","22 × 10 × 18 cm"],["KP11-H","27 × 8 × 21 cm"],["KP12-H","30 × 10 × 25 cm"],["KP13-H","32 × 11.5 × 28 cm"],["KP14-H","35 × 13 × 26 cm"],["KP15-H","40 × 12 × 28 cm"],["KP16-H","43 × 13 × 32 cm"],["KP17-H","48 × 14 × 35 cm"]],
@@ -131,6 +134,9 @@ export const catalogueProducts = [
     faqs: [
       {q:"How do I choose the correct paper bag size?",a:"Measure the product width, depth and height, including any presentation box. Allow clearance for insertion and carrying before comparing catalogue formats."},
       {q:"Can kraft paper be printed in full color?",a:"Available methods depend on paper color, surface, artwork and quantity. Light inks and fine color details may reproduce differently on natural kraft paper."},
+      {q:"What do the V and H catalogue models mean?",a:"The catalogue groups these examples as vertical and horizontal formats. Confirm the measurement order, usable opening and bottom depth for the model you choose before approving a size."},
+      {q:"Which handle and paper weight should I request?",a:"Tell us the packed product weight, whether it includes a box, the intended carrying use and your preferred appearance. Handle material, attachment, paper weight and any reinforcement must be confirmed for the selected specification."},
+      {q:"What should I send for a logo paper bag quote?",a:"Share the chosen model or target width, depth and height, quantity per size and artwork, destination, editable logo if available, preferred print colors and any finish requirement. We will confirm the achievable print method and placement."},
       commonFaq.custom
     ]
   },
@@ -157,8 +163,8 @@ export const catalogueProducts = [
     name: "Stand-up Pouches",
     group: "Retail & Product Packaging",
     eyebrow: "Shelf-ready flexible packaging",
-    intro: "Stand-up pouch formats designed to present and organize products on shelves or in e-commerce orders. Select from catalogue sizes and ask about the structure required for your contents.",
-    meta: "Explore self-sealing stand-up pouches in 8 catalogue formats for product presentation and storage. Request material, barrier and printing information.",
+    intro: "Stand-up pouch formats for shelf presentation and organized packing, with 8 catalogue dimensions to compare. Tell us what you will pack, the fill weight or volume and your required closure so the material, usable capacity and printing can be checked for your use.",
+    meta: "Compare 8 stand-up pouch catalogue dimensions and ask about usable capacity, closure, barrier and custom printing. Food use requires confirmed material documents.",
     highlights: ["8 catalogue formats", "Stand-up bottom", "Resealable styles shown", "Multiple colors and windows"],
     sizeLabel: "Catalogue dimension",
     sizes: [["SP01","9 × 13 + 6 cm"],["SP02","10 × 15 + 6 cm"],["SP03","12 × 20 + 8 cm"],["SP04","14 × 20 + 8 cm"],["SP05","15 × 22 + 8 cm"],["SP06","16 × 24 + 8 cm"],["SP07","18 × 26 + 8 cm"],["SP08","20 × 30 + 8 cm"]],
@@ -168,6 +174,9 @@ export const catalogueProducts = [
     faqs: [
       {q:"Are these pouches food safe?",a:"Food suitability cannot be determined from shape alone. Request the exact material structure and compliance documents for the intended food and destination market."},
       {q:"How do I choose the correct pouch size?",a:"Provide the product density, fill weight or volume and required headspace. A physical filling test is recommended before confirming production size."},
+      {q:"Does a catalogue size tell me how much the pouch holds?",a:"No. The listed dimensions do not establish a usable fill volume. Capacity depends on the bottom construction, material and product density. Share the intended contents and target fill amount, then confirm the final size with a filling test."},
+      {q:"Can I choose a zipper or window?",a:"Resealable and window styles are shown as format examples. Tell us which closure and window placement you need; availability depends on the exact material and dimensions and must be confirmed in the quotation."},
+      {q:"What details help you quote a printed stand-up pouch?",a:"Send the contents, target fill weight or volume, quantity per size and design, destination, artwork, desired closure and any barrier or shelf-life requirement. For food contents, include the market and applicable documentation needs."},
       commonFaq.print
     ]
   },
