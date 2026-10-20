@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data.mjs";
+const path = "/guides/kraft-vs-poly-bubble-mailers/";
+const title = "Kraft Bubble Mailers vs Poly Bubble Mailers";
+const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@type": "Organization", name: "Welltroy" }, publisher: { "@type": "Organization", name: "Welltroy" }, mainEntityOfPage: `${site.origin}${path}`, datePublished: "2026-10-20", dateModified: "2026-10-20" };
+const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: site.origin }, { "@type": "ListItem", position: 2, name: "Buying Guide", item: `${site.origin}/guides/choose-a-mailer/` }, { "@type": "ListItem", position: 3, name: "Kraft vs poly bubble mailers", item: `${site.origin}${path}` }] };
+---
+<Layout title={`${title} | Welltroy`} description="Compare paper-exterior kraft bubble mailers with poly bubble mailers by appearance, published sizes, usable inner space, printing and packing tests before requesting a quote." canonicalPath={path} schemas={[schema, breadcrumbs]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/choose-a-mailer/">Buying Guide</a> / Kraft vs poly bubble mailers</div><p class="eyebrow">Protective mailer comparison</p><h1>{title}</h1><p class="lead">Start with a kraft bubble mailer if a paper exterior suits your presentation, or a poly bubble mailer if you want a flexible film exterior and a published range of outer sizes to shortlist. In either case, the bubble construction, usable inner space, seal and full shipping pack must be confirmed for your actual item. The exterior alone does not establish protection or recyclability.</p><nav class="anchor-links" aria-label="In this guide"><a href="#compare">Compare</a><a href="#example">Size example</a><a href="#test">Test</a><a href="#quote">Quote brief</a></nav></div></section>
+  <section class="section"><div class="container article-layout"><article class="article-main">
+    <h2 id="compare">What Changes When the Exterior Changes?</h2>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Kraft and poly bubble mailer comparison"><table><thead><tr><th>Decision point</th><th>Yellow kraft bubble mailer</th><th>Poly bubble mailer</th></tr></thead><tbody>
+      <tr><td>Shown construction</td><td>Yellow kraft paper exterior with bubble lining</td><td>Flexible film exterior with internal bubble cushioning</td></tr>
+      <tr><td>Presentation</td><td>Paper appearance; confirm paper weight and print result</td><td>Film appearance; confirm exterior color and print method</td></tr>
+      <tr><td>Published size information</td><td>No numbered size table on the current product page; request both outer and usable inner dimensions</td><td>15 catalogue outer sizes, BM01–BM15; usable inner dimensions still need confirmation</td></tr>
+      <tr><td>Protection</td><td>Confirm bubble structure and test the packed item</td><td>Confirm bubble structure and test the packed item</td></tr>
+      <tr><td>Closure and artwork</td><td>Peel-and-seal flap shown; confirm adhesive and print placement</td><td>Confirm flap, adhesive, exterior finish and printable area for the chosen model</td></tr>
+    </tbody></table></div>
+    <p><a href="/products/kraft-padded-mailers/">Plain Kraft Padded Mailers</a> are another paper-exterior option, but their lining structure is selected per specification; do not assume it is identical to the yellow kraft bubble style. Ask for construction details before comparing quotations.</p>
+    <h2 id="example">Worked Size Example: A Boxed Accessory</h2>
+    <p>Suppose an accessory in its retail box measures 20 × 24 × 3 cm. The <a href="/products/poly-bubble-mailers/">Poly Bubble Mailers</a> catalogue lists BM08 as 25 × 30 + 5 cm and BM10 as 29 × 36 + 5 cm, both outer width × length + flap. BM08 may be too tight once the 3 cm thickness, bubble lining and seams are considered; BM10 is a larger candidate to ask about. Neither outer size proves a fit. Request usable internal width and length, then insert and seal a real sample.</p>
+    <p>The current <a href="/products/yellow-kraft-bubble-mailers/">Yellow Kraft Bubble Mailers</a> page does not list numbered sizes. Send the same packed dimensions and ask for a comparable kraft option with its outer and usable inner measurements. Compare quotations for the same packing requirement and quantity rather than treating unlike model names as equivalent.</p>
+    <h2 id="test">Test the Complete Pack, Not Just the Mailer</h2>
+    <ul><li>Check insertion, seam tension, flap closure and label placement with the actual packed product.</li><li>Test handling and transit conditions relevant to your shipment. For fragile, heavy, sharp or crushable goods, a mailer may need additional protection or a box.</li><li>If moisture exposure matters, ask for a material-specific test or protective solution. Do not infer water resistance from paper or film appearance alone.</li><li>For environmental claims, request the exact material and liner documentation and check the intended disposal route in the destination market. A paper exterior with bubble lining is not automatically recyclable.</li></ul>
+    <h2 id="quote">Request Comparable Samples and Quotes</h2>
+    <p>Send the item and packed dimensions, weight, shipping route, target quantity per size and design, preferred exterior, required cushioning, artwork and destination. Ask for the inner measurements, paper or film specification, bubble structure, seal, sample arrangements and quotation for each candidate. If printing is involved, use our <a href="/guides/logo-artwork-checklist/">logo artwork checklist</a> to prepare files and placement notes.</p>
+    <a class="button" href="/quote/?product=multiple-products#quote-form">Compare kraft and poly options</a>
+  </article><aside class="side-card"><p class="eyebrow">Compare actual products</p><h2>Related Mailers</h2><div class="guide-options">
+    <a href="/products/yellow-kraft-bubble-mailers/"><strong>Yellow Kraft Bubble Mailers</strong><span>Paper exterior with a bubble lining</span></a>
+    <a href="/products/poly-bubble-mailers/"><strong>Poly Bubble Mailers</strong><span>Compare 15 listed outer sizes</span></a>
+    <a href="/products/kraft-padded-mailers/"><strong>Kraft Padded Mailers</strong><span>Confirm the proposed lining construction</span></a>
+  </div><a class="text-link" href="/guides/choose-a-mailer/">Compare plain and cushioned mailers →</a></aside></div></section>
+</Layout>
+<style>.article-main{min-width:0}.article-main td{min-width:145px;vertical-align:top}.article-main li{margin:0 0 10px}h2[id]{scroll-margin-top:120px}</style>
