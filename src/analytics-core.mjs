@@ -10,6 +10,7 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/about/','/faq/','/reviews/','/ordering/','/privacy/','/catalogue/','/guides/',
   '/guides/choose-a-mailer/','/guides/mailer-size-for-clothing/',
   '/guides/logo-artwork-checklist/',
+  '/guides/kraft-vs-poly-bubble-mailers/',
   '/guides/custom-packaging-500-pieces/']);
 const names = new Set(['page_view','view_product','quote_start','quote_submit_success',
   'quote_submit_error','whatsapp_click','email_click']);
