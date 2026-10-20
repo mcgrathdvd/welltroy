@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data.mjs";
+const path = "/guides/custom-paper-bag-size-handles-printing/";
+const title = "Choosing Custom Paper Bags: Size, Handles and Printing";
+const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@type": "Organization", name: "Welltroy" }, publisher: { "@type": "Organization", name: "Welltroy" }, mainEntityOfPage: `${site.origin}${path}`, datePublished: "2026-10-20", dateModified: "2026-10-20" };
+const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: site.origin }, { "@type": "ListItem", position: 2, name: "Buying Guide", item: `${site.origin}/guides/choose-a-mailer/` }, { "@type": "ListItem", position: 3, name: "Custom paper bag size, handles and printing", item: `${site.origin}${path}` }] };
+---
+<Layout title={`${title} | Welltroy`} description="Choose a custom retail paper bag by checking packed-item dimensions, usable opening, handle strength and artwork on the exact paper. Compare real Welltroy catalogue examples before requesting samples." canonicalPath={path} schemas={[schema, breadcrumbs]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/choose-a-mailer/">Buying Guide</a> / Custom paper bags</div><p class="eyebrow">Retail paper bag buying guide</p><h1>{title}</h1><p class="lead">Measure the item as the customer will carry it, including its box. Shortlist a vertical or horizontal bag with room to insert it, then confirm the usable opening and base with a physical sample. Specify the packed weight and carrying use before choosing a handle or paper weight. Approve printing on the actual paper and finish, not from a screen image alone.</p><nav class="anchor-links" aria-label="In this guide"><a href="#size">Size</a><a href="#example">Example</a><a href="#handles">Handles</a><a href="#printing">Printing</a><a href="#quote">Quote brief</a></nav></div></section>
+  <section class="section"><div class="container article-layout"><article class="article-main">
+    <h2 id="size">Choose the Format and Usable Size</h2>
+    <p>Record the packed product's width, depth and height, including any retail box, tissue or insert. Decide whether it should sit upright or sideways. A catalogue dimension is a shortlist, not proof that the item will pass through the opening or sit flat on the base. Ask the supplier to confirm the measurement order, usable opening, base depth and handle clearance for the selected model.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Paper bag sizing decisions"><table><thead><tr><th>Check</th><th>Why it matters</th><th>What to verify</th></tr></thead><tbody>
+      <tr><td>Vertical or horizontal format</td><td>Changes the orientation of the item and available front panel</td><td>Insert the actual packed item in the proposed orientation</td></tr>
+      <tr><td>Width and opening</td><td>Seams, folds and paper stiffness can reduce usable space</td><td>Request the usable opening measurement</td></tr>
+      <tr><td>Base depth</td><td>A box may fit through the top but not rest flat</td><td>Check the formed base with a sample</td></tr>
+      <tr><td>Height and handles</td><td>Overfilled bags may not close or carry comfortably</td><td>Check the item below the handle area</td></tr>
+    </tbody></table></div>
+    <h2 id="example">Worked Example: A Boxed Retail Gift</h2>
+    <p>Suppose a boxed gift measures 22 × 8 × 20 cm. The <a href="/products/kraft-paper-bags/">Kraft Paper Bags</a> catalogue lists KP06-V at 25 × 13 × 32 cm and KP12-H at 30 × 10 × 25 cm. These are two formats to ask about, not confirmed fits: the catalogue page does not establish usable inner dimensions or a measurement order for every model. If the supplier confirms width × depth × height, the horizontal option has less nominal depth clearance. Test both with the real box, including any tissue, before ordering.</p>
+    <p>For a colored presentation bag, compare the <a href="/products/paper-gift-bags/">Paper &amp; Gift Bags</a> range separately. Its PB09-H catalogue entry is 32 × 11 × 27 cm, but color, paper, handles and usable measurements need their own specification. Do not assume the kraft and gift-bag models share a construction just because their listed dimensions are similar.</p>
+    <h2 id="handles">Specify Handles for the Actual Load</h2>
+    <p>Send the maximum packed weight, how long customers will carry the bag, and whether the contents have sharp corners or a rigid box. Ask which handle material, attachment method, paper weight and reinforcement can be supplied for the chosen size. Request a loaded sample and check the handle attachment, rim, base and comfort during realistic carrying. A photograph of a handle does not establish a safe load rating.</p>
+    <h2 id="printing">Approve Artwork on the Chosen Paper</h2>
+    <ul><li>Send an editable logo when available, a visual reference, brand colors, desired print position and quantity per design.</li><li>Ask for the printable area and keep essential artwork away from handles, folds, side gussets and the base.</li><li>Confirm the paper color, surface, print process and whether light colors or fine details require an adjusted method. A digital preview cannot guarantee the result on natural kraft or colored paper.</li><li>Approve the final proof for the exact bag size, paper, handle and finish. Request a physical sample when color or feel is critical.</li></ul>
+    <p>Use the <a href="/guides/logo-artwork-checklist/">logo artwork checklist</a> to prepare files and proof questions before production.</p>
+    <h2 id="quote">What to Send for a Comparable Quote</h2>
+    <p>Share the item and packed dimensions, weight, target bag model or format, quantity per size and design, delivery destination, artwork and preferred color or finish. Ask for confirmed usable dimensions, paper and handle specifications, reinforcement, print method, sample arrangements and lead time. Compare quotations against the same load and presentation requirements rather than catalogue dimensions alone.</p>
+    <a class="button" href="/quote/?product=multiple-products#quote-form">Request a paper bag quote</a>
+  </article><aside class="side-card"><p class="eyebrow">Compare actual formats</p><h2>Related Products</h2><div class="guide-options">
+    <a href="/products/kraft-paper-bags/"><strong>Kraft Paper Bags</strong><span>17 vertical and horizontal catalogue entries</span></a>
+    <a href="/products/paper-gift-bags/"><strong>Paper &amp; Gift Bags</strong><span>Colored presentation options to specify</span></a>
+  </div><a class="text-link" href="/guides/logo-artwork-checklist/">Prepare your logo artwork →</a></aside></div></section>
+</Layout>
+<style>.article-main{min-width:0}.article-main td{min-width:145px;vertical-align:top}.article-main li{margin:0 0 10px}h2[id]{scroll-margin-top:120px}</style>
