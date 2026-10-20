@@ -1,3 +1,5 @@
+import {catalogueModels} from './catalogue-models.mjs';
+
 export const productSlugs = new Set([
   'poly-mailers','biodegradable-mailers','poly-bubble-mailers','metallic-bubble-mailers',
   'zipper-bags','kraft-paper-bags','paper-gift-bags','stand-up-pouches','thermal-labels',
@@ -14,8 +16,14 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/guides/custom-paper-bag-size-handles-printing/',
   '/guides/custom-packaging-500-pieces/']);
 const names = new Set(['page_view','view_product','quote_start','quote_submit_success',
-  'quote_submit_error','whatsapp_click','email_click']);
+  'quote_submit_error','whatsapp_click','email_click','quote_cta_click','select_size','download_catalogue','sample_interest']);
 const errors = new Set(['request_rejected','service_unavailable','delivery_unconfirmed']);
+const placements = new Set(['header','hero','product-hero','product-size','product-details','product-bottom','footer','sticky-desktop','sticky-mobile','content']);
+const sampleTypes = new Set(['existing','custom','none']);
+
+export function safeTitle(value) {
+  return typeof value === 'string' && /^[A-Za-z0-9 &|():,.?\u2013\u2014'/-]{1,160}$/.test(value) ? value : 'Welltroy';
+}
 
 export function safePath(path) {
   const bare = typeof path === 'string' ? path.split(/[?#]/)[0] : '';
@@ -39,24 +47,39 @@ export function sourceInfo(referrer, currentOrigin) {
   } catch { return {entry_source:'direct_or_unknown',page_referrer:''}; }
 }
 
-export function sanitizeEvent(name, details, path) {
+export function sanitizeEvent(name, details, path, title) {
   const cleanPath = safePath(path);
   if (!names.has(name) || !cleanPath) return null;
-  const result = {page_path:cleanPath, page_location:`https://welltroy.com${cleanPath}`, page_title:'Welltroy'};
+  const result = {page_path:cleanPath, page_location:`https://welltroy.com${cleanPath}`, page_title:safeTitle(title)};
   if (name === 'view_product') {
     if (!productSlugs.has(details?.product_slug)) return null;
     result.product_slug = details.product_slug;
   } else if (name.startsWith('quote_')) result.product_slug = safeProduct(details?.product_slug);
   if (name === 'quote_submit_error') result.error_category = errors.has(details?.error_category) ? details.error_category : 'delivery_unconfirmed';
   if (name === 'whatsapp_click') result.contact_stage = 'outbound';
+  if (name === 'quote_cta_click') result.placement = placements.has(details?.placement) ? details.placement : 'content';
+  if (name === 'select_size') {
+    if (!productSlugs.has(details?.product_slug) || !catalogueModels[details?.product_slug]?.includes(details?.model)) return null;
+    result.product_slug = details.product_slug;
+    result.model = details.model;
+  }
+  if (name === 'download_catalogue') {
+    if (!['2025-pdf','current-guide-print'].includes(details?.document)) return null;
+    result.document = details.document;
+  }
+  if (name === 'sample_interest') {
+    if (!sampleTypes.has(details?.sample_type)) return null;
+    result.product_slug = safeProduct(details?.product_slug);
+    result.sample_type = details.sample_type;
+  }
   return result;
 }
 
-export function createTracker({canSend,send,getPath}) {
+export function createTracker({canSend,send,getPath,getTitle = () => 'Welltroy'}) {
   return (name, details = {}) => {
     try {
       if (!canSend()) return false;
-      const payload = sanitizeEvent(name,details,getPath());
+      const payload = sanitizeEvent(name,details,getPath(),getTitle());
       if (!payload) return false;
       send(name,payload);
       return true;

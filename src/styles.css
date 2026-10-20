@@ -89,6 +89,7 @@ h3 { font-size: 1.25rem; }
 .hero-wide { position: relative; isolation: isolate; display: grid; overflow: hidden; min-height: 660px; background: #153828; color: #fff; }
 .hero-wide::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(8,31,20,.68) 0%, rgba(8,31,20,.46) 31%, rgba(8,31,20,.08) 57%, transparent 76%); pointer-events: none; }
 .hero-wide-media { position: absolute; inset: 0; z-index: 0; }
+.hero-wide-media picture { display:block; width:100%; height:100%; }
 .hero-wide-media img { width: 100%; height: 100%; object-fit: cover; object-position: left center; }
 .hero-wide-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; width: 100%; max-width: none; min-height: 660px; padding: 70px clamp(28px, 6vw, 120px); }
 .hero-wide-eyebrow { max-width: 550px; margin: 0 0 24px; color: #e0edda; font-size: .78rem; font-weight: 800; letter-spacing: .2em; line-height: 1.5; text-transform: uppercase; }
@@ -186,6 +187,15 @@ section[id] { scroll-margin-top: 95px; }
 .breadcrumbs { font-size: .84rem; color: var(--muted); margin-bottom: 30px; }
 .breadcrumbs a { color: var(--orange); }
 .page-hero-grid { display: grid; grid-template-columns: 1fr .8fr; gap: 70px; align-items: center; }
+.product-hero-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); grid-template-areas:"heading visual" "decision visual"; column-gap:70px; align-items:start; }
+.product-heading { grid-area:heading; min-width:0; }
+.product-heading h1 { margin-bottom:0; }
+.product-decision { grid-area:decision; min-width:0; }
+.product-hero .product-visual { grid-area:visual; align-self:center; }
+.product-lead { margin-top:20px; }
+.product-hero-actions { margin-top:24px; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+.table-wrap tbody th[scope="row"] { background:transparent; color:var(--ink); font-weight:650; }
 .page-hero h1 { font-size: clamp(2.6rem,5vw,4.6rem); }
 .product-visual { min-width: 0; }
 .page-product-image { display: grid; place-items: center; background: var(--paper); overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
@@ -578,3 +588,34 @@ html:has(.contact-dialog[open]) { overflow: hidden; }
 
 .analytics-settings { background:none;border:0;padding:0;color:inherit;text-align:left;font:inherit;cursor:pointer;text-decoration:underline;min-height:44px;}
 .analytics-settings[hidden] {display:none;}
+
+@media (max-width:980px) {
+  .product-hero { padding:32px 0 40px; }
+  .product-hero-grid { grid-template-columns:minmax(0,1fr); grid-template-areas:"heading" "visual" "decision"; gap:20px; }
+  .product-heading .breadcrumbs { margin-bottom:14px; }
+  .product-heading .eyebrow { margin:0 0 10px; }
+  .product-hero .product-visual { width:100%; max-width:560px; justify-self:center; }
+  .product-decision { display:flex; flex-direction:column; }
+  .product-decision .order-summary { order:0; margin:0; }
+  .product-hero-actions { order:1; margin-top:16px; }
+  .product-decision .product-detail-links { order:2; }
+  .product-lead { order:3; margin-top:14px; }
+}
+@media (max-width:640px) {
+  .product-hero { padding:22px 0 30px; }
+  .product-hero-grid { gap:14px; }
+  .product-heading .breadcrumbs { font-size:.75rem; margin-bottom:10px; }
+  .product-heading .eyebrow { display:none; }
+  .product-heading h1 { font-size:clamp(1.9rem,8vw,2.5rem); line-height:1.12; }
+  .product-hero .page-product-image img { height:clamp(160px,46vw,210px); aspect-ratio:auto; }
+  .product-hero .page-product-image[href] { gap:0; padding-bottom:8px; }
+  .product-hero .image-zoom-label { font-size:.75rem; }
+  .product-hero .product-image-note { margin:8px 0 0; font-size:.72rem; line-height:1.4; }
+  .product-decision .order-summary { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; padding:12px 0; }
+  .product-decision .order-summary > div:last-child { grid-column:auto; }
+  .product-decision .order-summary dt { font-size:.68rem; }
+  .product-decision .order-summary dd { font-size:.76rem; line-height:1.4; }
+  .product-hero-actions { display:grid; grid-template-columns:1fr; gap:8px; margin-top:14px; }
+  .product-hero-actions .button { min-height:46px; font-size:.9rem; }
+  .product-lead { font-size:1rem; }
+}
