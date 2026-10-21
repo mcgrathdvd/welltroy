@@ -55,9 +55,9 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
       <a class="desktop-whatsapp" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
         <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true" fill="none"><path d="M16 3a13 13 0 0 0-11.1 19.8L3 29l6.3-1.8A13 13 0 1 0 16 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><path d="M11.4 9.4c-.4-.9-.8-.9-1.2-.9H9.1c-.4 0-1 .2-1.5.8-.5.6-1.7 1.7-1.7 4.2s1.8 4.9 2.1 5.2c.3.4 3.6 5.7 8.8 7.7 4.3 1.7 5.2 1.4 6.2 1.3 1-.1 3.2-1.3 3.7-2.6.4-1.3.4-2.5.3-2.7-.1-.2-.4-.4-.9-.7l-3.7-1.7c-.5-.2-.8-.3-1.2.3l-1.6 1.9c-.3.4-.6.4-1.1.2-.5-.3-2.1-.8-4-2.5-1.5-1.3-2.5-3-2.8-3.5-.3-.5 0-.8.2-1.1l.9-1.1c.3-.4.4-.6.6-1 .2-.3.1-.6 0-.9l-1.7-4.1Z" fill="currentColor" transform="translate(4 2) scale(.72)" /></svg>
       </a>
-      <a class="desktop-quote" href={quoteHref}>Get a Free Quote<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 12 9-9h7l2 2v7l-9 9-9-9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /><circle cx="16.5" cy="7.5" r="1.4" fill="currentColor" /></svg></a>
+      <a class="desktop-quote" href={quoteHref} data-quote-placement="sticky-desktop">Request a Custom Quote<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 12 9-9h7l2 2v7l-9 9-9-9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /><circle cx="16.5" cy="7.5" r="1.4" fill="currentColor" /></svg></a>
     </div>
-    <div class="mobile-actions" aria-label="Quick contact"><a href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a><a href={quoteHref}>Request a Quote</a></div>
+    <div class="mobile-actions" aria-label="Quick contact"><a href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a><a href={quoteHref} data-quote-placement="sticky-mobile">Request a Quote</a></div>
     <WhatsAppContact />
     <dialog class="contact-dialog email-contact" data-email-dialog aria-labelledby="email-contact-title">
       <div class="contact-dialog-header"><span class="eyebrow">Talk to Welltroy</span><button class="contact-close" type="button" data-email-close aria-label="Close email contact">×</button></div>
@@ -71,7 +71,7 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
       <p class="form-note">If no email app opens, paste this address into the email service you normally use. Attach artwork and files separately.</p>
       <p class="form-note">You can also <a class="text-link" href="/quote/#quote-form" data-email-form>send your enquiry and files online</a>.</p>
     </dialog>
-    <AnalyticsConsent />
+    <AnalyticsConsent pageTitle={title} />
     <script src="../main.js"></script>
     <script src="../whatsapp.js"></script>
   </body>
