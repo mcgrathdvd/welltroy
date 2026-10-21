@@ -2,8 +2,9 @@
 // Public measurement identifier confirmed in the user's GA4 Web stream.
 const raw = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID ?? 'G-R2B5B1072P';
 const measurementId = /^G-[A-Z0-9]{5,20}$/.test(raw) ? raw : '';
+const { pageTitle = 'Welltroy' } = Astro.props;
 ---
-<span hidden data-analytics-config data-measurement-id={measurementId}></span>
+<span hidden data-analytics-config data-measurement-id={measurementId} data-page-title={pageTitle}></span>
 <section class="analytics-choice" data-analytics-banner hidden aria-label="Optional website analytics">
   <div><strong>Optional analytics</strong><p>Allow Google Analytics cookies to improve this site? You can enquire either way. <a href="/privacy/#website-analytics">Details</a></p></div>
   <div class="analytics-choice-actions"><button type="button" data-analytics-reject>Decline</button><button type="button" data-analytics-accept>Allow</button></div>

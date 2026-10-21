@@ -61,7 +61,7 @@ const items = [
           {item.groups ? <><a class="nav-new-products" href="/products/#new-products">New Products · 8 <span aria-hidden="true">→</span></a><div class="nav-product-groups">{item.groups.map((group, index) => <div><a class="nav-group-title" href={`/products/#group-${index + 1}`}>{group.name}</a>{group.slugs.map((slug) => <a href={`/products/${slug}/`}>{products.find((product) => product.slug === slug).name}</a>)}</div>)}</div></> : <div class="nav-dropdown-links">{item.links.map((link) => <a href={link.href}>{link.label}</a>)}</div>}
         </div>
       </div>)}
-      <a class="button nav-quote" href={quoteHref} aria-label="Request a Quote"><span class="nav-quote-desktop"><span aria-hidden="true">→</span> GET QUOTE</span><span class="nav-quote-mobile">Request a Quote</span></a>
+      <a class="button nav-quote" href={quoteHref} data-quote-placement="header" aria-label="Request a Quote"><span class="nav-quote-desktop"><span aria-hidden="true">→</span> GET QUOTE</span><span class="nav-quote-mobile">Request a Quote</span></a>
     </nav>
   </div>
 </header>
