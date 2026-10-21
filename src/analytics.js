@@ -1,4 +1,5 @@
-import {createTracker,validMeasurementId,safePath,productSlugs,sourceInfo,readChoice,saveChoice} from './analytics-core.mjs';
+import {createTracker,validMeasurementId,safePath,safeTitle,productSlugs,sourceInfo,readChoice,saveChoice} from './analytics-core.mjs';
+import {campaignForVisit,clearCampaign} from './campaigns.mjs';
 
 let tracker = () => false;
 let initialized = false;
@@ -24,9 +25,11 @@ export function initializeAnalytics() {
     let started = false;
     let gtag;
     const source = sourceInfo(document.referrer,location.origin);
+    const title = safeTitle(config.dataset.pageTitle);
+    let campaign = {};
     const canSend = () => choice === 'granted' && loaded;
-    tracker = createTracker({canSend,getPath:() => location.pathname,send:(name,params) => {
-      gtag('event',name,{...params,entry_source:source.entry_source,page_referrer:source.page_referrer,send_to:id});
+    tracker = createTracker({canSend,getPath:() => location.pathname,getTitle:() => title,send:(name,params) => {
+      gtag('event',name,{...params,...campaign,entry_source:campaign.campaign_source ? 'campaign' : source.entry_source,page_referrer:source.page_referrer,send_to:id});
     }});
     const view = () => {
       if (viewed || !safePath(location.pathname) || !canSend()) return;
@@ -37,12 +40,15 @@ export function initializeAnalytics() {
     };
     const load = () => {
       if (loaded) { view(); return; }
+      let session;
+      try { session = window.sessionStorage; } catch { session = null; }
+      campaign = campaignForVisit(location.search || '',session,{referrer:document.referrer,origin:location.origin});
       window.dataLayer = window.dataLayer || [];
       gtag = function () { window.dataLayer.push(arguments); };
       gtag('consent','default',allDenied);
       gtag('consent','update',{...allDenied,analytics_storage:'granted'});
       // Set sanitized context before config/session events. No raw URL, query or form text.
-      gtag('set',{page_location:`https://welltroy.com${safePath(location.pathname) || '/'}`,page_referrer:source.page_referrer,page_title:'Welltroy'});
+      gtag('set',{page_location:`https://welltroy.com${safePath(location.pathname) || '/'}`,page_referrer:source.page_referrer,page_title:title,...campaign});
       gtag('js',new Date());
       gtag('config',id,{send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false,cookie_domain:'welltroy.com',cookie_flags:'SameSite=Lax;Secure'});
       const script = document.createElement('script');
@@ -73,6 +79,8 @@ export function initializeAnalytics() {
         // Stop transmission immediately, then clear known first-party GA cookies.
         window[`ga-disable-${id}`] = true;
         window.dataLayer = [];
+        campaign = {};
+        try { clearCampaign(window.sessionStorage); } catch { /* optional storage */ }
         clearCookies();
         // A loaded third-party script cannot be unloaded. Reload into the blocked state.
         if (loaded) location.reload();
@@ -88,6 +96,7 @@ export function initializeAnalytics() {
     else window[`ga-disable-${id}`] = true;
     document.addEventListener('click',(event) => {
       if (!event.isTrusted || (event.button !== undefined && event.button !== 0)) return;
+      if (event.target.closest?.('[data-print-guide]')) track('download_catalogue',{document:'current-guide-print'});
       const link = event.target.closest?.('a[href]');
       if (!link) return;
       // Other listeners can intercept the link to open a dialog. Check after bubbling.
@@ -97,6 +106,12 @@ export function initializeAnalytics() {
           const url = new URL(link.href);
           if (url.protocol === 'mailto:') track('email_click');
           if (url.hostname === 'wa.me') track('whatsapp_click');
+          if (url.origin === location.origin && url.pathname === '/quote/') {
+            const slug = url.searchParams.get('product') || location.pathname.match(/^\/products\/([^/]+)\/$/)?.[1];
+            track('quote_cta_click',{product_slug:slug,placement:link.dataset.quotePlacement});
+            if (link.dataset.model) track('select_size',{product_slug:slug,model:link.dataset.model});
+          }
+          if (url.origin === location.origin && url.pathname === '/catalog/Welltroy-Product-Catalog-2025.pdf') track('download_catalogue',{document:'2025-pdf'});
         } catch { /* no analytics for invalid links */ }
       });
     });
@@ -108,6 +123,11 @@ export function initializeAnalytics() {
     };
     form?.addEventListener('input',start);
     form?.addEventListener('change',start);
+    form?.addEventListener('change',(event) => {
+      if (!event.isTrusted || event.target.name !== 'sample') return;
+      const types = {'Existing product sample':'existing','Custom printed sample':'custom','No sample needed':'none'};
+      track('sample_interest',{product_slug:form.elements.namedItem('product')?.value,sample_type:types[event.target.value]});
+    });
     form?.addEventListener('welltroy:new-enquiry',() => {started = false;});
   } catch { tracker = () => false; }
 }

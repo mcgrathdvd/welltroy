@@ -52,22 +52,22 @@ test('referrers lose search terms; arbitrary private referrer paths and hosts ar
  assert.equal(sourceInfo('https://google.com.evil.invalid/search','https://welltroy.com').entry_source,'referral');
 });
 
-async function environment({id='G-TEST12345',hostname='welltroy.com',choice=null}={}) {
+async function environment({id='G-TEST12345',hostname='welltroy.com',choice=null,search='',pathname='/quote/',referrer='https://www.google.com/search?q=private'}={}) {
  const saved={window:globalThis.window,document:globalThis.document,location:globalThis.location};
  const node=()=>({hidden:true,listeners:{},addEventListener(name,fn){this.listeners[name]=fn;},focus(){this.focused=true;}});
  const accept=node(),reject=node(),settings=node(),banner=node();
  banner.querySelector=(s)=>s==='[data-analytics-accept]'?accept:s==='[data-analytics-reject]'?reject:reject;
- const scripts=[],deletedCookies=[];let stored=choice?JSON.stringify({choice,expires:Date.now()+100000}):null;
- globalThis.window={localStorage:{getItem:()=>stored,setItem:(k,v)=>{stored=v;}}};
- globalThis.location={hostname,origin:`https://${hostname}`,pathname:'/quote/',reload(){this.reloaded=true;}};
- globalThis.document={referrer:'https://www.google.com/search?q=private',
-  querySelector:(s)=>s==='[data-analytics-config]'?{dataset:{measurementId:id}}:s==='[data-analytics-banner]'?banner:s==='[data-analytics-settings]'?settings:null,
-  createElement:()=>({}),head:{append(s){scripts.push(s);}},addEventListener(){},
+ const scripts=[],deletedCookies=[],sessionReads=[],session=new Map(),listeners={};let stored=choice?JSON.stringify({choice,expires:Date.now()+100000}):null;
+ globalThis.window={localStorage:{getItem:()=>stored,setItem:(k,v)=>{stored=v;}},get sessionStorage(){sessionReads.push(true);return {getItem:k=>session.get(k),setItem:(k,v)=>session.set(k,v),removeItem:k=>session.delete(k)};}};
+ globalThis.location={hostname,origin:`https://${hostname}`,pathname,search,reload(){this.reloaded=true;}};
+ globalThis.document={referrer,
+  querySelector:(s)=>s==='[data-analytics-config]'?{dataset:{measurementId:id,pageTitle:'Request a Packaging Quote | Welltroy'}}:s==='[data-analytics-banner]'?banner:s==='[data-analytics-settings]'?settings:null,
+  createElement:()=>({}),head:{append(s){scripts.push(s);}},addEventListener(name,fn){listeners[name]=fn;},
   get cookie(){return '_ga=abc; _ga_TEST12345=xyz';},set cookie(v){deletedCookies.push(v);}
  };
  const mod=await import(`../src/analytics.js?test=${Math.random()}`);
  mod.initializeAnalytics();
- return {mod,scripts,accept,reject,banner,settings,deletedCookies,restore(){for(const [key,val] of Object.entries(saved)){if(val===undefined)delete globalThis[key];else globalThis[key]=val;}}};
+ return {mod,scripts,accept,reject,banner,settings,deletedCookies,sessionReads,session,listeners,restore(){for(const [key,val] of Object.entries(saved)){if(val===undefined)delete globalThis[key];else globalThis[key]=val;}}};
 }
 test('runtime loads no script with missing ID or on a preview host',async()=>{
  for(const input of [{id:''},{hostname:'preview.welltroy.pages.dev'}]){
@@ -94,4 +94,39 @@ test('runtime rejection never loads GA; revocation stops events and reloads with
   assert.equal(env.mod.track('quote_start'),false);assert.equal(window.dataLayer.length,0);
   assert.ok(env.deletedCookies.every(x=>x.includes('Max-Age=0')));
  }finally{env.restore();}
+});
+
+test('runtime reads campaign storage only after consent and configures public attribution before events',async()=>{
+ const env=await environment({search:'?utm_source=google&utm_medium=cpc&utm_campaign=poly-mailers&email=buyer@example.com&gclid=private'});
+ try {
+  assert.equal(env.sessionReads.length,0);assert.equal(env.session.size,0);
+  env.accept.listeners.click();
+  assert.ok(env.sessionReads.length>0);assert.equal(env.session.size,1);
+  const queue=window.dataLayer.map(x=>Array.from(x));
+  const set=queue.findIndex(x=>x[0]==='set'),config=queue.findIndex(x=>x[0]==='config');
+  assert.ok(set<config);assert.equal(queue[set][1].campaign_source,'google');
+  const page=queue.find(x=>x[0]==='event'&&x[1]==='page_view')[2];
+  assert.equal(page.campaign_name,'poly-mailers');assert.equal(page.entry_source,'campaign');
+  assert.equal(page.page_title,'Request a Packaging Quote | Welltroy');
+  assert.equal(page.page_location,'https://welltroy.com/quote/');
+  assert.equal(JSON.stringify(queue).includes('buyer@example.com'),false);
+  assert.equal(JSON.stringify(queue).includes('gclid'),false);
+  env.reject.listeners.click();assert.equal(env.session.size,0);
+ } finally {env.restore();}
+});
+
+test('runtime size and catalogue clicks produce filtered funnel events without breaking navigation',async()=>{
+ const env=await environment({choice:'granted',pathname:'/products/poly-mailers/'});
+ try {
+  const link={href:'https://welltroy.com/quote/?product=poly-mailers&size=P03%20private',dataset:{quotePlacement:'product-size',model:'P03'}};
+  const click=()=>({isTrusted:true,button:0,defaultPrevented:false,target:{closest:selector=>selector==='a[href]'?link:null}});
+  const event=click();env.listeners.click(event);await Promise.resolve();
+  const sent=window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event');
+  assert.equal(sent.filter(x=>x[1]==='quote_cta_click').length,1);
+  const model=sent.find(x=>x[1]==='select_size')[2];assert.equal(model.model,'P03');
+  assert.equal(JSON.stringify(sent).includes('private'),false);assert.equal(event.defaultPrevented,false);
+  link.href='https://welltroy.com/catalog/Welltroy-Product-Catalog-2025.pdf';link.dataset={};
+  env.listeners.click(click());await Promise.resolve();
+  assert.equal(window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event'&&x[1]==='download_catalogue').length,1);
+ } finally {env.restore();}
 });

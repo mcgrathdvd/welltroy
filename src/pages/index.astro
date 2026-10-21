@@ -25,7 +25,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 ---
 <Layout title="Custom E-commerce Packaging & Mailer Bags | Welltroy" description="Source custom poly mailers, bubble mailers, paper bags, zipper bags, pouches, thermal labels and honeycomb paper wrap from Welltroy in Shenzhen, China." schemas={[organization, faqSchema]}>
   <section class="hero-wide">
-    <div class="hero-wide-media"><img src="/images/hero-wide-selected.webp" alt="An illustrative arrangement of mailers, pouches, labels, wrap and paper bags" width="1983" height="793" fetchpriority="high" /></div>
+    <div class="hero-wide-media"><picture><source media="(max-width: 640px)" srcset="/images/hero-mobile-480.webp 480w, /images/hero-mobile-800.webp 800w" sizes="100vw" /><img src="/images/hero-wide-selected.webp" srcset="/images/hero-wide-1280.webp 1280w, /images/hero-wide-selected.webp 1983w" sizes="100vw" alt="An illustrative arrangement of mailers, pouches, labels, wrap and paper bags" width="1983" height="793" fetchpriority="high" decoding="async" /></picture></div>
     <div class="container hero-wide-inner">
       <p class="hero-wide-eyebrow">Packaging factory · Custom orders from 500 pieces*</p>
       <h1><span>Packaging That</span>{" "}<span>Builds Your Brand</span></h1>
@@ -36,7 +36,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
         <a href="/products/kraft-paper-bags/">Paper Bags</a>
         <a href="/products/#group-3">Labels &amp; Wrap</a>
       </div>
-      <div class="button-row hero-wide-actions"><a class="button" href="/quote/">Get a Custom Quote <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="/products/">View Products <span aria-hidden="true">↗</span></a></div>
+      <div class="button-row hero-wide-actions"><a class="button" href="/quote/#quote-form" data-quote-placement="hero">Request a Custom Quote <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="/products/">View Products <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
   <section class="hero-stats" aria-label="Starting order and sample information">
@@ -66,6 +66,6 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
   <section class="section section-soft"><div class="container"><div class="section-head"><div><p class="eyebrow">Buyer feedback</p><h2>Feedback from Packaging Buyers</h2><p class="lead">Selected buyer comments supplied by Welltroy.</p></div><a class="text-link" href="/reviews/">Buyer reviews →</a></div><div class="review-grid">{reviews.map((review, index) => <details class="review-card review-disclosure" open={index === 0}><summary><span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span><strong>{review.country}</strong><span class="review-toggle">Read buyer review</span></summary><blockquote>“{review.quote}”</blockquote><div class="review-meta"><span>{review.date} · {review.note}</span></div></details>)}</div></div></section>
 
   <section class="section" id="faq"><div class="container"><div class="section-head"><div><p class="eyebrow">Frequently asked questions</p><h2>Practical Answers Before You Enquire</h2></div><a class="text-link" href="/faq/">See all buyer questions →</a></div><Faq items={homeFaq.slice(0, 3)} /></div></section>
-  <section class="cta-band"><div class="container inner"><div><h2>Tell Us What You Need to Pack</h2><p>Send your product, quantity, preferred size and destination for a tailored quotation.</p></div><div class="button-row"><a class="button button-light" href="/quote/">Request a Quote</a><a class="button button-secondary button-light" href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a></div></div></section>
+  <section class="cta-band"><div class="container inner"><div><h2>Tell Us What You Need to Pack</h2><p>Send your product, quantity, preferred size and destination for a tailored quotation.</p></div><div class="button-row"><a class="button button-light" href="/quote/#quote-form" data-quote-placement="content">Request a Custom Quote</a><a class="button button-secondary button-light" href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a></div></div></section>
 </Layout>
 
