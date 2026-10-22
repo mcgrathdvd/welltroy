@@ -25,6 +25,17 @@ function protectResponse(response, url) {
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const requestUrl = new URL(url);
+  const legacyPages = {
+    '/product-catelog': '/catalogue/',
+    '/web-agency-gb-contact-us': '/about/#contact',
+    '/web-agency-gb-about-us': '/about/'
+  };
+  const destination = legacyPages[url.pathname.replace(/\/$/, '')];
+  if (destination && ['GET', 'HEAD'].includes(context.request.method)) {
+    const target = new URL(destination, 'https://welltroy.com');
+    target.search = url.search;
+    return protectResponse(Response.redirect(target.toString(), 301), requestUrl);
+  }
   const legacyCategories = {
     '/product-category/mailer-shipping-bags': 'group-1',
     '/product-category/product-packaging': 'group-2'
