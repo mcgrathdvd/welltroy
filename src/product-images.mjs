@@ -16,12 +16,12 @@ const cache = new Map();
 // Run from component rendering, after the image service module is ready.
 export function getProductVisual(source) {
   if (!cache.has(source.src)) cache.set(source.src, (async () => {
-    const widths = [...new Set([Math.min(480, source.width), Math.min(960, source.width), source.width])];
+    const widths = [...new Set([240, 480, 800, 960, source.width].map(width => Math.min(width, source.width)))].sort((a, b) => a - b);
     const variants = await Promise.all(widths.map((width) => getImage({
       src: source, width, format: "webp", quality: width === source.width ? 88 : 84
     })));
     return {
-      image: variants[Math.min(1, variants.length - 1)].src,
+      image: variants[widths.indexOf(Math.min(960, source.width))].src,
       imageFull: variants[variants.length - 1].src,
       imageSrcSet: variants.map((variant, index) => `${variant.src} ${widths[index]}w`).join(", "),
       imageWidth: Math.min(960, source.width),
