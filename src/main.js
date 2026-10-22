@@ -144,15 +144,6 @@ if (toggle && nav) {
   });
 }
 
-document.querySelectorAll('[data-faq-button]').forEach((button) => {
-  button.addEventListener('click', () => {
-    const item = button.closest('.faq-item');
-    const open = item.classList.toggle('open');
-    button.setAttribute('aria-expanded', String(open));
-    button.querySelector('[data-icon]').textContent = open ? '−' : '+';
-  });
-});
-
 const quoteForm = document.querySelector('[data-quote-form]');
 if (quoteForm) {
   const quoteParams = new URLSearchParams(window.location.search);
@@ -359,7 +350,8 @@ if (quoteForm) {
   retryService.addEventListener('click', initializeService);
   initializeService();
   quoteForm.querySelector('[data-check-verification]').addEventListener('click', () => {
-    servicePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Let the CSS scroll-behavior follow the user's reduced-motion preference.
+    servicePanel.scrollIntoView({ block: 'start' });
     servicePanel.focus({ preventScroll: true });
   });
   document.querySelectorAll('a[href="#quote-form"]').forEach((link) => {

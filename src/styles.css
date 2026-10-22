@@ -17,7 +17,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-block-end: calc(88px + env(safe-area-inset-bottom, 0px)); }
+main#main { scroll-margin-block-start: 96px; }
 body { margin: 0; background: var(--paper); color: var(--body); font-family: Inter, Arial, sans-serif; font-size: 16px; line-height: 1.65; }
 body.menu-open { overflow: hidden; }
 img { max-width: 100%; display: block; }
@@ -169,14 +170,6 @@ section[id] { scroll-margin-top: 95px; }
 .step .step-no { color: var(--gold); font: 500 .84rem "IBM Plex Mono"; }
 .step h3 { margin-top: 26px; }
 .step p { color: #d9e7dc; margin-bottom: 0; font-size: .94rem; }
-
-.faq-list { max-width: 880px; margin: 0 auto; }
-.faq-item { border-top: 1px solid var(--line); }
-.faq-item:last-child { border-bottom: 1px solid var(--line); }
-.faq-item button { width: 100%; display: flex; justify-content: space-between; gap: 20px; text-align: left; border: 0; background: transparent; color: var(--ink); padding: 22px 0; font-weight: 750; cursor: pointer; }
-.faq-answer { display: none; padding: 0 46px 24px 0; color: var(--muted); }
-.faq-item.open .faq-answer { display: block; }
-.faq-item button span:last-child { color: var(--orange); font-size: 1.3rem; }
 
 .cta-band { padding: 64px 0; background: var(--ink); color: white; }
 .cta-band .inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
@@ -483,6 +476,13 @@ textarea { min-height: 130px; resize: vertical; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
+}
+
+/* A dark focus ring with a light halo remains visible on both page themes. */
+:is(a, button, input, select, textarea, summary, [tabindex]):not(main):focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--paper);
 }
 
 /* Assisted enquiries and a clear, separate completion state. */
