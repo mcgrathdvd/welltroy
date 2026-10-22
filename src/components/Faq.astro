@@ -3,11 +3,24 @@ const { items } = Astro.props;
 ---
 <div class="faq-list">
   {items.map((item, index) => (
-    <div class:list={["faq-item", { open: index === 0 }]}>
-      <button type="button" data-faq-button aria-expanded={index === 0 ? "true" : "false"}>
-        <span>{item.q}</span><span data-icon>{index === 0 ? "−" : "+"}</span>
-      </button>
+    <details class="faq-item" open={index === 0}>
+      <summary>
+        <span>{item.q}</span><span class="faq-icon" aria-hidden="true"></span>
+      </summary>
       <div class="faq-answer"><p>{item.a}</p></div>
-    </div>
+    </details>
   ))}
 </div>
+
+<style>
+  .faq-list { max-width: 880px; margin: 0 auto; }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-item summary { width: 100%; display: flex; justify-content: space-between; gap: 20px; text-align: left; border: 0; background: transparent; color: var(--ink); padding: 22px 0; font-weight: 750; cursor: pointer; list-style: none; min-height: 46px; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-answer { display: none; padding: 0 46px 24px 0; color: var(--muted); }
+  .faq-item[open] .faq-answer { display: block; }
+  .faq-icon { color: var(--orange); font-size: 1.3rem; flex-shrink: 0; }
+  .faq-icon::before { content: '+'; }
+  .faq-item[open] .faq-icon::before { content: '−'; }
+</style>
