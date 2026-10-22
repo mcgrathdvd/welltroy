@@ -38,10 +38,17 @@ if (browser) {
     category.value = validValue(category, params.get('category'));
     range.value = validValue(range, params.get('range'));
     const match = location.hash.match(/^#group-(\d)$/);
-    if (match) { category.value = category.options[Number(match[1])]?.value || ''; range.value = ''; }
-    if (location.hash === '#new-products') { category.value = ''; range.value = 'new'; }
-    apply(false);
-    if (match || location.hash === '#new-products' || location.hash === '#product-browser') browser.scrollIntoView({block:'start', behavior:'instant'});
+    const group = match && category.options[Number(match[1])]?.value;
+    const newProducts = location.hash === '#new-products';
+    // Navigation shortcuts start a fresh selection; shared filter URLs retain their search.
+    if (group || newProducts) {
+      search.value = '';
+      category.value = group || '';
+      range.value = newProducts ? 'new' : '';
+    }
+    const shouldScroll = group || newProducts || location.hash === '#product-browser';
+    apply(Boolean(group || newProducts));
+    if (shouldScroll) browser.scrollIntoView({block:'start', behavior:'instant'});
   };
   form.addEventListener('submit', event => { event.preventDefault(); apply(); });
   search.addEventListener('input', () => apply());
