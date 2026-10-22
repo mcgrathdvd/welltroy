@@ -49,7 +49,7 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header quoteHref={quoteHref} />
-    <main id="main"><slot /></main>
+    <main id="main" tabindex="-1"><slot /></main>
     <Footer quoteHref={quoteHref} />
     <div class="desktop-actions" aria-label="Quick contact">
       <a class="desktop-whatsapp" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
