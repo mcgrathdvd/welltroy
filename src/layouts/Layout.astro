@@ -2,6 +2,7 @@
 import "../styles.css";
 import "../assets/fonts/fonts.css";
 import interFont from "../assets/fonts/inter-latin-wght-normal.woff2?url";
+import archivoFont from "../assets/fonts/archivo-latin-wght-normal.woff2?url";
 import { site } from "../data.mjs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -31,6 +32,7 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#203c30" />
     <link rel="preload" href={interFont} as="font" type="font/woff2" crossorigin="anonymous" />
+    {canonicalPath === '/quote/' && <link rel="preload" href={archivoFont} as="font" type="font/woff2" crossorigin="anonymous" />}
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
