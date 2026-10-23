@@ -66,13 +66,23 @@ export const additionalProducts = [
     slug: "custom-paper-hang-tags", name: "Custom Paper Hang Tags", group: retail,
     imageKey: "custom-paper-hang-tags-main",
     eyebrow: "Finishing details for your brand",
-    intro: "Custom paper hang tags add a branded finishing touch to apparel, accessories and gifts. The orange and ivory example pairs layered cardstock with a black cord and fastener.",
-    meta: "Request custom paper hang tags with your logo, artwork and cord options. Explore orange and ivory cardstock examples from Welltroy.",
+    intro: "Plan a paper hang tag around the product information it must carry and the way it attaches. The orange and ivory image is an edited design reference; confirm the actual tag dimensions, paper, print, hole position and cord or fastener with your quotation.",
+    meta: "Plan custom paper hang tags for apparel and gifts. Confirm tag size, two-sided artwork, paper, hole position and attachment before requesting a quote.",
+    imageDescription: "Edited design reference showing orange and ivory paper hang tags with Welltroy branding",
+    imageNote: "Edited product image for design reference. Branding, paper, attachment and final construction require approval on your specification.",
     highlights: ["Custom printed cardstock", "Orange and ivory example", "Cord attachment", "Apparel and gift branding"],
-    sizes: [["Format shown", "Layered rectangular paper tags"], ["Colors shown", "Orange front and ivory backing"], ["Attachment", "Black cord and fastener shown"], ["Customization", "Tag dimensions, paper weight, artwork and attachment"]],
+    sizes: [["Format shown", "Layered rectangular paper tags; confirm required width and height"], ["Colors shown", "Orange front and ivory backing in the edited reference"], ["Attachment", "Black cord and fastener shown; confirm hole and attachment"], ["Customization", "Paper, artwork, print finish and quantity confirmed per order"]],
     applications: ["Apparel", "Accessories", "Gift products", "Brand and care information"],
-    specNeeds: ["Tag width, height and shape", "Paper weight and number of layers", "Front and back artwork", "Hole position", "Cord and fastener configuration"],
-    faqs: [{ q: "Can the back of the tag carry product information?", a: "Include both sides in your artwork brief. Ask us to confirm printing, finishing and space for care instructions, barcodes or product details." }, customFaq, sampleFaq]
+    specNeeds: ["Required width, height, shape and quantity", "Paper weight and number of layers", "Front and back artwork and print colors", "Hole position and diameter", "Cord and fastener configuration", "Destination and any required care or barcode text"],
+    relatedGuide: { title: "Prepare logo and two-sided print artwork", href: "/guides/logo-artwork-checklist/" },
+    faqs: [
+      { q: "Are the pictured tag dimensions a standard size?", a: "No dimensions are confirmed by the design reference. Send your target width and height, shape and the product it will attach to; request a physical proof before a production size is approved." },
+      { q: "Can the back carry care information or a barcode?", a: "Include both sides in your artwork brief. Confirm the available print area, readable type and barcode requirements on a proof. The tag itself does not establish compliance with any market labeling rules." },
+      { q: "How should I specify the hole and cord?", a: "Provide the intended attachment point, hole location and preferred cord or fastener, then test the assembled tag on the actual product. The image shows one example, not a promise of every combination." },
+      { q: "Can you match our brand colors and finish?", a: "Send editable artwork and color references. Paper stock, printing method and finish affect the result; approve a proof or sample for the chosen specification." },
+      { q: "Is the Welltroy branding in the image an actual production sample?", a: "The displayed branding was edited onto a product image as a design reference. It does not document a completed order or establish a specific print method." },
+      { q: "What should I send for a hang tag quote?", a: "Share dimensions or a die line, paper and layer preference, artwork for both sides, hole and attachment details, quantity per design, destination and any required information or barcode." }
+    ]
   },
   {
     slug: "kraft-padded-mailers", name: "Kraft Padded Mailers", group: mailing,
