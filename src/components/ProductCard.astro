@@ -1,10 +1,13 @@
 ---
 import { getProductVisual } from "../product-images.mjs";
-const { product, filterable = false } = Astro.props;
+const { product, filterable = false, compactMobile = false } = Astro.props;
+const imageSizes = compactMobile
+  ? '(max-width: 640px) 112px, (max-width: 980px) calc((100vw - 62px) / 2), 378px'
+  : '(max-width: 640px) calc(100vw - 28px), (max-width: 980px) calc((100vw - 62px) / 2), 378px';
 const visual = await getProductVisual(product.imageSource);
 ---
 <a class="product-card" href={`/products/${product.slug}/`} data-product-card={filterable || undefined} data-group={filterable ? product.group : undefined} data-new={filterable ? String(Boolean(product.isNew)) : undefined} data-search={filterable ? [product.name, product.group, product.intro, ...product.applications].join(' ').toLowerCase() : undefined}>
-  <div class:list={["product-media", { "product-media-reference": product.isNew }]}><img src={visual.image} srcset={visual.imageSrcSet} sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 980px) calc((100vw - 62px) / 2), 378px" alt={`Welltroy ${product.name} ${product.isNew ? "product reference" : "custom branding illustration"}`} loading="lazy" decoding="async" width={visual.imageWidth} height={visual.imageHeight} />{product.isNew && <span class="new-product-label">New</span>}</div>
+  <div class:list={["product-media", { "product-media-reference": product.isNew }]}><img src={visual.image} srcset={visual.imageSrcSet} sizes={imageSizes} alt={`Welltroy ${product.name} ${product.isNew ? "product reference" : "custom branding illustration"}`} loading="lazy" decoding="async" width={visual.imageWidth} height={visual.imageHeight} />{product.isNew && <span class="new-product-label">New</span>}</div>
   <div class="product-content">
     <h3>{product.name}</h3>
     <span class="tag">{product.group}</span>

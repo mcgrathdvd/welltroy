@@ -3,6 +3,12 @@ import { products, productGroups } from "../data.mjs";
 import { reviews } from "../reviews.mjs";
 import { catalogue } from "../ordering.mjs";
 const { quoteHref = "/quote/#quote-form" } = Astro.props;
+const currentPath = Astro.url.pathname;
+const currentPage = (href) => href === currentPath ? 'page' : undefined;
+const currentSection = (item) => currentPath === item.href
+  || (item.id === 'products' && currentPath.startsWith('/products/'))
+  || (item.id === 'guide' && (currentPath.startsWith('/guides/') || currentPath === '/ordering/'))
+  || (item.id === 'about' && currentPath === '/catalogue/');
 
 const items = [
   { id: "products", label: "Products", href: "/products/", overview: "View all products", groups: productGroups },
@@ -51,13 +57,13 @@ const items = [
     </a>
     <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="nav-links" id="site-nav" data-nav aria-label="Main navigation">
-      {items.map((item) => <div class:list={["nav-item", { "nav-item-products": item.groups }]} data-dropdown>
-        <a class="nav-mobile-link" href={item.href}>{item.label}</a>
+      {items.map((item) => <div class:list={["nav-item", { "nav-item-products": item.groups }]} data-dropdown data-current={currentSection(item) || undefined}>
+        <a class="nav-mobile-link" href={item.href} aria-current={currentPage(item.href)}>{item.label}</a>
         <button class="nav-trigger" type="button" data-dropdown-toggle aria-expanded="false" aria-controls={`nav-${item.id}`}>
           {item.label}<svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 4.5 3.5 3 3.5-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
         </button>
         <div class:list={["nav-dropdown", { "nav-dropdown-products": item.groups }]} id={`nav-${item.id}`} hidden>
-          <a class="nav-overview" href={item.href}>{item.overview}<span aria-hidden="true">↗</span></a>
+          <a class="nav-overview" href={item.href} aria-current={currentPage(item.href)}>{item.overview}<span aria-hidden="true">↗</span></a>
           {item.groups ? <><a class="nav-new-products" href="/products/#new-products">New Products · 8 <span aria-hidden="true">→</span></a><div class="nav-product-groups">{item.groups.map((group, index) => <div><a class="nav-group-title" href={`/products/#group-${index + 1}`}>{group.name}</a>{group.slugs.map((slug) => <a href={`/products/${slug}/`}>{products.find((product) => product.slug === slug).name}</a>)}</div>)}</div></> : <div class="nav-dropdown-links">{item.links.map((link) => <a href={link.href}>{link.label}</a>)}</div>}
         </div>
       </div>)}
