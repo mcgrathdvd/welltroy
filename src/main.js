@@ -348,7 +348,23 @@ if (quoteForm) {
     }
   };
   retryService.addEventListener('click', initializeService);
-  initializeService();
+  // Start before the visitor needs to submit, without competing with the first paint.
+  let verificationObserver;
+  const startService = () => {
+    verificationObserver?.disconnect();
+    quoteForm.removeEventListener('focusin', startService);
+    quoteForm.removeEventListener('pointerdown', startService);
+    initializeService();
+  };
+  quoteForm.addEventListener('focusin', startService);
+  quoteForm.addEventListener('pointerdown', startService);
+  if ('IntersectionObserver' in window) {
+    verificationObserver = new IntersectionObserver((entries) => {
+      if (entries.some(entry => entry.isIntersecting)) startService();
+    }, { rootMargin: '300px' });
+    verificationObserver.observe(servicePanel);
+    showService('Fill in your details below. The security check will load when you enter the form.', 'waiting');
+  } else startService();
   quoteForm.querySelector('[data-check-verification]').addEventListener('click', () => {
     // Let the CSS scroll-behavior follow the user's reduced-motion preference.
     servicePanel.scrollIntoView({ block: 'start' });
