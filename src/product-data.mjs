@@ -106,17 +106,21 @@ export const catalogueProducts = [
     name: "Zipper Bags",
     group: "Retail & Product Packaging",
     eyebrow: "Organize, protect and present",
-    intro: "Flexible zipper bags for organizing, protecting and presenting apparel, accessories and other lightweight products before sale or shipment.",
-    meta: "Explore zipper bags in 16 catalogue sizes for apparel, accessories and product organization. Ask Welltroy about materials, printing and custom sizes.",
+    intro: "Reclosable inner bags for folded apparel, accessories and product sets. Compare 16 catalogue outer sizes with the item after folding, then confirm usable space, zipper construction and any printed warning text before ordering. Add a suitable outer pack for shipment.",
+    meta: "Compare 16 zipper bag catalogue outer sizes for apparel and accessories. Check usable space, closure, finish and logo or warning text before a custom quote.",
     highlights: ["16 catalogue entries", "Reclosable format", "Clear and printed examples", "Custom enquiries supported"],
     sizeLabel: "Catalogue outer dimension",
     sizes: [["Z01","14 × 18 cm"],["Z02","14 × 20 cm"],["Z03","17 × 25 cm"],["Z04","18 × 20 cm"],["Z05","20 × 14 cm"],["Z06","20 × 28 cm"],["Z07","24 × 35 cm"],["Z08","25 × 30 cm"],["Z09","28 × 30 cm"],["Z10","28 × 35 cm"],["Z11","30 × 40 cm"],["Z12","35 × 45 cm"],["Z13","40 × 50 cm"],["Z14","45 × 60 cm"],["Z15","40 × 30 cm"],["Z16","60 × 45 cm"]],
     applications: ["Clothing and knitwear", "Fashion accessories", "Product sets and kits", "Organized storage", "Retail preparation"],
-    specNeeds: ["Material and thickness", "Frosted, clear or colored finish", "Vent holes", "Zipper construction", "Warning text and logo printing"],
+    specNeeds: ["Folded item width, length and thickness", "Model or required usable inner space", "Material and thickness", "Frosted, clear or colored finish", "Zipper, vent holes and warning text", "Quantity per size and artwork"],
+    relatedGuide: { title: "Measure clothing for an inner bag and outer mailer", href: "/guides/mailer-size-for-clothing/" },
     faqs: [
-      {q:"Are these bags suitable as shipping mailers?",a:"That depends on the material, closure and delivery method. Some zipper bags are inner product packaging and require an outer shipping package."},
-      {q:"Can I add ventilation holes or warning text?",a:"Ask our team to confirm available construction and printing options for the selected size and quantity."},
-      commonFaq.custom
+      {q:"Are the listed sizes usable inner dimensions?",a:"The 16 catalogue figures are outer dimensions. The zipper and sealed edges reduce usable space. Measure the folded item, include any insert, and request the inner dimensions for the selected model before ordering."},
+      {q:"Are these bags suitable as shipping mailers?",a:"Treat this range as inner product packaging unless the chosen construction and delivery method are confirmed for shipping. A zipper closure alone does not make the bag a protective outer mailer."},
+      {q:"Which finish and closure can I choose?",a:"Clear and printed examples are shown. Tell us whether you need a frosted, clear or colored appearance and how the bag should open and reclose; material, zipper and finish availability must be confirmed for your size."},
+      {q:"Can I add vent holes or warning text?",a:"Send the desired hole position, warning wording, logo artwork and destination market. We will check the selected construction and printing options rather than assuming every option is available on every size."},
+      {q:"How should I choose a bag for several garments?",a:"Fold and measure the full packed set, including inserts. Check the usable opening and thickness as well as the flat width and length, then test insertion and closure with a sample."},
+      {q:"What should I send for a custom zipper bag quote?",a:"Share the catalogue model or required usable dimensions, folded product dimensions, quantity per size, finish, zipper and vent requirements, artwork, warning text and destination."}
     ]
   },
   {
@@ -203,18 +207,22 @@ export const catalogueProducts = [
     name: "Honeycomb Paper Rolls",
     group: "Packing & Fulfillment Supplies",
     eyebrow: "Expandable paper protection",
-    intro: "Expandable kraft paper wrap for cushioning, separating and presenting products during packing. The honeycomb structure opens as it is stretched around the item.",
-    meta: "Explore expandable honeycomb kraft paper rolls in four widths, multiple roll lengths and three colors for product wrapping and cushioning.",
+    intro: "Expandable paper wrap for surface separation and presentation during packing. Compare four catalogue widths and five roll lengths, then test the stretched sheet, amount used per item and complete shipping pack before choosing a roll specification.",
+    meta: "Compare honeycomb paper wrap in four catalogue widths and five roll lengths. Check expanded coverage, paper specification and complete-pack protection before ordering.",
     highlights: ["4 catalogue widths", "5 roll lengths", "Brown, white and black", "Expandable paper structure"],
     sizeLabel: "Catalogue options",
     sizes: [["30 cm wide","30 / 50 / 100 / 200 / 250 m"],["38 cm wide","30 / 50 / 100 / 200 / 250 m"],["40 cm wide","30 / 50 / 100 / 200 / 250 m"],["50 cm wide","30 / 50 / 100 / 200 / 250 m"]],
     applications: ["Cosmetics and personal care", "Handmade soaps and gifts", "Artwork and picture frames", "Glassware and home accessories", "Presentation boxes"],
-    specNeeds: ["Roll width and length", "Paper color", "Paper gsm", "Tissue interleaf", "Dispenser and carton packing"],
+    specNeeds: ["Product dimensions, weight and fragility", "Roll width and length", "Expected cut length per item", "Paper color and confirmed gsm", "Tissue interleaf or dispenser needs", "Quantity in rolls and destination"],
     alert: "The catalogue states 80 g paper weight and a 1:16 expansion ratio. Confirm the measurement method and exact gsm before ordering.",
+    relatedGuide: { title: "See gift and homeware packing checks", href: "/industries/#gifts" },
     faqs: [
-      {q:"How does honeycomb paper wrap protect a product?",a:"The die-cut paper expands into a three-dimensional structure that wraps around the product and helps provide separation and surface protection."},
-      {q:"Can it replace bubble wrap?",a:"It may suit some wrapping uses, but protection should be tested with the actual product and shipping method. Heavy, sharp or fragile products may need added cushioning."},
-      {q:"Is it biodegradable or recyclable?",a:"Request the confirmed paper composition, inks or coatings and supporting documents applicable to your market before making an environmental claim."}
+      {q:"How do I choose between the four roll widths?",a:"Compare the item dimensions with the width of the paper as it will be used. Wrap a real item to check edge coverage and overlap; width alone does not determine how much roll length the pack will consume."},
+      {q:"Does a 30 m roll wrap a fixed number of products?",a:"No. The number depends on product size, cut length, stretch and overlap. Run a packing trial, record paper used per item, then estimate the roll count from your order volume."},
+      {q:"How does honeycomb paper protect a product?",a:"The die-cut paper opens into a three-dimensional lattice as it is stretched. It can separate surfaces and help cushion a tested pack, but performance depends on the item and the rest of the packaging."},
+      {q:"Can it replace bubble wrap for glassware?",a:"Do not assume equivalent protection. Test the actual item, wrap, carton and shipping route together. Fragile, heavy or sharp products may need a box, interleaf or additional cushioning."},
+      {q:"Is this paper biodegradable or recyclable?",a:"The catalogue dimensions do not establish an environmental claim. Request the confirmed paper composition, inks or coatings and supporting documents for the selected specification and market."},
+      {q:"What details help you quote honeycomb paper rolls?",a:"Send the product dimensions and fragility, preferred roll width and length, color, paper specification, trial consumption if known, quantity in rolls, dispenser or interleaf needs and destination."}
     ]
   }
 ];
