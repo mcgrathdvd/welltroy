@@ -13,6 +13,19 @@ export function getStaticPaths() {
 }
 
 const { product } = Astro.props;
+const searchTitles = {
+  'poly-mailers': 'Custom Printed Poly Mailers | Sizes & Quotes | Welltroy',
+  'biodegradable-mailers': 'Biodegradable Mailers | Sizes & Material Details | Welltroy',
+  'poly-bubble-mailers': 'Custom Poly Bubble Mailers | Sizes & Printing | Welltroy',
+  'metallic-bubble-mailers': 'Metallic Bubble Mailers | Colors & Custom Printing | Welltroy',
+  'zipper-bags': 'Custom Zipper Bags for Apparel & Accessories | Welltroy',
+  'kraft-paper-bags': 'Custom Kraft Paper Bags | Sizes & Logo Printing | Welltroy',
+  'paper-gift-bags': 'Custom Paper Gift Bags | Sizes & Printing | Welltroy',
+  'stand-up-pouches': 'Custom Stand-up Pouches | Sizes & Packaging Options | Welltroy',
+  'thermal-labels': 'Thermal Labels | Sizes & Printer Compatibility | Welltroy',
+  'honeycomb-paper-rolls': 'Honeycomb Paper Rolls | Widths, Lengths & Colors | Welltroy'
+};
+const pageTitle = searchTitles[product.slug] || `${product.name} | Custom Packaging | Welltroy`;
 const visual = await getProductVisual(product.imageSource);
 const related = products.filter((item) => item.group === product.group && item.slug !== product.slug).sort((a, b) => Number(b.slug === product.parentSlug) - Number(a.slug === product.parentSlug)).slice(0, 3);
 // These made-to-order ranges have no public price or product-specific ratings.
@@ -38,7 +51,7 @@ const cataloguePage = String(catalogueProducts.findIndex((item) => item.slug ===
 const catalogueImage = `/images/catalog-pages/page-${cataloguePage}.jpg`;
 const whatsappText = encodeURIComponent(`Hi Welltroy, I am interested in ${product.name}. Could we discuss specifications and pricing?`);
 ---
-<Layout title={`${product.name} | Custom Packaging | Welltroy`} description={product.meta} canonicalPath={`/products/${product.slug}/`} schemas={[pageSchema, faqSchema, breadcrumbSchema]} ogImage={visual.imageFull} ogImageAlt={`Welltroy ${product.name} ${product.isNew ? "product reference" : "custom branding illustration"}`}>
+<Layout title={pageTitle} description={product.meta} canonicalPath={`/products/${product.slug}/`} schemas={[pageSchema, faqSchema, breadcrumbSchema]} ogImage={visual.imageFull} ogImageAlt={`Welltroy ${product.name} ${product.isNew ? "product reference" : "custom branding illustration"}`}>
   <section class="page-hero product-hero">
     <div class="container product-hero-grid">
       <div class="product-heading">
