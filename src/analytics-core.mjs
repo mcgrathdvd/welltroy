@@ -4,7 +4,7 @@ export const productSlugs = new Set([
   'poly-mailers','biodegradable-mailers','poly-bubble-mailers','metallic-bubble-mailers',
   'zipper-bags','kraft-paper-bags','paper-gift-bags','stand-up-pouches','thermal-labels',
   'honeycomb-paper-rolls','die-cut-handle-shipping-bags','pink-handle-mailers',
-  'yellow-kraft-bubble-mailers','printed-snack-pouches','custom-paper-hang-tags',
+  'yellow-kraft-bubble-mailers','printed-snack-pouches','custom-stand-up-pouches','custom-paper-hang-tags',
   'kraft-padded-mailers','colored-honeycomb-paper-rolls','white-nut-pouches'
 ]);
 const formProducts = new Set([...productSlugs,'multiple-products','not-sure']);
@@ -15,6 +15,7 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/guides/kraft-vs-poly-bubble-mailers/',
   '/guides/custom-paper-bag-size-handles-printing/',
   '/guides/honeycomb-paper-wrap-bottles-gifts/',
+  '/guides/custom-stand-up-pouch-specification/',
   '/guides/custom-packaging-500-pieces/']);
 const names = new Set(['page_view','view_product','quote_start','quote_submit_success',
   'quote_submit_error','whatsapp_click','email_click','quote_cta_click','select_size','download_catalogue','sample_interest']);
