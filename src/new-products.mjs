@@ -51,16 +51,40 @@ export const additionalProducts = [
     faqs: [{ q: "Are outer dimensions the same as usable inner dimensions?", a: "The liner and sealed edges reduce the usable space. Ask for inner measurements before choosing a size for a thick or boxed product." }, customFaq, sampleFaq]
   },
   {
+    slug: "custom-stand-up-pouches", name: "Custom Stand Up Pouches", group: retail,
+    imageKey: "custom-stand-up-pouches-main", parentSlug: "stand-up-pouches",
+    eyebrow: "Made-to-order flexible packaging",
+    intro: "Build a stand-up pouch around the actual product, filling process and shelf life. Choose the bottom gusset, closure, material structure, print and finish together, then approve a filled sample before production. The image shows color and size examples; it does not establish one standard specification for every pouch.",
+    meta: "Specify custom stand-up pouches by fill amount, material barrier, zipper or window, artwork and finish. Compare samples and request a product-specific quote.",
+    imageDescription: "Range of colorful custom stand-up pouch examples in different sizes",
+    imageNote: "Supplier range image. Colors and sizes are examples; confirm the selected construction and proof before ordering.",
+    highlights: ["Custom size and bottom gusset", "Material and barrier options", "Zipper, window and notch options", "Digital or gravure printing to confirm"],
+    sizes: [["Format", "Stand-up pouch with bottom gusset; specify filled shape and usable capacity"], ["Size", "Width × total height × bottom gusset, with the measurement convention confirmed on a dieline"], ["Materials", "Layer structure selected for contents, sealing, barrier and destination-market requirements"], ["Closures and features", "Zipper, tear notch, clear window and other fittings subject to the chosen construction"], ["Print and finish", "Digital or gravure process; matte, gloss and specialty effects reviewed against artwork and quantity"]],
+    applications: ["Dry food and snack packaging with approved materials", "Beauty and personal care", "Pet products", "Craft and hobby refills", "Retail kits and accessories"],
+    specNeeds: ["Contents, fill weight or volume, product density and target shelf life", "Width, total height, bottom gusset and required usable opening", "Material structure, barrier, food-contact and recycling requirements", "Zipper, tear notch, window, valve, spout or handle as applicable", "Filling temperature, sealing method and machine compatibility", "Editable front, back and gusset artwork; print colors and finish", "Quantity per size and design, destination and sample requirements"],
+    alert: "The supplier images show possible materials and a 'recyclable' label, but do not establish that every custom construction is recyclable or suitable for food. Confirm the exact laminate, test documents and local collection route for the chosen specification. Heat or retort use needs separate validation.",
+    relatedGuide: { title: "Plan the size, material and artwork of a stand-up pouch", href: "/guides/custom-stand-up-pouch-specification/" },
+    faqs: [
+      { q: "How do I measure a custom stand-up pouch?", a: "Specify width, total height and bottom gusset on an approved dieline. The zipper, top seal, side seals and gusset reduce usable space. Fill a sample with the real product to verify capacity and shelf presentation." },
+      { q: "Which material should I choose?", a: "Start with the contents, moisture or oxygen sensitivity, filling and sealing process, intended shelf life and destination market. Ask for the exact layer structure and relevant tests for the selected pouch. A material name or photo alone is insufficient." },
+      { q: "Can I order a recyclable or food-contact pouch?", a: "Potential options depend on the complete laminate, inks, adhesives, closures and local recycling system or food-contact rules. State the market and required standard, then request specification-specific documents before making a claim." },
+      { q: "Are zippers, windows and specialty finishes available together?", a: "The images show examples of zippers, windows, notches and several finishes. Compatibility depends on the pouch structure, size, artwork and production method; confirm the exact combination on a proof and sample." },
+      { q: "What artwork files should I send?", a: "Send editable AI, EPS or PDF artwork when possible, with front, back and gusset panels, fonts or outlines, color references and a dieline. PSD or other formats may need conversion. Confirm bleed, safe area and print method with the final proof." },
+      { q: "What is needed for a quote?", a: "Send product and fill details, proposed dimensions, material and barrier needs, closure, finish, artwork, quantity per size and design, destination and any compliance documents or sample tests required." }
+    ]
+  },
+  {
     slug: "printed-snack-pouches", name: "Printed Snack Pouches", group: retail,
     imageKey: "printed-snack-pouches-main", parentSlug: "stand-up-pouches",
     eyebrow: "Colorful stand-up packaging",
-    intro: "Printed stand-up pouches offer a colorful presentation for nuts, snacks and other dry products. The illustrated designs show a range of artwork layouts and window options for your own branding.",
-    meta: "Explore printed stand-up snack pouches with custom artwork and window options. Request material structure, size and closure details from Welltroy.",
-    highlights: ["Stand-up format", "Full-color artwork", "Window options", "Dry-product packaging"],
-    sizes: [["Format", "Stand-up pouch with bottom gusset"], ["Artwork", "Multiple color and print-layout examples"], ["Window", "Clear window options shown"], ["Specification", "Material structure, zipper and size confirmed per order"]],
+    intro: "Printed snack pouches use a stand-up bottom for shelf display and room for brand artwork. Specify the actual snack, fill weight, shelf-life target and filling method before choosing a barrier structure, zipper or window; artwork examples do not confirm food-contact suitability.",
+    meta: "Plan printed stand-up snack pouches by fill weight, barrier, zipper or window, artwork and destination-market documentation. Request a filled sample before production.",
+    highlights: ["Stand-up bottom", "Custom printed panels", "Window options to confirm", "Food-contact structure to verify"],
+    sizes: [["Format", "Stand-up pouch with bottom gusset; confirm usable fill volume"], ["Artwork", "Front, back and gusset design reviewed on the final dieline"], ["Window", "Clear window examples shown; confirm position and barrier effect"], ["Specification", "Material layers, zipper, seal and food-contact documents selected per product"]],
     applications: ["Nuts and dried snacks", "Dry ingredients", "Specialty retail products", "Branded product ranges"],
-    specNeeds: ["Product type and filling weight", "Width, height and bottom gusset", "Material barrier requirements", "Zipper and sealing method", "Artwork, window and destination market"],
-    faqs: [{ q: "Does this product include the nuts shown?", a: "The product is the packaging pouch. Contents in the images illustrate a possible use and are not included." }, { q: "How do I confirm suitability for food packing?", a: "Share the food type, filling process, storage needs and destination market so the material structure and required food-contact documents can be reviewed." }, customFaq]
+    specNeeds: ["Snack type, fill weight, shelf-life target and storage conditions", "Width, total height, bottom gusset and usable opening", "Oxygen, moisture and light barrier requirements", "Zipper, tear notch, window and heat-seal method", "Artwork for front, back and gusset; quantity per design", "Destination market and food-contact documentation"],
+    relatedGuide: { title: "Plan a custom stand-up pouch specification", href: "/guides/custom-stand-up-pouch-specification/" },
+    faqs: [{ q: "Does this product include the snacks shown?", a: "This listing is for packaging only. Filled or printed examples illustrate possible presentation and do not establish a standard capacity." }, { q: "How do I confirm suitability for food packing?", a: "Share the food type, filling process, storage and shelf-life needs and destination market. Review the exact laminate and required food-contact documents, then test the filled pouch." }, { q: "Does a clear window change the barrier?", a: "It may. State the product's light, oxygen and moisture sensitivities; confirm the window film and complete pouch structure before approving shelf-life claims." }, customFaq]
   },
   {
     slug: "custom-paper-hang-tags", name: "Custom Paper Hang Tags", group: retail,
@@ -113,12 +137,13 @@ export const additionalProducts = [
     slug: "white-nut-pouches", name: "White Printed Nut Pouches", group: retail,
     imageKey: "printed-snack-pouches-white", parentSlug: "stand-up-pouches",
     eyebrow: "White pouches with custom artwork",
-    intro: "White stand-up pouches give nut and snack ranges a clear, coordinated presentation. Printed illustrations and product information can be adapted to your artwork and packaging specification.",
-    meta: "Explore white printed nut and snack pouches with custom artwork. Request pouch dimensions, window options, closures and material details from Welltroy.",
+    intro: "White printed pouches can give a nut range a consistent visual system while each flavor or ingredient uses its own artwork. Keep the same pouch dimensions only after testing the actual fill, headspace and seal for every product; confirm barrier and food-contact requirements by market.",
+    meta: "Specify coordinated white printed nut pouches by fill amount, barrier, seal, artwork versions and food-contact documentation. Compare filled samples before ordering.",
     highlights: ["White pouch base", "Printed product artwork", "Stand-up bottom gusset", "Coordinated range design"],
-    sizes: [["Format", "White stand-up pouch"], ["Design examples", "Pistachio, hazelnut and almond packaging artwork"], ["Customization", "Artwork, window layout and closure options"], ["Specification", "Dimensions and material structure confirmed per order"]],
+    sizes: [["Format", "White stand-up pouch; usable capacity confirmed by fill trial"], ["Design examples", "Pistachio, hazelnut and almond artwork shown"], ["Customization", "Versioned front and back artwork, zipper and window to confirm"], ["Specification", "Barrier, seal, dimensions and food-contact documents confirmed per order"]],
     applications: ["Nut ranges", "Dried snacks", "Specialty food packaging", "Coordinated retail collections"],
-    specNeeds: ["Product and desired filling weight", "Pouch width, height and gusset", "Shelf-life and barrier requirements", "Artwork and window placement", "Destination market and food-contact documentation"],
-    faqs: [{ q: "Are the foods and printed weights included in the offer?", a: "This listing is for packaging. The food and design examples illustrate the presentation; confirm your own filling weight, artwork and pouch dimensions with the quotation." }, { q: "Can several designs share one pouch specification?", a: "Send the designs and quantity for each version. We will confirm artwork setup, printing and minimum order requirements for the range." }, customFaq]
+    specNeeds: ["Nut type, fill weight and shelf-life target for each SKU", "Pouch width, total height, gusset and usable opening", "Oxygen, moisture and light barrier needs", "Zipper, window and seal method", "Artwork version and quantity for each SKU", "Destination market and food-contact documentation"],
+    relatedGuide: { title: "Plan a custom stand-up pouch specification", href: "/guides/custom-stand-up-pouch-specification/" },
+    faqs: [{ q: "Are the foods and printed weights included in the offer?", a: "This listing is for packaging. The food and printed weights are presentation examples; confirm your own fill amount, artwork and pouch dimensions." }, { q: "Can several designs share one pouch specification?", a: "They may share a base construction after each nut product passes a filling and seal test. Send artwork and quantity for each version so print setup and minimums can be confirmed." }, { q: "What barrier should a nut pouch have?", a: "The answer depends on the nut product, processing, target shelf life and storage. State oxygen, moisture and light needs, then review the exact laminate and test data before making a shelf-life claim." }, customFaq]
   }
 ].map((product) => ({ ...product, isNew: true, sizeLabel: "Product details" }));
