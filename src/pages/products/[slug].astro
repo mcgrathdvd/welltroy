@@ -54,7 +54,7 @@ const imageDescription = product.imageDescription ?? `Welltroy ${product.name} $
 const imageNote = product.imageNote ?? `${product.isNew ? "Product reference" : "Custom branding illustration"}. Final specification confirmed with your quote.`;
 ---
 <Layout title={pageTitle} description={product.meta} canonicalPath={`/products/${product.slug}/`} schemas={[pageSchema, faqSchema, breadcrumbSchema]} ogImage={visual.imageFull} ogImageAlt={imageDescription}>
-  <section class="page-hero product-hero">
+  <section class={`page-hero product-hero${product.slug === "custom-stand-up-pouches" ? " product-hero-pouch" : ""}`}>
     <div class="container product-hero-grid">
       <div class="product-heading">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/products/">Products</a> / {product.name}</div>
