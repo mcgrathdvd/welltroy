@@ -621,3 +621,8 @@ html:has(.contact-dialog[open]) { overflow: hidden; }
   .product-hero-actions .button { min-height:46px; font-size:.9rem; }
   .product-lead { font-size:1rem; }
 }
+
+@media (max-width:640px) {
+  .product-hero-pouch .page-product-image { background:#fff; }
+  .product-hero-pouch .page-product-image img { height:auto; aspect-ratio:1; }
+}
