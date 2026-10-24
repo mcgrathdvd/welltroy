@@ -14,10 +14,10 @@ export function getStaticPaths() {
 
 const { product } = Astro.props;
 const searchTitles = {
-  'poly-mailers': 'Custom Printed Poly Mailers | Sizes & Quotes | Welltroy',
+  'poly-mailers': 'Custom Printed Poly Mailers | MOQ 500 | Welltroy',
   'biodegradable-mailers': 'Biodegradable Mailers | Sizes & Material Details | Welltroy',
-  'poly-bubble-mailers': 'Custom Poly Bubble Mailers | Sizes & Printing | Welltroy',
-  'metallic-bubble-mailers': 'Metallic Bubble Mailers | Colors & Custom Printing | Welltroy',
+  'poly-bubble-mailers': 'Custom Poly Bubble Mailers | MOQ 500 | Welltroy',
+  'metallic-bubble-mailers': 'Custom Metallic Bubble Mailers | MOQ 500 | Welltroy',
   'zipper-bags': 'Custom Zipper Bags for Apparel & Accessories | Welltroy',
   'kraft-paper-bags': 'Custom Kraft Paper Bags | Sizes & Logo Printing | Welltroy',
   'paper-gift-bags': 'Custom Paper Gift Bags | Sizes & Printing | Welltroy',
@@ -26,6 +26,11 @@ const searchTitles = {
   'honeycomb-paper-rolls': 'Honeycomb Paper Rolls | Widths, Lengths & Colors | Welltroy'
 };
 const pageTitle = searchTitles[product.slug] || `${product.name} | Custom Packaging | Welltroy`;
+const pageHeading = {
+  'poly-mailers': 'Custom Printed Poly Mailers',
+  'poly-bubble-mailers': 'Custom Poly Bubble Mailers',
+  'metallic-bubble-mailers': 'Custom Metallic Bubble Mailers'
+}[product.slug] || product.name;
 const visual = await getProductVisual(product.imageSource);
 const related = products.filter((item) => item.group === product.group && item.slug !== product.slug).sort((a, b) => Number(b.slug === product.parentSlug) - Number(a.slug === product.parentSlug)).slice(0, 3);
 // These made-to-order ranges have no public price or product-specific ratings.
@@ -58,7 +63,7 @@ const imageNote = product.imageNote ?? `${product.isNew ? "Product reference" : 
     <div class="container product-hero-grid">
       <div class="product-heading">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/products/">Products</a> / {product.name}</div>
-        <p class="eyebrow">{product.eyebrow}</p><h1>{product.name}</h1>
+        <p class="eyebrow">{product.eyebrow}</p><h1>{pageHeading}</h1>
       </div>
       <div class="product-visual">
         <a class="page-product-image" href={visual.imageFull} target="_blank" rel="noopener" aria-label={`View a larger image of ${product.name}`}>
