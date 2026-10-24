@@ -52,6 +52,17 @@ test('referrers lose search terms; arbitrary private referrer paths and hosts ar
  assert.equal(sourceInfo('https://google.com.evil.invalid/search','https://welltroy.com').entry_source,'referral');
 });
 
+test('recognised AI referrals retain only public origins and reject lookalike domains',()=>{
+ for(const origin of ['https://chatgpt.com','https://chat.openai.com','https://www.perplexity.ai','https://copilot.microsoft.com','https://claude.ai','https://gemini.google.com']){
+  assert.deepEqual(sourceInfo(`${origin}/conversation/private-id?q=buyer@example.com#private`,'https://welltroy.com'),{entry_source:'ai_referral',page_referrer:origin});
+ }
+ for(const referrer of ['https://chatgpt.com.evil.invalid/conversation','https://fakeperplexity.ai/private','https://copilot.microsoft.com.evil.invalid/']){
+  assert.deepEqual(sourceInfo(referrer,'https://welltroy.com'),{entry_source:'referral',page_referrer:''});
+ }
+ assert.deepEqual(sourceInfo('javascript:alert(1)','https://welltroy.com'),{entry_source:'direct_or_unknown',page_referrer:''});
+ assert.deepEqual(sourceInfo('https://welltroy.com/products/poly-mailers/','https://welltroy.com'),{entry_source:'internal',page_referrer:''});
+});
+
 async function environment({id='G-TEST12345',hostname='welltroy.com',choice=null,search='',pathname='/quote/',referrer='https://www.google.com/search?q=private'}={}) {
  const saved={window:globalThis.window,document:globalThis.document,location:globalThis.location};
  const node=()=>({hidden:true,listeners:{},addEventListener(name,fn){this.listeners[name]=fn;},focus(){this.focused=true;}});
@@ -94,6 +105,23 @@ test('runtime rejection never loads GA; revocation stops events and reloads with
   assert.equal(env.mod.track('quote_start'),false);assert.equal(window.dataLayer.length,0);
   assert.ok(env.deletedCookies.every(x=>x.includes('Max-Age=0')));
  }finally{env.restore();}
+});
+
+test('runtime AI attribution waits for consent and never includes conversation paths',async()=>{
+ const env=await environment({referrer:'https://chatgpt.com/c/private-conversation?email=buyer@example.com#private'});
+ try {
+  assert.equal(env.scripts.length,0);
+  assert.equal(env.mod.track('quote_start'),false);
+  env.accept.listeners.click();
+  const queue=window.dataLayer.map(x=>Array.from(x));
+  const page=queue.find(x=>x[0]==='event'&&x[1]==='page_view')[2];
+  assert.equal(page.entry_source,'ai_referral');
+  assert.equal(page.page_referrer,'https://chatgpt.com');
+  assert.equal(JSON.stringify(queue).includes('private-conversation'),false);
+  assert.equal(JSON.stringify(queue).includes('buyer@example.com'),false);
+  env.reject.listeners.click();
+  assert.equal(env.mod.track('quote_start'),false);
+ } finally {env.restore();}
 });
 
 test('runtime reads campaign storage only after consent and configures public attribution before events',async()=>{

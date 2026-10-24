@@ -1,9 +1,12 @@
 ---
 import { minimumOrder } from "../ordering.mjs";
 const { slug } = Astro.props;
+const primaryMailer = ['poly-mailers', 'poly-bubble-mailers', 'metallic-bubble-mailers'].includes(slug);
 ---
-<dl class="order-summary" aria-label="Ordering at a glance">
+<dl class:list={["order-summary", { "order-summary--mailers": primaryMailer }]} aria-label="Ordering at a glance" aria-describedby={primaryMailer ? 'mailer-service-terms' : undefined}>
   <div><dt>Minimum order</dt><dd>{minimumOrder(slug)}</dd></div>
-  <div><dt>Samples</dt><dd>Free samples</dd></div>
+  {primaryMailer && <div><dt>Design</dt><dd>Free initial draft within 24 hours*</dd></div>}
+  <div><dt>Samples</dt><dd>{primaryMailer ? 'Free · 7-day delivery target*' : 'Free samples'}</dd></div>
   <div><dt>Production</dt><dd>Approx. 15–20 days after payment</dd></div>
 </dl>
+{primaryMailer && <p class="muted product-service-note" id="mailer-service-terms">*Design timing starts after a clear brief. The sample delivery target starts after specifications and artwork are confirmed and depends on destination. Confirm the sample route and courier charges. <a href="/ordering/">Sample and order details →</a></p>}

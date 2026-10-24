@@ -224,6 +224,9 @@ tr:nth-child(even) td { background: #f6f8f3; }
 .order-summary > div:last-child { grid-column: 1 / -1; }
 .order-summary dt { color: var(--muted); font-size: .78rem; margin-bottom: 4px; }
 .order-summary dd { margin: 0; color: var(--ink); font-size: .92rem; font-weight: 700; line-height: 1.45; overflow-wrap: anywhere; }
+.product-decision .order-summary.order-summary--mailers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.product-decision .order-summary.order-summary--mailers > div:last-child { grid-column: auto; }
+.product-service-note { font-size: .78rem; line-height: 1.5; margin: 8px 0 16px; }
 .quote-service { margin-bottom: 24px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--cream); }
 .quote-service[data-state="error"], .quote-service[data-state="expired"] { border-left: 3px solid var(--orange); }
 .quote-service-message { margin: 0; font-size: .88rem; line-height: 1.6; color: var(--ink); }
