@@ -28,7 +28,13 @@ export async function onRequest(context) {
   const legacyPages = {
     '/product-catelog': '/catalogue/',
     '/web-agency-gb-contact-us': '/about/#contact',
-    '/web-agency-gb-about-us': '/about/'
+    '/web-agency-gb-about-us': '/about/',
+    // Exact retired product URLs observed in Search Console. Unmatched old
+    // products keep their real status rather than redirecting to a guessed range.
+    '/product/customized-printed-metallic-bubble-envelope-bags-waterproof-packaging-poly-bubble-mailers': '/products/metallic-bubble-mailers/',
+    '/product/packaging-kraft-paper-shopping-bag': '/products/kraft-paper-bags/',
+    '/product/custom-luxury-large-coffee-kraft-craft-black-brown-christmas-paper-bags-gift-shopping-bag': '/products/kraft-paper-bags/',
+    '/product/custom-printed-shopping-paper-bags-luxury-branded-gift-paper-bags': '/products/paper-gift-bags/'
   };
   const destination = legacyPages[url.pathname.replace(/\/$/, '')];
   if (destination && ['GET', 'HEAD'].includes(context.request.method)) {
