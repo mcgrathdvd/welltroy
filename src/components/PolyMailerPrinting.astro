@@ -1,0 +1,78 @@
+---
+import { getProductVisual } from "../product-images.mjs";
+import packingSource from "../assets/new-products/poly-mailers-apparel-packing.jpg";
+import productionSource from "../assets/new-products/poly-mailers-production.jpg";
+import diagramSource from "../assets/new-products/poly-mailers-customization-diagram.png";
+
+const [packing, production, diagram] = await Promise.all([
+  getProductVisual(packingSource), getProductVisual(productionSource), getProductVisual(diagramSource)
+]);
+const methods = [
+  ["Screen printing — our main method", "Simple one- or two-color vector logos and text", "Confirm artwork detail, print colors, placement and coverage."],
+  ["Gravure printing", "All-over patterns, multicolor illustrations and gradients", "Review the proposed process, setup and quantity for the design."],
+  ["Flexographic printing", "Solid color blocks and text", "Confirm compatibility with the selected film and required appearance."],
+  ["Digital printing", "Complex full-color or photographic designs, and multiple SKUs", "Confirm material compatibility, quantities per design and the offered sample route."]
+];
+const photos = [
+  { visual: packing, alt: "Pink strawberry-pattern poly mailer being packed with folded clothing", caption: "Apparel packing example supplied by Welltroy. Confirm the size and complete packing method for your own products." },
+  { visual: production, alt: "Printed pink poly mailers stacked beside bag-making equipment in a production area", caption: "Poly mailer production photograph supplied by Welltroy. The scene shows bag production, not a demonstration of a specific printing method." }
+];
+---
+<section class="section section-soft" id="poly-mailer-printing" aria-labelledby="poly-printing-heading">
+  <div class="container">
+    <p class="eyebrow">Custom printing</p>
+    <h2 id="poly-printing-heading">Screen Printing &amp; Other Artwork Options</h2>
+    <p class="lead">Screen printing is our main method for custom poly mailers. For simple one- or two-color vector logos and text, it is the starting point for review. We select the final printing method around your design, film, coverage, order quantity and sample requirements.</p>
+    <p>Use the options below to prepare your enquiry. The offered process, setup charges, minimum quantity and proof are confirmed for each order; the 500-piece starting quantity does not automatically apply to every printing method.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Poly mailer printing method selection">
+      <table>
+        <caption class="sr-only">Printing methods to discuss for your custom poly mailer artwork</caption>
+        <thead><tr><th scope="col">Printing method</th><th scope="col">Artwork to discuss</th><th scope="col">Before approval</th></tr></thead>
+        <tbody>{methods.map(([method, artwork, check]) => <tr><th scope="row">{method}</th><td>{artwork}</td><td>{check}</td></tr>)}</tbody>
+      </table>
+    </div>
+    <p class="muted">The printing method does not establish whether a bag is biodegradable or recyclable. Any material or environmental requirement needs confirmation for the selected construction.</p>
+    <div class="poly-print-layout">
+      <div>
+        <h3>Confirm the Print Area, Body &amp; Flap</h3>
+        <p>Send front and back artwork separately and identify the bag width, body length and flap length. Confirm usable inner dimensions separately from outer dimensions.</p>
+        <ul>
+          <li>Mark logo placement, print sides, colors and intended coverage.</li>
+          <li>Agree printable boundaries and clearance from seams and the sealing zone.</li>
+          <li>Confirm the adhesive strip and flap configuration on the production proof.</li>
+          <li>Specify film thickness and its measurement convention with your quotation; no standard thickness range is stated here.</li>
+        </ul>
+        <p>The reference drawing shows the customization concept. It is not to scale and is not the approved dieline for your order.</p>
+        <a class="text-link" href="/guides/logo-artwork-checklist/">Prepare your logo artwork →</a>
+      </div>
+      <figure>
+        <a href={diagram.imageFull} target="_blank" rel="noopener" aria-label="View the poly mailer customization diagram">
+          <img src={diagram.image} srcset={diagram.imageSrcSet} sizes="(max-width: 760px) calc(100vw - 40px), 570px" alt="Poly mailer reference drawing showing front and back print areas, width, body length and adhesive flap" width={diagram.imageWidth} height={diagram.imageHeight} loading="lazy" decoding="async" />
+        </a>
+        <figcaption>Customization reference supplied by Welltroy. Confirm measurement directions and print boundaries on the final proof.</figcaption>
+      </figure>
+    </div>
+    <div class="poly-photo-grid">
+      {photos.map(({visual, alt, caption}) => <figure>
+        <a href={visual.imageFull} target="_blank" rel="noopener" aria-label={`View larger image: ${alt}`}>
+          <img src={visual.image} srcset={visual.imageSrcSet} sizes="(max-width: 760px) calc(100vw - 40px), 570px" alt={alt} width={visual.imageWidth} height={visual.imageHeight} loading="lazy" decoding="async" />
+        </a>
+        <figcaption>{caption}</figcaption>
+      </figure>)}
+    </div>
+    <div class="button-row"><a class="button" href="/quote/?product=poly-mailers#quote-form" data-quote-placement="product-details">Discuss Your Artwork &amp; Printing</a></div>
+  </div>
+</section>
+<style>
+  #poly-mailer-printing {scroll-margin-top:100px;}
+  .poly-print-layout,.poly-photo-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:32px 0;align-items:start;}
+  figure {margin:0;min-width:0;}
+  figure a {display:block;}
+  figure img {display:block;width:100%;height:auto;border-radius:12px;}
+  figcaption {font-size:.82rem;line-height:1.5;color:var(--muted);margin-top:10px;}
+  th,td {vertical-align:top;}
+  @media(max-width:760px) {
+    .poly-print-layout,.poly-photo-grid {grid-template-columns:minmax(0,1fr);gap:24px;}
+    table {min-width:640px;}
+  }
+</style>
