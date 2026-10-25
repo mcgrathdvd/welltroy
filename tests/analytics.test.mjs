@@ -158,3 +158,19 @@ test('runtime size and catalogue clicks produce filtered funnel events without b
   assert.equal(window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event'&&x[1]==='download_catalogue').length,1);
  } finally {env.restore();}
 });
+
+test('new buying guides track only public paths and still require consent',()=>{
+  for(const path of ['/guides/','/guides/custom-mailer-sample-approval/','/guides/compare-custom-mailer-quotes/']) {
+    const events=[]; let consent=false;
+    const track=createTracker({canSend:()=>consent,send:(name,data)=>events.push({name,data}),getPath:()=>`${path}?email=buyer@example.com#private-approval`});
+    assert.equal(track('page_view'),false);
+    assert.equal(events.length,0);
+    consent=true;
+    assert.equal(track('page_view'),true);
+    assert.deepEqual(events,[{name:'page_view',data:{page_path:path,page_location:`https://welltroy.com${path}`,page_title:'Welltroy'}}]);
+    consent=false;
+    assert.equal(track('quote_cta_click'),false);
+    assert.equal(events.length,1);
+  }
+  assert.equal(sanitizeEvent('page_view',{},'/guides/private-buyer-approval/'),null);
+});
