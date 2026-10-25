@@ -1,0 +1,45 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data.mjs";
+import { orderTerms } from "../../ordering.mjs";
+const path = "/guides/custom-mailer-sample-approval/";
+const title = "How to Approve a Custom Mailer Sample";
+const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@id": `${site.origin}/#organization` }, publisher: { "@id": `${site.origin}/#organization` }, mainEntityOfPage: `${site.origin}${path}`, dateModified: "2026-10-25", inLanguage: "en" };
+const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: site.origin }, { "@type": "ListItem", position: 2, name: "Buying Guides", item: `${site.origin}/guides/` }, { "@type": "ListItem", position: 3, name: "Sample approval", item: `${site.origin}${path}` }] };
+const records = [
+  ["Sample identity", "Date, sample type, product model and revision"],
+  ["Dimensions", "Outer size, usable inner space, units and agreed tolerances"],
+  ["Appearance", "Finish reference, artwork version, print sides and color reference"],
+  ["Packing", "Actual contents, packing steps, checks and observations"],
+  ["Changes", "Each correction, its owner and how it will be confirmed"],
+  ["Approval", "Named approver, approval date and retained reference sample"]
+];
+---
+<Layout title="Custom Mailer Sample Approval Checklist | Welltroy" description="Check fit, artwork, closure and packing before approving custom poly or bubble mailer samples. Record the specification, corrections and approved version." canonicalPath={path} schemas={[schema, breadcrumbs]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Sample approval</div><p class="eyebrow">Before bulk production</p><h1>{title}</h1><p class="lead">Approve a custom mailer sample against the specification you intend to order. Check the fit with your actual packed product, review the artwork on the chosen material, and record corrections before confirming the approved version.</p><p class="muted">By Welltroy · Updated <time datetime="2026-10-25">25 October 2026</time></p><nav class="anchor-links" aria-label="In this guide"><a href="#sample-type">Sample types</a><a href="#fit">Fit &amp; closure</a><a href="#artwork">Artwork</a><a href="#record">Approval record</a></nav></div></section>
+  <section class="section"><div class="container article-layout"><article class="article-main">
+    <h2 id="sample-type">First, Identify What the Sample Can Confirm</h2>
+    <p>A stock sample, artwork proof and custom printed sample answer different questions. Ask which details your sample represents and which still need confirmation for the production order.</p>
+    <ul><li><strong>Existing product sample:</strong> review its actual material, construction and closure. Its size or print may differ from your intended order.</li><li><strong>Artwork proof:</strong> review the supplied layout, text and placement. A digital proof does not demonstrate physical fit or the printed surface.</li><li><strong>Custom printed sample:</strong> compare it with your agreed specification. Record any differences in material, printing process or construction from the proposed bulk order.</li></ul>
+    <h2>Start with a Written Sample Brief</h2>
+    <p>Record the mailer type, model or requested size, dimensions and units, material specification, finish, closure, print sides and quantity per design. Include your destination and the product that will go inside. Confirm the sample route before dispatch.</p>
+    <p>Choose the format you plan to buy: <a href="/products/poly-mailers/">Poly Mailers</a>, <a href="/products/poly-bubble-mailers/">Poly Bubble Mailers</a> or <a href="/products/metallic-bubble-mailers/">Metallic Bubble Mailers</a>. If the format is still open, start with the <a href="/guides/choose-a-mailer/">mailer selection guide</a>.</p>
+    <h2 id="fit">Check Fit with the Complete Shipping Pack</h2>
+    <ol><li>Pack the product with its retail box, inserts, tissue or other components.</li><li>Measure usable inner space separately from catalogue outer dimensions. The bubble lining, seams and packed thickness affect fit.</li><li>Insert the contents, close the flap without forcing it, and check where the shipping label will go.</li><li>Photograph the sealed pack and record measurements. If several products will share one mailer, check each intended pack.</li></ol>
+    <p>Use the <a href="/guides/mailer-size-for-clothing/">clothing mailer size guide</a> for a garment measurement workflow. A nominal outer size alone does not establish that a packed item fits.</p>
+    <h2 id="artwork">Review Artwork on the Agreed Surface</h2>
+    <p>Check the logo version, wording, print sides, placement and orientation against the approved file. Agree how color will be assessed and which physical reference will be retained. Use the <a href="/guides/logo-artwork-checklist/">logo artwork checklist</a> to prepare your files.</p>
+    <p>For poly mailers, Welltroy mainly uses screen printing; the printing route is selected according to the buyer's artwork and requirements. Confirm the offered process for your specification. For a metallic mailer, identify the exact finish: metallic and holographic are different descriptions, so request confirmation of the available surface.</p>
+    <div class="guide-callout"><strong>See a real customization case:</strong> the <a href="/products/poly-bubble-mailers/#bubble-mailer-cases">LUMIÈRE bubble mailer case</a> shows a branded packaging example. Use it as a visual reference; your sample and approved specification must describe your own order.</div>
+    <h2>Agree a Packing and Closure Check</h2>
+    <p>Check the actual packed configuration using a procedure agreed with your supplier. Record the contents, packing steps and observations, including closure, movement inside the mailer and visible damage. If the pack does not meet your requirements, review the configuration before approving it. Keep any required acceptance criteria in writing; a sample check does not establish a protection rating for every product or route.</p>
+    <h2 id="record">Keep an Approval Record</h2>
+    <p>Use the following fields as an approval checklist. Fill them with your actual sample information.</p>
+    <p class="table-scroll-hint">On a small screen, swipe the table to read both columns.</p><div class="table-wrap" tabindex="0" role="region" aria-label="Custom mailer sample approval record"><table><caption class="sr-only">Fields to record before approving a custom mailer sample</caption><thead><tr><th scope="col">Item</th><th scope="col">What to record</th></tr></thead><tbody>{records.map(([item, detail]) => <tr><th scope="row">{item}</th><td>{detail}</td></tr>)}</tbody></table></div>
+    <p>If you change size, material, artwork or closure after approval, ask which checks need repeating. Keep the final written specification with the approved reference and <a href="/guides/compare-custom-mailer-quotes/">matching quotation</a>.</p>
+    <h2>Request Your Sample Route</h2>
+    <p>Welltroy offers a free initial design draft within 24 hours after a clear brief. Eligible specifications start from 500 pieces. {orderTerms.sample}</p>
+    <p>See <a href="/ordering/#samples">sample choices and ordering terms</a> before planning your launch. Send your product, quantity, packed dimensions and destination, and tell us which parts of the sample you need to evaluate.</p><a class="button" href="/quote/?product=multiple-products#quote-form" data-quote-placement="content">Request a sample proposal</a>
+  </article><aside class="side-card"><p class="eyebrow">Your next step</p><h2>Keep the Order Consistent</h2><div class="guide-options"><a href="/guides/compare-custom-mailer-quotes/"><strong>Compare quotations</strong><span>Match the price to the approved specification</span></a><a href="/guides/logo-artwork-checklist/"><strong>Prepare artwork</strong><span>Check files, placement and print sides</span></a><a href="/ordering/"><strong>Plan the order</strong><span>Samples, payment and delivery milestones</span></a></div><a class="text-link" href="/guides/">All buying guides →</a></aside></div></section>
+</Layout>
+<style>.article-main{min-width:0}.article-main td{min-width:230px;vertical-align:top}.article-main th[scope="row"]{min-width:135px;vertical-align:top}.article-main li{margin:0 0 10px}h2[id]{scroll-margin-top:120px}</style>

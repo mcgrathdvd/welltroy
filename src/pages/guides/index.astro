@@ -1,0 +1,34 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data.mjs";
+const path = "/guides/";
+const groups = [
+  { id: "select", title: "1. Choose the Format and Size", intro: "Start with your packed product and the protection it needs.", guides: [
+    { title: "Poly Mailers vs Bubble Mailers", href: "/guides/choose-a-mailer/", text: "Compare flexible and cushioned construction, then check usable space." },
+    { title: "Mailer Sizes for Clothing", href: "/guides/mailer-size-for-clothing/", text: "Measure a folded garment and check catalogue size allowances." },
+    { title: "Kraft vs Poly Bubble Mailers", href: "/guides/kraft-vs-poly-bubble-mailers/", text: "Compare outer materials, lining and the checks needed for your pack." }
+  ] },
+  { id: "customize", title: "2. Prepare the Custom Specification", intro: "Define artwork, material and construction before requesting prices.", guides: [
+    { title: "Logo Artwork Checklist", href: "/guides/logo-artwork-checklist/", text: "Prepare artwork files, print sides, colors and placement." },
+    { title: "Custom Paper Bag Size, Handles and Printing", href: "/guides/custom-paper-bag-size-handles-printing/", text: "Describe your bag dimensions, handles and print requirements." },
+    { title: "Honeycomb Wrap for Bottles and Gifts", href: "/guides/honeycomb-paper-wrap-bottles-gifts/", text: "Plan the complete wrapping and shipping configuration." },
+    { title: "Custom Stand-up Pouch Specification", href: "/guides/custom-stand-up-pouch-specification/", text: "Prepare the product, size, closure and material brief for a pouch." }
+  ] },
+  { id: "approve", title: "3. Compare Quotes and Approve Samples", intro: "Keep the enquiry, quotation and approved reference consistent.", guides: [
+    { title: "500-piece Custom Packaging Quote Checklist", href: "/guides/custom-packaging-500-pieces/", text: "Prepare your initial enquiry and confirm the minimum by specification." },
+    { title: "How to Compare Custom Mailer Quotes", href: "/guides/compare-custom-mailer-quotes/", text: "Use a comparison worksheet for specification, cost and delivery scope." },
+    { title: "Custom Mailer Sample Approval Checklist", href: "/guides/custom-mailer-sample-approval/", text: "Check fit, artwork and closure, then record the approved version." }
+  ] }
+];
+const guides = groups.flatMap(group => group.guides);
+const listId = `${site.origin}${path}#guide-list`;
+const schema = { "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${site.origin}${path}#webpage`, url: `${site.origin}${path}`, name: "Packaging Buying Guides", description: "Practical Welltroy guides for selecting, customizing, quoting and approving packaging.", isPartOf: { "@id": `${site.origin}/#website` }, publisher: { "@id": `${site.origin}/#organization` }, mainEntity: { "@id": listId }, inLanguage: "en" };
+const list = { "@context": "https://schema.org", "@type": "ItemList", "@id": listId, numberOfItems: guides.length, itemListElement: guides.map((guide, index) => ({ "@type": "ListItem", position: index + 1, name: guide.title, url: `${site.origin}${guide.href}` })) };
+const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: site.origin }, { "@type": "ListItem", position: 2, name: "Buying Guides", item: `${site.origin}${path}` }] };
+---
+<Layout title="Packaging Buying Guides: Sizes, Artwork, Quotes & Samples | Welltroy" description="Use Welltroy buying guides to choose mailers, measure clothing packs, prepare artwork, compare custom packaging quotes and approve samples before production." canonicalPath={path} schemas={[schema, list, breadcrumbs]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / Buying Guides</div><p class="eyebrow">Practical purchasing checklists</p><h1>Packaging Buying Guides</h1><p class="lead">Choose your packaging, prepare a clear specification, and check the quotation and sample before production. Start with the step you are working on.</p><nav class="anchor-links" aria-label="Guide categories"><a href="#select">Format &amp; size</a><a href="#customize">Custom specification</a><a href="#approve">Quotes &amp; approval</a></nav></div></section>
+  {groups.map(group => <section class="section guide-section" id={group.id} aria-labelledby={`${group.id}-heading`}><div class="container"><p class="eyebrow">Buying workflow</p><h2 id={`${group.id}-heading`}>{group.title}</h2><p>{group.intro}</p><div class="grid-2">{group.guides.map(guide => <article class="editorial-card"><h3><a href={guide.href}>{guide.title}</a></h3><p>{guide.text}</p><a class="text-link" href={guide.href}>Read the guide →</a></article>)}</div></div></section>)}
+  <section class="section"><div class="container guide-callout"><h2>Ready to Discuss Your Packaging?</h2><p>Send your product, packed dimensions, quantity per design and destination. Eligible specifications start from 500 pieces. Confirm the sample route and delivery scope in your written quotation.</p><div class="button-row"><a class="button" href="/quote/#quote-form" data-quote-placement="content">Request a quotation</a><a class="text-link" href="/ordering/">Samples, payment &amp; delivery →</a><a class="text-link" href="/products/">Explore products →</a></div></div></section>
+</Layout>
+<style>.guide-section{scroll-margin-top:100px}.guide-section+.guide-section{padding-top:0}.editorial-card h3{font-size:1.15rem}.editorial-card h3 a{color:inherit}.editorial-card h3 a:hover{text-decoration:underline}</style>

@@ -1,0 +1,43 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data.mjs";
+import { orderTerms } from "../../ordering.mjs";
+const path = "/guides/compare-custom-mailer-quotes/";
+const title = "How to Compare Custom Mailer Quotes";
+const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@id": `${site.origin}/#organization` }, publisher: { "@id": `${site.origin}/#organization` }, mainEntityOfPage: `${site.origin}${path}`, dateModified: "2026-10-25", inLanguage: "en" };
+const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: site.origin }, { "@type": "ListItem", position: 2, name: "Buying Guides", item: `${site.origin}/guides/` }, { "@type": "ListItem", position: 3, name: "Compare quotes", item: `${site.origin}${path}` }] };
+const fields = [
+  ["Mailer type and construction", "Are the offered structures the same?"],
+  ["Outer and usable dimensions", "Are units, flap allowance and measurement directions clear?"],
+  ["Material and thickness", "What exactly is included in the measurement?"],
+  ["Artwork and print sides", "Are colors, coverage, placement and printing method included?"],
+  ["Quantity per size/design", "Does the minimum apply to each configuration?"],
+  ["Sample route", "Stock sample, artwork proof or custom printed sample?"],
+  ["Production start milestone", "Which approvals or payments start the schedule?"],
+  ["Delivery scope", "Which destination, service and charges are included?"]
+];
+---
+<Layout title={`${title} | Welltroy`} description="Compare custom mailer quotes using the same size, material, artwork, quantity and delivery scope. Use a worksheet to separate product, setup and shipping charges." canonicalPath={path} schemas={[schema, breadcrumbs]}>
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Compare quotes</div><p class="eyebrow">After you receive quotations</p><h1>{title}</h1><p class="lead">Compare custom mailer quotes against one written specification. Check that usable size, material, print coverage and delivery scope match, then compare the complete quoted cost and any unresolved conditions.</p><p class="muted">By Welltroy · Updated <time datetime="2026-10-25">25 October 2026</time></p><nav class="anchor-links" aria-label="In this guide"><a href="#worksheet">Comparison worksheet</a><a href="#costs">Cost items</a><a href="#timing">Timing</a><a href="#approval">Final approval</a></nav></div></section>
+  <section class="section"><div class="container article-layout"><article class="article-main">
+    <h2>Give Each Supplier the Same Brief</h2>
+    <p>Identify the exact mailer format and state whether your dimensions are outer or usable inner dimensions. Include the packed product, quantity per size and design, artwork, intended finish, sample needs and destination. Use consistent units and mark requirements that are still open.</p>
+    <p>The <a href="/guides/custom-packaging-500-pieces/">500-piece quotation checklist</a> helps you prepare the initial enquiry. This comparison worksheet is for the next step: checking whether the replies describe the same order.</p>
+    <h2 id="worksheet">Compare Specification Before Price</h2>
+    <p>Copy the written terms from each quotation into this worksheet. “To confirm” marks an unanswered field; it is not a supplier offer or a price estimate.</p>
+    <p class="table-scroll-hint">Swipe the table horizontally to see Quote B and the questions.</p><div class="table-wrap" tabindex="0" role="region" aria-label="Custom mailer quotation comparison worksheet"><table><caption class="sr-only">Blank worksheet for comparing two custom mailer quotations</caption><thead><tr><th scope="col">Field</th><th scope="col">Quote A</th><th scope="col">Quote B</th><th scope="col">Question to resolve</th></tr></thead><tbody>{fields.map(([field, question]) => <tr><th scope="row">{field}</th><td>To confirm</td><td>To confirm</td><td>{question}</td></tr>)}</tbody></table></div>
+    <p>For a bubble mailer, confirm usable inner space after accounting for the lining. For a printed poly mailer, confirm print sides and the offered method. For a metallic mailer, identify the exact surface effect. Compare the <a href="/products/poly-mailers/#mailer-comparison">three mailer formats</a> if the construction is still undecided.</p>
+    <h2 id="costs">Separate the Cost Items</h2>
+    <ul><li><strong>Products:</strong> unit price, quantity per size/design, currency and the total product amount.</li><li><strong>Setup:</strong> any separately quoted artwork, plate or tooling charges, and whether they apply again on a repeat order.</li><li><strong>Samples:</strong> the sample type, any quoted preparation charge and the courier arrangement.</li><li><strong>Packing and delivery:</strong> carton requirements, freight, destination and other stated charges.</li><li><strong>Unresolved items:</strong> identify charges still awaiting confirmation before comparing totals.</li></ul>
+    <div class="guide-callout"><strong>Build a total for the same scope:</strong> add the quoted product amount and the applicable, confirmed additional items. Keep each currency separate until you agree on a comparison basis. Mark an unknown charge as pending; ask for an updated quotation when its amount is known.</div>
+    <p>If destinations or delivery terms differ, resolve those differences first. Ask which freight and destination charges are included, excluded or estimated. Keep the quoted terms beside your comparison so the total can be checked.</p>
+    <h2 id="timing">Compare Timing by Milestone</h2>
+    <p>Keep design, sample preparation, sample transit, production and bulk transit as separate stages. Record the event that starts each stage. An estimate measured from artwork approval has a different starting point from one measured from payment or dispatch.</p>
+    <p>At Welltroy, the initial design draft target is within 24 hours after a clear brief. {orderTerms.sample}</p><p><strong>Bulk production:</strong> {orderTerms.production}</p>
+    <p>Confirm your required arrival date and destination with the supplier. See <a href="/ordering/">samples, payment and delivery terms</a> for the current Welltroy process.</p>
+    <h2 id="approval">Resolve Exceptions Before Approval</h2>
+    <p>Ask for a revised written quotation when you change size, artwork, material, quantity or delivery scope. Keep the final specification, <a href="/guides/custom-mailer-sample-approval/">sample approval record</a> and quotation together, with a version and date for each.</p>
+    <p>Eligible Welltroy specifications start from 500 pieces; confirm the minimum for each size and design. To request a comparison-ready proposal, send the same specification and destination through our enquiry form.</p><a class="button" href="/quote/?product=multiple-products#quote-form" data-quote-placement="content">Request a detailed quotation</a>
+  </article><aside class="side-card"><p class="eyebrow">Related checklists</p><h2>From Brief to Approval</h2><div class="guide-options"><a href="/guides/custom-packaging-500-pieces/"><strong>Prepare your enquiry</strong><span>Write a specification for an initial quote</span></a><a href="/guides/custom-mailer-sample-approval/"><strong>Approve the sample</strong><span>Check fit, artwork and the retained reference</span></a><a href="/guides/choose-a-mailer/"><strong>Choose a mailer</strong><span>Compare flexible and cushioned formats</span></a></div><a class="text-link" href="/guides/">All buying guides →</a></aside></div></section>
+</Layout>
+<style>.article-main{min-width:0}.article-main table{min-width:700px}.article-main th[scope="row"]{width:24%;vertical-align:top}.article-main td{vertical-align:top;min-width:100px}.article-main td:last-child{min-width:220px}.article-main li{margin:0 0 10px}h2[id]{scroll-margin-top:120px}</style>
