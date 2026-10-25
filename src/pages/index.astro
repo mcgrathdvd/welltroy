@@ -17,7 +17,8 @@ const homeFaq = [
 ];
 
 const organization = {
-  "@context": "https://schema.org", "@type": "Organization", name: site.legalName, url: site.origin,
+  "@context": "https://schema.org", "@type": "Organization", "@id": `${site.origin}/#organization`, name: site.name, legalName: site.legalName, url: site.origin,
+  logo: `${site.origin}/images/welltroy-logo.svg`,
   email: site.email, telephone: site.phone,
   address: { "@type": "PostalAddress", streetAddress: "4/F Yunsong Bld, Tairan 8th Road, Shatou Street", addressLocality: "Shenzhen", addressRegion: "Guangdong", addressCountry: "CN" }
 };
