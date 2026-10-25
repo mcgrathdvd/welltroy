@@ -37,15 +37,17 @@ export function safeProduct(value) { return formProducts.has(value) ? value : 'u
 export function validMeasurementId(value) { return typeof value === 'string' && /^G-[A-Z0-9]{5,20}$/.test(value); }
 
 export function sourceInfo(referrer, currentOrigin) {
-  // Only known public search/social origins go to GA; arbitrary referrer URLs never do.
+  // Only known public search/social/AI origins go to GA. Never send conversation
+  // paths, search terms or arbitrary private referrer URLs.
   try {
     const u = new URL(referrer);
     if (!['https:','http:'].includes(u.protocol)) throw Error();
     if (u.origin === currentOrigin) return { entry_source:'internal', page_referrer:'' };
     const h = u.hostname.replace(/^www\./,'');
+    const ai = /(^|\.)(chatgpt\.com|chat\.openai\.com|perplexity\.ai|copilot\.microsoft\.com|claude\.ai|gemini\.google\.com)$/.test(h);
     const search = /(^|\.)(google\.(com|co\.uk|com\.au|ca|de|fr|cn)|bing\.com|duckduckgo\.com|search\.yahoo\.com)$/.test(h);
     const social = /(^|\.)(linkedin\.com|pinterest\.com|facebook\.com|instagram\.com|youtube\.com|t\.co)$/.test(h);
-    return {entry_source:search ? 'organic_search' : social ? 'social' : 'referral',page_referrer:search || social ? u.origin : ''};
+    return {entry_source:ai ? 'ai_referral' : search ? 'organic_search' : social ? 'social' : 'referral',page_referrer:ai || search || social ? u.origin : ''};
   } catch { return {entry_source:'direct_or_unknown',page_referrer:''}; }
 }
 

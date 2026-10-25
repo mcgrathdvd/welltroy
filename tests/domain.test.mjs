@@ -17,7 +17,11 @@ test('retired catalogue and company pages redirect once to their matching curren
  const routes = {
   '/product-catelog':'/catalogue/',
   '/web-agency-gb-contact-us':'/about/#contact',
-  '/web-agency-gb-about-us':'/about/'
+  '/web-agency-gb-about-us':'/about/',
+  '/product/customized-printed-metallic-bubble-envelope-bags-waterproof-packaging-poly-bubble-mailers':'/products/metallic-bubble-mailers/',
+  '/product/packaging-kraft-paper-shopping-bag':'/products/kraft-paper-bags/',
+  '/product/custom-luxury-large-coffee-kraft-craft-black-brown-christmas-paper-bags-gift-shopping-bag':'/products/kraft-paper-bags/',
+  '/product/custom-printed-shopping-paper-bags-luxury-branded-gift-paper-bags':'/products/paper-gift-bags/'
  };
  for(const [path,destination] of Object.entries(routes)){
   for(const host of ['welltroy.com','www.welltroy.com']){
@@ -35,7 +39,7 @@ test('retired catalogue and company pages redirect once to their matching curren
 });
 
 test('unknown legacy products, similar paths and POST requests are not redirected to unrelated content',async()=>{
- for(const [path,method] of [['/product/double-tape-kraft-paper-envelope-bag/','GET'],['/product-catelog-extra/','GET'],['/web-agency-gb-contact-us/','POST']]){
+ for(const [path,method] of [['/product/double-tape-kraft-paper-envelope-bag/','GET'],['/product-catelog-extra/','GET'],['/web-agency-gb-contact-us/','POST'],['/product/packaging-kraft-paper-shopping-bag/','POST'],['/product/packaging-kraft-paper-shopping-bag-extra/','GET']]){
   const response=await onRequest({request:new Request(`https://welltroy.com${path}`,{method}),next:()=>new Response('original route',{status:404})});
   assert.equal(response.status,404);assert.equal(await response.text(),'original route');
  }
