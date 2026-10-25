@@ -35,6 +35,12 @@ const pageHeading = {
   'poly-bubble-mailers': 'Custom Poly Bubble Mailers',
   'metallic-bubble-mailers': 'Custom Metallic Bubble Mailers'
 }[product.slug] || product.name;
+const primaryMailerSlugs = ["poly-mailers", "poly-bubble-mailers", "metallic-bubble-mailers"];
+const mailerComparison = [
+  {slug:"poly-mailers",name:"Poly Mailers",format:"Flexible film bag without bubble cushioning",count:13,check:"Packed soft goods, usable inner space, film thickness and flap closure"},
+  {slug:"poly-bubble-mailers",name:"Poly Bubble Mailers",format:"Flexible film exterior with an inner bubble layer",count:15,check:"Packed item and retail box, usable opening, liner and closure"},
+  {slug:"metallic-bubble-mailers",name:"Metallic Bubble Mailers",format:"Reflective exterior with an inner bubble layer",count:9,check:"Surface structure and finish, print compatibility, usable space and closure"}
+];
 const suppliedVisuals = { "poly-mailers": polyPackingSource, "poly-bubble-mailers": bubbleCaseSource };
 const visual = await getProductVisual(suppliedVisuals[product.slug] || product.imageSource);
 const related = products.filter((item) => item.group === product.group && item.slug !== product.slug).sort((a, b) => Number(b.slug === product.parentSlug) - Number(a.slug === product.parentSlug)).slice(0, 3);
@@ -48,6 +54,8 @@ const pageSchema = {
   name: `${product.name} | Welltroy`,
   description: product.intro,
   image: `${site.origin}${visual.imageFull}`,
+  publisher: { "@id": `${site.origin}/#organization` },
+  isPartOf: { "@id": `${site.origin}/#website` },
   about: { "@type": "Thing", name: product.name, description: product.intro },
   breadcrumb: { "@id": `${site.origin}/products/${product.slug}/#breadcrumb` }
 };
@@ -96,6 +104,16 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
   {product.gallery?.length > 0 && <div id="product-gallery"><ProductGallery product={product} /></div>}
   <section class="section"><div class="container content-grid"><div><p class="eyebrow">{product.isNew ? "Product specification" : "Catalogue specifications"}</p><h2>{product.isNew ? "Product Details & Custom Options" : "Standard Size Options"}</h2><p>{product.isNew ? "Review the format and options below, then send your required size, material and artwork for a confirmed specification." : "The following dimensions are listed in the 2025 Welltroy catalogue. Confirm current availability, usable inner dimensions, measurement direction and tolerance before ordering."}</p>{product.alert && <div class="alert">{product.alert}</div>}<p class="table-scroll-hint">Swipe or scroll the size table to see all details.</p><div class="table-wrap" tabindex="0" role="region" aria-label={`${product.name} specifications`}><table class:list={{ "product-detail-table": product.isNew }}><caption class="sr-only">{product.name}: {product.isNew ? "available format and custom options" : "catalogue models and outer dimensions"}</caption><thead><tr><th scope="col">{product.isNew ? "Feature / option" : "Model / option"}</th><th scope="col">{product.sizeLabel}</th>{!product.isNew && <th scope="col">Enquire</th>}</tr></thead><tbody>{product.sizes.map(([model, size]) => <tr><th scope="row">{model}</th><td>{size}</td>{!product.isNew && <td><a class="text-link spec-enquire" data-quote-placement="product-size" data-model={model} aria-label={`Request a quote for ${product.name} ${model}`} href={`/quote/?product=${product.slug}&size=${encodeURIComponent(`${model} — ${size}`)}#quote-form`}>Quote this size →</a></td>}</tr>)}</tbody></table></div>{product.slug === "thermal-labels" && <div class="alert"><strong>Ordering labels?</strong> Tell us the label size, rolls or fanfold packs, labels per roll/pack, and printer model. The MOQ is not a count of individual stickers; confirm the sales unit before comparing prices.</div>}<p class="muted">Need another format? Include your required dimensions and quantity with the enquiry.</p>{!product.isNew && <details class="catalogue-preview"><summary>View the original 2025 catalogue page</summary><p>This source page includes the catalogue product image and listed sizes. Ask us to confirm current specifications before ordering.</p><a href={catalogueImage} target="_blank" rel="noopener" aria-label={`Open the catalogue page for ${product.name}`}><img src={catalogueImage} alt={`2025 catalogue page showing ${product.name} and its size table`} loading="lazy" width="1500" height="844" /></a><a class="text-link" href={catalogue.path} download>Download the complete catalogue (PDF)</a></details>}{product.parentSlug && <p><a class="text-link" href={`/products/${product.parentSlug}/`}>Explore the related catalogue range →</a></p>}</div><aside class="side-card"><h3>For a Better Quotation</h3><p>Include these details where possible:</p><ul>{product.specNeeds.map((item) => <li>{item}</li>)}</ul><div class="product-order-note"><strong>Ordering & samples</strong><ul class="order-terms"><li><b>MOQ:</b> {minimumOrder(product.slug)}.</li><li><b>Samples:</b> {orderTerms.sample}</li><li><b>Bulk production:</b> {orderTerms.production}</li><li><b>Payment:</b> {orderTerms.payment}</li><li><a href="/ordering/">Sample choices, delivery &amp; order checklist →</a></li></ul></div><div class="button-row"><a class="button" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-details">Request a Custom Quote</a></div></aside></div></section>
   <section class="section section-soft"><div class="container split"><div><p class="eyebrow">Applications</p><h2>Common Uses</h2><ul class="pill-list">{product.applications.map((item) => <li>{item}</li>)}</ul></div><div><p class="eyebrow">Custom order</p><h2>Match the Specification to the Product</h2><p class="lead">Custom options, minimum quantities and production times depend on material, size, printing and order quantity. Final specifications are confirmed in writing before production.</p><a class="text-link" href={`/quote/?product=${product.slug}#quote-form`}>Discuss this product →</a></div></div></section>
+  {primaryMailerSlugs.includes(product.slug) && <section class="section mailer-comparison" id="mailer-comparison" aria-labelledby="mailer-comparison-heading">
+    <div class="container">
+      <p class="eyebrow">Compare mailer formats</p><h2 id="mailer-comparison-heading">Which Mailer Fits Your Product?</h2>
+      <p class="lead">Choose a plain poly mailer for soft, non-fragile goods when a flexible shipping layer is enough. Consider a poly bubble mailer when a compact pack needs cushioning. Discuss a metallic bubble mailer when a reflective exterior is part of the design. Confirm the complete pack with a sample.</p>
+      <p class="table-scroll-hint">Swipe or scroll the comparison table to see all details.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Compare poly, poly bubble and metallic bubble mailers"><table><caption class="sr-only">Welltroy mailer formats, catalogue outer-size counts and specification checks</caption><thead><tr><th scope="col">Format</th><th scope="col">Construction</th><th scope="col">Catalogue sizes</th><th scope="col">Confirm for your order</th></tr></thead><tbody>{mailerComparison.map(item => <tr><th scope="row"><a href={`/products/${item.slug}/`} aria-current={item.slug === product.slug ? "page" : undefined}>{item.name}</a></th><td>{item.format}</td><td>{item.count} outer sizes</td><td>{item.check}</td></tr>)}</tbody></table></div>
+      <p class="muted">Size counts refer to the <a href={catalogue.path}>2025 Welltroy catalogue</a>. Outer dimensions are not usable inner space; confirm current availability, material and tolerance. A reflective finish does not establish a holographic effect, and cushioning does not establish one protection rating for every product.</p>
+      <p><a class="text-link" href="/guides/choose-a-mailer/">See the packing and size selection guide →</a></p>
+    </div>
+  </section>}
   {product.slug === "poly-mailers" && <PolyMailerPrinting />}
   {product.slug === "poly-bubble-mailers" && <BubbleMailerCases />}
   {product.group === "Mailing & Protective Packaging" && <section class="section"><div class="container guide-inline"><div><p class="eyebrow">Buying guide</p><h2>Choosing Between Mailer Formats?</h2><p>Compare lightweight and cushioned options, learn which dimensions to measure, and prepare the details needed for a quotation.</p></div><a class="button button-secondary" href="/guides/choose-a-mailer/">Read the mailer guide</a></div></section>}
@@ -104,4 +122,11 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
   {related.length > 0 && <section class="section section-soft"><div class="container"><div class="section-head"><div><p class="eyebrow">Related products</p><h2>Compare Similar Options</h2></div></div><div class="product-grid">{related.map((item) => <ProductCard product={item} />)}</div></div></section>}
   <section class="cta-band"><div class="container inner"><div><h2>Need Pricing for {product.name}?</h2><p>Send the model or size, quantity, customization requirements and destination country.</p></div><a class="button button-light" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-bottom">Request a Custom Quote</a></div></section>
 </Layout>
+
+<style>
+  #mailer-comparison {scroll-margin-top:100px;}
+  .mailer-comparison th,.mailer-comparison td {vertical-align:top;}
+  .mailer-comparison a[aria-current="page"] {font-weight:700;}
+  @media(max-width:760px) {.mailer-comparison table {min-width:680px;}}
+</style>
 
