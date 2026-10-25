@@ -26,7 +26,10 @@ const items = [
   { id: "reviews", label: "Reviews", href: "/reviews/", overview: "Read all buyer reviews", links: reviews.map((review) => ({
     label: review.country, href: `/reviews/#review-${review.country.toLowerCase().replaceAll(" ", "-")}`
   })) },
-  { id: "guide", label: "Buying Guide", href: "/guides/choose-a-mailer/", overview: "Choose the right mailer", links: [
+  { id: "guide", label: "Buying Guide", href: "/guides/", overview: "All buying guides", links: [
+    { label: "Choose the right mailer", href: "/guides/choose-a-mailer/" },
+    { label: "Compare custom mailer quotes", href: "/guides/compare-custom-mailer-quotes/" },
+    { label: "Custom mailer sample approval", href: "/guides/custom-mailer-sample-approval/" },
     { label: "Clothing mailer size guide", href: "/guides/mailer-size-for-clothing/" },
     { label: "Logo artwork checklist", href: "/guides/logo-artwork-checklist/" },
     { label: "Kraft vs poly bubble mailers", href: "/guides/kraft-vs-poly-bubble-mailers/" },
