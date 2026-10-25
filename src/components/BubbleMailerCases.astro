@@ -1,0 +1,84 @@
+---
+import { getProductVisual } from "../product-images.mjs";
+import lumiereSource from "../assets/new-products/bubble-mailer-lumiere-case.png";
+import verdantSource from "../assets/new-products/bubble-mailer-verdant-case.png";
+const [lumiere, verdant] = await Promise.all([getProductVisual(lumiereSource),getProductVisual(verdantSource)]);
+const cases = [
+  {
+    visual: lumiere, title: "LUMIÈRE: Matte Pink Branding", label: "Beauty & jewelry",
+    alt: "LUMIÈRE logo printed in black on a matte pink bubble mailer",
+    brief: "A North American beauty and jewelry project called for cushioned shipping with a softer, branded presentation. The project was planned around a 500–1,000-piece trial-order range.",
+    solution: "A matte blush-pink bubble mailer with monochrome LUMIÈRE branding, a cushioned interior and an adhesive flap.",
+    check: "Send your actual product, retail carton or jewelry box, inserts and packed measurements. Confirm the final material, usable dimensions, print process and closure in the approved specification.",
+    caption: "LUMIÈRE matte pink bubble mailer — a Welltroy customer case. Your configuration is confirmed separately."
+  },
+  {
+    visual: verdant, title: "VERDANT STUDIO: A Material-Led Brief", label: "Lifestyle & artisan products",
+    alt: "VERDANT STUDIO botanical logo printed in dark green on an off-white bubble mailer",
+    brief: "A European lifestyle and artisan project combined a natural off-white appearance, botanical branding and specific material-documentation requirements. The brief included a PLA/PBAT-based option.",
+    solution: "An off-white bubble mailer with dark green botanical artwork and VERDANT STUDIO branding. This is a separate material specification from the conventional PE catalogue range above.",
+    check: "Confirm the complete outer film, bubble layer, ink and adhesive. Review the current certificate, covered specification and permitted mark use before approving any compostability claim for a new order.",
+    caption: "VERDANT STUDIO off-white bubble mailer — a Welltroy customer case with a separate material specification."
+  }
+];
+const methods = [
+  ["Screen printing", "Simple one- or two-color vector logos and text", "Bag format, colors, printable area, setup and quantity per design"],
+  ["Digital printing", "Complex full-color artwork, photographic designs or multiple SKUs", "Film compatibility, coverage, sample route and the print result"],
+  ["Flexographic printing", "Roll-based text, solid colors and repeated designs", "Material, run quantity, plates, setup and finishing"],
+  ["Gravure printing", "Roll-based multicolor patterns and coverage-led designs", "Tooling, production quantity, artwork and printable boundaries"]
+];
+---
+<section class="section section-soft" id="bubble-mailer-cases" aria-labelledby="bubble-cases-heading">
+  <div class="container">
+    <div class="section-head"><div><p class="eyebrow">Welltroy customer cases</p><h2 id="bubble-cases-heading">Bubble Mailers Built Around Different Buyer Briefs</h2></div></div>
+    <p class="lead">Explore two customer projects, then confirm the construction and packing method for your own order. Each case has its own material and artwork specification.</p>
+    <div class="bubble-case-grid">
+      {cases.map(item => <article class="bubble-case-card">
+        <figure><a href={item.visual.imageFull} target="_blank" rel="noopener" aria-label={`View larger image: ${item.title}`}><img src={item.visual.image} srcset={item.visual.imageSrcSet} sizes="(max-width:760px) calc(100vw - 40px), 570px" alt={item.alt} width={item.visual.imageWidth} height={item.visual.imageHeight} loading="lazy" decoding="async" /></a><figcaption>{item.caption}</figcaption></figure>
+        <p class="eyebrow">{item.label}</p><h3>{item.title}</h3>
+        <p><strong>Buyer brief.</strong> {item.brief}</p>
+        <p><strong>Design delivered.</strong> {item.solution}</p>
+        <p><strong>For your version.</strong> {item.check}</p>
+      </article>)}
+    </div>
+    <p>For fragile, sharp or crushable contents, check the actual product together with its retail packaging and inserts. Agree a complete-pack trial before approval; the cases do not establish one protection rating for every order.</p>
+  </div>
+</section>
+<section class="section" id="bubble-mailer-printing" aria-labelledby="bubble-printing-heading">
+  <div class="container">
+    <p class="eyebrow">Custom printing</p><h2 id="bubble-printing-heading">Match the Printing Route to Your Artwork &amp; Quantity</h2>
+    <p class="lead">For a trial-order brief, ask whether an existing bag format and a suitable decoration process can meet your design. Printing on pre-made mailers and printing on rollstock follow different setup and production routes.</p>
+    <p class="table-scroll-hint">Swipe or scroll the printing table to see all details.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Bubble mailer printing route comparison">
+      <table><caption class="sr-only">Printing routes to discuss for custom bubble mailers</caption><thead><tr><th scope="col">Printing route</th><th scope="col">Artwork brief</th><th scope="col">Confirm before approval</th></tr></thead><tbody>{methods.map(([method,artwork,check])=><tr><th scope="row">{method}</th><td>{artwork}</td><td>{check}</td></tr>)}</tbody></table>
+    </div>
+    <p>Send editable artwork and a clear preview. Mark front and back panels, colors, position and coverage. Confirm clearance from seams and the sealing flap on the actual dieline.</p>
+    <p>The offered method, setup charges, minimum quantity and sample route are confirmed for each configuration. A stock-bag logo order and a fully custom roll-printed bag may have different requirements.</p>
+    <a class="text-link" href="/guides/logo-artwork-checklist/">Prepare your logo artwork →</a>
+  </div>
+</section>
+<section class="section section-soft" aria-labelledby="bubble-approval-heading">
+  <div class="container"><p class="eyebrow">From brief to approval</p><h2 id="bubble-approval-heading">A Clear Customization &amp; Approval Process</h2>
+    <ol class="bubble-approval-steps">
+      <li><strong>Send the brief.</strong> Include the product, complete packed dimensions, quantity per size and design, destination and required arrival date.</li>
+      <li><strong>Confirm the construction.</strong> Review outer film, bubble layer, thickness convention, usable space, flap and adhesive.</li>
+      <li><strong>Review artwork and quotation.</strong> Agree the print route, color reference, coverage, setup, delivery scope and lead-time milestones.</li>
+      <li><strong>Check the sample.</strong> Test insertion, closure and the complete pack. Agree print adhesion and other relevant checks, recording the method and acceptance criteria.</li>
+      <li><strong>Approve the final version.</strong> Keep the sample identifier, specification, artwork version and written quotation together. Reconfirm affected checks after any change.</li>
+    </ol>
+    <p>See the <a href="/ordering/">design, sample and ordering terms</a> for timing and courier conditions.</p>
+    <div class="button-row"><a class="button" href="/quote/?product=poly-bubble-mailers#quote-form" data-quote-placement="product-details">Discuss Your Bubble Mailer Project</a></div>
+  </div>
+</section>
+<style>
+  #bubble-mailer-cases,#bubble-mailer-printing {scroll-margin-top:100px;}
+  .bubble-case-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:28px 0;align-items:start;}
+  .bubble-case-card {min-width:0;}
+  figure {margin:0 0 22px;}
+  figure a {display:block;}
+  figure img {display:block;width:100%;height:auto;border-radius:12px;}
+  figcaption {font-size:.82rem;line-height:1.5;color:var(--muted);margin-top:10px;}
+  .bubble-approval-steps {display:grid;gap:16px;padding-left:24px;max-width:900px;}
+  th,td {vertical-align:top;}
+  @media(max-width:760px) {.bubble-case-grid {grid-template-columns:minmax(0,1fr);gap:32px;} table {min-width:640px;}}
+</style>
