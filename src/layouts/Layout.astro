@@ -31,8 +31,10 @@ const website = {
   "@context": "https://schema.org", "@type": "WebSite", "@id": `${site.origin}/#website`,
   name: site.name, url: `${site.origin}/`, inLanguage: "en", publisher: { "@id": `${site.origin}/#organization` }
 };
-// Home supplies the same organization identifier; avoid duplicate definitions there.
-const pageSchemas = [...(canonicalPath === "/" ? [] : [organization]), website, ...schemas];
+// Home and About already provide this company; emit one shared definition.
+const isSiteOrganization = (schema: Record<string, unknown>) => schema["@type"] === "Organization" &&
+  (schema.url === site.origin || schema.url === `${site.origin}/` || schema["@id"] === organization["@id"]);
+const pageSchemas = [organization, website, ...schemas.filter(schema => !isSiteOrganization(schema))];
 const productSlug = Astro.url.pathname.match(/^\/products\/([^/]+)\/?$/)?.[1];
 const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
   ? '#quote-form' : productSlug ? `/quote/?product=${encodeURIComponent(productSlug)}#quote-form` : '/quote/#quote-form';
