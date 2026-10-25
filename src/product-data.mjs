@@ -74,8 +74,8 @@ export const catalogueProducts = [
     name: "Poly Bubble Mailers",
     group: "Mailing & Protective Packaging",
     eyebrow: "Cushioned poly shipping mailers",
-    intro: "Poly bubble mailers pair a flexible film exterior with an inner bubble layer and a sealing flap. Opaque colors, logo printing and heat-sealed side edges are options to discuss. Compare 15 catalogue outer sizes, then confirm the usable opening, liner and seal with a filled sample before shipping.",
-    meta: "Custom poly bubble mailers with logo printing options. Compare 15 catalogue sizes; eligible orders from 500 pieces, with free initial design and sample support.",
+    intro: "Create a branded shipping pack around your actual product. Choose a catalogue format or discuss a custom poly bubble mailer, then confirm usable inner dimensions, outer film, cushioning, adhesive flap and artwork with an approved sample. Eligible configurations start from 500 pieces, confirmed for each size and design.",
+    meta: "Custom poly bubble mailers with logo printing and eligible orders from 500 pieces. Explore Welltroy buyer cases, usable sizes, artwork and sample approval.",
     highlights: ["15 catalogue outer sizes", "Bubble-lined construction", "Adhesive flap shown", "Color and logo options"],
     sizeLabel: "Outer dimension (Width × Length + Flap)",
     sizes: [["BM01","11 × 13 + 4 cm"],["BM02","13 × 15 + 4 cm"],["BM03","15 × 18 + 4 cm"],["BM04","15 × 20 + 4 cm"],["BM05","18 × 23 + 4 cm"],["BM06","20 × 25 + 4 cm"],["BM07","23 × 28 + 5 cm"],["BM08","25 × 30 + 5 cm"],["BM09","26 × 32 + 5 cm"],["BM10","29 × 36 + 5 cm"],["BM11","32 × 40 + 5 cm"],["BM12","35 × 43 + 5 cm"],["BM13","38 × 47 + 5 cm"],["BM14","40 × 45 + 5 cm"],["BM15","40 × 50 + 5 cm"]],
@@ -91,7 +91,11 @@ export const catalogueProducts = [
       {q:"Can I customize color, logo, pattern or size?",a:"Multiple opaque colors, logo placements and patterns can be discussed. Share your preferred color, artwork, packed item and target dimensions. We will confirm available film, printing, exact size and minimum quantity for each version."},
       {q:"Are poly bubble mailers recyclable?",a:"A general eco-friendly label does not establish the complete film, liner, adhesive or ink structure or local collection route. Request the selected product's material specification and verify recycling guidance for the destination market before making a claim."},
       {q:"What should I send for a custom bubble mailer quote?",a:"Send the packed item's dimensions, weight and fragility, catalogue model or inner-size target, film and bubble requirements, flap and seal preferences, color, editable logo or pattern artwork, quantity per size and design, and destination."},
-      {q:"Can I order 500 bubble mailers?",a:"A 500-piece starting quantity applies to eligible bag specifications. Share the exact size, construction, color and print design so we can confirm the minimum for each version."}
+      {q:"Can I order 500 bubble mailers?",a:"A 500-piece starting quantity applies to eligible bag specifications. Share the exact size, construction, color and print design so we can confirm the minimum for each version."},
+      {q:"Can you print a logo on a small trial order?",a:"Discuss an existing bag format with screen or digital decoration as a starting point. The offered method depends on the film, artwork, coverage, quantity and sample requirements. Confirm setup charges and the proof with your quotation."},
+      {q:"Are all-over printing and custom film colors available at the same minimum?",a:"Different construction and printing routes can have different setup and quantity requirements. Send the full artwork and color brief; do not assume that a stock-bag logo order and a fully custom roll-printed bag share the same minimum."},
+      {q:"Do the two customer cases use the same material?",a:"The LUMIÈRE pink bubble mailer and the VERDANT STUDIO material-specific brief are separate configurations. The VERDANT STUDIO brief included a PLA/PBAT-based option; it does not describe the conventional PE catalogue range. Confirm the complete outer film, bubble layer, ink and adhesive for your order."},
+      {q:"Can I add a compostability or recycling mark?",a:"Confirm the exact material and relevant supporting documents before approving a mark or disposal statement. A brand image, film name or printing process alone does not establish certification or acceptance in the destination's collection system."}
     ]
   },
   {
