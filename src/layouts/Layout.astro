@@ -21,6 +21,20 @@ interface Props {
 const { title, description, canonicalPath = "/", schemas = [], ogImage = "/images/hero-wide-selected.webp", ogImageAlt = "Welltroy packaging product range" } = Astro.props;
 const canonical = new URL(canonicalPath, site.origin).toString();
 const socialImage = new URL(ogImage, site.origin).toString();
+const organization = {
+  "@context": "https://schema.org", "@type": "Organization", "@id": `${site.origin}/#organization`,
+  name: site.name, legalName: site.legalName, url: site.origin,
+  logo: `${site.origin}/images/welltroy-logo.svg`, email: site.email, telephone: site.phone,
+  address: { "@type": "PostalAddress", streetAddress: "4/F Yunsong Bld, Tairan 8th Road, Shatou Street", addressLocality: "Shenzhen", addressRegion: "Guangdong", addressCountry: "CN" }
+};
+const website = {
+  "@context": "https://schema.org", "@type": "WebSite", "@id": `${site.origin}/#website`,
+  name: site.name, url: `${site.origin}/`, inLanguage: "en", publisher: { "@id": `${site.origin}/#organization` }
+};
+// Home and About already provide this company; emit one shared definition.
+const isSiteOrganization = (schema: Record<string, unknown>) => schema["@type"] === "Organization" &&
+  (schema.url === site.origin || schema.url === `${site.origin}/` || schema["@id"] === organization["@id"]);
+const pageSchemas = [organization, website, ...schemas.filter(schema => !isSiteOrganization(schema))];
 const productSlug = Astro.url.pathname.match(/^\/products\/([^/]+)\/?$/)?.[1];
 const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
   ? '#quote-form' : productSlug ? `/quote/?product=${encodeURIComponent(productSlug)}#quote-form` : '/quote/#quote-form';
@@ -46,7 +60,7 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={socialImage} />
     <link rel="icon" href="/images/welltroy-logo.svg" type="image/svg+xml" />
-    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />)}
+    {pageSchemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />)}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
