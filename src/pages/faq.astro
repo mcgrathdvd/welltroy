@@ -2,9 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
 import { orderTerms } from "../ordering.mjs";
+import { site } from "../data.mjs";
 
 const groups = [
-  { id: "ordering", title: "Ordering & Quotation", items: [
+  { id: "buyer-answers", title: "Quick Buying Decisions", items: [
+    { id: "custom-mailer-minimum", q: "Can I order 500 custom printed mailers?", a: "Eligible Welltroy poly, poly bubble and metallic bubble mailer specifications start from 500 pieces. Confirm the minimum for each size, color and design; a 500-piece enquiry does not automatically cover every printing method or construction.", href: "/guides/custom-packaging-500-pieces/", label: "Prepare a 500-piece quote brief" },
+    { id: "metallic-or-holographic", q: "Are metallic bubble mailers the same as holographic mailers?", a: "No. A reflective metallic exterior does not by itself establish a holographic effect. Send the exact finish reference and ask Welltroy to confirm the offered surface and sample before including it in your order.", href: "/products/metallic-bubble-mailers/", label: "Check metallic bubble mailer details" },
+    { id: "design-or-approval", q: "Does free design mean my artwork is approved for production?", a: "No. Welltroy offers a free initial design draft within 24 hours after a clear brief. Production approval is a separate written confirmation of the final artwork version, material, size, placement, colors and quantity, with a physical reference where required.", href: "/guides/logo-artwork-checklist/#approval", label: "Check artwork approval steps" },
+    { id: "comparable-mailer-quotes", q: "What should I compare before choosing a mailer quote?", a: "Compare the same construction, usable dimensions, material and thickness convention, artwork, quantity per design, sample route and delivery scope before comparing totals. Ask suppliers to identify included, excluded and unresolved charges in writing.", href: "/guides/compare-custom-mailer-quotes/", label: "Use the quote comparison worksheet" }
+  ] },
+  { id: "ordering", title: "Ordering & Quotation", guide: { href: "/guides/custom-mailer-sample-approval/", label: "Use the sample approval checklist" }, items: [
     { q: "What details do you need to quote?", a: "Send the product type or catalogue model, size or packed dimensions, estimated quantity, printing needs and destination country. If the size is uncertain, describe what you plan to pack." },
     { q: "What is the minimum order quantity?", a: "Most bags and mailers start at 500 pieces for eligible specifications. Honeycomb paper starts at 500 rolls. Thermal labels start at 500 units; confirm whether the quoted unit is a roll or fanfold pack and how many labels it contains." },
     { q: "Can I order several packaging products together?", a: "Select Multiple products on the enquiry form, then list each product, size and quantity in the requirements field. Minimum quantities apply to each product, not to the combined enquiry total." },
@@ -12,20 +19,20 @@ const groups = [
     { q: "Is the sample shipping also free?", a: "Free samples do not automatically include delivery. Confirm whether you need an existing product sample or a custom printed sample, what is included, and any courier charge before dispatch." },
     { q: "Which payment method do you accept?", a: orderTerms.payment }
   ] },
-  { id: "specifications", title: "Product Specifications", items: [
+  { id: "specifications", title: "Product Specifications", guide: { href: "/guides/choose-a-mailer/", label: "Compare mailer formats and fit checks" }, items: [
     { q: "Are catalogue dimensions internal or external?", a: "Dimension labels differ by product. Mailer listings identify outer dimensions; ask for usable inner space and tolerance before confirming a close fit." },
     { q: "Can you make a custom size?", a: "Custom dimensions can be discussed for selected products. Provide the required size and quantity so production feasibility can be checked." },
     { q: "How do I choose between a poly mailer and a bubble mailer?", a: "Poly mailers suit many lightweight, non-fragile goods. Bubble mailers add an internal cushioning layer. Test the complete pack with the actual product and shipping method." },
     { q: "Are stand-up pouches suitable for food?", a: "Food suitability depends on the exact material structure, contents and destination market. Request product-specific compliance documents before ordering for food use." }
   ] },
-  { id: "customization", title: "Printing & Materials", items: [
+  { id: "customization", title: "Printing & Materials", guide: { href: "/guides/logo-artwork-checklist/", label: "Prepare files, colors and print placement" }, items: [
     { q: "Can you print our logo?", a: "Logo printing is available for selected products. Provide artwork, desired colors, print coverage and quantity for a product-specific review." },
     { q: "How quickly can I receive a design draft?", a: "Welltroy offers a free initial design draft within 24 hours after receiving a clear packaging and artwork brief. Complex requirements may need additional discussion." },
     { q: "Can you match a brand color?", a: "Supply a Pantone or other color reference. Matching depends on the substrate and print process; request a physical approval reference where color accuracy matters." },
     { q: "What documents support environmental claims?", a: "Request the material composition and relevant test documents for the exact product. Recycling and disposal routes depend on local facilities and regulations." },
     { q: "Can I upload artwork on this website?", a: "Yes. You can attach your logo, reference images or customization brief to the Request a Quote form. Upload up to 3 files, with a combined size of 10 MB or less. Supported formats are PNG, JPG, WEBP, PDF, AI, PSD, DOCX, XLSX, TXT and CSV. For larger files, email info@welltroy.com to arrange sharing and include your enquiry reference if available." }
   ] },
-  { id: "shipping", title: "Production & Delivery", items: [
+  { id: "shipping", title: "Production & Delivery", guide: { href: "/ordering/", label: "Read sample, payment and delivery terms" }, items: [
     { q: "How long does production take?", a: orderTerms.production },
     { q: "Does production time include delivery?", a: "No. Production and transport are separate. Include your destination, postcode or port, and required arrival date. Ask for the shipping method, freight, duties and taxes to be itemized in your quotation." },
     { q: "What should I do if there is a quality issue?", a: "Contact info@welltroy.com with your order reference, affected quantity, photos or video, and the agreed specification. Keep the packaging and affected goods available for review. The remedy and any inspection requirements depend on your written order terms." },
@@ -33,10 +40,11 @@ const groups = [
     { q: "What should I approve before production?", a: "Confirm dimensions, material, print artwork, colors, quantity, packing details and agreed shipping terms in writing." }
   ] }
 ];
-const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: groups.flatMap((group) => group.items).map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "@id": `${site.origin}/faq/#webpage`, url: `${site.origin}/faq/`, name: "Answers for Packaging Buyers", inLanguage: "en", dateModified: "2026-10-26", publisher: { "@id": `${site.origin}/#organization` }, isPartOf: { "@id": `${site.origin}/#website` }, mainEntity: groups.flatMap((group) => group.items).map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
 ---
 <Layout title="Packaging FAQ | Welltroy" description="Answers about packaging specifications, custom printing, minimum order quantities, samples, production and international shipping enquiries." canonicalPath="/faq/" schemas={[faqSchema]}>
-  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / FAQ</div><p class="eyebrow">Frequently asked questions</p><h1>Answers for Packaging Buyers</h1><p class="lead">Use these answers to prepare your specification. Product-specific details are on each catalogue page.</p><nav class="anchor-links" aria-label="FAQ categories">{groups.map((group) => <a href={`#${group.id}`}>{group.title} ↗</a>)}</nav></div></section>
-  {groups.map((group, index) => <section class:list={["section", { "section-soft": index % 2 === 1 }]} id={group.id}><div class="container"><div class="section-head"><div><p class="eyebrow">FAQ 0{index + 1}</p><h2>{group.title}</h2></div></div><Faq items={group.items} /></div></section>)}
+  <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / FAQ</div><p class="eyebrow">Frequently asked questions</p><h1>Answers for Packaging Buyers</h1><p class="lead">Start with the purchasing decision you need to make, then follow the relevant product specification or checklist. Confirm the final configuration, sample and quotation for your own order.</p><p class="muted">By Welltroy · Updated <time datetime="2026-10-26">26 October 2026</time></p><nav class="anchor-links" aria-label="FAQ categories">{groups.map((group) => <a href={`#${group.id}`}>{group.title} ↗</a>)}</nav></div></section>
+  {groups.map((group, index) => <section class:list={["section", { "section-soft": index % 2 === 1 }]} id={group.id}><div class="container"><div class="section-head"><div><p class="eyebrow">FAQ 0{index + 1}</p><h2>{group.title}</h2></div></div>{group.id === "buyer-answers" ? <div class="buyer-answer-grid">{group.items.map(item => <article class="editorial-card" id={item.id}><h3>{item.q}</h3><p>{item.a}</p><a class="text-link" href={item.href}>{item.label} →</a></article>)}</div> : <><Faq items={group.items} />{group.guide && <p class="faq-guide-link"><a class="text-link" href={group.guide.href}>{group.guide.label} →</a></p>}</>}</div></section>)}
   <section class="cta-band"><div class="container inner"><div><h2>Have a Product-Specific Question?</h2><p>Share the catalogue model and how the packaging will be used.</p></div><a class="button button-light" href="/quote/">Ask Welltroy</a></div></section>
 </Layout>
+<style>.buyer-answer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.buyer-answer-grid h3{font-size:1.15rem;line-height:1.45}.buyer-answer-grid article{min-width:0;scroll-margin-top:110px}.faq-guide-link{max-width:880px;margin:24px auto 0}.section[id]{scroll-margin-top:100px}@media(max-width:760px){.buyer-answer-grid{grid-template-columns:minmax(0,1fr)}}</style>
