@@ -1,5 +1,6 @@
 ---
 import { getProductVisual } from "../product-images.mjs";
+import { polyMailerThicknessOptions } from "../product-data.mjs";
 import packingSource from "../assets/new-products/poly-mailers-apparel-packing.jpg";
 import productionSource from "../assets/new-products/poly-mailers-production.jpg";
 import diagramSource from "../assets/new-products/poly-mailers-customization-diagram.png";
@@ -18,6 +19,19 @@ const photos = [
   { visual: production, alt: "Printed pink poly mailers stacked beside bag-making equipment in a production area", caption: "Poly mailer production photograph supplied by Welltroy. The scene shows bag production, not a demonstration of a specific printing method." }
 ];
 ---
+<section class="section" id="poly-mailer-thickness" aria-labelledby="poly-thickness-heading">
+  <div class="container">
+    <p class="eyebrow">Film specification</p>
+    <h2 id="poly-thickness-heading">Single-Wall Film Thickness Options</h2>
+    <p class="lead">Reference options are 60, 70, 80, 90 and 100 microns per side. Specify the thickness of one film wall; the front and back panels are not added together. Confirm the offered option for your size, artwork and order quantity.</p>
+    <p class="table-scroll-hint">Swipe the table horizontally to compare thickness units.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Poly mailer single-wall thickness conversion">
+      <table><caption class="sr-only">Five reference film thickness options, all measured per side</caption><thead><tr><th scope="col">Microns per side</th><th scope="col">Millimeters per side</th><th scope="col">Approx. mil per side</th></tr></thead><tbody>{polyMailerThicknessOptions.map(option => <tr><th scope="row">{option.microns} μm</th><td>{option.millimeters} mm</td><td>{option.mil} mil</td></tr>)}</tbody></table>
+    </div>
+    <p><strong>Keep the units clear:</strong> 1 mil is 0.001 inch, or 25.4 microns; it is a different unit from millimeter. For example, 60 μm per side is 0.06 mm per side, approximately 2.36 mil per side.</p>
+    <p class="muted">These values are specification references, not an inspection tolerance or a load rating. Confirm film material, the thickness measurement method and agreed tolerance in your quotation. Check the chosen bag with the actual contents and keep the <a href="/guides/custom-mailer-sample-approval/">approved sample record</a>.</p>
+  </div>
+</section>
 <section class="section section-soft" id="poly-mailer-printing" aria-labelledby="poly-printing-heading">
   <div class="container">
     <p class="eyebrow">Custom printing</p>
@@ -40,7 +54,7 @@ const photos = [
           <li>Mark logo placement, print sides, colors and intended coverage.</li>
           <li>Agree printable boundaries and clearance from seams and the sealing zone.</li>
           <li>Confirm the adhesive strip and flap configuration on the production proof.</li>
-          <li>Specify film thickness and its measurement convention with your quotation; no standard thickness range is stated here.</li>
+          <li>Choose a <a href="#poly-mailer-thickness">single-wall thickness reference</a>, then confirm material, measurement method and tolerance with your quotation.</li>
         </ul>
         <p>The reference drawing shows the customization concept. It is not to scale and is not the approved dieline for your order.</p>
         <a class="text-link" href="/guides/logo-artwork-checklist/">Prepare your logo artwork →</a>
@@ -64,7 +78,7 @@ const photos = [
   </div>
 </section>
 <style>
-  #poly-mailer-printing {scroll-margin-top:100px;}
+  #poly-mailer-printing,#poly-mailer-thickness {scroll-margin-top:100px;}
   .poly-print-layout,.poly-photo-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:32px 0;align-items:start;}
   figure {margin:0;min-width:0;}
   figure a {display:block;}
