@@ -1,5 +1,10 @@
 import { additionalProducts } from "./new-products.mjs";
 
+// Single-wall options supplied by Welltroy; 1 mil = 25.4 microns.
+export const polyMailerThicknessOptions = [60, 70, 80, 90, 100].map(microns => ({
+  microns, millimeters: (microns / 1000).toFixed(2), mil: (microns / 25.4).toFixed(2)
+}));
+
 export const site = {
   name: "Welltroy",
   legalName: "Shenzhen Welltroy Technology Co., Ltd.",
@@ -37,6 +42,8 @@ export const catalogueProducts = [
     alert: "The 13 P-series figures below are catalogue outer dimensions, not usable inner sizes or an automatic match for a custom order. No single load rating applies to every size and film thickness. Confirm film, seams and adhesive for the actual contents, then test the complete shipping pack. Water resistance and recyclability require specification-specific evidence.",
     relatedGuide: { title: "Measure a poly mailer for packed clothing", href: "/guides/mailer-size-for-clothing/" },
     faqs: [
+      {q:"What film thickness options are available for poly mailers?",a:`The reference options are ${polyMailerThicknessOptions.map(option => option.microns).join(', ')} microns per side. These are single-wall film thicknesses, not the front and back panels added together. Confirm the offered option, material, tolerance and quantity for your exact size and design in the written quotation and approved sample.`},
+      {q:"Is mil the same as millimeter when specifying mailer thickness?",a:"No. One mil is 0.001 inch, or 25.4 microns. For example, 60 microns per side is 0.06 mm per side, approximately 2.36 mil per side. State the unit and single-wall measurement convention on the specification; confirm tolerances separately."},
       {q:"How do I choose a poly mailer size?",a:"Fold and pack the actual order first, including any inner bag or insert. Measure packed width, length and thickness; then compare candidate catalogue outer sizes and request usable inner dimensions. Test insertion and flap closure with a sample before approving the size."},
       {q:"Does the listed length include the sealing flap?",a:"The catalogue table gives outer width × length plus a separately listed flap. The flap is not extra usable body length, and the seals reduce inner space. Confirm the opening, internal dimensions and closure clearance for the packed item."},
       {q:"Can you match a brand color or print our logo and pattern?",a:"Yes. Screen printing is our main printing method for custom poly mailers, particularly simple one- or two-color vector logos and text. Other methods are selected according to the buyer's artwork, film, coverage, quantity and sample requirements. Send editable artwork, color references and placement so we can confirm the process and proof for your order."},
