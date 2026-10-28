@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data.mjs';
+const path = '/guides/metallic-vs-holographic-bubble-mailers/';
+const title = 'Metallic vs Holographic Bubble Mailers';
+const description = 'Compare metallic and holographic mailer finishes, logo printing, usable sizes and sample checks. Prepare a clear finish brief before a custom packaging quote.';
+const article = {
+  '@context': 'https://schema.org', '@type': 'Article',
+  '@id': `${site.origin}${path}#article`, headline: title, description,
+  author: {'@id': `${site.origin}/#organization`}, publisher: {'@id': `${site.origin}/#organization`},
+  mainEntityOfPage: `${site.origin}${path}`, datePublished: '2026-10-29', dateModified: '2026-10-29', inLanguage: 'en'
+};
+const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[
+  {'@type':'ListItem',position:1,name:'Home',item:site.origin},
+  {'@type':'ListItem',position:2,name:'Buying Guides',item:`${site.origin}/guides/`},
+  {'@type':'ListItem',position:3,name:title,item:`${site.origin}${path}`}
+]};
+const comparison = [
+  ['Appearance to specify', 'Reflective silver, gold or another confirmed color; state gloss, texture and the required look.', 'State the required rainbow, pattern, movement or depth effect. Some optical effects have a silver appearance without a rainbow.'],
+  ['Reference to approve', 'A physical surface and color reference for the selected mailer.', 'A physical sample viewed at different angles; a still image may not capture the effect.'],
+  ['Material and cushioning', 'Confirm the exterior layers, bubble liner, seams and closure.', 'Confirm the same construction details separately from the visual effect.'],
+  ['Printing and labels', 'Check logo contrast, print adhesion and the shipping-label area on the actual surface.', 'Check whether the effect changes logo readability and confirm print and label adhesion.']
+];
+const checks = [
+  ['Finish reference', 'Attach a photo or short video and describe the effect you want. Identify an exact sample or finish code when available.'],
+  ['Size and contents', 'Give packed width, length, thickness and weight. State outer or usable inner dimensions and the flap allowance.'],
+  ['Construction', 'Ask for the offered exterior material, bubble liner, seams and closure. Record any requirements still awaiting confirmation.'],
+  ['Artwork and quantity', 'Send logo files, colors, print sides and coverage, plus the quantity for each size, finish and design.'],
+  ['Sample and destination', 'State the sample checks, destination and required arrival date; confirm sample delivery and bulk shipping separately.']
+];
+---
+<Layout title={`${title} | Welltroy`} description={description} canonicalPath={path} schemas={[article,breadcrumbs]}>
+  <section class="page-hero"><div class="container">
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Metallic &amp; holographic finishes</div>
+    <p class="eyebrow">Choose the finish before approving the sample</p><h1>{title}</h1>
+    <p class="lead">A metallic finish describes a reflective appearance. A holographic finish can add patterns, movement or depth as the viewing angle changes; many show rainbow colors, but some do not. A mailer can combine both effects. Specify the finish separately from its material, cushioning and usable size.</p>
+    <p class="muted">By <a href="/about/">Welltroy</a> · Published <time datetime="2026-10-29">29 October 2026</time></p>
+    <nav class="anchor-links" aria-label="In this guide"><a href="#compare">Compare finishes</a><a href="#sizes">Sizes &amp; printing</a><a href="#brief">Quote checklist</a><a href="#questions">Common questions</a></nav>
+  </div></section>
+  <section class="section"><div class="container article-layout"><article class="article-main">
+    <h2 id="compare">Are Metallic and Holographic Courier Mailers the Same?</h2>
+    <p>The terms describe surface appearance and may overlap. Ask what the supplied bag actually looks like under changing light, rather than treating the product name as a complete specification. A finish description also does not establish the material layers or the protection provided by the finished pack.</p>
+    <p class="table-scroll-hint">Swipe the table horizontally to compare both finish briefs.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Metallic and holographic mailer finish comparison"><table>
+      <caption class="sr-only">What to confirm when comparing metallic and holographic bubble mailer finishes</caption>
+      <thead><tr><th scope="col">Check</th><th scope="col">Metallic finish brief</th><th scope="col">Holographic finish brief</th></tr></thead>
+      <tbody>{comparison.map(([check,metallic,holographic])=><tr><th scope="row">{check}</th><td>{metallic}</td><td>{holographic}</td></tr>)}</tbody>
+    </table></div>
+    <div class="guide-callout"><strong>What is confirmed in the Welltroy range?</strong><p>Our <a href="/products/metallic-bubble-mailers/">metallic bubble mailer page</a> lists a reflective exterior and nine catalogue outer sizes. If your brief requires a holographic effect, send a finish reference so we can confirm whether the requested surface, printing and quantity can be offered.</p></div>
+    <h2 id="sizes">Check Usable Size, Logo Printing and the Shipping Label</h2>
+    <p>A similar-looking mailer from another supplier may use a different size convention. Welltroy catalogue sizes use outer width × body length + flap. For example, MB06 is listed as 20 × 28 + 4 cm, approximately 7.87 × 11.02 + 1.57 inches. These are outer measurements; lining and seams reduce usable space.</p>
+    <p>Measure the packed item, including any retail box or insert. Request the usable opening and inner dimensions, then check insertion and flap closure with a sample. Compare the <a href="/products/metallic-bubble-mailers/#order-options">metallic mailer sizes and order options</a> before choosing a model.</p>
+    <ul><li><strong>Logo readability:</strong> check contrast, placement and fine details on the selected reflective surface.</li><li><strong>Printing route:</strong> confirm the method, colors, coverage and artwork proof for the actual film and finish.</li><li><strong>Courier label:</strong> test the intended label and barcode on the sample under your packing conditions.</li><li><strong>Complete pack:</strong> check the liner, seams, closure and any extra protection needed for your contents.</li></ul>
+    <p>Use the <a href="/guides/logo-artwork-checklist/">logo artwork checklist</a> and retain an <a href="/guides/custom-mailer-sample-approval/">approved sample record</a> with the final quotation.</p>
+    <h2 id="brief">What Should I Send for a Custom Mailer Quote?</h2>
+    <p>Prepare one brief for each proposed configuration. This checklist helps keep a reflective catalogue finish and a requested optical effect distinct while the available specification is being confirmed.</p>
+    <dl class="finish-checklist">{checks.map(([label,text])=><div><dt>{label}</dt><dd>{text}</dd></div>)}</dl>
+    <p>Eligible Welltroy bag specifications start from 500 pieces. Confirm the minimum for each size, finish and artwork; the starting quantity does not establish availability of every holographic effect. A free initial design draft is offered within 24 hours after a clear brief. The sample delivery target is within seven days after specifications and artwork are confirmed, depending on destination; confirm sample type and courier charges.</p>
+    <div class="button-row"><a class="button" href="/quote/?product=metallic-bubble-mailers#quote-form" data-quote-placement="content">Discuss My Mailer Finish</a><a class="text-link" href="/ordering/">Sample and order terms →</a></div>
+    <h2 id="questions">Common Questions</h2>
+    <h3>Does a silver bubble mailer automatically have a holographic effect?</h3><p>No. Silver describes a color or metallic appearance. Ask for the required optical effect and approve a physical sample; a reflective photograph alone does not confirm it.</p>
+    <h3>Can a holographic effect be subtle rather than rainbow-colored?</h3><p>Yes, surface-decoration examples include silver-tone depth effects as well as rainbow motion effects. Describe the effect you need with a reference and confirm whether it is available for your chosen mailer construction.</p>
+    <h3>Does the finish prove waterproofing or recyclability?</h3><p>The visual finish does not establish either property. Request the complete material structure and applicable evidence for the chosen specification and destination before making such a claim.</p>
+    <h3>Would a poly bubble mailer or a plain poly mailer suit my order?</h3><p>Consider a <a href="/products/poly-bubble-mailers/">poly bubble mailer</a> when your chosen pack needs an inner bubble layer. A <a href="/products/poly-mailers/">plain poly mailer</a> has no bubble cushioning and is commonly used for soft goods. Compare formats against the actual contents and test the complete pack.</p>
+    <h2>Sources and Specification Basis</h2>
+    <p>The MB06 size example comes from the <a href="/catalog/Welltroy-Product-Catalog-2025.pdf">2025 Welltroy catalogue</a>; current availability, inner dimensions and tolerances are confirmed with your quotation.</p>
+    <p>For surface-effect terminology, <a href="https://www.kurzusa.com/press-news/release/silver-line-from-kurz-premium-packaging-and-label-design-with-3d-effects" rel="noopener">KURZ describes silver-tone depth effects and rainbow motion effects</a>. These examples explain the appearance terms; your mailer's offered material and finish are confirmed separately.</p>
+  </article><aside class="side-card"><p class="eyebrow">From finish to specification</p><h2>Prepare Your Mailer Brief</h2><div class="guide-options">
+    <a href="/products/metallic-bubble-mailers/"><strong>Metallic bubble mailers</strong><span>Nine catalogue outer sizes and custom order checks</span></a>
+    <a href="/guides/logo-artwork-checklist/"><strong>Prepare your artwork</strong><span>Print sides, colors, placement and files</span></a>
+    <a href="/guides/custom-mailer-sample-approval/"><strong>Approve the sample</strong><span>Record fit, finish, artwork and closure</span></a>
+  </div><a class="text-link" href="/guides/">All buying guides →</a></aside></div></section>
+</Layout>
+<style>
+  .article-main{min-width:0}.article-main table{min-width:650px}.article-main th[scope="row"]{width:22%}.article-main th,.article-main td{vertical-align:top}.article-main li{margin-bottom:10px}h2[id]{scroll-margin-top:110px}
+  .finish-checklist{margin:24px 0}.finish-checklist>div{padding:16px 0;border-bottom:1px solid #d9dfd8}.finish-checklist dt{font-weight:700;margin-bottom:5px}.finish-checklist dd{margin:0}
+</style>
