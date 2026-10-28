@@ -1,0 +1,43 @@
+---
+import { mailerOrderOptions } from '../mailer-options.mjs';
+const { slug } = Astro.props;
+const option = mailerOrderOptions[slug];
+const rows = option ? [
+  ['Starting configuration to assess', option.starting],
+  ['Material & construction', option.material],
+  ['Logo & printing', option.artwork],
+  ['When the minimum may change', option.more],
+  ['Sample approval', option.sample]
+] : [];
+---
+{option && <section class="section section-soft mailer-order-options" id="order-options" aria-labelledby="order-options-heading">
+  <div class="container">
+    <p class="eyebrow">Plan a 500-piece enquiry</p>
+    <h2 id="order-options-heading">What Can I Customize on a 500-Piece Order?</h2>
+    <p class="lead">Eligible specifications for {option.name.toLowerCase()} start from 500 pieces. Send the quantity for each size, color and design; we confirm the available configuration and minimum in your quotation.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label={`${option.name} custom order options`}>
+      <table>
+        <caption class="sr-only">Configuration checks for {option.name.toLowerCase()}: eligible orders from 500 pieces</caption>
+        <thead><tr><th scope="col">Decision</th><th scope="col">Options to discuss</th></tr></thead>
+        <tbody>{rows.map(([label, text]) => <tr><th scope="row">{label}</th><td>{text}</td></tr>)}</tbody>
+      </table>
+    </div>
+    <p><strong>Quantity is counted per confirmed configuration.</strong> A total of 500 split across different sizes or designs does not automatically qualify. Ask for a comparison at 500, 1,000 and 3,000 pieces if you are deciding between a trial order and a larger run.</p>
+    <div class="mailer-next-steps">
+      <div><h3>1. Send your brief</h3><p>Share the packed item, size, artwork, quantity per version and destination. We provide a free initial design draft within 24 hours after a clear brief.</p></div>
+      <div><h3>2. Confirm the sample</h3><p>Agree the specification and artwork, then confirm the free sample route and courier charges. The 7-day delivery target depends on destination.</p></div>
+      <div><h3>3. Approve production</h3><p>Confirm the written quote and approved sample. Bulk production is typically 15–20 days after payment; shipping time is additional.</p></div>
+    </div>
+    <div class="button-row"><a class="button" href={`/quote/?product=${slug}#quote-form`} data-quote-placement="product-details">Check My 500-Piece Configuration</a><a class="text-link" href="/guides/logo-artwork-checklist/">Prepare artwork →</a></div>
+    <p class="muted">Need a specification checklist? See <a href="/guides/custom-packaging-500-pieces/">what to include in a 500-piece packaging enquiry</a> and the <a href="/ordering/">sample and order terms</a>.</p>
+  </div>
+</section>}
+<style>
+  .mailer-order-options {scroll-margin-top:100px;}
+  .mailer-order-options th,.mailer-order-options td {vertical-align:top;}
+  .mailer-order-options tr > :first-child {width:27%;min-width:150px;}
+  .mailer-next-steps {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:28px 0;}
+  .mailer-next-steps h3 {font-size:1.08rem;margin-bottom:8px;}
+  .mailer-next-steps p {margin:0;}
+  @media(max-width:760px) {.mailer-order-options table {min-width:540px;}.mailer-next-steps {grid-template-columns:1fr;gap:20px;}}
+</style>
