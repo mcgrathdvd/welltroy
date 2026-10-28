@@ -151,7 +151,29 @@ if (quoteForm) {
   const productSelect = quoteForm.querySelector('[name="product"]');
   if (requestedProduct && [...productSelect.options].some((option) => option.value === requestedProduct)) productSelect.value = requestedProduct;
   const requestedSize = quoteParams.get('size');
-  if (productSelect.value && requestedSize) quoteForm.querySelector('[name="size"]').value = requestedSize.slice(0, 160);
+  const sizeInput = quoteForm.querySelector('[name="size"]');
+  if (productSelect.value && requestedSize) sizeInput.value = requestedSize.slice(0, 160);
+  const sizeHelp = quoteForm.querySelector('[data-size-help]');
+  const defaultSizeHelp = 'Confirm the model or dimensions for the selected product.';
+  let prefilledSize = Boolean(productSelect.value && requestedSize);
+  let lastSizeProduct = productSelect.value;
+  sizeInput.addEventListener('input', () => {
+    prefilledSize = false;
+    sizeHelp.textContent = defaultSizeHelp;
+  });
+  productSelect.addEventListener('change', () => {
+    if (productSelect.value === lastSizeProduct) return;
+    if (sizeInput.value.trim()) {
+      if (prefilledSize) {
+        sizeInput.value = '';
+        sizeHelp.textContent = 'Product changed. Choose a model or enter dimensions for the new product; the previous product model was cleared.';
+      } else {
+        sizeHelp.textContent = 'Product changed. Your entered size was kept; please confirm it applies to the new product.';
+      }
+    } else sizeHelp.textContent = defaultSizeHelp;
+    prefilledSize = false;
+    lastSizeProduct = productSelect.value;
+  });
   const quantityInput = quoteForm.querySelector('[name="quantity"]');
   const messageInput = quoteForm.querySelector('[name="message"]');
   const updateGuidance = () => {
@@ -414,6 +436,9 @@ if (quoteForm) {
     quoteForm.dispatchEvent(new Event("welltroy:new-enquiry"));
     hasSubmissionError = false;
     quoteForm.reset();
+    prefilledSize = false;
+    lastSizeProduct = productSelect.value;
+    sizeHelp.textContent = defaultSizeHelp;
     selectedFiles = [];
     renderFiles();
     updateGuidance();
