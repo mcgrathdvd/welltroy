@@ -1,13 +1,12 @@
 ---
 import { products, productGroups } from "../data.mjs";
-import { reviews } from "../reviews.mjs";
 import { catalogue } from "../ordering.mjs";
 const { quoteHref = "/quote/#quote-form" } = Astro.props;
 const currentPath = Astro.url.pathname;
 const currentPage = (href) => href === currentPath ? 'page' : undefined;
 const currentSection = (item) => currentPath === item.href
   || (item.id === 'products' && currentPath.startsWith('/products/'))
-  || (item.id === 'guide' && (currentPath.startsWith('/guides/') || currentPath === '/ordering/'))
+  || (item.id === 'guide' && (currentPath.startsWith('/guides/') || currentPath === '/ordering/' || currentPath === '/faq/'))
   || (item.id === 'about' && currentPath === '/catalogue/');
 
 const items = [
@@ -23,35 +22,18 @@ const items = [
     { label: "Production gallery", href: "/why-welltroy/#factory-photos" },
     { label: "Before production", href: "/why-welltroy/#order-checkpoints" }
   ] },
-  { id: "reviews", label: "Reviews", href: "/reviews/", overview: "Read all buyer reviews", links: reviews.map((review) => ({
-    label: review.country, href: `/reviews/#review-${review.country.toLowerCase().replaceAll(" ", "-")}`
-  })) },
-  { id: "guide", label: "Buying Guide", href: "/guides/", overview: "All buying guides", links: [
-    { label: "Choose the right mailer", href: "/guides/choose-a-mailer/" },
-    { label: "Compare custom mailer quotes", href: "/guides/compare-custom-mailer-quotes/" },
-    { label: "Custom mailer sample approval", href: "/guides/custom-mailer-sample-approval/" },
-    { label: "Clothing mailer size guide", href: "/guides/mailer-size-for-clothing/" },
-    { label: "Logo artwork checklist", href: "/guides/logo-artwork-checklist/" },
-    { label: "Kraft vs poly bubble mailers", href: "/guides/kraft-vs-poly-bubble-mailers/" },
-    { label: "Custom paper bag size & printing", href: "/guides/custom-paper-bag-size-handles-printing/" },
-    { label: "Honeycomb wrap for bottles & gifts", href: "/guides/honeycomb-paper-wrap-bottles-gifts/" },
-    { label: "Custom stand-up pouch specification", href: "/guides/custom-stand-up-pouch-specification/" },
-    { label: "500-piece quote checklist", href: "/guides/custom-packaging-500-pieces/" },
-    { label: "Samples, payment & delivery", href: "/ordering/" },
-    { label: "Printing & materials", href: "/faq/#customization" },
-    { label: "Production & delivery", href: "/faq/#shipping" }
+  { id: "guide", label: "Buying Guide", href: "/guides/", overview: "All buying guides & FAQs", links: [
+    { label: "Product selection & sizing", href: "/guides/#select" },
+    { label: "Artwork & customization", href: "/guides/#customize" },
+    { label: "Quotes & sample approval", href: "/guides/#approve" },
+    { label: "FAQ — common buyer questions", href: "/faq/" },
+    { label: "Samples, payment & delivery", href: "/ordering/" }
   ] },
   { id: "about", label: "About", href: "/about/", overview: "About Welltroy", links: [
     { label: "Contact details", href: "/about/#contact" },
     { label: "Current product guide", href: "/catalogue/" },
     { label: "Original catalogue (PDF)", href: catalogue.path },
     { label: "Production gallery", href: "/why-welltroy/#factory-photos" }
-  ] },
-  { id: "faq", label: "FAQ", href: "/faq/", overview: "All buyer questions", links: [
-    { label: "Ordering & quotation", href: "/faq/#ordering" },
-    { label: "Product specifications", href: "/faq/#specifications" },
-    { label: "Printing & materials", href: "/faq/#customization" },
-    { label: "Production & delivery", href: "/faq/#shipping" }
   ] }
 ];
 ---
