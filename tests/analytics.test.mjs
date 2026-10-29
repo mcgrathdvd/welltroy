@@ -160,7 +160,7 @@ test('runtime size and catalogue clicks produce filtered funnel events without b
 });
 
 test('new buying guides track only public paths and still require consent',()=>{
-  for(const path of ['/guides/','/guides/custom-mailer-sample-approval/','/guides/compare-custom-mailer-quotes/']) {
+  for(const path of ['/guides/','/guides/custom-mailer-sample-approval/','/guides/compare-custom-mailer-quotes/','/guides/metallic-vs-holographic-bubble-mailers/']) {
     const events=[]; let consent=false;
     const track=createTracker({canSend:()=>consent,send:(name,data)=>events.push({name,data}),getPath:()=>`${path}?email=buyer@example.com#private-approval`});
     assert.equal(track('page_view'),false);

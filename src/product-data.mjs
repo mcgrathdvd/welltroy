@@ -117,7 +117,7 @@ export const catalogueProducts = [
     sizes: [["MB01","11 × 13 + 4 cm"],["MB02","15 × 13 + 4 cm"],["MB03","15 × 18 + 4 cm"],["MB04","15 × 20 + 4 cm"],["MB05","18 × 23 + 4 cm"],["MB06","20 × 28 + 4 cm"],["MB07","23 × 29 + 4 cm"],["MB08","25 × 30 + 4 cm"],["MB09","35 × 40 + 4 cm"]],
     applications: ["Beauty products", "Jewelry and accessories", "Gift items", "Promotional kits", "Small e-commerce products"],
     specNeeds: ["Packed product dimensions, weight and protection needs", "Catalogue model and required usable inner dimensions", "Surface structure, color and finish reference", "Bubble cushioning thickness and closure", "Logo artwork, print sides and coverage", "Quantity per size and design, destination and sample needs"],
-    relatedGuide: { title: "Prepare logo artwork for your printed mailers", href: "/guides/logo-artwork-checklist/" },
+    relatedGuide: { title: "Compare metallic and holographic mailer finishes", href: "/guides/metallic-vs-holographic-bubble-mailers/" },
     faqs: [
       {q:"Is the metallic finish available in custom colors?",a:"The catalogue shows several colors. Confirm current availability, quantity requirements and color variation before ordering."},
       {q:"Can the metallic surface be printed?",a:"Printing depends on the surface, artwork and required finish. Submit your design for a product-specific assessment."},
