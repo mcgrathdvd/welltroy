@@ -18,6 +18,7 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/guides/custom-stand-up-pouch-specification/',
   '/guides/custom-packaging-500-pieces/',
   '/guides/custom-mailer-sample-approval/',
+  '/guides/metallic-vs-holographic-bubble-mailers/',
   '/guides/compare-custom-mailer-quotes/']);
 const names = new Set(['page_view','view_product','quote_start','quote_submit_success',
   'quote_submit_error','whatsapp_click','email_click','quote_cta_click','select_size','download_catalogue','sample_interest']);
