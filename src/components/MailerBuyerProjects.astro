@@ -34,6 +34,42 @@ const projects = {
     cta: 'Discuss Finishes and Samples'
   }
 };
+Object.assign(projects, {
+  "zipper-bags": {
+    "heading": "Zipper Inner Bags for Clothing Brands and Garment Buyers",
+    "question": "Are these zipper bags inner clothing packaging or outer shipping mailers?",
+    "answer": "Welltroy’s zipper bags are presented as inner packaging for garments, accessories and sets. Use them when folding, separation, identification or presentation calls for an inner bag, then choose an appropriate outer shipping pack. Confirm the offered material, finish, usable space and zipper construction; a zipper closure alone does not establish outer-shipping suitability.",
+    "cards": [
+      {
+        "title": "Garment buyer: specify usable inner space",
+        "text": "Measure the actual folded garment with hang tags and inserts, including thickness. Ask for the usable space below the zipper and between seams, then test loading and full reclosure. Listed outside size alone does not establish fit.",
+        "href": "/guides/apparel-inner-bags-and-shipping-mailers/#measure",
+        "label": "Measure clothing for an inner zipper bag"
+      },
+      {
+        "title": "Brand and operations: map sizes and labels",
+        "text": "Compare folded garment examples before creating many bag versions. Confirm the offered clear, frosted or other finish per specification, and test the real label with the garment inside. Record which clothing SKUs use each approved bag.",
+        "href": "/guides/apparel-inner-bags-and-shipping-mailers/#versions",
+        "label": "Plan bag versions and identification"
+      },
+      {
+        "title": "Packing team: match the outer mailer",
+        "text": "Measure the finished inner pack before choosing the outer bag. Agree the fold, loading direction, label area, inserts and bag references with your factory or warehouse. Quote inner and outer products as separate lines.",
+        "href": "/industries/apparel-poly-mailers/",
+        "label": "Plan the complete apparel shipping order"
+      }
+    ],
+    "checks": [
+      "Approve folded-item fit, opening, usable space and repeat closure with a filled sample.",
+      "Record the offered finish, material, thickness, zipper and artwork rather than assuming all options are available.",
+      "Retain the item-to-bag mapping and recheck it when the garment fold, contents or packaging specification changes."
+    ],
+    "brief": "Garment or accessory and folded dimensions · inserts and packed thickness · usable-size target · requested finish/material/zipper · label position and artwork · quantity per bag version · outer packaging needs · sample checks · destination and arrival date",
+    "planHref": "/guides/apparel-inner-bags-and-shipping-mailers/",
+    "planLabel": "Plan zipper inner bags and outer mailers together",
+    "cta": "Discuss Clothing Zipper Inner Bags"
+  }
+});
 const project = projects[slug];
 const designAnswer = buyerAnswers.find(answer => answer.id === 'free-design-timing').a;
 ---
