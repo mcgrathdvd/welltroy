@@ -56,7 +56,7 @@ const pageSchema = {
   url: `${site.origin}/products/${product.slug}/`,
   name: `${product.name} | Welltroy`,
   description: product.intro,
-  ...(["poly-mailers", "metallic-bubble-mailers"].includes(product.slug) ? { dateModified: "2026-10-30" } : {}),
+  ...(primaryMailerSlugs.includes(product.slug) ? { dateModified: "2026-10-30" } : {}),
   image: `${site.origin}${visual.imageFull}`,
   publisher: { "@id": `${site.origin}/#organization` },
   isPartOf: { "@id": `${site.origin}/#website` },
@@ -100,7 +100,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
           <a class="button" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-hero">Request a Custom Quote</a>
           <a class="button button-secondary" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} rel="noopener">Ask on WhatsApp</a>
         </div>
-        <p class="product-detail-links">{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{["poly-mailers", "metallic-bubble-mailers"].includes(product.slug) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a>}<a href="#product-features">Compare features &amp; sizes ↓</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a>}</p>
+        <p class="product-detail-links">{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{primaryMailerSlugs.includes(product.slug) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a>}<a href="#product-features">Compare features &amp; sizes ↓</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a>}</p>
       </div>
     </div>
   </section>
