@@ -14,6 +14,8 @@ const projects = {
     ],
     checks: ['Pack the real garment combination and check usable space, seams and closure.', 'Compare the approved artwork version with the printed sample, including both sides where specified.', 'Confirm film material and single-wall thickness, then test the filled pack for the intended route.'],
     brief: 'Garment combination · packed width × length × thickness · packed weight · model or inner-size target · film and thickness · print sides and artwork · quantity per size/color/design · US ZIP code · arrival deadline',
+    planHref: '/industries/apparel-poly-mailers/',
+    planLabel: 'Plan single-item, bulky and multi-item clothing orders',
     cta: 'Discuss an Apparel Mailer Project'
   },
   'metallic-bubble-mailers': {
@@ -27,6 +29,8 @@ const projects = {
     ],
     checks: ['Retain the agreed finish reference and check appearance, print and courier-label compatibility.', 'Test insertion, closure and the complete filled pack; outer catalogue dimensions are not usable inner space.', 'Approve the artwork, surface, material structure and quantity together in the written specification.'],
     brief: 'Beauty product and retail carton · packed dimensions and weight · inner-size target · metallic or holographic reference · artwork and print sides · quantity per finish/size/design · destination country and postal code · launch deadline',
+    planHref: '/industries/beauty-holographic-bubble-mailers/',
+    planLabel: 'Plan a beauty launch pack and sample approval',
     cta: 'Discuss Finishes and Samples'
   }
 };
@@ -45,6 +49,7 @@ const designAnswer = buyerAnswers.find(answer => answer.id === 'free-design-timi
       <div><h3>Separate Design, Samples and Shipping</h3><p>{designAnswer}</p><p>{orderTerms.sample}</p><p><a class="text-link" href="/ordering/">Read current sample and ordering terms →</a></p></div>
     </div>
     <div class="buyer-project-brief"><h3>Include These Details in Your Enquiry</h3><p>{project.brief}</p><a class="button" href={`/quote/?product=${slug}#quote-form`} data-quote-placement="product-project">{project.cta}</a></div>
+    <p><a class="text-link" href={project.planHref}>{project.planLabel} →</a></p>
     <p class="muted">Welltroy is Shenzhen Welltroy Technology Co., Ltd., based in Shenzhen, China. Review the <a href="/catalogue/">catalogue references</a> and <a href="/faq/#buyer-answers">buyer answers</a>, then confirm your project specification and delivery scope in writing.</p>
   </div>
 </section>}
