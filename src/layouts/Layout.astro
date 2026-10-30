@@ -3,7 +3,7 @@ import "../styles.css";
 import "../assets/fonts/fonts.css";
 import interFont from "../assets/fonts/inter-latin-wght-normal.woff2?url";
 import archivoFont from "../assets/fonts/archivo-latin-wght-normal.woff2?url";
-import { site } from "../data.mjs";
+import { site, products } from "../data.mjs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsAppContact from "../components/WhatsAppContact.astro";
@@ -16,9 +16,11 @@ interface Props {
   schemas?: Record<string, unknown>[];
   ogImage?: string;
   ogImageAlt?: string;
+  quoteProduct?: string;
+  contactContext?: string;
 }
 
-const { title, description, canonicalPath = "/", schemas = [], ogImage = "/images/hero-wide-selected.webp", ogImageAlt = "Welltroy packaging product range" } = Astro.props;
+const { title, description, canonicalPath = "/", schemas = [], ogImage = "/images/hero-wide-selected.webp", ogImageAlt = "Welltroy packaging product range", quoteProduct, contactContext } = Astro.props;
 const canonical = new URL(canonicalPath, site.origin).toString();
 const socialImage = new URL(ogImage, site.origin).toString();
 const organization = {
@@ -35,7 +37,11 @@ const website = {
 const isSiteOrganization = (schema: Record<string, unknown>) => schema["@type"] === "Organization" &&
   (schema.url === site.origin || schema.url === `${site.origin}/` || schema["@id"] === organization["@id"]);
 const pageSchemas = [organization, website, ...schemas.filter(schema => !isSiteOrganization(schema))];
-const productSlug = Astro.url.pathname.match(/^\/products\/([^/]+)\/?$/)?.[1];
+const productSlug = quoteProduct || Astro.url.pathname.match(/^\/products\/([^/]+)\/?$/)?.[1];
+const contactProduct = products.find(product => product.slug === productSlug);
+const whatsappHref = contactProduct
+  ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi Welltroy, I would like a quote for ${contactProduct.name}.${contactContext ? ` My project: ${contactContext}.` : ''}`)}`
+  : `https://wa.me/${site.whatsapp}`;
 const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
   ? '#quote-form' : productSlug ? `/quote/?product=${encodeURIComponent(productSlug)}#quote-form` : '/quote/#quote-form';
 ---
@@ -68,12 +74,12 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
     <main id="main" tabindex="-1"><slot /></main>
     <Footer quoteHref={quoteHref} />
     <div class="desktop-actions" aria-label="Quick contact">
-      <a class="desktop-whatsapp" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+      <a class="desktop-whatsapp" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
         <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true" fill="none"><path d="M16 3a13 13 0 0 0-11.1 19.8L3 29l6.3-1.8A13 13 0 1 0 16 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><path d="M11.4 9.4c-.4-.9-.8-.9-1.2-.9H9.1c-.4 0-1 .2-1.5.8-.5.6-1.7 1.7-1.7 4.2s1.8 4.9 2.1 5.2c.3.4 3.6 5.7 8.8 7.7 4.3 1.7 5.2 1.4 6.2 1.3 1-.1 3.2-1.3 3.7-2.6.4-1.3.4-2.5.3-2.7-.1-.2-.4-.4-.9-.7l-3.7-1.7c-.5-.2-.8-.3-1.2.3l-1.6 1.9c-.3.4-.6.4-1.1.2-.5-.3-2.1-.8-4-2.5-1.5-1.3-2.5-3-2.8-3.5-.3-.5 0-.8.2-1.1l.9-1.1c.3-.4.4-.6.6-1 .2-.3.1-.6 0-.9l-1.7-4.1Z" fill="currentColor" transform="translate(4 2) scale(.72)" /></svg>
       </a>
       <a class="desktop-quote" href={quoteHref} data-quote-placement="sticky-desktop">Request a Custom Quote<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 12 9-9h7l2 2v7l-9 9-9-9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /><circle cx="16.5" cy="7.5" r="1.4" fill="currentColor" /></svg></a>
     </div>
-    <div class="mobile-actions" aria-label="Quick contact"><a href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp</a><a href={quoteHref} data-quote-placement="sticky-mobile">Request a Quote</a></div>
+    <div class="mobile-actions" aria-label="Quick contact"><a href={whatsappHref} rel="noopener">WhatsApp</a><a href={quoteHref} data-quote-placement="sticky-mobile">Request a Quote</a></div>
     <WhatsAppContact />
     <dialog class="contact-dialog email-contact" data-email-dialog aria-labelledby="email-contact-title">
       <div class="contact-dialog-header"><span class="eyebrow">Talk to Welltroy</span><button class="contact-close" type="button" data-email-close aria-label="Close email contact">×</button></div>
@@ -85,7 +91,7 @@ const quoteHref = Astro.url.pathname.replace(/\/$/, '') === '/quote'
       <div class="button-row"><button class="button" type="button" data-copy-email>Copy email address</button><a class="button button-secondary" href={`mailto:${site.email}`} data-native-email>Open email app</a></div>
       <p class="form-note" data-email-copy-status role="status" aria-live="polite"></p>
       <p class="form-note">If no email app opens, paste this address into the email service you normally use. Attach artwork and files separately.</p>
-      <p class="form-note">You can also <a class="text-link" href="/quote/#quote-form" data-email-form>send your enquiry and files online</a>.</p>
+      <p class="form-note">You can also <a class="text-link" href={quoteHref} data-email-form>send your enquiry and files online</a>.</p>
     </dialog>
     <AnalyticsConsent pageTitle={title} />
     <script src="../main.js"></script>
