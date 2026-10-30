@@ -6,14 +6,15 @@ const currentPath = Astro.url.pathname;
 const currentPage = (href) => href === currentPath ? 'page' : undefined;
 const currentSection = (item) => currentPath === item.href
   || (item.id === 'products' && currentPath.startsWith('/products/'))
+  || (item.id === 'industries' && currentPath.startsWith('/industries/'))
   || (item.id === 'guide' && (currentPath.startsWith('/guides/') || currentPath === '/ordering/' || currentPath === '/faq/'))
   || (item.id === 'about' && currentPath === '/catalogue/');
 
 const items = [
   { id: "products", label: "Products", href: "/products/", overview: "View all products", groups: productGroups },
   { id: "industries", label: "Industries", href: "/industries/", overview: "Explore all applications", links: [
-    { label: "Apparel & Fashion", href: "/industries/#apparel" },
-    { label: "Beauty & Jewelry", href: "/industries/#beauty" },
+    { label: "Clothing Brand Mailers", href: "/industries/apparel-poly-mailers/" },
+    { label: "Beauty Holographic Mailers", href: "/industries/beauty-holographic-bubble-mailers/" },
     { label: "E-commerce & Fulfillment", href: "/industries/#fulfillment" },
     { label: "Gifts & Homeware", href: "/industries/#gifts" }
   ] },
