@@ -1,0 +1,64 @@
+---
+import { orderTerms } from '../ordering.mjs';
+import { buyerAnswers } from '../buyer-answers.mjs';
+const { slug } = Astro.props;
+const projects = {
+  'poly-mailers': {
+    heading: 'Custom Poly Mailers for Small Apparel Brands',
+    question: 'Can a small US apparel brand start with 500 custom poly mailers?',
+    answer: 'Yes, eligible Welltroy configurations start at 500 pieces per confirmed size, color and design. Start with your folded, fully packed garment and logo brief, then confirm the bag, printing route and minimum for each version. A 500-piece total split across different designs does not automatically meet each minimum.',
+    cards: [
+      { title: 'Fit the complete apparel order', text: 'Measure the folded garment with its inner bag, tissue and inserts, including packed thickness and weight. Request usable inner dimensions and test insertion and flap closure. Plain poly film suits soft, non-fragile contents; it adds no bubble cushioning.', href: '/guides/mailer-size-for-clothing/', label: 'Measure clothing and compare candidate sizes' },
+      { title: 'Match the logo to the printing route', text: 'Send editable artwork, print sides, colors and coverage. Simple one- or two-color logos and all-over artwork can need different processes, setup and minimums. Confirm the actual method and proof before comparing prices.', href: '#poly-mailer-printing', label: 'Compare logo printing and artwork options' },
+      { title: 'Plan delivery to the United States', text: 'Include the destination ZIP code, required arrival date and quantity for each version. Request the sample and bulk delivery scope, freight charges and any unresolved import costs in the quotation. Production time and transit time are separate stages.', href: '/guides/compare-custom-mailer-quotes/', label: 'Compare the complete quoted scope' }
+    ],
+    checks: ['Pack the real garment combination and check usable space, seams and closure.', 'Compare the approved artwork version with the printed sample, including both sides where specified.', 'Confirm film material and single-wall thickness, then test the filled pack for the intended route.'],
+    brief: 'Garment combination · packed width × length × thickness · packed weight · model or inner-size target · film and thickness · print sides and artwork · quantity per size/color/design · US ZIP code · arrival deadline',
+    cta: 'Discuss an Apparel Mailer Project'
+  },
+  'metallic-bubble-mailers': {
+    heading: 'Holographic Bubble Mailers for Beauty Brand Projects',
+    question: 'Can I request holographic bubble mailer samples for a European beauty launch?',
+    answer: 'Yes. Welltroy supplies metallic reflective and holographic or rainbow-effect bubble mailers, with samples available for both finishes. Send the finish reference, packed product, artwork and quantity. Confirm the exact surface and sample arrangement before choosing a mailer for your launch.',
+    cards: [
+      { title: 'Confirm the intended surface effect', text: 'A reflective metallic finish alone does not establish a holographic effect. Compare the actual offered samples under your intended lighting and viewing angles; keep a reference for the finish and color agreed for production.', href: '/guides/metallic-vs-holographic-bubble-mailers/', label: 'Compare metallic and holographic finishes' },
+      { title: 'Test the packed beauty product', text: 'Use the complete retail carton and inserts to check the usable opening, bubble-lined inner space and flap closure. Test logo print adhesion and your actual courier label on the chosen surface. Glass, heavy or crushable contents may need a rigid box or added protection.', href: '/guides/custom-mailer-sample-approval/', label: 'Use the sample approval checklist' },
+      { title: 'Plan delivery to your European destination', text: 'State the destination country and postal code, launch deadline and quantity for each finish and design. Ask for the sample and bulk shipping scope, courier charges and any unresolved import costs. Confirm the construction and evidence required for any material or disposal claim.', href: '/guides/compare-custom-mailer-quotes/', label: 'Compare specifications and delivery scope' }
+    ],
+    checks: ['Retain the agreed finish reference and check appearance, print and courier-label compatibility.', 'Test insertion, closure and the complete filled pack; outer catalogue dimensions are not usable inner space.', 'Approve the artwork, surface, material structure and quantity together in the written specification.'],
+    brief: 'Beauty product and retail carton · packed dimensions and weight · inner-size target · metallic or holographic reference · artwork and print sides · quantity per finish/size/design · destination country and postal code · launch deadline',
+    cta: 'Discuss Finishes and Samples'
+  }
+};
+const project = projects[slug];
+const designAnswer = buyerAnswers.find(answer => answer.id === 'free-design-timing').a;
+---
+{project && <section class="section buyer-project" id="buyer-project" aria-labelledby="buyer-project-heading">
+  <div class="container">
+    <p class="eyebrow">Plan your packaging project</p>
+    <h2 id="buyer-project-heading">{project.heading}</h2>
+    <p class="buyer-project-review">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-10-30">30 October 2026</time></p>
+    <div class="buyer-project-answer"><h3>{project.question}</h3><p class="lead">{project.answer}</p></div>
+    <div class="buyer-project-grid">{project.cards.map(card => <article><h3>{card.title}</h3><p>{card.text}</p><a class="text-link" href={card.href}>{card.label} →</a></article>)}</div>
+    <div class="buyer-project-approval">
+      <div><h3>Keep an Approval Record</h3><ol>{project.checks.map(check => <li>{check}</li>)}</ol><p><a class="text-link" href="/guides/custom-mailer-sample-approval/">Record the final sample and specification →</a></p></div>
+      <div><h3>Separate Design, Samples and Shipping</h3><p>{designAnswer}</p><p>{orderTerms.sample}</p><p><a class="text-link" href="/ordering/">Read current sample and ordering terms →</a></p></div>
+    </div>
+    <div class="buyer-project-brief"><h3>Include These Details in Your Enquiry</h3><p>{project.brief}</p><a class="button" href={`/quote/?product=${slug}#quote-form`} data-quote-placement="product-project">{project.cta}</a></div>
+    <p class="muted">Welltroy is Shenzhen Welltroy Technology Co., Ltd., based in Shenzhen, China. Review the <a href="/catalogue/">catalogue references</a> and <a href="/faq/#buyer-answers">buyer answers</a>, then confirm your project specification and delivery scope in writing.</p>
+  </div>
+</section>}
+<style>
+  .buyer-project {scroll-margin-top:100px;}
+  .buyer-project-review {font-size:.88rem;opacity:.8;}
+  .buyer-project-answer {max-width:920px;margin:28px 0;}
+  .buyer-project-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:32px 0;}
+  .buyer-project-grid article {padding:24px;border:1px solid #dce2dd;border-radius:16px;display:flex;flex-direction:column;min-width:0;}
+  .buyer-project-grid article p {flex:1;}
+  .buyer-project-grid h3,.buyer-project-approval h3,.buyer-project-brief h3 {font-size:1.15rem;}
+  .buyer-project-approval {display:grid;grid-template-columns:1fr 1fr;gap:36px;margin:36px 0;}
+  .buyer-project-approval li {margin-bottom:12px;}
+  .buyer-project-brief {background:#f4f5ef;border-radius:16px;padding:28px;margin:28px 0;}
+  .buyer-project-brief p {overflow-wrap:anywhere;}
+  @media(max-width:900px) {.buyer-project-grid,.buyer-project-approval {grid-template-columns:1fr;gap:18px;}}
+</style>
