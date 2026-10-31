@@ -7,6 +7,8 @@ import PolyMailerPrinting from "../../components/PolyMailerPrinting.astro";
 import BubbleMailerCases from "../../components/BubbleMailerCases.astro";
 import MailerOrderOptions from "../../components/MailerOrderOptions.astro";
 import MailerBuyerProjects from "../../components/MailerBuyerProjects.astro";
+import SecondaryBuyerProjects from "../../components/SecondaryBuyerProjects.astro";
+import {secondaryBuyerProjects} from "../../secondary-buyer-projects.mjs";
 import { approximateInches } from "../../mailer-options.mjs";
 import polyPackingSource from "../../assets/new-products/poly-mailers-apparel-packing.jpg";
 import bubbleCaseSource from "../../assets/new-products/bubble-mailer-lumiere-case.png";
@@ -20,6 +22,8 @@ export function getStaticPaths() {
 }
 
 const { product } = Astro.props;
+const secondaryProject = secondaryBuyerProjects[product.slug];
+const productFaqs = [...product.faqs, ...(secondaryProject?.faqs || [])];
 const searchTitles = {
   'poly-mailers': 'Custom Printed Poly Mailers | MOQ 500 | Welltroy',
   'biodegradable-mailers': 'Biodegradable Mailers | Sizes & Material Details | Welltroy',
@@ -30,7 +34,8 @@ const searchTitles = {
   'paper-gift-bags': 'Custom Paper Gift Bags | Sizes & Printing | Welltroy',
   'stand-up-pouches': 'Custom Stand-up Pouches | Sizes & Packaging Options | Welltroy',
   'thermal-labels': 'Thermal Labels | Sizes & Printer Compatibility | Welltroy',
-  'honeycomb-paper-rolls': 'Honeycomb Paper Rolls | Widths, Lengths & Colors | Welltroy'
+  'honeycomb-paper-rolls': 'Honeycomb Paper Rolls | MOQ 1 Roll | Welltroy',
+  'colored-honeycomb-paper-rolls': 'Honeycomb Paper Roll Colors | MOQ 1 Roll | Welltroy'
 };
 const pageTitle = searchTitles[product.slug] || `${product.name} | Custom Packaging | Welltroy`;
 const pageHeading = {
@@ -56,14 +61,14 @@ const pageSchema = {
   url: `${site.origin}/products/${product.slug}/`,
   name: `${product.name} | Welltroy`,
   description: product.intro,
-  ...(primaryMailerSlugs.includes(product.slug) ? { dateModified: "2026-10-30" } : {}),
+  ...(secondaryProject || product.slug === 'colored-honeycomb-paper-rolls' ? { dateModified: "2026-10-31" } : primaryMailerSlugs.includes(product.slug) ? { dateModified: "2026-10-30" } : {}),
   image: `${site.origin}${visual.imageFull}`,
   publisher: { "@id": `${site.origin}/#organization` },
   isPartOf: { "@id": `${site.origin}/#website` },
   about: { "@type": "Thing", name: product.name, description: product.intro },
   breadcrumb: { "@id": `${site.origin}/products/${product.slug}/#breadcrumb` }
 };
-const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: product.faqs.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: productFaqs.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
 const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", "@id": `${site.origin}/products/${product.slug}/#breadcrumb`, itemListElement: [
   { "@type": "ListItem", position: 1, name: "Home", item: site.origin },
   { "@type": "ListItem", position: 2, name: "Products", item: `${site.origin}/products/` },
@@ -100,13 +105,14 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
           <a class="button" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-hero">Request a Custom Quote</a>
           <a class="button button-secondary" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} rel="noopener">Ask on WhatsApp</a>
         </div>
-        <p class="product-detail-links">{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{primaryMailerSlugs.includes(product.slug) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a>}<a href="#product-features">Compare features &amp; sizes ↓</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a>}</p>
+        <p class="product-detail-links">{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{(primaryMailerSlugs.includes(product.slug) || secondaryProject) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a>}<a href="#product-features">Compare features &amp; sizes ↓</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a>}</p>
       </div>
     </div>
   </section>
   <div class="container section-tight" id="product-features"><div class="highlight-grid">{product.highlights.map((highlight) => <div class="highlight">{highlight}</div>)}</div></div>
   {primaryMailerSlugs.includes(product.slug) && <MailerOrderOptions slug={product.slug} />}
   {["poly-mailers", "metallic-bubble-mailers", "zipper-bags"].includes(product.slug) && <MailerBuyerProjects slug={product.slug} />}
+  {secondaryProject && <SecondaryBuyerProjects slug={product.slug} />}
   {product.gallery?.length > 0 && <div id="product-gallery"><ProductGallery product={product} /></div>}
   <section class="section"><div class="container content-grid"><div><p class="eyebrow">{product.isNew ? "Product specification" : "Catalogue specifications"}</p><h2>{product.isNew ? "Product Details & Custom Options" : "Standard Size Options"}</h2>{primaryMailerSlugs.includes(product.slug) && <p>Dimensions below use <strong>width × body length + flap</strong>. Inches are approximate conversions of the catalogue outer dimensions. The flap is separate from body length; request usable inner space before selecting a size.</p>}<p>{product.isNew ? "Review the format and options below, then send your required size, material and artwork for a confirmed specification." : "The following dimensions are listed in the 2025 Welltroy catalogue. Confirm current availability, usable inner dimensions, measurement direction and tolerance before ordering."}</p>{product.alert && <div class="alert">{product.alert}</div>}<p class="table-scroll-hint">Swipe or scroll the size table to see all details.</p><div class="table-wrap" tabindex="0" role="region" aria-label={`${product.name} specifications`}><table class:list={{ "product-detail-table": product.isNew }}><caption class="sr-only">{product.name}: {product.isNew ? "available format and custom options" : "catalogue models and outer dimensions"}</caption><thead><tr><th scope="col">{product.isNew ? "Feature / option" : "Model / option"}</th><th scope="col">{product.sizeLabel}</th>{primaryMailerSlugs.includes(product.slug) && <th scope="col">Approx. outer size (inches)</th>}{!product.isNew && <th scope="col">Enquire</th>}</tr></thead><tbody>{product.sizes.map(([model, size]) => <tr><th scope="row">{model}</th><td>{size}</td>{primaryMailerSlugs.includes(product.slug) && <td>{approximateInches(size)}</td>}{!product.isNew && <td><a class="text-link spec-enquire" data-quote-placement="product-size" data-model={model} aria-label={`Request a quote for ${product.name} ${model}`} href={`/quote/?product=${product.slug}&size=${encodeURIComponent(`${model} — ${size}`)}#quote-form`}>Quote this size →</a></td>}</tr>)}</tbody></table></div>{product.slug === "thermal-labels" && <div class="alert"><strong>Ordering labels?</strong> Tell us the label size, rolls or fanfold packs, labels per roll/pack, and printer model. The MOQ is not a count of individual stickers; confirm the sales unit before comparing prices.</div>}<p class="muted">Need another format? Include your required dimensions and quantity with the enquiry.</p>{!product.isNew && <details class="catalogue-preview"><summary>View the original 2025 catalogue page</summary><p>This source page includes the catalogue product image and listed sizes. Ask us to confirm current specifications before ordering.</p><a href={catalogueImage} target="_blank" rel="noopener" aria-label={`Open the catalogue page for ${product.name}`}><img src={catalogueImage} alt={`2025 catalogue page showing ${product.name} and its size table`} loading="lazy" width="1500" height="844" /></a><a class="text-link" href={catalogue.path} download>Download the complete catalogue (PDF)</a></details>}{product.parentSlug && <p><a class="text-link" href={`/products/${product.parentSlug}/`}>Explore the related catalogue range →</a></p>}</div><aside class="side-card"><h3>For a Better Quotation</h3><p>Include these details where possible:</p><ul>{product.specNeeds.map((item) => <li>{item}</li>)}</ul><div class="product-order-note"><strong>Ordering & samples</strong><ul class="order-terms"><li><b>MOQ:</b> {minimumOrder(product.slug)}.</li><li><b>Samples:</b> {orderTerms.sample}</li><li><b>Bulk production:</b> {orderTerms.production}</li><li><b>Payment:</b> {orderTerms.payment}</li><li><a href="/ordering/">Sample choices, delivery &amp; order checklist →</a></li></ul></div><div class="button-row"><a class="button" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-details">Request a Custom Quote</a></div></aside></div></section>
   <section class="section section-soft"><div class="container split"><div><p class="eyebrow">Applications</p><h2>Common Uses</h2><ul class="pill-list">{product.applications.map((item) => <li>{item}</li>)}</ul></div><div><p class="eyebrow">Custom order</p><h2>Match the Specification to the Product</h2><p class="lead">Custom options, minimum quantities and production times depend on material, size, printing and order quantity. Final specifications are confirmed in writing before production.</p><a class="text-link" href={`/quote/?product=${product.slug}#quote-form`}>Discuss this product →</a></div></div></section>
@@ -125,7 +131,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
   {product.slug === "poly-bubble-mailers" && <BubbleMailerCases />}
   {product.group === "Mailing & Protective Packaging" && <section class="section"><div class="container guide-inline"><div><p class="eyebrow">Buying guide</p><h2>Choosing Between Mailer Formats?</h2><p>Compare lightweight and cushioned options, learn which dimensions to measure, and prepare the details needed for a quotation.</p></div><a class="button button-secondary" href="/guides/choose-a-mailer/">Read the mailer guide</a></div></section>}
   {product.relatedGuide && <section class="section"><div class="container guide-inline"><div><p class="eyebrow">Related buying advice</p><h2>Check the Packing Details</h2><p>Use the relevant guide or application checklist before confirming your product specification.</p></div><a class="button button-secondary" href={product.relatedGuide.href}>{product.relatedGuide.title}</a></div></section>}
-  <section class="section"><div class="container"><div class="section-head"><div><p class="eyebrow">Product FAQ</p><h2>Questions About {product.name}</h2></div></div><Faq items={product.faqs} /></div></section>
+  <section class="section"><div class="container"><div class="section-head"><div><p class="eyebrow">Product FAQ</p><h2>Questions About {product.name}</h2></div></div><Faq items={productFaqs} /></div></section>
   {related.length > 0 && <section class="section section-soft"><div class="container"><div class="section-head"><div><p class="eyebrow">Related products</p><h2>Compare Similar Options</h2></div></div><div class="product-grid">{related.map((item) => <ProductCard product={item} />)}</div></div></section>}
   <section class="cta-band"><div class="container inner"><div><h2>Need Pricing for {product.name}?</h2><p>Send the model or size, quantity, customization requirements and destination country.</p></div><a class="button button-light" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-bottom">Request a Custom Quote</a></div></section>
 </Layout>

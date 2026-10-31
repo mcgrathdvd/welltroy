@@ -1,5 +1,6 @@
+import {secondaryIndustryPlans} from './secondary-industry-plans.mjs';
 // Public purchasing scenarios and workflows, not customer results.
-export const industryPlans = [
+export const industryPlans = [...secondaryIndustryPlans,
   {
     "slug": "apparel-poly-mailers",
     "title": "Custom Poly Mailers for Clothing Brands",

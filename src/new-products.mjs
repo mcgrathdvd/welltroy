@@ -125,13 +125,13 @@ export const additionalProducts = [
     imageKey: "colored-honeycomb-paper-rolls-main", parentSlug: "honeycomb-paper-rolls",
     gallery: [{ key: "colored-honeycomb-paper-rolls-wrapping", caption: "Expanded honeycomb paper used as a wrapping example." }],
     eyebrow: "Kraft, black and white wrapping paper",
-    intro: "Kraft, black and white honeycomb paper rolls combine expandable wrapping with a choice of presentation colors. Stretch the die-cut paper around the product to create a textured protective layer.",
-    meta: "Compare kraft, black and white honeycomb paper rolls for protective wrapping. MOQ starts at 500 rolls; request widths, lengths and paper specifications.",
-    highlights: ["Kraft, black and white", "Expandable structure", "Roll format", "MOQ from 500 rolls"],
-    sizes: [["Colors shown", "Kraft brown, black and white"], ["Catalogue widths", "30 / 38 / 40 / 50 cm; confirm current options"], ["Catalogue roll lengths", "30 / 50 / 100 / 200 / 250 m; confirm specification"], ["Minimum order", "500 rolls"]],
+    intro: "Kraft, black and white honeycomb paper rolls start from 1 complete roll (1 pc). Choose the width, length and color, then trial the expanded wrap with your actual product and complete pack before planning repeat quantities.",
+    meta: "Honeycomb paper color options from 1 roll (1 pc). Compare kraft, black and white, widths and lengths; confirm the specification and trial your packing method.",
+    highlights: ["Kraft, black and white", "Expandable structure", "Roll format", "MOQ from 1 roll (1 pc)"],
+    sizes: [["Colors shown", "Kraft brown, black and white"], ["Catalogue widths", "30 / 38 / 40 / 50 cm; confirm current options"], ["Catalogue roll lengths", "30 / 50 / 100 / 200 / 250 m; confirm specification"], ["Minimum order", "1 complete roll (1 pc)"]],
     applications: ["Gift wrapping", "Bottles and homeware", "Cosmetics and soaps", "Packing separation"],
     specNeeds: ["Roll width and length", "Paper color and gsm", "Product fragility", "Tissue interleaf or dispenser needs", "Carton packing"],
-    faqs: [{ q: "Can honeycomb paper be used for fragile items?", a: "The expanded paper can provide wrapping and surface separation. Confirm the complete packing method for your product; very fragile, heavy or sharp items may need additional protection." }, customFaq, sampleFaq]
+    faqs: [{ q: "Can I buy one roll of the honeycomb paper color options?", a: "Yes. The minimum is 1 complete roll (1 pc). Confirm the current color, width, roll length and paper specification with your quotation; the unit is a roll, not a cut sheet. Delivery arrangements and charges are confirmed separately." }, { q: "Can honeycomb paper be used for fragile items?", a: "The expanded paper can provide wrapping and surface separation. Confirm the complete packing method for your product; very fragile, heavy or sharp items may need additional protection." }, customFaq, sampleFaq]
   },
   {
     slug: "white-nut-pouches", name: "White Printed Nut Pouches", group: retail,
