@@ -1,0 +1,39 @@
+WELLTROY - CLOTHING MAILER FIT RECORD
+Updated: 31 October 2026
+Guide: https://welltroy.com/guides/mailer-size-for-clothing/
+Send: https://welltroy.com/quote/?product=poly-mailers#quote-form
+
+Use one record per packing group and proposed bag configuration.
+This is a measurement and sample-check record, not an approved specification.
+If uncertain, write "Please recommend". Do not assume a bag fits from garment size.
+
+GARMENT AND COMPLETE PACK
+Garment type / style / size range:
+Number of items per parcel:
+Inner zipper bag / tissue / inserts included:
+Folded packed width x length x greatest thickness:
+Units (cm or inches):
+Packed weight and units:
+
+BAG AND ORDER REQUEST
+Candidate model, if known (or leave undecided):
+Requested usable inner dimensions / opening:
+Film material and single-wall thickness, if known:
+Bag color and artwork version:
+Quantity for THIS size / color / design:
+Destination and target arrival date:
+Ask which setup, sample and delivery charges are included.
+
+SAMPLE FIT CHECK - complete after testing an actual sample
+Sample / model / artwork reference and check date:
+Actual usable inner dimensions and units:
+Inserts without forcing:
+Flap closes in the intended position:
+Seams are not strained:
+Movement / spare space is acceptable:
+Complete-pack shipping checks and observations:
+Approved specification / remaining questions:
+
+Catalogue outer sizes are not usable inner dimensions. Confirm fit with the
+complete pack. Repeat relevant checks if garment, fold or inner packaging changes.
+Retain the approved sample and written specification before production.
