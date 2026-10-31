@@ -105,6 +105,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
           <a class="button" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-hero">Request a Custom Quote</a>
           <a class="button button-secondary" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} rel="noopener">Ask on WhatsApp</a>
         </div>
+        {product.slug === "poly-mailers" && <p class="poly-fit-entry">Packing T-shirts or hoodies? <a href="/guides/mailer-size-for-clothing/">Measure your complete pack and compare candidate sizes →</a></p>}
         <p class="product-detail-links">{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{(primaryMailerSlugs.includes(product.slug) || secondaryProject) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a>}<a href="#product-features">Compare features &amp; sizes ↓</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a>}</p>
       </div>
     </div>
@@ -127,6 +128,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
       <p>Ready for the next step? Use the <a href="/guides/compare-custom-mailer-quotes/">custom mailer quote comparison worksheet</a>, then keep a <a href="/guides/custom-mailer-sample-approval/">sample approval record</a> for your final specification.</p>
     </div>
   </section>}
+  {product.slug === "poly-mailers" && <section class="section section-soft" aria-labelledby="poly-quote-path"><div class="container"><p class="eyebrow">Plan your custom mailer order</p><h2 id="poly-quote-path">From Packed Garment to a Comparable Quote</h2><div class="poly-quote-grid"><article><h3>1. Confirm the fit</h3><p>Measure packed width, length and thickness with inner wrapping included. Catalogue sizes are outer dimensions.</p><a class="text-link" href="/guides/mailer-size-for-clothing/#measurement-record">Use the clothing measurement record →</a></article><article><h3>2. Compare the same specification</h3><p>State single-wall film thickness, print coverage and quantity per size and design. Ask which setup, sample and delivery charges are included.</p><a class="text-link" href="/guides/compare-custom-mailer-quotes/">Compare quotation details →</a></article><article><h3>3. Send one complete brief</h3><p>Include your logo, destination and target timing. Leave the bag model undecided if you need a fit recommendation.</p><a class="text-link" href="/quote/?product=poly-mailers#quote-form" data-quote-placement="product-details">Request a poly mailer quote →</a></article></div></div></section>}
   {product.slug === "poly-mailers" && <PolyMailerPrinting />}
   {product.slug === "poly-bubble-mailers" && <BubbleMailerCases />}
   {product.group === "Mailing & Protective Packaging" && <section class="section"><div class="container guide-inline"><div><p class="eyebrow">Buying guide</p><h2>Choosing Between Mailer Formats?</h2><p>Compare lightweight and cushioned options, learn which dimensions to measure, and prepare the details needed for a quotation.</p></div><a class="button button-secondary" href="/guides/choose-a-mailer/">Read the mailer guide</a></div></section>}
@@ -137,6 +139,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
 </Layout>
 
 <style>
+  .poly-fit-entry{margin:12px 0;font-size:.95rem}.poly-quote-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.poly-quote-grid article{min-width:0}.poly-quote-grid h3{font-size:1.1rem}@media(max-width:760px){.poly-quote-grid{grid-template-columns:1fr;gap:16px}}
   #mailer-comparison {scroll-margin-top:100px;}
   .mailer-comparison th,.mailer-comparison td {vertical-align:top;}
   .mailer-comparison a[aria-current="page"] {font-weight:700;}
