@@ -1,0 +1,18 @@
+---
+import {secondaryBuyerProjects} from '../secondary-buyer-projects.mjs';
+const {slug}=Astro.props;
+const project=secondaryBuyerProjects[slug];
+---
+{project && <section class="section section-soft secondary-project" id="buyer-project" aria-labelledby="secondary-project-heading"><div class="container">
+  <p class="eyebrow">Plan your buying project</p><h2 id="secondary-project-heading">{project.title}</h2>
+  <h3>{project.question}</h3><p class="lead">{project.answer}</p>
+  <div class="secondary-buyers">{project.buyers.map(buyer=><article><h3>{buyer[0]}</h3><p>{buyer[1]}</p></article>)}</div>
+  <div class="secondary-checks"><div><h3>Check before requesting production</h3><ul>{project.checks.map(check=><li>{check}</li>)}</ul></div><div><h3>Prepare a useful enquiry</h3><p>{project.brief}</p><div class="button-row"><a class="button" href={`/quote/?product=${slug}#quote-form`} data-quote-placement="product-project">Discuss This Product</a></div></div></div>
+  <p><a class="text-link" href={project.link}>{project.linkText} →</a></p>
+</div></section>}
+<style>
+  .secondary-project{scroll-margin-top:110px}.secondary-project h3{font-size:1.15rem;line-height:1.45}.secondary-project .lead{max-width:1000px}
+  .secondary-buyers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:28px 0}.secondary-buyers article{min-width:0;background:white;padding:22px;border:1px solid var(--line);border-radius:14px}
+  .secondary-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px}.secondary-checks li{margin-bottom:12px}
+  @media(max-width:800px){.secondary-buyers,.secondary-checks{grid-template-columns:1fr;gap:18px}}
+</style>

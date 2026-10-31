@@ -10,7 +10,7 @@ export const orderTerms = {
 };
 
 export function minimumOrder(slug) {
-  if (['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls'].includes(slug)) return 'From 500 rolls';
+  if (['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls'].includes(slug)) return 'From 1 roll (1 pc)';
   if (slug === 'thermal-labels') return 'From 500 units; confirm roll or fanfold configuration';
   if (slug === 'custom-stand-up-pouches') return '1,000 pieces shown in supplier example; confirm by specification';
   return 'From 500 pieces for eligible specifications';

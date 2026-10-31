@@ -237,8 +237,8 @@ export const catalogueProducts = [
     name: "Honeycomb Paper Rolls",
     group: "Packing & Fulfillment Supplies",
     eyebrow: "Expandable paper protection",
-    intro: "Die-cut honeycomb wrapping paper opens into a three-dimensional mesh when stretched. Use it to wrap and separate products inside a complete pack. The supplied product sheet lists four widths, five roll lengths, natural/black/white colors and 80 gsm; confirm the chosen combination and trial its coverage with the real item.",
-    meta: "Compare honeycomb paper wrap in 30, 38, 40 and 50 cm widths and 30–250 m roll lengths. See packing steps, 80 gsm catalogue reference and quote checks.",
+    intro: "Die-cut honeycomb wrapping paper opens into a three-dimensional mesh when stretched. Use it to wrap and separate products inside a complete pack. Orders start from 1 complete roll (1 pc), so you can trial coverage before planning repeat quantities. The supplied product sheet lists four widths, five roll lengths, natural/black/white colors and 80 gsm; confirm the chosen combination with your quotation.",
+    meta: "Honeycomb paper rolls from 1 roll (1 pc). Compare 30–50 cm widths, roll lengths and colors; plan a packing trial and confirm the complete specification.",
     highlights: ["30 / 38 / 40 / 50 cm widths", "30 / 50 / 100 / 200 / 250 m lengths", "Natural, black and white listed", "80 gsm in supplied product sheet"],
     sizeLabel: "Catalogue options",
     sizes: [["30 cm wide","30 / 50 / 100 / 200 / 250 m"],["38 cm wide","30 / 50 / 100 / 200 / 250 m"],["40 cm wide","30 / 50 / 100 / 200 / 250 m"],["50 cm wide","30 / 50 / 100 / 200 / 250 m"]],
@@ -247,6 +247,7 @@ export const catalogueProducts = [
     alert: "The supplied product sheet lists 80 gsm paper and natural, black and white options. Confirm current availability, exact paper and roll measurement for the chosen specification. Photos of green and red rolls show color examples, not confirmed stock options. Cushioning, recycling and biodegradability need product-specific evidence; test the full shipping pack.",
     relatedGuide: { title: "How to wrap bottles and gifts with honeycomb paper", href: "/guides/honeycomb-paper-wrap-bottles-gifts/" },
     faqs: [
+      {q:"Can I order one honeycomb paper roll before buying in bulk?",a:"Yes. The minimum order is 1 complete roll (1 pc). Confirm the width, roll length, color and paper specification, then trial the actual product and complete packing method before planning a larger order. Delivery arrangements and charges are confirmed separately."},
       {q:"What sizes and colors are listed?",a:"The supplied product sheet lists widths of 30, 38, 40 and 50 cm; lengths of 30, 50, 100, 200 and 250 m; and natural, black and white at 80 gsm. Confirm current combinations and tolerances in the quotation. Green and red examples in another image do not establish availability."},
       {q:"Does a 30 m roll wrap a fixed number of products?",a:"No. The number depends on product size, cut length, stretch and overlap. Run a packing trial, record paper used per item, then estimate the roll count from your order volume."},
       {q:"How does honeycomb paper protect a product?",a:"The die-cut paper opens into a three-dimensional lattice as it is stretched. It can separate surfaces and help cushion a tested pack, but performance depends on the item and the rest of the packaging."},

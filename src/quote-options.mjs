@@ -25,8 +25,8 @@ export function selectionGuidance(slug) {
   const labels = slug === 'thermal-labels';
   return {
     help: 'Choose a product, or select an assisted enquiry above if you need help.',
-    quantity: rolls ? 'e.g. 500 rolls' : labels ? 'e.g. 500 rolls; specify labels per roll' : 'e.g. 1,000 pieces',
-    quantityHelp: labels ? 'Specify rolls or fanfold packs and labels per unit; the sales unit will be confirmed.' : rolls ? 'Honeycomb paper starts at 500 rolls. An estimate is welcome.' : 'Most bags and mailers start at 500 pieces. An estimate is welcome.',
+    quantity: rolls ? 'e.g. 1 roll' : labels ? 'e.g. 500 rolls; specify labels per roll' : 'e.g. 1,000 pieces',
+    quantityHelp: labels ? 'Specify rolls or fanfold packs and labels per unit; the sales unit will be confirmed.' : rolls ? 'Honeycomb paper starts at 1 roll (1 pc). Enter the quantity in rolls.' : 'Most bags and mailers start at 500 pieces. An estimate is welcome.',
     message: 'Packaging and printing requirements',
     placeholder: 'Tell us what you are packing, preferred material, colors, logo printing and required schedule.',
     required: false
