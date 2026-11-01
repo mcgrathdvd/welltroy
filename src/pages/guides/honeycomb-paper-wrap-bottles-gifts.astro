@@ -3,12 +3,12 @@ import Layout from "../../layouts/Layout.astro";
 import { site } from "../../data.mjs";
 const path = "/guides/honeycomb-paper-wrap-bottles-gifts/";
 const title = "How to Use Honeycomb Paper Wrap for Bottles and Gifts";
-const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@type": "Organization", name: "Welltroy" }, publisher: { "@type": "Organization", name: "Welltroy" }, mainEntityOfPage: `${site.origin}${path}`, datePublished: "2026-10-23", dateModified: "2026-10-31" };
+const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@type": "Organization", name: "Welltroy" }, publisher: { "@type": "Organization", name: "Welltroy" }, mainEntityOfPage: `${site.origin}${path}`, datePublished: "2026-10-23", dateModified: "2026-11-01" };
 const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: site.origin }, { "@type": "ListItem", position: 2, name: "Buying Guide", item: `${site.origin}/guides/` }, { "@type": "ListItem", position: 3, name: "Honeycomb paper wrap for bottles and gifts", item: `${site.origin}${path}` }] };
 ---
-<Layout title={`${title} | Welltroy`} description="Learn a practical honeycomb paper wrapping workflow for bottles and gifts, compare listed roll widths and lengths, estimate usage with a packing trial, and test the complete shipping pack." canonicalPath={path} schemas={[schema, breadcrumbs]}>
+<Layout title={`${title} | Welltroy`} description="Learn how to wrap bottles and gifts with honeycomb paper. Use your packing-trial measurements in the roll usage calculator and plan whole rolls for an order." quoteProduct="honeycomb-paper-rolls" contactContext="Honeycomb paper roll usage planning" canonicalPath={path} schemas={[schema, breadcrumbs]}>
   <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guide</a> / Honeycomb paper wrap</div><p class="eyebrow">Protective wrapping guide</p><h1>{title}</h1><p class="lead">Stretch the die-cut sheet to open its honeycomb cells, wrap the actual product with enough overlap to hold the layer in place, then place it in a correctly sized outer box. For bottles, ceramics and other fragile items, test the complete pack and shipping route. The wrap alone does not establish transit protection.</p><nav class="anchor-links" aria-label="In this guide"><a href="#steps">Wrapping steps</a><a href="#sizes">Roll options</a><a href="#estimate">Usage estimate</a><a href="#limits">Protection limits</a><a href="#quote">Quote brief</a></nav></div></section>
-  <section class="section"><div class="container article-layout"><article class="article-main"><p class="muted">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-10-31">31 October 2026</time></p>
+  <section class="section"><div class="container article-layout"><article class="article-main"><p class="muted">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-11-01">1 November 2026</time></p>
     <h2 id="steps">Wrap a Bottle or Boxed Gift: Trial Workflow</h2>
     <ol><li>Measure the packed item, including any cap, handle, retail box or protruding edge. Protect surfaces that could be scratched and check whether a separate tissue interleaf is needed.</li><li>Choose a roll width that can cover the intended part of the item. Cut a trial length; gently stretch the paper so the cells open without tearing it.</li><li>Roll the item through the opened sheet. Add overlap where the ends meet and check that the top, base and corners are adequately covered. A shaped bottle may need a different cut length from a rectangular gift box.</li><li>Place the wrapped item in an outer carton with the additional inserts or cushioning the item requires. Check for movement, contact with the carton walls and contact between multiple items.</li><li>Repeat with the actual packing team and route. Record cut length, time per pack and any damage or loosening; adjust the method before choosing roll quantity.</li></ol>
     <p>The supplier images show wrapped gifts and a bottle inside a carton as application examples. They do not provide a drop-test result or prove that one layer is sufficient for every bottle.</p>
@@ -17,6 +17,27 @@ const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList
     <div class="table-wrap" tabindex="0" role="region" aria-label="Honeycomb paper selection checks"><table><thead><tr><th>Choice</th><th>How to decide</th><th>Confirm before ordering</th></tr></thead><tbody><tr><td>Width</td><td>Trial the sheet on the real item to check coverage across its height or circumference.</td><td>Chosen 30 / 38 / 40 / 50 cm option and usable paper width.</td></tr><tr><td>Roll length</td><td>Measure paper consumed per packed item during a trial.</td><td>Nominal length, measurement method and quantity in rolls.</td></tr><tr><td>Color and paper</td><td>Consider presentation and any surface-contact needs.</td><td>Current color, 80 gsm specification, interleaf and sample.</td></tr></tbody></table></div>
     <h2 id="estimate">Estimate Rolls from a Packing Trial</h2>
     <p>Do not use a fixed “items per roll” figure. For an illustration, if a tested method consumes 0.8 m per gift, a nominal 50 m roll gives <strong>50 ÷ 0.8 = 62.5 theoretical cuts</strong> before waste, setup and variation. Use the actual measured consumption, then add an allowance based on your operation. The example is a calculation, not a production yield or coverage claim.</p>
+    <section class="usage-tool" aria-labelledby="usage-calculator">
+      <h3 id="usage-calculator">Honeycomb Paper Roll Usage Calculator</h3>
+      <p>Measure the <strong>unexpanded paper drawn from the roll per completed pack</strong>, including all cuts and layers. Use a roll length quoted on that same unexpanded basis. Do not enter expanded sheet length. Check several real packs before choosing your planning figure.</p>
+      <p>An extra 10% paper allowance means a measured 80 cm becomes 88 cm per pack. It is an addition to measured consumption, not a percentage removed from the roll. The calculator rounds down to complete packs per roll, then rounds up to whole rolls for the order; leftover cuts are not joined between rolls.</p>
+      <form id="honeycomb-usage-form" hidden novalidate>
+        <div class="usage-inputs">
+          <label for="roll-metres">Unexpanded roll length (m)<input id="roll-metres" name="rollMetres" type="number" inputmode="decimal" min="0.001" max="1000000" step="any" required aria-describedby="usage-basis" /></label>
+          <label for="draw-centimetres">Measured paper per pack (cm)<input id="draw-centimetres" name="drawCentimetres" type="number" inputmode="decimal" min="0.001" max="100000000" step="any" required aria-describedby="usage-basis" /></label>
+          <label for="paper-allowance">Extra paper allowance (%)<input id="paper-allowance" name="allowancePercent" type="number" inputmode="decimal" min="0" max="100" step="any" value="0" required /></label>
+          <label for="pack-quantity">Order quantity (complete packs)<input id="pack-quantity" name="packs" type="number" inputmode="numeric" min="1" max="10000000" step="1" required /></label>
+        </div>
+        <p id="usage-basis" class="muted">Use the same roll width and packing method as your trial. Enter your measurements; no catalogue option is selected automatically.</p>
+        <div class="usage-actions"><button class="button" type="submit">Calculate whole rolls</button><button class="usage-example" type="button" id="usage-example">Try a calculation example</button></div>
+        <p id="usage-example-note" class="muted" hidden>Example only: a 50 m roll, 80 cm per pack, 10% extra paper and 120 packs. Replace these figures with your own trial and quoted specification.</p>
+        <p id="usage-error" role="alert" hidden></p>
+        <div id="usage-result" class="usage-result" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+      </form>
+      <noscript><p>For the calculator, enable JavaScript. You can also calculate manually: complete packs per roll = round down (roll length in cm ÷ paper per pack including allowance); whole rolls = round up (order quantity ÷ complete packs per roll).</p></noscript>
+      <p>Planning estimate only. Short rolls, startup waste, packing variation and damaged paper can change the result. Check the quoted length basis and allow for your operation; the result does not establish protective performance.</p>
+      <a href="/quote/?product=honeycomb-paper-rolls#quote-form">Confirm the roll specification and request a quote →</a>
+    </section>
     <h2 id="limits">Know What the Material Does Not Prove</h2>
     <p>The expanded lattice can separate surfaces and add a wrapping layer. Its protection depends on paper specification, number of layers, carton fit, inserts, product mass and the shipping route. The supplied graphics make broad claims about impact resistance, strength, export treatment and environmental benefits without test methods or certification. We do not treat those as verified specifications. Ask for relevant evidence if such claims matter to your purchase.</p>
 <h2 id="buyer-project">Turn the Trial into a Packing and Reorder Specification</h2>
@@ -27,4 +48,41 @@ const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList
     <a class="button" href="/quote/?product=honeycomb-paper-rolls#quote-form">Request a honeycomb paper quote</a>
   </article><aside class="side-card"><p class="eyebrow">Related pages</p><h2>Check the Actual Pack</h2><div class="guide-options"><a href="/products/honeycomb-paper-rolls/"><strong>Honeycomb Paper Rolls</strong><span>Catalogue widths, lengths and enquiry details</span></a><a href="/industries/#gifts"><strong>Gifts &amp; Homeware</strong><span>Presentation and shipping are separate decisions</span></a></div></aside></div></section>
 </Layout>
-<style>.article-main{min-width:0}.article-main li{margin:0 0 10px}.article-main td{min-width:145px;vertical-align:top}h2[id]{scroll-margin-top:120px}</style>
+<style>.article-main{min-width:0}.article-main li{margin:0 0 10px}.article-main td{min-width:145px;vertical-align:top}h2[id],h3[id]{scroll-margin-top:120px}.usage-tool{padding:24px;border:1px solid #d6ddd4;border-radius:16px;background:#f4f6f0;margin:24px 0}.usage-tool h3{margin-top:0}.usage-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.usage-inputs label{display:grid;gap:8px;font-weight:700;min-width:0}.usage-inputs input{width:100%;min-width:0;box-sizing:border-box;padding:12px;border:1px solid #728477;border-radius:6px;background:white;color:#173d2f;font:inherit}.usage-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.usage-example{font:inherit;text-decoration:underline;color:#173d2f;background:transparent;border:0;padding:12px 0;cursor:pointer}.usage-result{margin-top:20px;border-left:4px solid #b49b39;padding:14px;background:white;white-space:pre-line;font-weight:700}#usage-error{color:#8b251c;font-weight:700}.usage-tool [hidden]{display:none}@media(max-width:600px){.usage-tool{padding:18px}.usage-inputs{grid-template-columns:1fr}.usage-actions .button{width:100%}}</style>
+<script>
+  import { calculateHoneycombUsage } from '../../honeycomb-usage.mjs';
+  const form = document.querySelector<HTMLFormElement>('#honeycomb-usage-form');
+  const result = document.querySelector<HTMLElement>('#usage-result');
+  const error = document.querySelector<HTMLElement>('#usage-error');
+  const note = document.querySelector<HTMLElement>('#usage-example-note');
+  const example = document.querySelector<HTMLButtonElement>('#usage-example');
+  if (form && result && error && note && example) {
+    const number = new Intl.NumberFormat('en', { maximumFractionDigits: 2 });
+    const calculate = () => {
+      result.hidden = true;
+      error.hidden = true;
+      const data = new FormData(form);
+      try {
+        if ([...data.values()].some(value => String(value).trim() === '')) throw new RangeError('Complete all four fields. Enter 0 if no extra paper allowance is needed.');
+        const plan = calculateHoneycombUsage({ rollMetres: Number(data.get('rollMetres')), drawCentimetres: Number(data.get('drawCentimetres')), allowancePercent: Number(data.get('allowancePercent')), packs: Number(data.get('packs')) });
+        result.textContent = `Paper per pack with allowance: ${number.format(plan.allowedDrawCentimetres)} cm\nComplete packs per roll: ${number.format(plan.packsPerRoll)}\nWhole rolls for this order: ${number.format(plan.rollsNeeded)}`;
+        result.hidden = false;
+      } catch (problem) {
+        error.textContent = problem instanceof Error ? problem.message : 'Check the measurements and units.';
+        error.hidden = false;
+      }
+    };
+    form.addEventListener('submit', event => { event.preventDefault(); calculate(); });
+    form.addEventListener('input', () => { result.hidden = true; error.hidden = true; note.hidden = true; });
+    example.addEventListener('click', () => {
+      const values = { rollMetres: '50', drawCentimetres: '80', allowancePercent: '10', packs: '120' };
+      for (const [name, value] of Object.entries(values)) {
+        const input = form.elements.namedItem(name);
+        if (input instanceof HTMLInputElement) input.value = value;
+      }
+      note.hidden = false;
+      calculate();
+    });
+    form.hidden = false;
+  }
+</script>
