@@ -6,20 +6,26 @@ import verdantSource from "../assets/new-products/bubble-mailer-verdant-case.png
 const [lumiere, verdant] = await Promise.all([getProductVisual(lumiereSource),getProductVisual(verdantSource)]);
 const cases = [
   {
-    visual: lumiere, title: "LUMIÈRE: Matte Pink Branding", label: "Beauty & jewelry",
+    id: "lumiere-case", visual: lumiere, title: "LUMIÈRE: Matte Pink Branding", label: "Beauty & jewelry",
     alt: "LUMIÈRE logo printed in black on a matte pink bubble mailer",
-    brief: "A North American beauty and jewelry project called for cushioned shipping with a softer, branded presentation. The project was planned around a 500–1,000-piece trial-order range.",
-    solution: "A matte blush-pink bubble mailer with monochrome LUMIÈRE branding, a cushioned interior and an adhesive flap.",
+    brief: "The buyer wanted a cushioned shipping format with a softer, branded appearance for a beauty and jewelry range.",
+    solution: "A matte blush-pink bubble mailer with black LUMIÈRE / NATURAL SKINCARE artwork. The project brief describes a co-extruded PE shell, bubble cushioning and an adhesive flap.",
     check: "Send your actual product, retail carton or jewelry box, inserts and packed measurements. Confirm the final material, usable dimensions, print process and closure in the approved specification.",
-    caption: "LUMIÈRE matte pink bubble mailer — a Welltroy customer case. Your configuration is confirmed separately."
+    caption: "LUMIÈRE project image showing the matte pink exterior, black brand artwork and bag texture. Use the appearance as a design reference and confirm the construction on your own sample.",
+    evidence: [
+      ["Buyer and trial brief", "The North American project source describes a 500–1,000-piece initial trial brief. Agree the quantity for each size and artwork version in a new order."],
+      ["Material and construction", "Co-extruded PE, bubble cushioning and an adhesive flap are described in the project brief. Confirm the complete construction for your own order."],
+      ["Artwork and appearance", "Matte blush pink with a black brand name and NATURAL SKINCARE line. Confirm your own logo, print panels, placement and color reference on the proof."]
+    ]
   },
   {
-    visual: verdant, title: "VERDANT STUDIO: A Material-Led Brief", label: "Lifestyle & artisan products",
+    id: "verdant-case", visual: verdant, title: "VERDANT STUDIO: A Material-Led Brief", label: "Lifestyle & artisan products",
     alt: "VERDANT STUDIO botanical logo printed in dark green on an off-white bubble mailer",
     brief: "A European lifestyle and artisan project combined a natural off-white appearance, botanical branding and specific material-documentation requirements. The brief included a PLA/PBAT-based option.",
     solution: "An off-white bubble mailer with dark green botanical artwork and VERDANT STUDIO branding. This is a separate material specification from the conventional PE catalogue range above.",
     check: "Confirm the complete outer film, bubble layer, ink and adhesive. Review the current certificate, covered specification and permitted mark use before approving any compostability claim for a new order.",
-    caption: "VERDANT STUDIO off-white bubble mailer — a Welltroy customer case with a separate material specification."
+    caption: "VERDANT STUDIO off-white bubble mailer — a Welltroy customer case with a separate material specification.",
+    evidence: []
   }
 ];
 const methods = [
@@ -53,13 +59,17 @@ const methods = [
   <div class="container">
     <div class="section-head"><div><p class="eyebrow">Welltroy customer cases</p><h2 id="bubble-cases-heading">Bubble Mailers Built Around Different Buyer Briefs</h2></div></div>
     <p class="lead">Explore two customer projects, then confirm the construction and packing method for your own order. Each case has its own material and artwork specification.</p>
+    <p class="muted">Case review updated <time datetime="2026-11-01">1 November 2026</time></p>
     <div class="bubble-case-grid">
-      {cases.map(item => <article class="bubble-case-card">
+      {cases.map(item => <article class="bubble-case-card" id={item.id} aria-labelledby={`${item.id}-heading`}>
+        <div class="bubble-case-layout">
         <figure><a href={item.visual.imageFull} target="_blank" rel="noopener" aria-label={`View larger image: ${item.title}`}><img src={item.visual.image} srcset={item.visual.imageSrcSet} sizes="(max-width:760px) calc(100vw - 40px), 570px" alt={item.alt} width={item.visual.imageWidth} height={item.visual.imageHeight} loading="lazy" decoding="async" /></a><figcaption>{item.caption}</figcaption></figure>
-        <p class="eyebrow">{item.label}</p><h3>{item.title}</h3>
+        <div><p class="eyebrow">{item.label}</p><h3 id={`${item.id}-heading`}>{item.title}</h3>
         <p><strong>Buyer brief.</strong> {item.brief}</p>
         <p><strong>Design delivered.</strong> {item.solution}</p>
         <p><strong>For your version.</strong> {item.check}</p>
+        </div></div>
+        {item.evidence.length > 0 && <><h4>Project Details Buyers Can Use</h4><dl class="bubble-case-evidence">{item.evidence.map(([label,text])=><div><dt>{label}</dt><dd>{text}</dd></div>)}</dl><p class="muted">Case-specific usable dimensions, film gauge, the final screen or digital printing route and verified transit-damage results are not published here. Review those requirements for your actual product and approved sample.</p><div class="bubble-case-enquiry"><h4>Use This Project as a Visual Reference</h4><p>Mention the LUMIÈRE project and send your own brand artwork, complete retail-box dimensions and weight, quantity per design and destination. Ask us to review the material, inner space, printing route and sample checks together.</p><div class="button-row"><a class="button" href="/quote/?product=poly-bubble-mailers#quote-form" data-quote-placement="product-details">Plan My Branded Bubble Mailer</a><a class="text-link" href="/guides/choose-a-mailer/#bubble-fit-record">Record box dimensions and sample fit →</a></div></div></>}
       </article>)}
     </div>
     <p>For fragile, sharp or crushable contents, check the actual product together with its retail packaging and inserts. Agree a complete-pack trial before approval; the cases do not establish one protection rating for every order.</p>
@@ -102,13 +112,17 @@ const methods = [
   .bubble-project-brief {padding:28px;border-radius:16px;background:#f4f5ef;margin:28px 0;overflow-wrap:anywhere;}
   @media(max-width:900px) {.bubble-project-grid {grid-template-columns:1fr;}}
   #bubble-mailer-cases,#bubble-mailer-printing {scroll-margin-top:100px;}
-  .bubble-case-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:28px 0;align-items:start;}
-  .bubble-case-card {min-width:0;}
+  .bubble-case-grid {display:grid;grid-template-columns:minmax(0,1fr);gap:28px;margin:28px 0;align-items:start;}
+  .bubble-case-card {min-width:0;padding:28px;border:1px solid #dce2dd;border-radius:16px;background:#fff;scroll-margin-top:100px;}
+  .bubble-case-layout {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start;}.bubble-case-layout>div{min-width:0;}
+  .bubble-case-card h3 {margin-top:0;}.bubble-case-card h4 {font-size:1.1rem;}
+  .bubble-case-evidence {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}.bubble-case-evidence>div{min-width:0;}.bubble-case-evidence dt{font-weight:700;}.bubble-case-evidence dd{margin:8px 0 0;}
+  .bubble-case-enquiry {padding-top:8px;}
   figure {margin:0 0 22px;}
   figure a {display:block;}
   figure img {display:block;width:100%;height:auto;border-radius:12px;}
   figcaption {font-size:.82rem;line-height:1.5;color:var(--muted);margin-top:10px;}
   .bubble-approval-steps {display:grid;gap:16px;padding-left:24px;max-width:900px;}
   th,td {vertical-align:top;}
-  @media(max-width:760px) {.bubble-case-grid {grid-template-columns:minmax(0,1fr);gap:32px;} table {min-width:640px;}}
+  @media(max-width:760px) {.bubble-case-grid {gap:24px;}.bubble-case-card{padding:18px;}.bubble-case-layout,.bubble-case-evidence{grid-template-columns:minmax(0,1fr);gap:18px;} table {min-width:640px;}}
 </style>
