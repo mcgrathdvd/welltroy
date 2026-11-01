@@ -44,6 +44,15 @@ const pageHeading = {
   'metallic-bubble-mailers': 'Custom Metallic & Holographic Bubble Mailers'
 }[product.slug] || product.name;
 const primaryMailerSlugs = ["poly-mailers", "poly-bubble-mailers", "metallic-bubble-mailers"];
+// Published content-update dates; keep the corresponding sitemap entries aligned.
+const publishedContentDates = {
+  "poly-mailers": "2026-10-31",
+  "poly-bubble-mailers": "2026-11-01",
+  "zipper-bags": "2026-11-01",
+  "honeycomb-paper-rolls": "2026-11-01",
+  "colored-honeycomb-paper-rolls": "2026-11-01"
+};
+const contentModified = publishedContentDates[product.slug] || (secondaryProject || product.slug === 'colored-honeycomb-paper-rolls' ? "2026-10-31" : primaryMailerSlugs.includes(product.slug) ? "2026-10-30" : undefined);
 const mailerComparison = [
   {slug:"poly-mailers",name:"Poly Mailers",format:"Flexible film bag without bubble cushioning",count:13,check:"Packed soft goods, usable inner space, film thickness and flap closure"},
   {slug:"poly-bubble-mailers",name:"Poly Bubble Mailers",format:"Flexible film exterior with an inner bubble layer",count:15,check:"Packed item and retail box, usable opening, liner and closure"},
@@ -61,7 +70,7 @@ const pageSchema = {
   url: `${site.origin}/products/${product.slug}/`,
   name: `${product.name} | Welltroy`,
   description: product.intro,
-  ...(secondaryProject || product.slug === 'colored-honeycomb-paper-rolls' ? { dateModified: "2026-10-31" } : primaryMailerSlugs.includes(product.slug) ? { dateModified: "2026-10-30" } : {}),
+  ...(contentModified ? { dateModified: contentModified } : {}),
   image: `${site.origin}${visual.imageFull}`,
   publisher: { "@id": `${site.origin}/#organization` },
   isPartOf: { "@id": `${site.origin}/#website` },
