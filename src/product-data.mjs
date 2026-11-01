@@ -141,7 +141,7 @@ export const catalogueProducts = [
     sizes: [["Z01","14 × 18 cm"],["Z02","14 × 20 cm"],["Z03","17 × 25 cm"],["Z04","18 × 20 cm"],["Z05","20 × 14 cm"],["Z06","20 × 28 cm"],["Z07","24 × 35 cm"],["Z08","25 × 30 cm"],["Z09","28 × 30 cm"],["Z10","28 × 35 cm"],["Z11","30 × 40 cm"],["Z12","35 × 45 cm"],["Z13","40 × 50 cm"],["Z14","45 × 60 cm"],["Z15","40 × 30 cm"],["Z16","60 × 45 cm"]],
     applications: ["Clothing and knitwear", "Fashion accessories", "Product sets and kits", "Organized storage", "Retail preparation"],
     specNeeds: ["Folded item width, length and thickness", "Model or required usable inner space", "Material and thickness", "Frosted, clear or colored finish", "Zipper, vent holes and warning text", "Quantity per size and artwork"],
-    relatedGuide: { title: "Measure clothing for an inner bag and outer mailer", href: "/guides/mailer-size-for-clothing/" },
+    relatedGuide: { title: "Choose clothing zipper inner bags and outer mailers", href: "/guides/apparel-inner-bags-and-shipping-mailers/" },
     faqs: [
       {q:"Are the listed sizes usable inner dimensions?",a:"The 16 catalogue figures are outer dimensions. The zipper and sealed edges reduce usable space. Measure the folded item, include any insert, and request the inner dimensions for the selected model before ordering."},
       {q:"Are these bags suitable as shipping mailers?",a:"Treat this range as inner product packaging unless the chosen construction and delivery method are confirmed for shipping. A zipper closure alone does not make the bag a protective outer mailer."},
