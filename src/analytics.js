@@ -1,5 +1,6 @@
 import {createTracker,validMeasurementId,safePath,safeTitle,productSlugs,sourceInfo,readChoice,saveChoice} from './analytics-core.mjs';
 import {campaignForVisit,clearCampaign} from './campaigns.mjs';
+import {buyerLinkAction,projectForQuote} from './buyer-actions.mjs';
 
 let tracker = () => false;
 let initialized = false;
@@ -104,11 +105,15 @@ export function initializeAnalytics() {
         if (event.defaultPrevented) return;
         try {
           const url = new URL(link.href);
+          const action = buyerLinkAction(link.href, location.origin);
+          if (action) track(action.name, action.details);
           if (url.protocol === 'mailto:') track('email_click');
           if (url.hostname === 'wa.me') track('whatsapp_click');
           if (url.origin === location.origin && url.pathname === '/quote/') {
             const slug = url.searchParams.get('product') || location.pathname.match(/^\/products\/([^/]+)\/$/)?.[1];
-            track('quote_cta_click',{product_slug:slug,placement:link.dataset.quotePlacement});
+            const section = link.closest?.('#poly-mailer-case,#lumiere-case,#verdant-case');
+            const projectId = projectForQuote(section?.id, slug);
+            track('quote_cta_click',{product_slug:slug,placement:projectId ? 'customer-project' : link.dataset.quotePlacement,project_id:projectId});
             if (link.dataset.model) track('select_size',{product_slug:slug,model:link.dataset.model});
           }
           if (url.origin === location.origin && url.pathname === '/catalog/Welltroy-Product-Catalog-2025.pdf') track('download_catalogue',{document:'2025-pdf'});
