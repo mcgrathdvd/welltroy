@@ -8,7 +8,7 @@ const article = {
   '@context': 'https://schema.org', '@type': 'Article',
   '@id': `${site.origin}${path}#article`, headline: title, description,
   author: {'@id': `${site.origin}/#organization`}, publisher: {'@id': `${site.origin}/#organization`},
-  mainEntityOfPage: `${site.origin}${path}`, datePublished: '2026-10-29', dateModified: '2026-10-29', inLanguage: 'en'
+  mainEntityOfPage: `${site.origin}${path}`, datePublished: '2026-10-29', dateModified: '2026-10-31', inLanguage: 'en'
 };
 const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[
   {'@type':'ListItem',position:1,name:'Home',item:site.origin},
@@ -29,12 +29,12 @@ const checks = [
   ['Sample and destination', 'State the sample checks, destination and required arrival date; confirm sample delivery and bulk shipping separately.']
 ];
 ---
-<Layout title={`${title} | Welltroy`} description={description} canonicalPath={path} schemas={[article,breadcrumbs]}>
+<Layout title={`${title} | Welltroy`} description={description} quoteProduct="metallic-bubble-mailers" contactContext="Metallic or holographic bubble mailer finish brief" canonicalPath={path} schemas={[article,breadcrumbs]}>
   <section class="page-hero"><div class="container">
     <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Metallic &amp; holographic finishes</div>
     <p class="eyebrow">Choose the finish before approving the sample</p><h1>{title}</h1>
     <p class="lead">A metallic finish describes a reflective appearance. A holographic finish can add patterns, movement or depth as the viewing angle changes; many show rainbow colors, but some do not. A mailer can combine both effects. Specify the finish separately from its material, cushioning and usable size.</p>
-    <p class="muted">By <a href="/about/">Welltroy</a> · Published <time datetime="2026-10-29">29 October 2026</time></p>
+    <p class="muted">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-10-31">31 October 2026</time></p>
     <nav class="anchor-links" aria-label="In this guide"><a href="#compare">Compare finishes</a><a href="#sizes">Sizes &amp; printing</a><a href="#brief">Quote checklist</a><a href="#questions">Common questions</a></nav>
   </div></section>
   <section class="section"><div class="container article-layout"><article class="article-main">
@@ -51,9 +51,11 @@ const checks = [
     <p>A similar-looking mailer from another supplier may use a different size convention. Welltroy catalogue sizes use outer width × body length + flap. For example, MB06 is listed as 20 × 28 + 4 cm, approximately 7.87 × 11.02 + 1.57 inches. These are outer measurements; lining and seams reduce usable space.</p>
     <p>Measure the packed item, including any retail box or insert. Request the usable opening and inner dimensions, then check insertion and flap closure with a sample. Compare the <a href="/products/metallic-bubble-mailers/#order-options">metallic mailer sizes and order options</a> before choosing a model.</p>
     <ul><li><strong>Logo readability:</strong> check contrast, placement and fine details on the selected reflective surface.</li><li><strong>Printing route:</strong> confirm the method, colors, coverage and artwork proof for the actual film and finish.</li><li><strong>Courier label:</strong> test the intended label and barcode on the sample under your packing conditions.</li><li><strong>Complete pack:</strong> check the liner, seams, closure and any extra protection needed for your contents.</li></ul>
+    <p>For a repeatable fit check, use the <a href="/guides/choose-a-mailer/#bubble-fit-record">bubble mailer size and sample record</a>. A photograph of the finish cannot establish usable inner space or transit protection.</p>
     <p>Use the <a href="/guides/logo-artwork-checklist/">logo artwork checklist</a> and retain an <a href="/guides/custom-mailer-sample-approval/">approved sample record</a> with the final quotation.</p>
     <h2 id="brief">What Should I Send for a Custom Mailer Quote?</h2>
     <p>Prepare one brief for each proposed configuration. This checklist helps keep a reflective catalogue finish and a requested optical effect distinct while the available specification is being confirmed.</p>
+    <p><a class="text-link" href="/downloads/bubble-mailer-quote-brief.txt" download>Download the editable bubble mailer quote brief (.txt) ↓</a> Record the surface reference separately from the packed-item dimensions and protection checks. Complete one brief for each size, finish and design.</p>
     <dl class="finish-checklist">{checks.map(([label,text])=><div><dt>{label}</dt><dd>{text}</dd></div>)}</dl>
     <p>Eligible Welltroy bag specifications start from 500 pieces. Confirm the minimum for each size, finish and artwork; the starting quantity does not establish availability of every holographic effect. A free initial design draft is offered within 24 hours after a clear brief. The sample delivery target is within seven days after specifications and artwork are confirmed, depending on destination; confirm sample type and courier charges.</p>
     <div class="button-row"><a class="button" href="/quote/?product=metallic-bubble-mailers#quote-form" data-quote-placement="content">Discuss My Mailer Finish</a><a class="text-link" href="/ordering/">Sample and order terms →</a></div>
