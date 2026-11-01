@@ -131,6 +131,7 @@ export const additionalProducts = [
     sizes: [["Colors shown", "Kraft brown, black and white"], ["Catalogue widths", "30 / 38 / 40 / 50 cm; confirm current options"], ["Catalogue roll lengths", "30 / 50 / 100 / 200 / 250 m; confirm specification"], ["Minimum order", "1 complete roll (1 pc)"]],
     applications: ["Gift wrapping", "Bottles and homeware", "Cosmetics and soaps", "Packing separation"],
     specNeeds: ["Roll width and length", "Paper color and gsm", "Product fragility", "Tissue interleaf or dispenser needs", "Carton packing"],
+    relatedGuide: { title: "Calculate honeycomb paper rolls from your packing trial", href: "/guides/honeycomb-paper-wrap-bottles-gifts/#usage-calculator" },
     faqs: [{ q: "Can I buy one roll of the honeycomb paper color options?", a: "Yes. The minimum is 1 complete roll (1 pc). Confirm the current color, width, roll length and paper specification with your quotation; the unit is a roll, not a cut sheet. Delivery arrangements and charges are confirmed separately." }, { q: "Can honeycomb paper be used for fragile items?", a: "The expanded paper can provide wrapping and surface separation. Confirm the complete packing method for your product; very fragile, heavy or sharp items may need additional protection." }, customFaq, sampleFaq]
   },
   {
