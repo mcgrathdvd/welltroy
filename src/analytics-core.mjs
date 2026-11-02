@@ -10,7 +10,9 @@ export const productSlugs = new Set([
 const formProducts = new Set([...productSlugs,'multiple-products','not-sure']);
 const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-welltroy/',
   '/about/','/faq/','/reviews/','/ordering/','/privacy/','/catalogue/','/guides/',
+  '/materials-and-documents/',
   '/guides/choose-a-mailer/','/guides/mailer-size-for-clothing/',
+  '/guides/verify-packaging-bag-factory/',
   '/guides/apparel-inner-bags-and-shipping-mailers/',
   '/guides/logo-artwork-checklist/',
   '/guides/kraft-vs-poly-bubble-mailers/',

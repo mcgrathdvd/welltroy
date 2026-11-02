@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://welltroy.com/</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://welltroy.com/products/</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://welltroy.com/products/poly-mailers/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://welltroy.com/products/poly-mailers/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://welltroy.com/products/biodegradable-mailers/</loc></url>
   <url><loc>https://welltroy.com/products/poly-bubble-mailers/</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://welltroy.com/products/metallic-bubble-mailers/</loc><lastmod>2026-10-30</lastmod></url>
@@ -17,13 +17,14 @@
   <url><loc>https://welltroy.com/industries/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://welltroy.com/industries/apparel-poly-mailers/</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://welltroy.com/industries/beauty-holographic-bubble-mailers/</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://welltroy.com/why-welltroy/</loc></url>
+  <url><loc>https://welltroy.com/why-welltroy/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://welltroy.com/materials-and-documents/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://welltroy.com/about/</loc></url>
-  <url><loc>https://welltroy.com/faq/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://welltroy.com/faq/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://welltroy.com/reviews/</loc></url>
-  <url><loc>https://welltroy.com/guides/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://welltroy.com/guides/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://welltroy.com/guides/custom-mailer-sample-approval/</loc></url>
-  <url><loc>https://welltroy.com/guides/compare-custom-mailer-quotes/</loc></url>
+  <url><loc>https://welltroy.com/guides/compare-custom-mailer-quotes/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://welltroy.com/guides/choose-a-mailer/</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://welltroy.com/guides/mailer-size-for-clothing/</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://welltroy.com/guides/logo-artwork-checklist/</loc></url>
@@ -32,7 +33,7 @@
   <url><loc>https://welltroy.com/guides/custom-paper-bag-size-handles-printing/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://welltroy.com/guides/honeycomb-paper-wrap-bottles-gifts/</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://welltroy.com/guides/custom-stand-up-pouch-specification/</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://welltroy.com/guides/custom-packaging-500-pieces/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://welltroy.com/guides/custom-packaging-500-pieces/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://welltroy.com/products/die-cut-handle-shipping-bags/</loc></url>
   <url><loc>https://welltroy.com/products/pink-handle-mailers/</loc></url>
   <url><loc>https://welltroy.com/products/yellow-kraft-bubble-mailers/</loc></url>
@@ -48,4 +49,5 @@
   <url><loc>https://welltroy.com/industries/retail-event-paper-bags/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://welltroy.com/industries/retail-stand-up-pouches/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://welltroy.com/industries/homeware-gift-honeycomb-wrap/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://welltroy.com/guides/verify-packaging-bag-factory/</loc><lastmod>2026-11-02</lastmod></url>
 </urlset>
