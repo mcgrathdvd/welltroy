@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data.mjs';
+const path = '/guides/verify-packaging-bag-factory/';
+const title = 'How to Verify a Packaging Bag Factory';
+const brief = `Packaging product and intended use:
+Quantity per size and design, if known:
+Destination market and required timing:
+Contracting legal entity and registration identifier to confirm:
+Production location and operations to review:
+In-house and subcontracted steps to clarify:
+Walkthrough or inspection requested, preferred time zone and dates:
+Sample, material and artwork references:
+Quality checks and supporting documents requested:
+Confidentiality or recording restrictions:
+Unresolved questions and follow-up contact:`;
+const emailHref = `mailto:${site.email}?subject=${encodeURIComponent('Packaging supplier verification and walkthrough enquiry')}`;
+const article = {'@context':'https://schema.org','@type':'Article',headline:title,author:{'@id':`${site.origin}/#organization`},publisher:{'@id':`${site.origin}/#organization`},mainEntityOfPage:`${site.origin}${path}`,datePublished:'2026-11-02',dateModified:'2026-11-02',inLanguage:'en'};
+const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.origin},{'@type':'ListItem',position:2,name:'Buying Guides',item:`${site.origin}/guides/`},{'@type':'ListItem',position:3,name:'Verify a packaging factory',item:`${site.origin}${path}`}]};
+---
+<Layout title={`${title} | Welltroy`} description="Verify a packaging bag supplier's legal entity, production scope, walkthrough, samples and supporting documents. Use a checklist before approving an order." canonicalPath={path} schemas={[article,breadcrumbs]} contactContext="Packaging supplier verification and walkthrough enquiry">
+  <section class="page-hero"><div class="container">
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Factory verification</div>
+    <p class="eyebrow">Supplier checks for packaging buyers</p><h1>{title}</h1>
+    <p class="lead">Verify the contracting company, identify who performs each production step, review the relevant site and equipment, and check a sample against a written specification. Connect those findings to the material documents, inspection plan and quotation for your actual order.</p>
+    <p class="muted">By Welltroy · Updated <time datetime="2026-11-02">2 November 2026</time></p>
+    <nav class="anchor-links" aria-label="In this guide"><a href="#checklist">Verification checklist</a><a href="#identity">Company and site</a><a href="#production">Production scope</a><a href="#walkthrough">Video walkthrough</a><a href="#samples">Sample and records</a><a href="#documents">Documents</a><a href="#request">Prepare a request</a></nav>
+  </div></section>
+  <section class="section"><div class="container article-layout"><article class="article-main">
+    <h2 id="checklist">What Should I Check Before Choosing a Packaging Bag Supplier?</h2>
+    <p>Use the same checklist when comparing custom poly mailers, bubble mailers and clothing zipper bags. Record the source, date, person responsible and unanswered questions for each check. A useful review connects the supplier's identity and production scope to the exact bag you intend to buy.</p>
+    <p class="table-scroll-hint">Swipe or scroll the checklist to see the evidence and follow-up questions.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Packaging factory verification checklist"><table><caption>Six checks to connect a supplier review to an actual packaging order</caption><thead><tr><th scope="col">Check</th><th scope="col">Ask to review</th><th scope="col">Record or clarify</th></tr></thead><tbody>
+      <tr><th scope="row">Company and location</th><td>Registered legal entity, registration identifier, contracting company and relevant production address.</td><td>Which address is an office, warehouse or production site? Which entity appears on the quotation?</td></tr>
+      <tr><th scope="row">Production scope</th><td>Who sources the material, prints, converts or assembles the bag, checks it and packs the order.</td><td>Which operations are in-house or subcontracted, and who approves and controls those steps?</td></tr>
+      <tr><th scope="row">Site walkthrough</th><td>An agreed live view of the relevant production areas, sample handling and measurement process.</td><td>Site, date, participants, operations observed and any areas or records not reviewed.</td></tr>
+      <tr><th scope="row">Sample and specification</th><td>The proposed construction, usable size, thickness convention, artwork, closure and complete packed sample.</td><td>Sample identifier, specification version, agreed checks and remaining differences.</td></tr>
+      <tr><th scope="row">Quality and materials</th><td>Inspection responsibilities, applicable records and product-specific material or test documents.</td><td>Product and site covered, method, date, agreed acceptance criteria and document issuer.</td></tr>
+      <tr><th scope="row">Quotation and follow-up</th><td>Entity names, quantity per version, charges, approval milestones and delivery scope.</td><td>Resolve inconsistent details through an established contact and retain the written explanation.</td></tr>
+    </tbody></table></div>
+
+    <h2 id="identity">Confirm the Company and the Production Location Separately</h2>
+    <p>Request the registered company name and registration identifier, then compare them with the supplier's quotation and company documents. For a company registered in China, ask for its registered Chinese name so you can use the <a href="https://www.gsxt.gov.cn/index.html" target="_blank" rel="noopener noreferrer">official National Enterprise Credit Information Publicity System ↗</a>. The State Administration for Market Regulation publishes information about access to this system. <a href="https://www.samr.gov.cn/xw/zj/art/2023/art_e99bd2ba2c374ae5831d18b50b48f6e8.html" target="_blank" rel="noopener noreferrer">Official registry guidance ↗</a></p>
+    <p>Ask which location will make or finish your order. A contact address may serve a different function from a production site. Identify the relationship between the contracting company, any production partner and the party responsible for inspection. Clarify differences between company names in the commercial documents and payment instructions through your established contact before final approval.</p>
+
+    <h2 id="production">Match the Production Scope to the Bag You Are Buying</h2>
+    <p>Describe the production route for the actual product. Ask the supplier to map your selected material, printing and bag-making steps, including any subcontracted work and the controls used for it.</p>
+    <ul><li><strong>Printed poly mailers:</strong> distinguish printing on an existing bag from a route that prints film before bag making. Ask who performs the selected process and where the artwork and finished bag are checked.</li><li><strong>Poly bubble mailers:</strong> confirm who supplies or makes the outer film and bubble construction, and who performs the final printing, bag assembly and closure checks.</li><li><strong>Clothing zipper bags:</strong> confirm the bag construction, zipper or closure fitting, any holes and printed details, and the final size and closure checks.</li></ul>
+    <p>A supplier can coordinate several operations. Record which party is responsible for the offered specification, sample approval, changes and any quality follow-up. Do not infer ownership, capacity or the process used for your order from a photograph of equipment alone.</p>
+
+    <h2 id="walkthrough">What Should I Ask to See in a Live Factory Walkthrough?</h2>
+    <p>Agree the purpose, location, participants, time zone, duration and recording permissions first. Ask whether the operations relevant to your proposed order can be shown at that time. A supplier may need to protect other customers' artwork or production records.</p>
+    <ol><li><strong>Identify the site:</strong> establish which location is being shown and the contact leading the review.</li><li><strong>Follow the relevant route:</strong> review the material, printing or finishing, bag-making and packing areas that apply to your specification. Record which steps are being explained rather than currently running.</li><li><strong>Connect a sample to its record:</strong> ask the presenter to identify a permissible sample and show how dimensions, closure, artwork and inspection findings are recorded.</li><li><strong>List the follow-up:</strong> note missing views, records to review and questions that require a separate response. Confirm whether an independent visit or inspection can be arranged if your purchasing process requires one.</li></ol>
+    <div class="guide-callout"><strong>Keep the scope clear.</strong> Photographs, a video call and a sample each answer different questions. Record what was actually reviewed and which order details remain open; none of these alone establishes the performance of every future batch.</div>
+
+    <h2 id="samples">Use a Written Specification and a Retained Sample</h2>
+    <p>Give each sample an identifier and connect it to the bag material, outer and usable inner dimensions, thickness convention, print sides, artwork version, closure and intended contents. Pack your real item, including inner wrapping and inserts, before accepting the fit.</p>
+    <p>Ask which incoming, in-process and finished-order checks will apply, who performs them and what records can be shared. Agree the measurement methods, tolerances and acceptance criteria for your order instead of assuming a generic inspection label covers every requirement.</p>
+    <p>Use the <a href="/guides/custom-mailer-sample-approval/#record">sample approval record</a> for fit, artwork and closure findings. Keep it with the <a href="/guides/compare-custom-mailer-quotes/">final quotation and delivery scope</a>. If a material, artwork or production step changes, identify the affected checks and approvals before proceeding.</p>
+
+    <h2 id="documents">Check What a Certificate or Material Report Actually Covers</h2>
+    <p>Ask which documents are available for the exact proposed bag. Identify the holder or issuer, product or material description, covered location where applicable, issue date, current status, test method and stated results. A report for a different film or construction does not automatically describe the mailer you are ordering.</p>
+    <p>ISO explains that external certification bodies issue certificates; ISO itself does not certify companies. Identify the issuer and verify the relevant status directly or through an applicable certification database. <a href="https://www.iso.org/certification.html" target="_blank" rel="noopener noreferrer">ISO guidance on certification ↗</a></p>
+    <p>For applicable accredited management-system certificates, <a href="https://www.iafcertsearch.org/" target="_blank" rel="noopener noreferrer">IAF CertSearch ↗</a> can help check the certificate holder, scope, locations and status. Its <a href="https://support.iafcertsearch.org/iaf-certsearch-faq/iaf-certsearch-faq/general" target="_blank" rel="noopener noreferrer">official explanation ↗</a> describes what the database covers. A management-system certificate and a product-specific material test answer different questions.</p>
+
+    <h2 id="welltroy-references">What Can I Review on Welltroy Before an Enquiry?</h2>
+    <ul><li><a href="/about/">Company introduction and published contact details</a>.</li><li><a href="/why-welltroy/#factory-photos">Production photographs</a>, as references for follow-up questions about the relevant operations.</li><li><a href="/products/poly-mailers/#poly-mailer-case">The anonymous apparel mailer project</a> and <a href="/products/poly-bubble-mailers/#lumiere-case">the LUMIÈRE bubble mailer project</a>.</li><li><a href="/catalogue/">Catalogue and product references</a>, plus the <a href="/ordering/">sample and ordering terms</a>.</li></ul>
+    <p>Use these public references to prepare your questions. Ask us to confirm the relevant production location, process responsibilities and available supporting documents for your project. A live walkthrough, site visit or independent inspection needs a separate availability and scope discussion.</p>
+
+    <h2 id="request">Prepare a Factory Verification or Walkthrough Request</h2>
+    <p>Copy this brief into your enquiry or email. Include your packaging product and the checks you want to discuss. Mark undecided dimensions and quantities as open.</p>
+    <pre class="verification-brief">{brief}</pre>
+    <div class="button-row"><a class="button" href={emailHref}>Ask About a Factory Walkthrough</a><a class="button button-secondary" href="/quote/?product=not-sure#quote-form" data-quote-placement="content">Send Packaging and Verification Requirements</a></div>
+    <p class="muted">For the online form, paste the brief into Packaging and printing requirements. A request starts a discussion; confirm the date, location, scope and any charges separately.</p>
+
+    <h2>Questions About Packaging Factory Verification</h2>
+    <h3>Can production photographs prove that a supplier makes every product?</h3><p>No. Ask which site and operation each image shows, whether that operation applies to your specification, and who performs the remaining steps. Connect the explanation to the company, sample and order records.</p>
+    <h3>Can I verify a supplier before I know the final bag size?</h3><p>Yes. Start with the product, use, approximate order scale and destination, then ask about the company and relevant production route. Final sample and performance checks need the actual agreed construction and complete packed item.</p>
+    <h3>Does a video call replace an inspection of my order?</h3><p>No. A walkthrough helps you understand a site and its operations. Inspection of an order has its own scope, sampling, checks, timing and records, which should be agreed for that order.</p>
+  </article><aside class="side-card"><p class="eyebrow">From review to approval</p><h2>Keep the Evidence Connected</h2><div class="guide-options"><a href="/about/"><strong>Company details</strong><span>Start with the published entity and contacts</span></a><a href="/why-welltroy/#factory-photos"><strong>Production photographs</strong><span>Prepare questions about your proposed route</span></a><a href="/guides/custom-mailer-sample-approval/"><strong>Sample approval</strong><span>Record the actual fit, artwork and closure</span></a><a href="/guides/compare-custom-mailer-quotes/"><strong>Quotation comparison</strong><span>Resolve specification, cost and delivery differences</span></a></div></aside></div></section>
+</Layout>
+<style>.article-main{min-width:0}.article-main li{margin-bottom:12px}.article-main h3{margin-top:28px}.article-main table{min-width:760px}.article-main th,.article-main td{vertical-align:top;min-width:160px}.article-main th[scope="row"]{min-width:120px}.verification-brief{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.7;padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--cream)}h2[id]{scroll-margin-top:110px}.article-main .button-row>a{white-space:normal;text-align:center}@media(max-width:600px){.article-main .button-row{align-items:stretch}.article-main .button-row>a{width:100%}}</style>
