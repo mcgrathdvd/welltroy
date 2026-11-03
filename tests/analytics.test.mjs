@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createTracker,sanitizeEvent,safePath,confirmedQuote,errorCategory,readChoice,saveChoice,sourceInfo,productSlugs} from '../src/analytics-core.mjs';
 import {products} from '../src/product-data.mjs';
+import {buyerLinkAction,projectForQuote} from '../src/buyer-actions.mjs';
 
 test('product allowlist matches all actual catalogue pages',()=>{
   assert.deepEqual([...productSlugs].sort(),products.map(p=>p.slug).sort());
@@ -173,4 +174,83 @@ test('new buying guides track only public paths and still require consent',()=>{
     assert.equal(events.length,1);
   }
   assert.equal(sanitizeEvent('page_view',{},'/guides/private-buyer-approval/'),null);
+});
+
+test('buyer actions recognise only exact same-origin public destinations',()=>{
+  const origin='https://welltroy.com';
+  assert.deepEqual(buyerLinkAction(`${origin}/products/poly-mailers/?email=private#poly-mailer-case`,origin),{name:'customer_project_open',details:{project_id:'strawberry-apparel'}});
+  assert.deepEqual(buyerLinkAction('/products/poly-bubble-mailers/#lumiere-case',origin),{name:'customer_project_open',details:{project_id:'lumiere'}});
+  assert.deepEqual(buyerLinkAction('/products/poly-bubble-mailers/#verdant-case',origin),{name:'customer_project_open',details:{project_id:'verdant-studio'}});
+  for(const href of [
+    'https://welltroy.com.evil.invalid/products/poly-mailers/#poly-mailer-case',
+    'https://other.invalid/downloads/clothing-mailer-fit-record.txt',
+    '/products/poly-mailers/#lumiere-case','/products/poly-mailers/#poly-mailer-printing',
+    '/products/poly-mailers/','/downloads/private-buyer-file.txt',
+    'mailto:buyer@example.com','javascript:alert(1)','https://['
+  ]) assert.equal(buyerLinkAction(href,origin),null);
+  assert.deepEqual(buyerLinkAction('/downloads/clothing-mailer-fit-record.txt?email=private#private',origin),{name:'buyer_resource_download',details:{resource_id:'clothing-fit-record'}});
+  assert.equal(projectForQuote('lumiere-case','poly-bubble-mailers'),'lumiere');
+  assert.equal(projectForQuote('lumiere-case','poly-mailers'),null);
+});
+
+test('project and resource events derive public products and discard private metadata',()=>{
+  const privateData={product_slug:'buyer@example.com',email:'buyer@example.com',href:'https://private.invalid/file',filename:'buyer-logo.ai',message:'private'};
+  assert.deepEqual(sanitizeEvent('customer_project_open',{...privateData,project_id:'lumiere'},'/?email=private#private'),{
+    page_path:'/',page_location:'https://welltroy.com/',page_title:'Welltroy',project_id:'lumiere',product_slug:'poly-bubble-mailers'
+  });
+  assert.deepEqual(sanitizeEvent('buyer_resource_download',{...privateData,resource_id:'clothing-fit-record'},'/guides/?email=private#private'),{
+    page_path:'/guides/',page_location:'https://welltroy.com/guides/',page_title:'Welltroy',resource_id:'clothing-fit-record',product_slug:'poly-mailers'
+  });
+  for(const id of ['buyer@example.com','constructor','toString','',null]){
+    assert.equal(sanitizeEvent('customer_project_open',{project_id:id},'/'),null);
+    assert.equal(sanitizeEvent('buyer_resource_download',{resource_id:id},'/'),null);
+  }
+  const quote=sanitizeEvent('quote_cta_click',{product_slug:'poly-mailers',placement:'customer-project',project_id:'strawberry-apparel',...{email:'private'}},'/products/poly-mailers/');
+  assert.equal(quote.placement,'customer-project');assert.equal(quote.project_id,'strawberry-apparel');assert.equal(quote.email,undefined);
+  const mismatch=sanitizeEvent('quote_cta_click',{product_slug:'poly-mailers',placement:'customer-project',project_id:'lumiere'},'/products/poly-mailers/');
+  assert.equal(mismatch.placement,'content');assert.equal(mismatch.project_id,undefined);
+});
+
+test('runtime buyer link events require consent and trusted uncancelled clicks',async()=>{
+  const env=await environment({pathname:'/'});
+  try {
+    const link={href:'https://welltroy.com/products/poly-mailers/#poly-mailer-case',dataset:{}};
+    const click=(overrides={})=>({isTrusted:true,button:0,defaultPrevented:false,target:{closest:s=>s==='a[href]'?link:null},...overrides});
+    env.listeners.click(click());await Promise.resolve();assert.equal(env.scripts.length,0);assert.equal(window.dataLayer,undefined);
+    env.accept.listeners.click();
+    env.listeners.click(click({isTrusted:false}));
+    env.listeners.click(click({button:2}));
+    const cancelled=click();env.listeners.click(cancelled);cancelled.defaultPrevented=true;
+    await Promise.resolve();
+    const sent=()=>window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event');
+    assert.equal(sent().filter(x=>x[1]==='customer_project_open').length,0);
+    const active=click();env.listeners.click(active);await Promise.resolve();
+    assert.equal(active.defaultPrevented,false);
+    assert.equal(sent().filter(x=>x[1]==='customer_project_open').length,1);
+    link.href='https://welltroy.com/downloads/poly-mailer-logo-quote-brief.txt?email=private';
+    env.listeners.click(click());await Promise.resolve();
+    const download=sent().find(x=>x[1]==='buyer_resource_download')[2];
+    assert.equal(download.resource_id,'poly-mailer-logo-brief');assert.equal(download.product_slug,'poly-mailers');
+    assert.equal(JSON.stringify(sent()).includes('email=private'),false);
+    link.href='https://other.invalid/downloads/poly-mailer-logo-quote-brief.txt';
+    env.listeners.click(click());await Promise.resolve();
+    assert.equal(sent().filter(x=>x[1]==='buyer_resource_download').length,1);
+    env.reject.listeners.click();
+    env.listeners.click(click());await Promise.resolve();assert.equal(window.dataLayer.length,0);
+  } finally {env.restore();}
+});
+
+test('runtime identifies quote buttons inside a matching case without duplicate events',async()=>{
+  const env=await environment({choice:'granted',pathname:'/products/poly-bubble-mailers/'});
+  try {
+    let section='lumiere-case';
+    const link={href:'https://welltroy.com/quote/?product=poly-bubble-mailers&email=private',dataset:{quotePlacement:'product-details'},closest:()=>({id:section})};
+    const click=()=>({isTrusted:true,button:0,defaultPrevented:false,target:{closest:s=>s==='a[href]'?link:null}});
+    env.listeners.click(click());await Promise.resolve();
+    const quotes=()=>window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event'&&x[1]==='quote_cta_click');
+    assert.equal(quotes().length,1);assert.equal(quotes()[0][2].placement,'customer-project');assert.equal(quotes()[0][2].project_id,'lumiere');
+    assert.equal(JSON.stringify(quotes()).includes('email=private'),false);
+    section='buyer-project';env.listeners.click(click());await Promise.resolve();
+    assert.equal(quotes().length,2);assert.equal(quotes()[1][2].placement,'product-details');assert.equal(quotes()[1][2].project_id,undefined);
+  } finally {env.restore();}
 });

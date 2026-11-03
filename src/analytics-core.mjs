@@ -1,4 +1,5 @@
 import {catalogueModels} from './catalogue-models.mjs';
+import {customerProjects,buyerResources} from './buyer-actions.mjs';
 
 export const productSlugs = new Set([
   'poly-mailers','biodegradable-mailers','poly-bubble-mailers','metallic-bubble-mailers',
@@ -29,9 +30,10 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/industries/homeware-gift-honeycomb-wrap/',
   '/industries/beauty-holographic-bubble-mailers/']);
 const names = new Set(['page_view','view_product','quote_start','quote_submit_success',
-  'quote_submit_error','whatsapp_click','email_click','quote_cta_click','select_size','download_catalogue','sample_interest']);
+  'quote_submit_error','whatsapp_click','email_click','quote_cta_click','select_size','download_catalogue','sample_interest',
+  'customer_project_open','buyer_resource_download']);
 const errors = new Set(['request_rejected','service_unavailable','delivery_unconfirmed']);
-const placements = new Set(['header','hero','product-hero','product-size','product-details','product-bottom','footer','sticky-desktop','sticky-mobile','content','product-project','industry-hero','industry-plan']);
+const placements = new Set(['header','hero','product-hero','product-size','product-details','product-bottom','footer','sticky-desktop','sticky-mobile','content','product-project','industry-hero','industry-plan','customer-project']);
 const sampleTypes = new Set(['existing','custom','none']);
 
 export function safeTitle(value) {
@@ -72,7 +74,26 @@ export function sanitizeEvent(name, details, path, title) {
   } else if (name.startsWith('quote_')) result.product_slug = safeProduct(details?.product_slug);
   if (name === 'quote_submit_error') result.error_category = errors.has(details?.error_category) ? details.error_category : 'delivery_unconfirmed';
   if (name === 'whatsapp_click') result.contact_stage = 'outbound';
-  if (name === 'quote_cta_click') result.placement = placements.has(details?.placement) ? details.placement : 'content';
+  if (name === 'quote_cta_click') {
+    result.placement = placements.has(details?.placement) ? details.placement : 'content';
+    if (result.placement === 'customer-project') {
+      const project = customerProjects.get(details?.project_id);
+      if (project?.product === result.product_slug) result.project_id = details.project_id;
+      else result.placement = 'content';
+    }
+  }
+  if (name === 'customer_project_open') {
+    const project = customerProjects.get(details?.project_id);
+    if (!project) return null;
+    result.project_id = details.project_id;
+    result.product_slug = project.product;
+  }
+  if (name === 'buyer_resource_download') {
+    const resource = buyerResources.get(details?.resource_id);
+    if (!resource) return null;
+    result.resource_id = details.resource_id;
+    result.product_slug = resource.product;
+  }
   if (name === 'select_size') {
     if (!productSlugs.has(details?.product_slug) || !catalogueModels[details?.product_slug]?.includes(details?.model)) return null;
     result.product_slug = details.product_slug;
