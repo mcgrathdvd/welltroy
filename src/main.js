@@ -1,4 +1,5 @@
 import { selectionGuidance } from "./quote-options.mjs";
+import { initializeQuoteBrief } from "./quote-brief.js";
 import { initializeAnalytics, track } from "./analytics.js";
 import { confirmedQuote, errorCategory } from "./analytics-core.mjs";
 initializeAnalytics();
@@ -157,6 +158,11 @@ if (quoteForm) {
   const defaultSizeHelp = 'Confirm the model or dimensions for the selected product.';
   let prefilledSize = Boolean(productSelect.value && requestedSize);
   let lastSizeProduct = productSelect.value;
+  quoteForm.addEventListener("welltroy:brief-applied", () => {
+    prefilledSize = true;
+    lastSizeProduct = productSelect.value;
+    sizeHelp.textContent = "Imported from your product brief. Review the dimensions before sending.";
+  });
   sizeInput.addEventListener('input', () => {
     prefilledSize = false;
     sizeHelp.textContent = defaultSizeHelp;
@@ -486,6 +492,7 @@ if (quoteForm) {
       }
       if (!confirmedQuote(response,result)) throw new Error();
       completed = true;
+      quoteForm.dispatchEvent(new Event("welltroy:quote-sent"));
       track('quote_submit_success',{product_slug:submittedProductSlug});
       quoteForm.querySelector('[data-enquiry-reference]').value = result.reference;
       quoteForm.querySelector('[data-reference-status]').textContent = '';
@@ -525,3 +532,5 @@ if (quoteForm) {
     }
   });
 }
+
+initializeQuoteBrief();

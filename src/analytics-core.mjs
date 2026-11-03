@@ -31,7 +31,7 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/industries/beauty-holographic-bubble-mailers/']);
 const names = new Set(['page_view','view_product','quote_start','quote_submit_success',
   'quote_submit_error','whatsapp_click','email_click','quote_cta_click','select_size','download_catalogue','sample_interest',
-  'customer_project_open','buyer_resource_download']);
+  'customer_project_open','buyer_resource_download','quote_brief_start','quote_brief_continue']);
 const errors = new Set(['request_rejected','service_unavailable','delivery_unconfirmed']);
 const placements = new Set(['header','hero','product-hero','product-size','product-details','product-bottom','footer','sticky-desktop','sticky-mobile','content','product-project','industry-hero','industry-plan','customer-project']);
 const sampleTypes = new Set(['existing','custom','none']);
