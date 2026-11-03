@@ -1,0 +1,13 @@
+---
+import { products } from '../data.mjs';
+import { briefProducts } from '../quote-brief.mjs';
+const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefProducts, p.slug)).map(p => [p.slug, p.sizes]));
+---
+<section class="imported-brief" data-brief-import hidden aria-labelledby="imported-brief-heading">
+  <p class="eyebrow">Your product selections</p><h3 id="imported-brief-heading">Your Quote Brief</h3>
+  <p data-brief-import-status role="status" aria-live="polite"></p>
+  <button class="service-retry" type="button" data-brief-apply hidden>Apply product brief to this form</button>
+  <p><a class="text-link" data-brief-return href="/products/">Return to product selections →</a></p>
+</section>
+<script type="application/json" data-brief-catalogue set:html={JSON.stringify(catalogue).replace(/</g, '\\u003c')}></script>
+<style>.imported-brief{padding:20px;margin:0 0 24px;background:var(--cream);border:1px solid var(--line);border-radius:12px;overflow-wrap:anywhere}.imported-brief[hidden],.imported-brief [hidden]{display:none}.imported-brief h3{margin:0 0 8px;font-size:1.15rem}.imported-brief p:not(.eyebrow){font-size:.88rem;line-height:1.65}.imported-brief p:last-child{margin-bottom:0}</style>

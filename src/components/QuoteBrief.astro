@@ -1,0 +1,64 @@
+---
+import { products } from '../data.mjs';
+import { briefProducts, printChoices, sideChoices, sampleChoices } from '../quote-brief.mjs';
+const { product } = Astro.props;
+const isBubble = product.slug === 'poly-bubble-mailers';
+const isZipper = product.slug === 'zipper-bags';
+const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefProducts, p.slug)).map(p => [p.slug, p.sizes]));
+---
+<section class="section brief-section" id="quote-brief" aria-labelledby="brief-heading" data-quote-brief data-product={product.slug}>
+  <div class="container">
+    <div class="section-head"><div><p class="eyebrow">Plan your custom order</p><h2 id="brief-heading">Build Your {product.name} Quote Brief</h2><p class="lead">Choose a catalogue model, describe a custom size or ask for help. Review your selections, then add contact details on the enquiry page.</p></div></div>
+    <p class="brief-context">Catalogue dimensions are outer measurements, not guaranteed usable space. {isZipper ? 'Confirm the opening and zipper construction, and include any outer shipping packaging in your plan.' : isBubble ? 'Allow for the bubble lining, opening and adhesive flap when checking the complete pack.' : 'Measure the finished pack with inner bags, wrapping and inserts included.'} Minimum quantity and available options are confirmed for each size and design.</p>
+    <noscript><p class="alert">Enable JavaScript to build and carry your brief, or <a href={`/quote/?product=${product.slug}#quote-form`}>enter your requirements directly on the enquiry page</a>.</p></noscript>
+    <div class="brief-layout" data-brief-ui hidden>
+      <form id="brief-selection-form" class="brief-form" data-brief-form>
+        <fieldset><legend><span>1</span> Size &amp; contents</legend>
+          <div class="brief-fields">
+            <div class="field brief-wide"><label for="brief-size-mode">How would you like to choose a size?</label><select id="brief-size-mode" name="sizeMode"><option value="help">Help me choose a size</option><option value="catalogue">Compare a catalogue model</option><option value="custom">I have a custom size</option></select></div>
+            <div class="field brief-wide" data-brief-catalogue-field hidden><label for="brief-model">Catalogue model / outer size</label><select id="brief-model" name="model" disabled><option value="">Please select a model</option>{product.sizes.map(([model, size]) => <option value={model}>{model} — {size}</option>)}</select><small>Listed in the 2025 catalogue. Ask us to confirm current availability and usable inner dimensions.</small></div>
+            <div class="field brief-wide" data-brief-custom-field hidden><label for="brief-custom-size">Your required bag dimensions</label><input id="brief-custom-size" name="customSize" maxlength="160" placeholder="e.g. width × body length + flap, in cm or inches" disabled /><small>Include units and say whether these are outer or usable inner measurements.</small></div>
+            <div class="field"><label for="brief-goods">What are you packing? (optional)</label><input id="brief-goods" name="goods" maxlength="160" placeholder={isZipper ? 'e.g. one folded T-shirt per bag' : 'e.g. a folded hoodie with an inner bag'} /></div>
+            <div class="field"><label for="brief-packed-size">Packed item dimensions (optional)</label><input id="brief-packed-size" name="packedSize" maxlength="160" placeholder="Width × length × thickness, with units" /><small>This records your measurements; it does not calculate or guarantee fit.</small></div>
+          </div>
+        </fieldset>
+        <fieldset><legend><span>2</span> Printing &amp; order</legend>
+          <div class="brief-fields">
+            <div class="field"><label for="brief-printing">Printing preference</label><select id="brief-printing" name="printing">{Object.entries(printChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
+            <div class="field" data-brief-sides-field><label for="brief-sides">Printed sides</label><select id="brief-sides" name="sides">{Object.entries(sideChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
+            <div class="field"><label for="brief-quantity">Quantity for this size &amp; design</label><input id="brief-quantity" name="quantity" maxlength="100" placeholder="e.g. 1,000 pieces, or Not sure" /><small>Each size, color and artwork version is checked separately.</small></div>
+            <div class="field"><label for="brief-destination">Destination country / port</label><input id="brief-destination" name="destination" maxlength="160" placeholder="e.g. United States, Los Angeles" /><small>You can leave this open and add it on the enquiry page.</small></div>
+          </div>
+          <details class="brief-more"><summary>Add material, sample &amp; timing preferences (optional)</summary><div class="brief-fields">
+            <div class="field brief-wide"><label for="brief-material">{isBubble ? 'Outer film / cushioning preference' : isZipper ? 'Material / thickness / zipper preference' : 'Material / single-wall thickness preference'}</label><input id="brief-material" name="material" maxlength="160" placeholder="Describe your preference, or leave it for our advice" /><small>Preferences are requests for review, not confirmed available configurations.</small></div>
+            <div class="field"><label for="brief-sample">Sample preference</label><select id="brief-sample" name="sample">{Object.entries(sampleChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
+            <div class="field"><label for="brief-timing">Target timing</label><input id="brief-timing" name="timing" maxlength="100" placeholder="e.g. required arrival month, or Flexible" /></div>
+            <div class="field brief-wide"><label for="brief-notes">Additional requirements</label><textarea id="brief-notes" name="notes" maxlength="600" rows="3" placeholder="Other sizes, artwork versions or checks you would like to discuss"></textarea></div>
+          </div></details>
+        </fieldset>
+      </form>
+      <aside class="brief-review" aria-labelledby="brief-review-heading">
+        <p class="eyebrow">3 · Review &amp; continue</p><h3 id="brief-review-heading">Your Quote Brief</h3><p>Change any selection to update this summary.</p>
+        <textarea class="brief-summary" data-brief-summary readonly rows="14" aria-label="Your packaging brief summary"></textarea>
+        <button class="button" type="submit" form="brief-selection-form" data-brief-continue>Continue to Enquiry →</button>
+        <p class="brief-note">This step does not send an enquiry or place an order. Add your name, email and any artwork on the next page.</p>
+        <div class="brief-tools"><button class="text-link" type="button" data-brief-copy>Copy brief</button><button class="text-link" type="button" data-brief-clear>Clear selections</button></div>
+        <p class="brief-status" data-brief-status role="status" aria-live="polite"></p>
+        <a class="text-link" data-brief-fallback href={`/quote/?product=${product.slug}#quote-form`} hidden>Open enquiry form to paste your brief →</a>
+        <p class="brief-note">Selections are kept in this browser tab for up to 24 hours, so you can return and edit. Contact details and files are added separately. <a href="/privacy/#quote-brief-storage">Privacy details</a></p>
+      </aside>
+    </div>
+    <script type="application/json" data-brief-catalogue set:html={JSON.stringify(catalogue).replace(/</g, '\\u003c')}></script>
+  </div>
+</section>
+
+<style>
+  .brief-section{scroll-margin-top:100px;background:var(--cream)}.brief-section .section-head{margin-bottom:16px}.brief-context{max-width:950px;color:var(--muted);font-size:.94rem;line-height:1.7;margin-bottom:28px}
+  .brief-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:start}.brief-layout[hidden],.brief-section [hidden]{display:none}
+  .brief-form,.brief-review{min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}.brief-form fieldset{border:0;min-width:0;margin:0;padding:0}.brief-form fieldset+fieldset{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+  .brief-form legend{font-weight:700;font-size:1.1rem;margin-bottom:18px;padding:0}.brief-form legend span{display:inline-grid;place-items:center;background:var(--ink);color:#fff;border-radius:50%;width:28px;height:28px;margin-right:8px;font-size:.85rem}
+  .brief-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px}.brief-wide{grid-column:1/-1}.brief-fields .field{min-width:0}.brief-fields label{display:block;font-size:.88rem;font-weight:650;margin-bottom:7px}.brief-fields input,.brief-fields select,.brief-fields textarea{box-sizing:border-box;width:100%;min-width:0;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:16px;padding:11px 12px}.brief-fields small{display:block;color:var(--muted);font-size:.78rem;line-height:1.55;margin-top:7px}
+  .brief-more{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.brief-more summary{cursor:pointer;font-size:.9rem;font-weight:650;line-height:1.6}.brief-more[open] summary{margin-bottom:18px}.brief-review h3{font-size:1.5rem;margin:0 0 10px}.brief-review>p:not(.eyebrow){font-size:.88rem;line-height:1.65}.brief-summary{box-sizing:border-box;width:100%;min-height:330px;resize:vertical;line-height:1.7;font:inherit;font-size:.85rem;color:var(--ink);background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:16px;margin:8px 0 18px}.brief-review>.button{width:100%;box-sizing:border-box;white-space:normal;text-align:center;justify-content:center}.brief-tools{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px}.brief-tools button{background:none;border:0;cursor:pointer;padding:0;font:inherit;font-size:.88rem;text-align:left}.brief-note{color:var(--muted)}.brief-note a{text-decoration:underline}.brief-status:empty{display:none}.brief-status{font-weight:600;overflow-wrap:anywhere}
+  @media(max-width:980px){.brief-layout{grid-template-columns:1fr;gap:20px}.brief-summary{min-height:290px}}
+  @media(max-width:540px){.brief-form,.brief-review{padding:20px 16px;border-radius:12px}.brief-fields{grid-template-columns:1fr}.brief-summary{font-size:.82rem}.brief-review h3{font-size:1.3rem}}
+</style>
