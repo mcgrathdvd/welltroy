@@ -16,6 +16,7 @@ import {secondaryBuyerProjects} from "../../secondary-buyer-projects.mjs";
 import { approximateInches } from "../../mailer-options.mjs";
 import polyPackingSource from "../../assets/new-products/poly-mailers-apparel-packing.jpg";
 import bubbleCaseSource from "../../assets/new-products/bubble-mailer-lumiere-case.png";
+import { buyerQuestions } from "../../buyer-questions.mjs";
 import Faq from "../../components/Faq.astro";
 import { products, catalogueProducts, site } from "../../data.mjs";
 import { catalogue, minimumOrder, orderTerms } from "../../ordering.mjs";
@@ -30,7 +31,8 @@ const secondaryProject = secondaryBuyerProjects[product.slug];
 const hasSizeComparison = ["poly-mailers", "poly-bubble-mailers", "zipper-bags"].includes(product.slug);
 const hasQuoteBrief = Object.hasOwn(briefProducts, product.slug);
 const hasSpecificationChecks = Object.hasOwn(bagSpecifications, product.slug);
-const productFaqs = [...product.faqs, ...(secondaryProject?.faqs || [])];
+const extraBuyerQuestions = buyerQuestions[product.slug] || [];
+const productFaqs = [...product.faqs, ...extraBuyerQuestions, ...(secondaryProject?.faqs || [])];
 const searchTitles = {
   'poly-mailers': 'Custom Printed Poly Mailers | MOQ 500 | Welltroy',
   'biodegradable-mailers': 'Biodegradable Mailers | Sizes & Material Details | Welltroy',
@@ -124,7 +126,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
           <a class="button button-secondary" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} rel="noopener">Ask on WhatsApp</a>
         </div>
         {product.slug === "poly-mailers" && <p class="poly-fit-entry">Packing T-shirts or hoodies? <a href="/guides/mailer-size-for-clothing/">Measure your complete pack and compare candidate sizes →</a></p>}
-        <p class="product-detail-links">{hasSpecificationChecks && <a href="#specification-checks">Compare order specifications ↓</a>}{hasSizeComparison && <a href="#size-comparison">Compare packed-item sizes ↓</a>}{hasQuoteBrief && <a href="#quote-brief">Build your quote brief ↓</a>}{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{(primaryMailerSlugs.includes(product.slug) || secondaryProject) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <><a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a><a href="#poly-mailer-case">Delivered apparel case ↓</a></>}<a href={hasQuoteBrief ? "#catalogue-sizes" : "#product-features"}>{hasQuoteBrief ? "Compare catalogue sizes ↓" : "Compare features & sizes ↓"}</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <><a href="#lumiere-case">LUMIÈRE project ↓</a><a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a></>}</p>
+        <p class="product-detail-links">{hasSpecificationChecks && <a href="#specification-checks">Compare order specifications ↓</a>}{hasSizeComparison && <a href="#size-comparison">Compare packed-item sizes ↓</a>}{hasQuoteBrief && <a href="#quote-brief">Build your quote brief ↓</a>}{extraBuyerQuestions.length > 0 && <a href="#buyer-questions">Buyer questions ↓</a>}{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{(primaryMailerSlugs.includes(product.slug) || secondaryProject) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <><a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a><a href="#poly-mailer-case">Delivered apparel case ↓</a></>}<a href={hasQuoteBrief ? "#catalogue-sizes" : "#product-features"}>{hasQuoteBrief ? "Compare catalogue sizes ↓" : "Compare features & sizes ↓"}</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <><a href="#lumiere-case">LUMIÈRE project ↓</a><a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a></>}</p>
       </div>
     </div>
   </section>
@@ -153,7 +155,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
   {product.slug === "poly-bubble-mailers" && <BubbleMailerCases />}
   {product.group === "Mailing & Protective Packaging" && <section class="section"><div class="container guide-inline"><div><p class="eyebrow">Buying guide</p><h2>Choosing Between Mailer Formats?</h2><p>Compare lightweight and cushioned options, learn which dimensions to measure, and prepare the details needed for a quotation.</p></div><a class="button button-secondary" href="/guides/choose-a-mailer/">Read the mailer guide</a></div></section>}
   {product.relatedGuide && <section class="section"><div class="container guide-inline"><div><p class="eyebrow">Related buying advice</p><h2>Check the Packing Details</h2><p>Use the relevant guide or application checklist before confirming your product specification.</p></div><a class="button button-secondary" href={product.relatedGuide.href}>{product.relatedGuide.title}</a></div></section>}
-  <section class="section"><div class="container"><div class="section-head"><div><p class="eyebrow">Product FAQ</p><h2>Questions About {product.name}</h2></div></div><Faq items={productFaqs} /></div></section>
+  <section class="section" id={extraBuyerQuestions.length ? "buyer-questions" : undefined}><div class="container"><div class="section-head"><div><p class="eyebrow">Product FAQ</p><h2>Questions About {product.name}</h2></div></div><Faq items={productFaqs} />{extraBuyerQuestions.length > 0 && <p class="muted">{product.slug === "zipper-bags" ? <a href="/guides/apparel-inner-bags-and-shipping-mailers/#label-readability">Check garment labels, inner bags and the outer shipping pack →</a> : <><a href="/guides/custom-mailer-sample-approval/#shipping-label-trial">Record the shipping-label and sample checks →</a> · <a href="/guides/choose-a-mailer/#us-shipping-measurements">Separate bag sizing from US shipping measurements →</a></>}</p>}</div></section>
   {related.length > 0 && <section class="section section-soft"><div class="container"><div class="section-head"><div><p class="eyebrow">Related products</p><h2>Compare Similar Options</h2></div></div><div class="product-grid">{related.map((item) => <ProductCard product={item} />)}</div></div></section>}
   <section class="cta-band"><div class="container inner"><div><h2>Need Pricing for {product.name}?</h2><p>Send the model or size, quantity, customization requirements and destination country.</p></div><a class="button button-light" href={`/quote/?product=${product.slug}#quote-form`} data-quote-placement="product-bottom">Request a Custom Quote</a></div></section>
 </Layout>
