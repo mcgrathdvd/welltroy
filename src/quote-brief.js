@@ -54,10 +54,11 @@ function initializeBuilder(root) {
     selectedComparison = saved.comparison || null;
     for (const [name, value] of Object.entries(saved)) {
       const field = form.elements.namedItem(name);
-      if (field) field.value = value;
+      if (field?.type === 'checkbox') field.checked = value === true;
+      else if (field) field.value = value;
     }
     status.textContent = 'Your selections from this tab have been restored. Review or change them before continuing.';
-    if (saved.material || saved.timing || saved.notes || saved.sample !== 'not-sure') root.querySelector('.brief-more').open = true;
+    if (saved.material || saved.innerSize || saved.closure || saved.liner || saved.appearance || saved.packout || saved.detailPhotos || saved.timing || saved.notes || saved.sample !== 'not-sure') root.querySelector('.brief-more').open = true;
   }
   render();
   root.querySelector('[data-brief-ui]').hidden = false;
@@ -85,6 +86,21 @@ function initializeBuilder(root) {
   };
   form.addEventListener('input', changed);
   form.addEventListener('change', changed);
+  const openSpecificationFields = () => {
+    if (location.hash === '#brief-specification-checks') root.querySelector('.brief-more').open = true;
+  };
+  window.addEventListener('hashchange', openSpecificationFields);
+  openSpecificationFields();
+  document.querySelectorAll('[data-open-spec-brief]').forEach(link => link.addEventListener('click', event => {
+    root.querySelector('.brief-more').open = true;
+    const photoRequest = form.elements.namedItem('detailPhotos');
+    if (link.hasAttribute('data-request-detail-photos') && photoRequest) {
+      photoRequest.checked = true;
+      render(); saveBrief(storage, current());
+      status.textContent = 'A request about available detail photos was added to your brief. Review the specifications before continuing.';
+      if (event.isTrusted && !started) started = track('quote_brief_start', { product_slug: product });
+    }
+  }));
   document.querySelectorAll('[data-add-brief-model]').forEach(link => {
     link.addEventListener('click', event => {
       selectedComparison = null;

@@ -1,5 +1,6 @@
 import { catalogueModels } from './catalogue-models.mjs';
 import { comparisonMeasurements, packedDimensionsText, comparisonBriefText } from './packed-size.mjs';
+import { specificationFields, specificationLabels, detailPhotoRequest } from './bag-specification.mjs';
 
 export const briefProducts = {
   'poly-mailers': 'Poly Mailers',
@@ -35,6 +36,8 @@ export function normalizeBrief(value) {
   result.sizeMode = ['catalogue', 'custom', 'help'].includes(value.sizeMode) ? value.sizeMode : 'help';
   result.model = result.sizeMode === 'catalogue' && catalogueModels[value.product].includes(value.model) ? value.model : '';
   for (const [key, max] of Object.entries(textLimits)) result[key] = cleanText(value[key], max);
+  for (const key of specificationFields[result.product] || []) result[key] = cleanText(value[key], 160);
+  if (specificationFields[result.product]) result.detailPhotos = value.detailPhotos === true || value.detailPhotos === 'yes';
   // Hidden options must not leak into the brief after the buyer changes size mode.
   if (result.sizeMode !== 'custom') result.customSize = '';
   result.printing = Object.hasOwn(printChoices, value.printing) ? value.printing : 'not-sure';
@@ -74,12 +77,14 @@ export function briefText(brief, catalogue = {}) {
     `Packed item dimensions: ${b.packedSize || 'To be confirmed'}`,
     `Contents / packing use: ${b.goods || 'To be confirmed'}`,
     `Material / thickness / structure preference: ${b.material || 'Please advise'}`,
+    ...(specificationFields[b.product] || []).filter(key => b[key]).map(key => `${specificationLabels[key]}: ${b[key]}`),
     `Printing: ${printChoices[b.printing]}`,
     ...(b.printing === 'unprinted' ? [] : [`Printed sides: ${sideChoices[b.sides]}`]),
     `Quantity for this size and design: ${b.quantity || 'Not sure yet'}`,
     `Destination country / port: ${b.destination || 'To be confirmed'}`,
     `Target timing: ${b.timing || 'To be discussed'}`,
     `Sample preference: ${sampleChoices[b.sample]}`,
+    ...(b.detailPhotos ? [detailPhotoRequest(b.product)] : []),
     ...(b.comparison && comparisonBriefText(b.product, catalogue[b.product], b.comparison) ? [comparisonBriefText(b.product, catalogue[b.product], b.comparison)] : []),
     ...(b.notes ? [`Additional requirements: ${b.notes}`] : []),
     'Please confirm current availability, usable inner dimensions, material, minimum quantity, pricing and delivery before ordering.'
