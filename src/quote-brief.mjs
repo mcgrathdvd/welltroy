@@ -5,7 +5,14 @@ import { specificationFields, specificationLabels, detailPhotoRequest } from './
 export const briefProducts = {
   'poly-mailers': 'Poly Mailers',
   'poly-bubble-mailers': 'Poly Bubble Mailers',
-  'zipper-bags': 'Zipper Bags'
+  'zipper-bags': 'Zipper Bags',
+  'metallic-bubble-mailers': 'Metallic & Holographic Bubble Mailers'
+};
+export const finishChoices = {
+  'not-sure': 'Please advise on the finish',
+  metallic: 'Metallic reflective finish',
+  holographic: 'Holographic finish',
+  compare: 'Compare metallic and holographic samples'
 };
 export const printChoices = {
   'not-sure': 'Please advise on printing',
@@ -40,6 +47,10 @@ export function normalizeBrief(value) {
   if (specificationFields[result.product]) result.detailPhotos = value.detailPhotos === true || value.detailPhotos === 'yes';
   // Hidden options must not leak into the brief after the buyer changes size mode.
   if (result.sizeMode !== 'custom') result.customSize = '';
+  if (result.product === 'metallic-bubble-mailers') {
+    result.finish = Object.hasOwn(finishChoices, value.finish) ? value.finish : 'not-sure';
+    result.finishReference = cleanText(value.finishReference, 160);
+  }
   result.printing = Object.hasOwn(printChoices, value.printing) ? value.printing : 'not-sure';
   result.sides = result.printing !== 'unprinted' && Object.hasOwn(sideChoices, value.sides) ? value.sides : 'not-sure';
   result.sample = Object.hasOwn(sampleChoices, value.sample) ? value.sample : 'not-sure';
@@ -78,6 +89,7 @@ export function briefText(brief, catalogue = {}) {
     `Contents / packing use: ${b.goods || 'To be confirmed'}`,
     `Material / thickness / structure preference: ${b.material || 'Please advise'}`,
     ...(specificationFields[b.product] || []).filter(key => b[key]).map(key => `${specificationLabels[key]}: ${b[key]}`),
+    ...(b.product === 'metallic-bubble-mailers' ? [`Requested surface effect: ${finishChoices[b.finish]}`, `Finish reference / sample checks: ${b.finishReference || 'Please advise; confirm the actual surface on a sample'}`] : []),
     `Printing: ${printChoices[b.printing]}`,
     ...(b.printing === 'unprinted' ? [] : [`Printed sides: ${sideChoices[b.sides]}`]),
     `Quantity for this size and design: ${b.quantity || 'Not sure yet'}`,

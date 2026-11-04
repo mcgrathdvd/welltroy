@@ -1,11 +1,13 @@
 ---
 import { products } from '../data.mjs';
-import { briefProducts, printChoices, sideChoices, sampleChoices } from '../quote-brief.mjs';
+import { briefProducts, finishChoices, printChoices, sideChoices, sampleChoices } from '../quote-brief.mjs';
 import PackedSizeComparison from './PackedSizeComparison.astro';
 import SpecificationBriefFields from './SpecificationBriefFields.astro';
 import { specificationFields } from '../bag-specification.mjs';
 const { product } = Astro.props;
-const isBubble = product.slug === 'poly-bubble-mailers';
+const isMetallic = product.slug === 'metallic-bubble-mailers';
+const isBubble = product.slug === 'poly-bubble-mailers' || isMetallic;
+const hasSizeComparison = !isMetallic;
 const isZipper = product.slug === 'zipper-bags';
 const hasSpecificationFields = Boolean(specificationFields[product.slug]);
 const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefProducts, p.slug)).map(p => [p.slug, p.sizes]));
@@ -15,7 +17,7 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
     <div class="section-head"><div><p class="eyebrow">Plan your custom order</p><h2 id="brief-heading">Build Your {product.name} Quote Brief</h2><p class="lead">Choose a catalogue model, describe a custom size or ask for help. Review your selections, then add contact details on the enquiry page.</p></div></div>
     <p class="brief-context">Catalogue dimensions are outer measurements, not guaranteed usable space. {isZipper ? 'Confirm the opening and zipper construction, and include any outer shipping packaging in your plan.' : isBubble ? 'Allow for the bubble lining, opening and adhesive flap when checking the complete pack.' : 'Measure the finished pack with inner bags, wrapping and inserts included.'} Minimum quantity and available options are confirmed for each size and design.</p>
     <noscript><p class="alert">Enable JavaScript to build and carry your brief, or <a href={`/quote/?product=${product.slug}#quote-form`}>enter your requirements directly on the enquiry page</a>.</p></noscript>
-    <PackedSizeComparison product={product} />
+    {hasSizeComparison && <PackedSizeComparison product={product} />}
     <div class="brief-layout" data-brief-ui hidden>
       <form id="brief-selection-form" class="brief-form" data-brief-form>
         <fieldset><legend><span>1</span> Size &amp; contents</legend>
@@ -27,8 +29,9 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
             <div class="field"><label for="brief-packed-size">Packed item dimensions (optional)</label><input id="brief-packed-size" name="packedSize" maxlength="160" placeholder="Width × length × thickness, with units" /><small>This records your measurements; it does not calculate or guarantee fit.</small></div>
           </div>
         </fieldset>
-        <fieldset><legend><span>2</span> Printing &amp; order</legend>
+        <fieldset><legend><span>2</span> {isMetallic ? 'Finish, printing & order' : 'Printing & order'}</legend>
           <div class="brief-fields">
+            {isMetallic && <><div class="field"><label for="brief-finish">Surface effect to review</label><select id="brief-finish" name="finish">{Object.entries(finishChoices).map(([value,label]) => <option value={value}>{label}</option>)}</select><small>Both finishes can be discussed. Exact effects, size and printing are confirmed for your configuration.</small></div><div class="field"><label for="brief-finish-reference">Finish reference / sample checks (optional)</label><input id="brief-finish-reference" name="finishReference" maxlength="160" placeholder="Describe color, effect, logo or label checks" /><small>Add a reference image on the enquiry page; confirm the surface on a physical sample.</small></div></>}
             <div class="field"><label for="brief-printing">Printing preference</label><select id="brief-printing" name="printing">{Object.entries(printChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
             <div class="field" data-brief-sides-field><label for="brief-sides">Printed sides</label><select id="brief-sides" name="sides">{Object.entries(sideChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
             <div class="field"><label for="brief-quantity">Quantity for this size &amp; design</label><input id="brief-quantity" name="quantity" maxlength="100" placeholder="e.g. 1,000 pieces, or Not sure" /><small>Each size, color and artwork version is checked separately.</small></div>
