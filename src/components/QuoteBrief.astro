@@ -2,9 +2,12 @@
 import { products } from '../data.mjs';
 import { briefProducts, printChoices, sideChoices, sampleChoices } from '../quote-brief.mjs';
 import PackedSizeComparison from './PackedSizeComparison.astro';
+import SpecificationBriefFields from './SpecificationBriefFields.astro';
+import { specificationFields } from '../bag-specification.mjs';
 const { product } = Astro.props;
 const isBubble = product.slug === 'poly-bubble-mailers';
 const isZipper = product.slug === 'zipper-bags';
+const hasSpecificationFields = Boolean(specificationFields[product.slug]);
 const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefProducts, p.slug)).map(p => [p.slug, p.sizes]));
 ---
 <section class="section brief-section" id="quote-brief" aria-labelledby="brief-heading" data-quote-brief data-product={product.slug}>
@@ -31,8 +34,9 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
             <div class="field"><label for="brief-quantity">Quantity for this size &amp; design</label><input id="brief-quantity" name="quantity" maxlength="100" placeholder="e.g. 1,000 pieces, or Not sure" /><small>Each size, color and artwork version is checked separately.</small></div>
             <div class="field"><label for="brief-destination">Destination country / port</label><input id="brief-destination" name="destination" maxlength="160" placeholder="e.g. United States, Los Angeles" /><small>You can leave this open and add it on the enquiry page.</small></div>
           </div>
-          <details class="brief-more"><summary>Add material, sample &amp; timing preferences (optional)</summary><div class="brief-fields">
+          <details class="brief-more"><summary>{hasSpecificationFields ? 'Add specification checks, samples & timing (optional)' : 'Add material, sample & timing preferences (optional)'}</summary><div class="brief-fields">
             <div class="field brief-wide"><label for="brief-material">{isBubble ? 'Outer film / cushioning preference' : isZipper ? 'Material / thickness / zipper preference' : 'Material / single-wall thickness preference'}</label><input id="brief-material" name="material" maxlength="160" placeholder="Describe your preference, or leave it for our advice" /><small>Preferences are requests for review, not confirmed available configurations.</small></div>
+            {hasSpecificationFields && <SpecificationBriefFields slug={product.slug} />}
             <div class="field"><label for="brief-sample">Sample preference</label><select id="brief-sample" name="sample">{Object.entries(sampleChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
             <div class="field"><label for="brief-timing">Target timing</label><input id="brief-timing" name="timing" maxlength="100" placeholder="e.g. required arrival month, or Flexible" /></div>
             <div class="field brief-wide"><label for="brief-notes">Additional requirements</label><textarea id="brief-notes" name="notes" maxlength="600" rows="3" placeholder="Other sizes, artwork versions or checks you would like to discuss"></textarea></div>
