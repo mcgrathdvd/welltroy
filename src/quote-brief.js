@@ -3,6 +3,8 @@ import {
   readBrief, saveBrief, clearBrief, fieldsAfterProductChange, quoteFieldsAreEmpty
 } from './quote-brief.mjs';
 import { track } from './analytics.js';
+import { initializePackedSize } from './packed-size.js';
+import { packedDimensionsText } from './packed-size.mjs';
 
 function session() {
   try { return window.sessionStorage; } catch { return null; }
@@ -30,7 +32,8 @@ function initializeBuilder(root) {
   const fallback = root.querySelector('[data-brief-fallback]');
   const storage = session();
   let started = false;
-  const current = () => normalizeBrief({ ...formValues(form), product });
+  let selectedComparison = null;
+  const current = () => normalizeBrief({ ...formValues(form), product, comparison: selectedComparison });
   const render = () => {
     const mode = form.elements.sizeMode.value;
     for (const [value, selector, field] of [
@@ -48,6 +51,7 @@ function initializeBuilder(root) {
   };
   const saved = readBrief(storage, product);
   if (saved) {
+    selectedComparison = saved.comparison || null;
     for (const [name, value] of Object.entries(saved)) {
       const field = form.elements.namedItem(name);
       if (field) field.value = value;
@@ -57,7 +61,19 @@ function initializeBuilder(root) {
   }
   render();
   root.querySelector('[data-brief-ui]').hidden = false;
+  initializePackedSize(root, { product, catalogue: catalogue[product], saved: selectedComparison, choose: (comparison, trusted) => {
+    selectedComparison = comparison;
+    form.elements.sizeMode.value = comparison.model ? 'catalogue' : 'help';
+    form.elements.model.value = comparison.model;
+    form.elements.packedSize.value = packedDimensionsText(comparison);
+    render();
+    saveBrief(storage, current());
+    status.textContent = comparison.model ? `${comparison.model} and comparison assumptions added. Review before continuing.` : 'Packed measurements added for sizing advice.';
+    if (trusted && !started) started = track('quote_brief_start', { product_slug: product });
+    if (trusted && comparison.model) track('select_size', { product_slug: product, model: comparison.model });
+  }});
   const changed = event => {
+    if (['sizeMode', 'model', 'packedSize'].includes(event.target.name)) selectedComparison = null;
     render();
     saveBrief(storage, current());
     status.textContent = '';
@@ -71,6 +87,7 @@ function initializeBuilder(root) {
   form.addEventListener('change', changed);
   document.querySelectorAll('[data-add-brief-model]').forEach(link => {
     link.addEventListener('click', event => {
+      selectedComparison = null;
       form.elements.sizeMode.value = 'catalogue';
       form.elements.model.value = link.dataset.addBriefModel;
       render();
@@ -105,6 +122,8 @@ function initializeBuilder(root) {
   });
   root.querySelector('[data-brief-clear]').addEventListener('click', () => {
     form.reset();
+    selectedComparison = null;
+    root.dispatchEvent(new Event('welltroy:brief-cleared'));
     clearBrief(storage, product);
     render();
     fallback.hidden = true;

@@ -1,6 +1,7 @@
 ---
 import { products } from '../data.mjs';
 import { briefProducts, printChoices, sideChoices, sampleChoices } from '../quote-brief.mjs';
+import PackedSizeComparison from './PackedSizeComparison.astro';
 const { product } = Astro.props;
 const isBubble = product.slug === 'poly-bubble-mailers';
 const isZipper = product.slug === 'zipper-bags';
@@ -11,6 +12,7 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
     <div class="section-head"><div><p class="eyebrow">Plan your custom order</p><h2 id="brief-heading">Build Your {product.name} Quote Brief</h2><p class="lead">Choose a catalogue model, describe a custom size or ask for help. Review your selections, then add contact details on the enquiry page.</p></div></div>
     <p class="brief-context">Catalogue dimensions are outer measurements, not guaranteed usable space. {isZipper ? 'Confirm the opening and zipper construction, and include any outer shipping packaging in your plan.' : isBubble ? 'Allow for the bubble lining, opening and adhesive flap when checking the complete pack.' : 'Measure the finished pack with inner bags, wrapping and inserts included.'} Minimum quantity and available options are confirmed for each size and design.</p>
     <noscript><p class="alert">Enable JavaScript to build and carry your brief, or <a href={`/quote/?product=${product.slug}#quote-form`}>enter your requirements directly on the enquiry page</a>.</p></noscript>
+    <PackedSizeComparison product={product} />
     <div class="brief-layout" data-brief-ui hidden>
       <form id="brief-selection-form" class="brief-form" data-brief-form>
         <fieldset><legend><span>1</span> Size &amp; contents</legend>

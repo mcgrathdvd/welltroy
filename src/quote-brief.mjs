@@ -1,4 +1,5 @@
 import { catalogueModels } from './catalogue-models.mjs';
+import { comparisonMeasurements, packedDimensionsText, comparisonBriefText } from './packed-size.mjs';
 
 export const briefProducts = {
   'poly-mailers': 'Poly Mailers',
@@ -39,6 +40,12 @@ export function normalizeBrief(value) {
   result.printing = Object.hasOwn(printChoices, value.printing) ? value.printing : 'not-sure';
   result.sides = result.printing !== 'unprinted' && Object.hasOwn(sideChoices, value.sides) ? value.sides : 'not-sure';
   result.sample = Object.hasOwn(sampleChoices, value.sample) ? value.sample : 'not-sure';
+  const measurement = comparisonMeasurements(value.comparison);
+  if (measurement && result.packedSize === packedDimensionsText(measurement)
+    && ((result.sizeMode === 'catalogue' && result.model && value.comparison.model === result.model)
+      || (result.sizeMode === 'help' && !value.comparison.model))) {
+    result.comparison = { ...measurement, model: result.model };
+  }
   return result;
 }
 
@@ -73,6 +80,7 @@ export function briefText(brief, catalogue = {}) {
     `Destination country / port: ${b.destination || 'To be confirmed'}`,
     `Target timing: ${b.timing || 'To be discussed'}`,
     `Sample preference: ${sampleChoices[b.sample]}`,
+    ...(b.comparison && comparisonBriefText(b.product, catalogue[b.product], b.comparison) ? [comparisonBriefText(b.product, catalogue[b.product], b.comparison)] : []),
     ...(b.notes ? [`Additional requirements: ${b.notes}`] : []),
     'Please confirm current availability, usable inner dimensions, material, minimum quantity, pricing and delivery before ordering.'
   ].join('\n');
