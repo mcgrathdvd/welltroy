@@ -8,7 +8,7 @@ const article = {
   '@context': 'https://schema.org', '@type': 'Article',
   '@id': `${site.origin}${path}#article`, headline: title, description,
   author: {'@id': `${site.origin}/#organization`}, publisher: {'@id': `${site.origin}/#organization`},
-  mainEntityOfPage: `${site.origin}${path}`, datePublished: '2026-10-29', dateModified: '2026-10-31', inLanguage: 'en'
+  mainEntityOfPage: `${site.origin}${path}`, datePublished: '2026-10-29', dateModified: '2026-11-04', inLanguage: 'en'
 };
 const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[
   {'@type':'ListItem',position:1,name:'Home',item:site.origin},
@@ -34,7 +34,8 @@ const checks = [
     <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Metallic &amp; holographic finishes</div>
     <p class="eyebrow">Choose the finish before approving the sample</p><h1>{title}</h1>
     <p class="lead">A metallic finish describes a reflective appearance. A holographic finish can add patterns, movement or depth as the viewing angle changes; many show rainbow colors, but some do not. A mailer can combine both effects. Specify the finish separately from its material, cushioning and usable size.</p>
-    <p class="muted">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-10-31">31 October 2026</time></p>
+    <p class="muted">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-11-04">4 November 2026</time></p>
+    <div class="button-row"><a class="button" href="/products/metallic-bubble-mailers/#quote-brief" data-quote-placement="content">Choose a Finish &amp; Build My Brief</a><a class="text-link" href="/products/metallic-bubble-mailers/#catalogue-sizes">Compare 9 Catalogue Sizes →</a><a class="text-link" href="/products/metallic-bubble-mailers/#brief-sample">Discuss Samples of Both Finishes →</a></div>
     <nav class="anchor-links" aria-label="In this guide"><a href="#compare">Compare finishes</a><a href="#sizes">Sizes &amp; printing</a><a href="#brief">Quote checklist</a><a href="#questions">Common questions</a></nav>
   </div></section>
   <section class="section"><div class="container article-layout"><article class="article-main">
@@ -58,7 +59,7 @@ const checks = [
     <p><a class="text-link" href="/downloads/bubble-mailer-quote-brief.txt" download>Download the editable bubble mailer quote brief (.txt) ↓</a> Record the surface reference separately from the packed-item dimensions and protection checks. Complete one brief for each size, finish and design.</p>
     <dl class="finish-checklist">{checks.map(([label,text])=><div><dt>{label}</dt><dd>{text}</dd></div>)}</dl>
     <p>Eligible Welltroy bag specifications start from 500 pieces. Confirm the minimum for each size, finish and artwork; the starting quantity does not establish availability of every holographic effect. A free initial design draft is offered within 24 hours after a clear brief. The sample delivery target is within seven days after specifications and artwork are confirmed, depending on destination; confirm sample type and courier charges.</p>
-    <div class="button-row"><a class="button" href="/quote/?product=metallic-bubble-mailers#quote-form" data-quote-placement="content">Discuss My Mailer Finish</a><a class="text-link" href="/ordering/">Sample and order terms →</a></div>
+    <div class="button-row"><a class="button" href="/products/metallic-bubble-mailers/#quote-brief" data-quote-placement="content">Build My Mailer Finish Brief</a><a class="text-link" href="/ordering/">Sample and order terms →</a></div>
     <h2 id="questions">Common Questions</h2>
     <h3>Can Welltroy provide samples of both finishes?</h3><p>Yes. Samples are available for both metallic reflective and holographic bubble mailers. Share the required finish, size and destination so we can confirm the sample configuration, schedule and courier arrangements.</p>
     <h3>Does a silver bubble mailer automatically have a holographic effect?</h3><p>No. Silver describes a color or metallic appearance. Ask for the required optical effect and approve a physical sample; a reflective photograph alone does not confirm it.</p>
