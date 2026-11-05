@@ -89,7 +89,14 @@ function initializeBuilder(root) {
   form.addEventListener('change', changed);
   const openSpecificationFields = () => {
     if (['#brief-specification-checks', '#brief-sample'].includes(location.hash)) root.querySelector('.brief-more').open = true;
-    if (location.hash === '#quote-delivery-checks') root.querySelector('[data-brief-delivery]').open = true;
+    if (location.hash === '#quote-delivery-checks') {
+      const delivery = root.querySelector('[data-brief-delivery]');
+      delivery.open = true;
+      // Native fragment/scroll restoration may run while the brief is still hidden.
+      const revealDelivery = () => requestAnimationFrame(() => delivery.scrollIntoView({ block: 'start', behavior: 'instant' }));
+      if (document.readyState === 'complete') revealDelivery();
+      else window.addEventListener('load', revealDelivery, { once: true });
+    }
   };
   window.addEventListener('hashchange', openSpecificationFields);
   openSpecificationFields();
