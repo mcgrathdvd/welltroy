@@ -1,0 +1,14 @@
+---
+import { deliveryScopeChoices } from '../quote-brief.mjs';
+---
+<details class="delivery-checks" id="quote-delivery-checks" data-brief-delivery>
+  <summary>Compare quantities &amp; delivery costs (optional)</summary>
+  <p>Keep the same size, material and artwork for each quantity comparison. These are requests for a written quotation; available options, minimums and charges are confirmed separately.</p>
+  <div class="delivery-fields">
+    <div><label for="brief-alternative-quantities">Alternative quantities to compare</label><input id="brief-alternative-quantities" name="alternativeQuantities" maxlength="100" placeholder="e.g. 500, 1,000 and 3,000 pieces of this version" /><small>Alternatives for the same configuration, not quantities to combine across designs.</small></div>
+    <div><label for="brief-postal-code">Destination ZIP / postal code</label><input id="brief-postal-code" name="postalCode" maxlength="32" placeholder="If known, include the delivery postal code" /><small>Share the destination country above too.</small></div>
+    <div class="delivery-wide"><label for="brief-delivery-scope">Delivery quotation preference</label><select id="brief-delivery-scope" name="deliveryScope">{Object.entries(deliveryScopeChoices).map(([value,label])=><option value={value}>{label}</option>)}</select><small>Confirm which destination charges are included, excluded, estimated or still pending.</small></div>
+  </div>
+  <label class="delivery-breakdown" for="brief-itemized-quote"><input id="brief-itemized-quote" type="checkbox" name="itemizedQuote" value="yes" /><span>Request itemized product, setup, sample-related and delivery charges, with currency and quote validity</span></label>
+</details>
+<style>.delivery-checks{border-top:1px solid var(--line);margin-top:22px;padding-top:18px;scroll-margin-top:110px;min-width:0}.delivery-checks summary{cursor:pointer;font-size:.9rem;font-weight:650;line-height:1.6}.delivery-checks>p{font-size:.82rem;line-height:1.65;color:var(--muted);margin:14px 0 18px}.delivery-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px}.delivery-fields>div{min-width:0}.delivery-wide{grid-column:1/-1}.delivery-fields label{display:block;font-size:.88rem;font-weight:650;margin-bottom:7px}.delivery-fields input,.delivery-fields select{box-sizing:border-box;width:100%;min-width:0;border:1px solid var(--line);border-radius:8px;padding:11px 12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}.delivery-fields small{display:block;color:var(--muted);font-size:.78rem;line-height:1.55;margin-top:7px}.delivery-breakdown{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;line-height:1.6;font-weight:500;margin-top:18px;cursor:pointer}.delivery-breakdown input{width:18px;height:18px;margin:3px 0 0;flex:0 0 18px;accent-color:var(--ink)}@media(max-width:540px){.delivery-fields{grid-template-columns:1fr}}</style>

@@ -1,6 +1,7 @@
 ---
 import { products } from '../data.mjs';
 import { briefProducts, finishChoices, printChoices, sideChoices, sampleChoices } from '../quote-brief.mjs';
+import QuoteDeliveryFields from './QuoteDeliveryFields.astro';
 import PackedSizeComparison from './PackedSizeComparison.astro';
 import SpecificationBriefFields from './SpecificationBriefFields.astro';
 import { specificationFields } from '../bag-specification.mjs';
@@ -41,9 +42,10 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
             <div class="field brief-wide"><label for="brief-material">{isBubble ? 'Outer film / cushioning preference' : isZipper ? 'Material / thickness / zipper preference' : 'Material / single-wall thickness preference'}</label><input id="brief-material" name="material" maxlength="160" placeholder="Describe your preference, or leave it for our advice" /><small>Preferences are requests for review, not confirmed available configurations.</small></div>
             {hasSpecificationFields && <SpecificationBriefFields slug={product.slug} />}
             <div class="field"><label for="brief-sample">Sample preference</label><select id="brief-sample" name="sample">{Object.entries(sampleChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
-            <div class="field"><label for="brief-timing">Target timing</label><input id="brief-timing" name="timing" maxlength="100" placeholder="e.g. required arrival month, or Flexible" /></div>
+            <div class="field"><label for="brief-timing">Target timing</label><input id="brief-timing" name="timing" maxlength="100" placeholder="Required arrival date or timing target" /></div>
             <div class="field brief-wide"><label for="brief-notes">Additional requirements</label><textarea id="brief-notes" name="notes" maxlength="600" rows="3" placeholder="Other sizes, artwork versions or checks you would like to discuss"></textarea></div>
           </div></details>
+          <QuoteDeliveryFields />
         </fieldset>
       </form>
       <aside class="brief-review" aria-labelledby="brief-review-heading">
