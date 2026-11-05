@@ -25,6 +25,12 @@ export const sideChoices = {
   'one-side': 'One side',
   'two-sides': 'Both sides'
 };
+export const deliveryScopeChoices = {
+  'not-sure': 'Please advise on the delivery scope',
+  separate: 'Show bag price and shipping separately',
+  destination: 'Quote delivery to my stated destination'
+};
+export const itemizedQuoteRequest = 'Please itemize product amounts, setup, sample-related and courier charges, carton packing and bulk delivery. Identify included, excluded, estimated or pending destination charges, currency and quote validity.';
 export const sampleChoices = {
   'not-sure': 'Please advise on samples',
   'existing': 'Existing product sample',
@@ -33,7 +39,7 @@ export const sampleChoices = {
 };
 const prefix = 'welltroy-quote-brief-v1:';
 const lifetime = 24 * 60 * 60 * 1000;
-const textLimits = { customSize: 160, packedSize: 160, goods: 160, material: 160, quantity: 100, destination: 160, timing: 100, notes: 600 };
+const textLimits = { customSize: 160, packedSize: 160, goods: 160, material: 160, quantity: 100, destination: 160, timing: 100, notes: 600, alternativeQuantities: 100, postalCode: 32 };
 const cleanText = (value, max) => typeof value === 'string'
   ? value.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '';
 
@@ -53,6 +59,8 @@ export function normalizeBrief(value) {
   }
   result.printing = Object.hasOwn(printChoices, value.printing) ? value.printing : 'not-sure';
   result.sides = result.printing !== 'unprinted' && Object.hasOwn(sideChoices, value.sides) ? value.sides : 'not-sure';
+  result.deliveryScope = Object.hasOwn(deliveryScopeChoices, value.deliveryScope) ? value.deliveryScope : 'not-sure';
+  result.itemizedQuote = value.itemizedQuote === true || value.itemizedQuote === 'yes';
   result.sample = Object.hasOwn(sampleChoices, value.sample) ? value.sample : 'not-sure';
   const measurement = comparisonMeasurements(value.comparison);
   if (measurement && result.packedSize === packedDimensionsText(measurement)
@@ -93,9 +101,13 @@ export function briefText(brief, catalogue = {}) {
     `Printing: ${printChoices[b.printing]}`,
     ...(b.printing === 'unprinted' ? [] : [`Printed sides: ${sideChoices[b.sides]}`]),
     `Quantity for this size and design: ${b.quantity || 'Not sure yet'}`,
+    ...(b.alternativeQuantities ? [`Alternative quantities to compare (same size/design): ${b.alternativeQuantities}`] : []),
     `Destination country / port: ${b.destination || 'To be confirmed'}`,
+    ...(b.postalCode ? [`Destination ZIP / postal code: ${b.postalCode}`] : []),
+    ...(b.deliveryScope !== 'not-sure' ? [`Requested delivery quote scope: ${deliveryScopeChoices[b.deliveryScope]}`] : []),
     `Target timing: ${b.timing || 'To be discussed'}`,
     `Sample preference: ${sampleChoices[b.sample]}`,
+    ...(b.itemizedQuote ? [itemizedQuoteRequest] : []),
     ...(b.detailPhotos ? [detailPhotoRequest(b.product)] : []),
     ...(b.comparison && comparisonBriefText(b.product, catalogue[b.product], b.comparison) ? [comparisonBriefText(b.product, catalogue[b.product], b.comparison)] : []),
     ...(b.notes ? [`Additional requirements: ${b.notes}`] : []),

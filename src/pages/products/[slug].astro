@@ -56,10 +56,10 @@ const pageHeading = {
 const primaryMailerSlugs = ["poly-mailers", "poly-bubble-mailers", "metallic-bubble-mailers"];
 // Published content-update dates; keep the corresponding sitemap entries aligned.
 const publishedContentDates = {
-  "poly-mailers": "2026-11-04",
-  "poly-bubble-mailers": "2026-11-04",
-  "zipper-bags": "2026-11-04",
-  "metallic-bubble-mailers": "2026-11-04",
+  "poly-mailers": "2026-11-05",
+  "poly-bubble-mailers": "2026-11-05",
+  "zipper-bags": "2026-11-05",
+  "metallic-bubble-mailers": "2026-11-05",
   "honeycomb-paper-rolls": "2026-11-01",
   "colored-honeycomb-paper-rolls": "2026-11-01"
 };
@@ -126,7 +126,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
           <a class="button button-secondary" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} rel="noopener">Ask on WhatsApp</a>
         </div>
         {product.slug === "poly-mailers" && <p class="poly-fit-entry">Packing T-shirts or hoodies? <a href="/guides/mailer-size-for-clothing/">Measure your complete pack and compare candidate sizes →</a></p>}
-        <p class="product-detail-links">{hasSpecificationChecks && <a href="#specification-checks">Compare order specifications ↓</a>}{hasSizeComparison && <a href="#size-comparison">Compare packed-item sizes ↓</a>}{hasQuoteBrief && <a href="#quote-brief">Build your quote brief ↓</a>}{extraBuyerQuestions.length > 0 && <a href="#buyer-questions">Buyer questions ↓</a>}{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{(primaryMailerSlugs.includes(product.slug) || secondaryProject) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <><a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a><a href="#poly-mailer-case">Delivered apparel case ↓</a></>}<a href={hasQuoteBrief ? "#catalogue-sizes" : "#product-features"}>{hasQuoteBrief ? "Compare catalogue sizes ↓" : "Compare features & sizes ↓"}</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <><a href="#lumiere-case">LUMIÈRE project ↓</a><a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a></>}</p>
+        <p class="product-detail-links">{hasSpecificationChecks && <a href="#specification-checks">Compare order specifications ↓</a>}{hasSizeComparison && <a href="#size-comparison">Compare packed-item sizes ↓</a>}{hasQuoteBrief && <><a href="#quote-brief">Build your quote brief ↓</a><a href="#quote-delivery-checks">Quantity &amp; delivery quote checks ↓</a></>}{extraBuyerQuestions.length > 0 && <a href="#buyer-questions">Buyer questions ↓</a>}{primaryMailerSlugs.includes(product.slug) && <a href="#order-options">500-piece options ↓</a>}{(primaryMailerSlugs.includes(product.slug) || secondaryProject) && <a href="#buyer-project">Plan your packaging project ↓</a>}{product.slug === "poly-mailers" && <><a href="#poly-mailer-printing">Logo printing &amp; quote brief ↓</a><a href="#poly-mailer-case">Delivered apparel case ↓</a></>}<a href={hasQuoteBrief ? "#catalogue-sizes" : "#product-features"}>{hasQuoteBrief ? "Compare catalogue sizes ↓" : "Compare features & sizes ↓"}</a>{product.gallery?.length > 0 && <a href="#product-gallery">Packing example ↓</a>}{product.slug === "poly-bubble-mailers" && <><a href="#lumiere-case">LUMIÈRE project ↓</a><a href="#bubble-mailer-cases">Customer cases &amp; printing ↓</a></>}</p>
       </div>
     </div>
   </section>
