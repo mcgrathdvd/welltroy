@@ -13,7 +13,7 @@ const variants = await Promise.all(widths.map(width => getImage({ src: source, w
 <style>
   .factory-reference-image{margin:0;min-width:0;border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}
   .factory-reference-image>a{display:block}.factory-reference-image img{display:block;width:100%;height:auto}
-  figcaption{display:flex;gap:16px;justify-content:space-between;align-items:center;padding:18px 22px;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
-  figcaption .text-link{flex-shrink:0;font-size:.86rem}
-  @media(max-width:760px){figcaption{align-items:flex-start;flex-direction:column;padding:16px;gap:10px}}
+  figcaption{display:flex;gap:20px;justify-content:space-between;align-items:center;padding:12px 22px;border-top:1px solid var(--line);font-size:.875rem;line-height:1.65;color:var(--muted);background:var(--paper)}
+  figcaption>span{max-width:760px}figcaption .text-link{display:inline-flex;align-items:center;min-height:44px;flex-shrink:0;font-size:.875rem}
+  @media(max-width:760px){figcaption{align-items:flex-start;flex-direction:column;padding:14px 18px;gap:4px}}
 </style>

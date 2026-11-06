@@ -298,6 +298,7 @@ textarea { min-height: 130px; resize: vertical; }
 .industry-prompt { padding: 16px 20px; background: #f2f6ee; border-left: 3px solid var(--gold); }
 .process-grid-light { background: var(--line); border-color: var(--line); }
 .process-grid-light .step { background: #fff; }
+.process-grid-light .step-no { color: var(--orange); }
 .process-grid-light .step h3 { color: var(--ink); }
 .process-grid-light .step p { color: var(--body); }
 .about-grid { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(300px,.9fr); gap: 70px; align-items: center; }
@@ -368,12 +369,12 @@ textarea { min-height: 130px; resize: vertical; }
 .catalogue-download small { max-width: 430px; color: var(--muted); line-height: 1.45; }
 .editorial-card .text-link { margin-top: auto; padding-top: 24px; }
 .mobile-actions { display: none; }
-.desktop-actions { position: fixed; z-index: 40; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.desktop-actions { position: fixed; z-index: 40; right: 18px; bottom: 18px; display: flex; align-items: center; gap: 10px; }
 .desktop-actions a { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 10px 30px rgba(13, 39, 25, .18); }
 .desktop-actions a:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
-.desktop-whatsapp { width: 58px; height: 58px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .65); background: linear-gradient(145deg, #39da74, #0bb750); color: white; }
+.desktop-whatsapp { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .65); background: linear-gradient(145deg, #39da74, #0bb750); color: white; }
 .desktop-whatsapp:hover { background: #0ba74a; }
-.desktop-quote { min-height: 58px; padding: 14px 26px; gap: 14px; border: 1px solid #b89736; border-radius: 999px; background: var(--quote-gold); color: #11150f; font: 800 .92rem/1.4 Archivo, Inter, sans-serif; letter-spacing: .035em; }
+.desktop-quote { min-height: 48px; padding: 11px 18px; gap: 10px; border: 1px solid #b89736; border-radius: 999px; background: var(--quote-gold); color: #11150f; font: 750 .875rem/1.4 Archivo, Inter, sans-serif; letter-spacing: .015em; }
 .desktop-quote:hover { background: #dec16a; }
 .review-card[id] { scroll-margin-top: 100px; }
 
