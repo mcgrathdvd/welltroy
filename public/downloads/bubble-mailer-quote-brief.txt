@@ -1,5 +1,5 @@
 WELLTROY - BUBBLE MAILER QUOTE AND SAMPLE BRIEF
-Updated: 31 October 2026
+Updated: 6 November 2026
 Fit guide: https://welltroy.com/guides/choose-a-mailer/#bubble-fit-record
 Finish guide: https://welltroy.com/guides/metallic-vs-holographic-bubble-mailers/
 Poly bubble enquiry: https://welltroy.com/quote/?product=poly-bubble-mailers#quote-form
@@ -19,15 +19,19 @@ Additional outer box or protection currently used:
 Shipping route and handling concerns:
 
 2. PROPOSED MAILER
-Range: poly bubble / metallic bubble / holographic bubble / please recommend:
+Range: kraft bubble / poly bubble / metallic bubble / holographic bubble / please recommend:
 Catalogue model or proposed size:
-Confirm usable inner width and length, opening and measurement method:
+Minimum usable inner width and length requested, with units:
+Supplier-confirmed usable opening, inner size, measurement method and tolerance:
 Outer width x body length + flap, if known:
-Offered exterior film, bubble liner, seams and closure:
+Single-wall outer film gauge and unit OR kraft paper weight:
+Bubble liner construction (record separately from outer-film gauge):
+Offered exterior structure, seams and closure:
 Required material documents and destination market:
 
 3. FINISH AND ARTWORK
 Exterior color / finish reference / sample code:
+Appearance requested: matte / gloss / metallic reflective / holographic / please advise:
 For holographic effects, describe the pattern or changing-angle effect:
 Artwork file and version; front / back / both sides:
 Logo size, placement, colors and coverage:
@@ -36,13 +40,24 @@ Ask for the offered print process and sample approval route.
 
 4. QUANTITY AND DELIVERY
 Quantity for THIS size / exterior / artwork:
+Alternative quantities for the SAME specification (e.g. 500 / 1000 / 2000 / 5000):
 Destination country and delivery area / postal code:
 Required arrival date:
 Sample requested (existing / custom printed / please recommend):
-Ask for separate setup, sample freight and bulk delivery scope.
+Ask for unit and total product costs, setup, currency and quotation validity.
+Ask for sample type, specification represented, preparation and courier charges.
+Ask for carton quantity / dimensions / weight and bulk delivery scope.
+List destination charges as included / excluded / pending.
+Keep delivery of EMPTY bags separate from postage for each FILLED parcel.
 Eligible specifications may start from 500 pieces; confirm each configuration.
 
-5. SAMPLE RECORD - COMPLETE AFTER CHECKING AN ACTUAL SAMPLE
+5. EXISTING BAG REFERENCE - IF YOU HAVE ONE
+Reference source / model / physical sample identifier:
+Exterior, opening, lining and closure photos available:
+Features that must match / changes that are acceptable:
+Sample differences from proposed bulk material or printing:
+
+6. SAMPLE RECORD - COMPLETE AFTER CHECKING AN ACTUAL SAMPLE
 Sample identifier, artwork version and check date:
 Confirmed usable dimensions and units:
 Actual contents insert without forcing:
