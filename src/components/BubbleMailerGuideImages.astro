@@ -1,0 +1,20 @@
+---
+import { getProductVisual } from '../product-images.mjs';
+import kraft from '../assets/new-products/yellow-kraft-bubble-mailers-main.png';
+import matte from '../assets/new-products/bubble-mailer-lumiere-case.png';
+import metallic from '../assets/products/metallic-bubble-mailers.png';
+const { finish = false } = Astro.props;
+const items = finish ? [
+  { source: matte, title: 'Matte printed film reference', text: 'LUMIÈRE project: matte pink with black artwork. A colored matte exterior is a different appearance brief from a reflective or holographic surface.', alt: 'Matte pink LUMIÈRE bubble mailer with black printed artwork', href: '/products/poly-bubble-mailers/#lumiere-case', action: 'View the published project' },
+  { source: metallic, title: 'Reflective metallic reference', text: 'Metallic product imagery shows reflective color options. A reflective look alone does not demonstrate a holographic effect.', alt: 'Gold, silver, green and orange reflective bubble mailer product references', href: '/products/metallic-bubble-mailers/#quote-brief', action: 'Specify your required finish' }
+] : [
+  { source: kraft, title: 'Kraft paper exterior', text: 'Yellow kraft bubble mailer product reference. Confirm paper weight, liner, usable dimensions and the print result for your order.', alt: 'Yellow kraft bubble mailer reference showing the exterior, flap and stacked bags', href: '/products/yellow-kraft-bubble-mailers/', action: 'Review the kraft option' },
+  { source: matte, title: 'Printed poly exterior', text: 'LUMIÈRE project reference with a matte pink exterior and black artwork. Confirm your own construction and sample requirements.', alt: 'Pink printed poly bubble mailer from the LUMIÈRE project', href: '/products/poly-bubble-mailers/#lumiere-case', action: 'Review the poly bubble project' }
+];
+const visuals = await Promise.all(items.map(item => getProductVisual(item.source)));
+---
+<div class="bubble-guide-images">{items.map((item,index)=><figure><a class="bubble-guide-photo" href={item.href}><img src={visuals[index].image} srcset={visuals[index].imageSrcSet} sizes="(max-width:640px) calc(100vw - 64px), 370px" width={visuals[index].imageWidth} height={visuals[index].imageHeight} alt={item.alt} loading="lazy" decoding="async" /></a><figcaption><strong>{item.title}</strong><p>{item.text}</p><a class="text-link" href={item.href}>{item.action} →</a></figcaption></figure>)}</div>
+<style>
+  .bubble-guide-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:28px 0}.bubble-guide-images figure{margin:0;min-width:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white);display:flex;flex-direction:column}.bubble-guide-photo{display:block;background:var(--paper)}.bubble-guide-photo img{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain}.bubble-guide-images figcaption{padding:20px;display:flex;flex-direction:column;flex:1}.bubble-guide-images strong{color:var(--ink);font-size:1rem;line-height:1.4}.bubble-guide-images p{font-size:.95rem;line-height:1.7;margin:12px 0 18px}.bubble-guide-images .text-link{margin-top:auto;font-size:.875rem;line-height:1.6}
+  @media(max-width:640px){.bubble-guide-images{grid-template-columns:minmax(0,1fr)}.bubble-guide-images figcaption{padding:20px}}
+</style>
