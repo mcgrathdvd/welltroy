@@ -1,0 +1,27 @@
+---
+import FactoryReferenceImage from './FactoryReferenceImage.astro';
+import overview from '../assets/factory-evidence/certificate-report-overview.jpg';
+const { compact = false } = Astro.props;
+const records = [
+  { type: 'Management system', title: 'ISO 9001:2015', text: 'Quality management system certificate shown for the production and sales of packaging bags. Review the current certificate, covered entity, site and scope.' },
+  { type: 'Management system', title: 'ISO 14001:2015', text: 'Environmental management system certificate shown for the production and sales of packaging bags. Check the covered operations and current status.' },
+  { type: 'Paper chain of custody', title: 'FSC reference · ESTS', text: 'The overview shows a chain-of-custody certificate referring to FSC Mix and FSC Recycled paper products. Confirm the eligible paper product, current certificate and exact order claim.' },
+  { type: 'Sample testing', title: 'RoHS test report', text: 'The overview labels a RoHS report. Review the complete report for the tested sample, material, methods and stated results relevant to your specification.' },
+  { type: 'Sample testing', title: 'AOV test report', text: 'The overview includes an AOV laboratory report. Request the full record to identify the tested sample, test conditions and results for your intended use.' }
+];
+---
+<section class:list={['section', 'certificate-section', { 'section-soft': !compact }]} id={compact ? 'factory-documents' : 'certificate-references'}><div class="container">
+  <div class="section-head"><div><p class="eyebrow">Documents behind the discussion</p><h2>Certificate &amp; Test Report References</h2><p class="lead">Review the supplied document overview, then match the relevant record to your packaging, material and purchasing requirements.</p></div></div>
+  <FactoryReferenceImage source={overview} alt="Welltroy document overview showing an AOV test report, a report labeled RoHS, an ESTS FSC chain-of-custody certificate, and ISO 9001:2015 and ISO 14001:2015 management system certificates" caption="Document overview supplied by Welltroy. Full individual documents and current certification status need confirmation." label="View full document image" />
+  {compact ? <div class="certificate-summary"><p><strong>Management systems · paper chain of custody · sample testing</strong><br />Each record has its own scope. Confirm the current document and its applicability to the product you plan to order.</p><a class="button button-secondary" href="/materials-and-documents/#certificate-references">Explore all five document references →</a></div> : <>
+    <div class="certificate-records">{records.map(record => <article><p class="eyebrow">{record.type}</p><h3>{record.title}</h3><p>{record.text}</p></article>)}</div>
+    <div class="certificate-next"><div><h3>Need evidence for your exact packaging?</h3><p>Send the product, proposed material, destination and required standard. We will confirm which complete records can be shared and what they cover before approval.</p></div><a class="button" href="#document-request">Prepare a document request</a></div>
+    <p class="certificate-scope">A management-system certificate concerns its stated organization and operations; a test report concerns the identified sample and tests. Check product-specific requirements separately. For reference: <a href="https://www.iso.org/certification.html" target="_blank" rel="noopener noreferrer">ISO certification guidance ↗</a> and <a href="https://fsc.org/en/chain-of-custody" target="_blank" rel="noopener noreferrer">FSC chain-of-custody guidance ↗</a>.</p>
+  </>}
+</div></section>
+<style>
+  .certificate-section{scroll-margin-top:110px}.certificate-records{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px}.certificate-records article{min-width:0;padding:24px;background:#fff;border:1px solid var(--line);border-radius:12px}.certificate-records h3{font-size:1.3rem;margin:10px 0 14px}.certificate-records .eyebrow{font-size:.68rem}.certificate-records article>p:last-child{color:var(--muted);line-height:1.7;font-size:.94rem;margin-bottom:0}
+  .certificate-summary,.certificate-next{display:flex;gap:28px;justify-content:space-between;align-items:center;margin-top:24px}.certificate-summary p{margin:0;line-height:1.8;max-width:680px}.certificate-summary .button,.certificate-next .button{white-space:normal;text-align:center;flex-shrink:0;max-width:360px}.certificate-next{padding:28px;border:1px solid var(--line);border-radius:14px;background:#fff}.certificate-next h3{font-size:1.3rem;margin:0 0 12px}.certificate-next p{max-width:740px;margin:0;color:var(--muted)}.certificate-scope{font-size:.85rem;line-height:1.7;color:var(--muted);margin:22px 0 0;max-width:1000px}.certificate-scope a{text-decoration:underline;text-underline-offset:3px}
+  @media(max-width:980px){.certificate-records{grid-template-columns:repeat(2,minmax(0,1fr))}.certificate-summary,.certificate-next{align-items:flex-start;flex-direction:column}}
+  @media(max-width:600px){.certificate-records{grid-template-columns:minmax(0,1fr);gap:14px}.certificate-records article,.certificate-next{padding:20px}.certificate-summary .button,.certificate-next .button{width:100%;max-width:none}}
+</style>

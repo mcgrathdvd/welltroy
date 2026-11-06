@@ -1,0 +1,19 @@
+---
+import { getImage } from 'astro:assets';
+const { source, alt, caption, label = 'Open full-size image' } = Astro.props;
+const widths = [...new Set([480, 960, source.width].filter(width => width <= source.width))];
+const variants = await Promise.all(widths.map(width => getImage({ src: source, width, format: 'webp', quality: 92 })));
+---
+<figure class="factory-reference-image">
+  <a href={source.src} target="_blank" rel="noopener" aria-label={label}>
+    <img src={variants.at(-1).src} srcset={variants.map((variant, index) => `${variant.src} ${widths[index]}w`).join(', ')} sizes="(max-width: 760px) calc(100vw - 40px), 1180px" width={source.width} height={source.height} alt={alt} loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span>{caption}</span><a class="text-link" href={source.src} target="_blank" rel="noopener">{label} ↗</a></figcaption>
+</figure>
+<style>
+  .factory-reference-image{margin:0;min-width:0;border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}
+  .factory-reference-image>a{display:block}.factory-reference-image img{display:block;width:100%;height:auto}
+  figcaption{display:flex;gap:16px;justify-content:space-between;align-items:center;padding:18px 22px;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+  figcaption .text-link{flex-shrink:0;font-size:.86rem}
+  @media(max-width:760px){figcaption{align-items:flex-start;flex-direction:column;padding:16px;gap:10px}}
+</style>
