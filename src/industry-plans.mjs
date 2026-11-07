@@ -1,8 +1,10 @@
+import {coreOrderPolicy} from './core-order-policy.mjs';
 import {secondaryIndustryPlans} from './secondary-industry-plans.mjs';
 // Public purchasing scenarios and workflows, not customer results.
 export const industryPlans = [...secondaryIndustryPlans,
   {
     "slug": "apparel-poly-mailers",
+    "dateModified": "2026-11-07",
     "title": "Custom Poly Mailers for Clothing Brands",
     "seoTitle": "Custom Poly Mailers for Clothing Brands | MOQ 500 | Welltroy",
     "description": "Plan custom clothing mailers and zipper inner bags around apparel order combinations, bag versions, SKU labels, sample approval and fulfilment handoff.",
@@ -13,7 +15,7 @@ export const industryPlans = [...secondaryIndustryPlans,
     "imageAlt": "Welltroy apparel mailer packaging illustration",
     "intro": "For clothing founders planning a first branded run and apparel teams managing repeat orders: choose the pack around the garment combination, then agree who approves artwork, checks the filled sample and supplies bags to the packing team.",
     "answerQuestion": "Can a clothing brand order 500 custom poly mailers with its logo?",
-    "answer": "Yes. Eligible Welltroy specifications start from 500 pieces per confirmed size, color and design. Send the fully packed garment dimensions and the quantity for each version. A total of 500 pieces split across different sizes or designs does not automatically meet each minimum.",
+    "answer": 'Yes. The MOQ for poly mailers is 500 pieces. ' + coreOrderPolicy.breakdown + ' Send fully packed garment dimensions so the proposed specification can be reviewed.',
     "tableTitle": "Choose a packing route for each apparel order",
     "columns": [
       "Order combination",
@@ -43,7 +45,7 @@ export const industryPlans = [...secondaryIndustryPlans,
       ]
     ],
     "versionTitle": "Keep your first run manageable",
-    "versionIntro": "Map the order mix before creating many bag versions. A shared logo design may simplify the brief, while each size, color and artwork version still needs its own minimum confirmed.",
+    "versionIntro": "Map the order mix before creating many bag versions. A shared logo design may simplify the brief, while the size, color and artwork breakdown is agreed in the quotation.",
     "versionRows": [
       [
         "Same garment, different retail sizes",
@@ -55,7 +57,7 @@ export const industryPlans = [...secondaryIndustryPlans,
       ],
       [
         "Seasonal artwork or multiple collections",
-        "List each printed version separately. Ask about the minimum and setup for each before splitting the run."
+        "List each printed version separately. Ask us to approve the quantity breakdown and setup before splitting the run."
       ]
     ],
     "exampleTitle": "Planning example: a T-shirt and sweatshirt launch",
@@ -76,7 +78,7 @@ export const industryPlans = [...secondaryIndustryPlans,
       },
       {
         "q": "Does a 500-piece minimum include several bag sizes?",
-        "a": "The minimum is confirmed for each size, color and design. Provide a breakdown instead of assuming a combined total qualifies for every version."
+        "a": "The core MOQ is 500 pieces. Provide quantities for each size, color and design; confirm the proposed breakdown in your quotation instead of treating the total as approval of every version."
       },
       {
         "q": "Should I put clothing in a zipper bag before the shipping mailer?",
@@ -84,7 +86,7 @@ export const industryPlans = [...secondaryIndustryPlans,
       },
       {
         "q": "Can I request zipper inner bags and poly mailers in one enquiry?",
-        "a": "Yes. Choose Multiple products in the quotation form and list the inner and outer bags separately, with quantities per size, color and design. Confirm each product minimum and the sample arrangement; the combined enquiry total does not automatically satisfy every minimum."
+        "a": "Yes. Choose Multiple products in the quotation form and list the inner and outer bags separately, with quantities per size, color and design. Confirm the quantity breakdown for each product and the sample arrangement in the quotation."
       },
       {
         "q": "What should I give my factory or 3PL when supplying branded bags?",
@@ -114,7 +116,7 @@ export const industryPlans = [...secondaryIndustryPlans,
     "workflow": [
       [
         "Brand and procurement",
-        "Confirm the logo, budget scope, quantity per bag version and arrival deadline. An eligible 500-piece minimum is confirmed per configuration; a combined order total does not settle every version."
+        "Confirm the logo, budget scope, quantity per bag version and arrival deadline. The MOQ for poly mailers is 500 pieces; confirm the requested size, color and artwork breakdown in the quotation."
       ],
       [
         "Garment preparation and inner bags",
@@ -135,6 +137,7 @@ export const industryPlans = [...secondaryIndustryPlans,
   },
   {
     "slug": "beauty-holographic-bubble-mailers",
+    "dateModified": "2026-11-07",
     "title": "Holographic Bubble Mailers for Beauty Brands",
     "seoTitle": "Holographic Bubble Mailers for Beauty Brands | Welltroy",
     "description": "Plan metallic or holographic bubble mailers for beauty launches. Compare boxed products, finish references, usable inner space, label checks and sample approval.",
@@ -145,7 +148,7 @@ export const industryPlans = [...secondaryIndustryPlans,
     "imageAlt": "Welltroy beauty bubble mailer packaging illustration",
     "intro": "For beauty brand and launch teams: separate visual approval, purchasing and packed-product checks. Start with the complete retail pack, then compare the offered finish, usable space, logo, courier label and timing for the actual parcel.",
     "answerQuestion": "Can Welltroy supply holographic bubble mailers and samples for a beauty launch?",
-    "answer": "Yes. Welltroy supplies metallic reflective and holographic or rainbow-effect bubble mailers, with samples available for both finishes. Confirm the exact surface, construction, usable inner size and printing for your project. Eligible specifications start from 500 pieces per confirmed size, color and design.",
+    "answer": "Yes. Welltroy supplies metallic reflective and holographic or rainbow-effect bubble mailers, with samples available for both finishes. Confirm the exact surface, construction, usable inner size and printing for your project. The MOQ for bubble mailers is 500 pieces; the size, finish and artwork breakdown is agreed in the quotation.",
     "tableTitle": "Match the mailer decision to the beauty product",
     "columns": [
       "Packed contents",

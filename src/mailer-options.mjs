@@ -12,7 +12,7 @@ export const mailerOrderOptions = {
     material: 'Choose a single-wall thickness reference of 60, 70, 80, 90 or 100 microns; confirm the offered film, color and tolerance for your size.',
     artwork: 'Send vector artwork, print colors, front/back placement and coverage. Confirm the print area around seams, flap and adhesive.',
     sample: 'Pack the actual folded order, including inserts. Check insertion, usable space, seams and flap closure.',
-    more: 'Custom dimensions, film colors, all-over artwork or another printing method need a separate feasibility and minimum-quantity check.'
+    more: 'Custom dimensions, film colors, all-over artwork or another printing method need a review of feasibility, production route and setup.'
   },
   'poly-bubble-mailers': {
     name: 'Poly Bubble Mailers',
@@ -20,7 +20,7 @@ export const mailerOrderOptions = {
     material: 'Confirm the outer film, bubble liner, color, flap and adhesive as one complete construction.',
     artwork: 'Send the logo, print colors, sides and placement. A small logo and fully printed custom film can follow different production routes.',
     sample: 'Pack the actual product and retail box. Check the usable opening, liner, closure and complete-pack protection.',
-    more: 'Custom dimensions, a different material structure, full-surface printing or custom film colors may have different setup and quantity requirements.'
+    more: 'Custom dimensions, a different material structure, full-surface printing or custom film colors need a review of feasibility, production route and setup.'
   },
   'metallic-bubble-mailers': {
     name: 'Metallic Bubble Mailers',
@@ -28,6 +28,6 @@ export const mailerOrderOptions = {
     material: 'Confirm the exterior structure, color and finish reference, bubble liner, flap and adhesive.',
     artwork: 'Send the logo, print colors, sides and coverage. Review the proof on the actual reflective surface before approval.',
     sample: 'Check color and print appearance, usable inner space, insertion and closure with your actual contents.',
-    more: 'Custom colors, a different finish, custom dimensions and full-coverage artwork need a separate feasibility and minimum-quantity check.'
+    more: 'Custom colors, a different finish, custom dimensions and full-coverage artwork need a review of feasibility, production route and setup.'
   }
 };

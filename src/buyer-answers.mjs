@@ -1,4 +1,4 @@
-import { orderTerms } from './ordering.mjs';
+import { orderTerms, coreOrderPolicy } from './ordering.mjs';
 
 // Confirmed buyer answers shared by Home and FAQ. Product-specific options are
 // confirmed in the quotation; source links point to the supporting site detail.
@@ -18,7 +18,7 @@ export const buyerAnswers = [
   {
     id: 'custom-mailer-minimum',
     q: 'What is the MOQ for mailers and garment zipper bags?',
-    a: 'The MOQ is 500 pieces for Welltroy poly mailers, bubble mailers and garment zipper bags. List the quantity for each size, color and design so we can confirm how the order is split, the available printing route and setup costs. A 500-piece MOQ does not establish every material and print combination.',
+    a: [coreOrderPolicy.summary, coreOrderPolicy.breakdown, coreOrderPolicy.configuration].join(' '),
     href: '/guides/custom-packaging-500-pieces/', label: 'Check the 500-piece enquiry requirements'
   },
   {

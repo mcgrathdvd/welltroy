@@ -1,3 +1,4 @@
+import { coreOrderPolicy } from './core-order-policy.mjs';
 // Shared by the form and the mail handler so assisted enquiries stay valid.
 export const assistedChoices = [
   { slug: 'multiple-products', name: 'Multiple products' },
@@ -34,6 +35,10 @@ export function selectionGuidance(slug) {
       help: 'LDPE plastic bubble mailers with peel-and-seal closure. Specify usable inner space and cushioning separately from the catalogue outer size.',
       placeholder: 'Packed item dimensions, weight and fragility; usable opening and inner size if known; bubble cushioning and closure; color, logo and quantity by size/design. State thickness units and measurement method if requesting a specific value.'
     },
+    'metallic-bubble-mailers': {
+      help: 'Compare the actual metallic or holographic finish, bubble construction, usable space and print compatibility for your order.',
+      placeholder: 'Metallic or holographic finish reference; packed item dimensions and weight; usable inner-size target; artwork, print sides and quantity by size/design. Ask for a sample of the offered finish and confirm delivery scope.'
+    },
     'yellow-kraft-bubble-mailers': {
       help: 'Kraft-paper exterior with bubble cushioning and peel-and-seal closure. Request usable inner dimensions for your complete packed item.',
       placeholder: 'Packed item dimensions, weight and protection needs; usable inner-size target; kraft paper and bubble lining requirements; flap, logo and quantity by size/design. Include destination and required arrival date.'
@@ -42,7 +47,7 @@ export function selectionGuidance(slug) {
   if (Object.hasOwn(core, slug)) return {
     ...core[slug],
     quantity: 'e.g. 500 pieces, or Not sure',
-    quantityHelp: 'MOQ: 500 pieces. List quantities by size, color and design; the order breakdown and printing route are confirmed in your quote.',
+    quantityHelp: coreOrderPolicy.quantityHelp,
     message: 'Product specifications and printing requirements',
     required: false
   };

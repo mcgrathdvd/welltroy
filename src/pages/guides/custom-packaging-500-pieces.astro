@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { site } from '../../data.mjs';
-import { orderTerms } from '../../ordering.mjs';
+import { orderTerms, coreOrderPolicy } from '../../ordering.mjs';
 const path = '/guides/custom-packaging-500-pieces/';
 const title = 'Poly Mailer Cost & MOQ: What to Include in a Quote';
 const schema = {
@@ -9,7 +9,7 @@ const schema = {
   author: { '@id': `${site.origin}/#organization` },
   publisher: { '@id': `${site.origin}/#organization` },
   mainEntityOfPage: `${site.origin}${path}`,
-  datePublished: '2026-10-18', dateModified: '2026-11-05', inLanguage: 'en'
+  datePublished: '2026-10-18', dateModified: '2026-11-07', inLanguage: 'en'
 };
 const breadcrumbs = {
   '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -30,23 +30,23 @@ Sample required:
 Please separate product, setup, sample-related and delivery charges:
 Destination country, postcode or port:
 Required arrival date:
-Please confirm the minimum for each version and any pending charges:`;
+Please confirm the order breakdown, production route and any pending charges:`;
 const costFactors = [
   ['Size and usable fit', 'Catalogue model or proposed outer and usable dimensions, flap allowance and packed item measurements.', 'Use the same dimensions in each quantity option; confirm any proposed size change.'],
   ['Material and film thickness', 'Material description, thickness value, units and whether it measures one wall or another construction.', 'Identify the offered material and measurement convention before comparing prices.'],
   ['Printing and artwork', 'Print sides, artwork version, colors, coverage and placement; ask which print method is offered.', 'Ask which artwork, plate or setup items are included or separately quoted.'],
-  ['Quantity and versions', 'Pieces per size, color and artwork, plus any alternative quantities for the same specification.', 'Confirm the minimum and price for each version; a combined total does not establish eligibility.'],
+  ['Quantity and versions', 'Pieces per size, color and artwork, plus any alternative quantities for the same specification.', 'Confirm the quantity breakdown and price for each version; a proposed split requires approval.'],
   ['Closure and packing', 'Flap, adhesive or other closure requirements, labels, assortment and carton packing.', 'Identify included packing and any separately quoted requirements.'],
   ['Samples and delivery', 'Sample route, destination, arrival requirement and requested delivery scope.', 'Separate the product price, applicable sample-related items, courier and bulk delivery charges.']
 ];
 ---
-<Layout title="Poly Mailer Cost & MOQ | Custom Quote Guide | Welltroy" description="Understand the details behind a poly mailer quote: size, film thickness, printing, quantity per design, setup and delivery. Confirm eligible 500-piece minimums." canonicalPath={path} schemas={[schema, breadcrumbs]} quoteProduct="poly-mailers" contactContext="Poly mailer cost, minimum quantity and itemized quotation">
+<Layout title="Poly Mailer Cost & MOQ | Custom Quote Guide | Welltroy" description="Understand the details behind a poly mailer quote: size, film thickness, printing, quantity per design, setup and delivery. MOQ 500 pieces; confirm the order breakdown." canonicalPath={path} schemas={[schema, breadcrumbs]} quoteProduct="poly-mailers" contactContext="Poly mailer cost, minimum quantity and itemized quotation">
   <section class="page-hero"><div class="container">
     <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Cost &amp; MOQ</div>
     <p class="eyebrow">Plan a comparison-ready custom order</p><h1>{title}</h1>
-    <p class="lead">Request a poly mailer price against a clear size, material, print design and quantity. Eligible Welltroy bag specifications start from 500 pieces; confirm the minimum for each version and separate the product price from setup, sample-related and delivery charges.</p>
-    <p class="muted">By Welltroy · Updated <time datetime="2026-11-05">5 November 2026</time></p>
-    <nav class="anchor-links" aria-label="In this guide"><a href="#poly-cost">Cost details</a><a href="#minimum">Minimum by version</a><a href="#total-cost">Itemized quote</a><a href="#details">Prepare the details</a><a href="#example">Enquiry example</a><a href="#brief">Use the brief</a></nav>
+    <p class="lead">Request a poly mailer price against a clear size, material, print design and quantity. The MOQ for Welltroy poly mailers is {coreOrderPolicy.pieces} pieces. Confirm the size/design breakdown and separate the product price from setup, sample-related and delivery charges.</p>
+    <p class="muted">By Welltroy · Updated <time datetime="2026-11-07">7 November 2026</time></p>
+    <nav class="anchor-links" aria-label="In this guide"><a href="#poly-cost">Cost details</a><a href="#minimum">MOQ &amp; order breakdown</a><a href="#total-cost">Itemized quote</a><a href="#details">Prepare the details</a><a href="#example">Enquiry example</a><a href="#brief">Use the brief</a></nav>
   </div></section>
   <section class="section"><div class="container article-layout">
     <article class="article-main">
@@ -54,11 +54,11 @@ const costFactors = [
       <p>Ask for a price for your selected <a href="/products/poly-mailers/">poly mailer</a> construction and destination. A unit price is useful when you also know the specification, quantity, currency and included charges. If a requirement is open, ask for it to be identified in the quotation.</p>
       <p class="table-scroll-hint">Swipe or scroll the table to see the quotation details and questions.</p><div class="table-wrap" tabindex="0" role="region" aria-label="Poly mailer cost inputs"><table class="cost-inputs"><caption>Six inputs to confirm before comparing poly mailer prices</caption><thead><tr><th scope="col">Quote input</th><th scope="col">What to specify</th><th scope="col">What to clarify</th></tr></thead><tbody>{costFactors.map(([factor, specify, clarify]) => <tr><th scope="row">{factor}</th><td>{specify}</td><td>{clarify}</td></tr>)}</tbody></table></div>
       <p>Use your <a href="/guides/mailer-size-for-clothing/#measurement-record">packed-item measurements</a> to discuss fit, and confirm the <a href="/products/poly-mailers/#poly-mailer-printing">film and printing specification</a> before comparing quantity options. Include any <a href="/materials-and-documents/#document-request">material document requirements</a> in the initial brief so availability can be checked.</p>
-      <h2 id="minimum">What Does “From 500 Pieces” Mean?</h2>
-      <p>The available size, material, printing and construction need to be confirmed for your order. Do not assume that 500 pieces can be divided across several sizes, colors or artworks and still qualify for the same minimum. List the split and ask us to confirm the minimum for each specification.</p>
-      <h3>Confirm the Minimum for Each Size, Color and Artwork</h3><p>List each version on a separate line. The following quantities illustrate how to describe a request; they are not confirmed offers or guaranteed minimums.</p><ul><li><strong>One version:</strong> 500 pieces in one size and one artwork. Ask whether that construction is eligible and what the quoted minimum includes.</li><li><strong>Two artworks:</strong> 250 pieces of artwork A and 250 of artwork B. Ask for the minimum and setup scope for each artwork; the total of 500 alone does not confirm eligibility.</li><li><strong>Two sizes:</strong> 500 pieces in each size. Request a separate quantity, specification and price for each line.</li></ul>
-      <p>If you want quantity alternatives, ask for the same specification at your proposed starting quantity and a second quantity, such as 500 and 1,000 pieces where eligible. Compare the confirmed unit prices, product totals and additional charges. Ask for the minimum for a repeat order separately rather than assuming the initial terms remain available.</p>
-      <div class="guide-callout"><strong>Check the sales unit.</strong> Bags and mailers start from 500 pieces for eligible specifications. Honeycomb paper starts from 1 roll (1 pc). Thermal labels need the roll or fanfold configuration and sales unit confirmed separately. This guide does not promise every packaging format at a 500-piece minimum.</div>
+      <h2 id="minimum">What Does the 500-Piece MOQ Cover?</h2>
+      <p><strong>{coreOrderPolicy.summary}</strong> {coreOrderPolicy.breakdown} {coreOrderPolicy.configuration}</p>
+      <h3>List Size, Color and Artwork Versions Separately</h3><p>The published MOQ and the requested order split answer different questions. The following examples show how to describe an enquiry; only your quotation confirms the split and offered production route.</p><ul><li><strong>One version:</strong> 500 pieces in one size and one artwork. Confirm the offered material, printing process and setup costs.</li><li><strong>Two artworks:</strong> 250 pieces of artwork A and 250 of artwork B is a proposed split. Ask whether it is feasible; the total of 500 alone does not approve it.</li><li><strong>Two sizes:</strong> State the quantity and usable-size target for each size separately, then confirm the quoted breakdown.</li></ul>
+      <p>If you want quantity alternatives, request the same specification at 500 and 1,000 pieces. Compare the confirmed unit prices, product totals, setup and shipping items. For repeat orders, send the approved reference and ask us to confirm current pricing and availability.</p>
+      <div class="guide-callout"><strong>Check the product and sales unit.</strong> The 500-piece core MOQ is not a minimum for every catalogue product. Honeycomb paper starts at 1 roll (1 pc); thermal label rolls or fanfold packs and their sales units need separate confirmation. Use the <a href="/ordering/#minimum-order">core product, material and closure table</a> to start with the correct range.</div>
       <h2 id="details">Six Details That Make a Quote Useful</h2>
       <h3>1. Product and intended use</h3><p>Name the catalogue model or link to the product page. Explain what goes inside and how you pack it. If you are deciding between a plain mailer and a cushioned format, describe the contents and protection needs. Our <a href="/guides/choose-a-mailer/">mailer selection guide</a> can help you frame that question.</p>
       <h3>2. Dimensions, with units and measurement notes</h3><p>Write dimensions in mm or cm and identify width, height, gusset and flap where relevant. Say whether the figures describe the outside of the bag, the usable space or the packed contents. If you only know the packed item size, send that rather than guessing a bag size. A catalogue dimension is a reference to confirm, not a fit guarantee.</p>
@@ -87,13 +87,13 @@ const costFactors = [
       <pre class="quote-brief">{brief}</pre>
       <p>The website accepts AI, PSD, PDF, PNG, JPG, WEBP, DOCX, XLSX, TXT and CSV files: up to three files, with a combined limit of 10 MB. File acceptance does not confirm that artwork is ready to print. Keep the original editable file and ask us to review it.</p>
       <div class="button-row"><a class="button" href="/quote/?product=poly-mailers#quote-form" data-quote-placement="content">Request an Itemized Poly Mailer Quote</a><a class="text-link" href="/quote/?product=multiple-products#quote-form" data-quote-placement="content">Discuss other packaging formats →</a></div>
-      <h2>Questions About Poly Mailer Cost and Minimums</h2><h3>Does a 500-piece total cover several artworks?</h3><p>List the pieces for each artwork and size, then confirm the minimum for each version. A combined quantity is not confirmation of eligibility.</p><h3>Does a larger quantity always give a lower delivered cost?</h3><p>Request written quantity options using the same specification and destination. Compare the confirmed product amount and additional charges, as well as the quantity you actually need.</p><h3>Is a sample courier charge included in the unit price?</h3><p>Ask the quotation to identify the sample type, what is free and any applicable preparation, setup or courier arrangements. Confirm these before dispatch rather than assuming they are part of the bulk unit price.</p>
+      <h2>Questions About Poly Mailer Cost and Minimums</h2><h3>Does a 500-piece total cover several artworks?</h3><p>List the pieces for each artwork and size, then ask us to confirm the split, production route and setup. The published 500-piece MOQ does not automatically approve a particular split.</p><h3>Does a larger quantity always give a lower delivered cost?</h3><p>Request written quantity options using the same specification and destination. Compare the confirmed product amount and additional charges, as well as the quantity you actually need.</p><h3>Is a sample courier charge included in the unit price?</h3><p>Ask the quotation to identify the sample type, what is free and any applicable preparation, setup or courier arrangements. Confirm these before dispatch rather than assuming they are part of the bulk unit price.</p>
     </article>
     <aside class="side-card"><p class="eyebrow">Start with a product</p><h2>Related Packaging</h2><div class="guide-options">
       <a href="/products/poly-mailers/"><strong>Poly Mailers</strong><span>Clothing and other lightweight, non-fragile goods</span></a>
       <a href="/products/poly-bubble-mailers/"><strong>Poly Bubble Mailers</strong><span>Compare cushioning, closure and usable inner space</span></a>
       <a href="/products/kraft-paper-bags/"><strong>Kraft Paper Bags</strong><span>Retail presentation, bag dimensions and handle requirements</span></a>
-    </div><p>Confirm the eligible specification and minimum for your project.</p><a class="text-link" href="/ordering/">Review the order steps →</a></aside>
+    </div><p>Confirm the material, printing route and quantity breakdown for your project.</p><a class="text-link" href="/ordering/">Review the order steps →</a></aside>
   </div></section>
 </Layout>
 <style>
