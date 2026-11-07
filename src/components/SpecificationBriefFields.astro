@@ -1,17 +1,22 @@
 ---
 import { specificationFields } from '../bag-specification.mjs';
-const { slug } = Astro.props;
+const { slug, primary = false } = Astro.props;
 const zipper = slug === 'zipper-bags';
-const fields = [
+const allFields = [
   { name: 'innerSize', label: 'Usable inner size / opening target', placeholder: zipper ? 'Width × height below closure, with units, if known' : 'Usable width × length and opening, with units, if known' },
   { name: 'closure', label: zipper ? 'Zipper / opening preference' : 'Flap / adhesive preference', placeholder: zipper ? 'Describe opening and reclosure needs' : 'Describe flap, adhesive or closure checks' },
   { name: zipper ? 'appearance' : 'liner', label: zipper ? 'Appearance / visibility preference' : 'Bubble liner / cushioning requirements', placeholder: zipper ? 'e.g. garment visibility and label readability' : 'Describe the packed item and liner requirements' },
   { name: 'packout', label: 'Bundle / carton packing preference', placeholder: 'Counts, carton size or packing needs, if known' }
 ];
+const fields = zipper && primary ? [
+  { name: 'appearance', label: 'Garment bag finish', placeholder: 'Frosted, clear, or ask us to compare', options: ['Frosted', 'Clear', 'Compare frosted and clear samples'] },
+  { name: 'closure', label: 'Zipper preference', placeholder: 'Slider zipper, or describe another request', options: ['Slider zipper', 'Please review another closure', 'Please recommend a closure'] },
+  { name: 'material', label: 'Material / single-wall thickness preference', placeholder: 'PE, PVC, or ask for a recommendation; add units if known', options: ['PE — please advise on single-wall thickness', 'PVC — please advise on single-wall thickness', 'Please recommend material and thickness'] }
+] : allFields.filter(field => !zipper || !['appearance', 'closure'].includes(field.name));
 ---
-{specificationFields[slug] && <div class="brief-wide specification-fields" id="brief-specification-checks">
-  <h4>Order-Specific Details</h4><p>Enter buyer targets or ask for advice. Offered specifications and packing details are confirmed in your quotation. Inner-size targets do not change the catalogue outer-size comparison above.</p>
-  <div class="spec-fields-grid">{fields.map(field => <div><label for={`brief-${field.name}`}>{field.label}</label><input id={`brief-${field.name}`} name={field.name} maxlength="160" placeholder={field.placeholder} /></div>)}</div>
-  <label class="spec-photo-request" for="brief-detail-photos"><input id="brief-detail-photos" type="checkbox" name="detailPhotos" value="yes" /><span>Ask which detail photos are available for this specification</span></label>
+{specificationFields[slug] && <div class="brief-wide specification-fields" id={primary ? 'brief-garment-preferences' : 'brief-specification-checks'}>
+  {primary ? <><h4>Choose Your Garment Bag Options</h4><p>Frosted is the main finish; clear bags are also available. Slider zippers are the primary closure. Type your request or choose a suggestion; leave fields blank if you need advice. Material, finish and closure combinations are confirmed for your size. <a href="/guides/apparel-inner-bags-and-shipping-mailers/#finish-and-closure">Compare finishes and sample checks →</a></p></> : <><h4>Order-Specific Details</h4><p>Enter buyer targets or ask for advice. Offered specifications and packing details are confirmed in your quotation. Inner-size targets do not change the catalogue outer-size comparison above.</p></>}
+  <div class="spec-fields-grid">{fields.map(field => <div><label for={`brief-${field.name}`}>{field.label}</label><input id={`brief-${field.name}`} name={field.name} maxlength="160" placeholder={field.placeholder} list={field.options ? `brief-${field.name}-options` : undefined} />{field.options && <datalist id={`brief-${field.name}-options`}>{field.options.map(option => <option value={option} />)}</datalist>}</div>)}</div>
+  {!primary && <label class="spec-photo-request" for="brief-detail-photos"><input id="brief-detail-photos" type="checkbox" name="detailPhotos" value="yes" /><span>Ask which detail photos are available for this specification</span></label>}
 </div>}
 <style>.specification-fields{grid-column:1/-1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;scroll-margin-top:110px;min-width:0}.specification-fields h4{font-size:1rem;margin:0 0 8px}.specification-fields p{font-size:.82rem;line-height:1.65;color:var(--muted);margin:0 0 18px}.spec-fields-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px}.spec-fields-grid>div{min-width:0}.spec-fields-grid label{display:block;font-size:.87rem;font-weight:650;margin-bottom:7px}.spec-fields-grid input{box-sizing:border-box;width:100%;min-width:0;border:1px solid var(--line);border-radius:8px;padding:11px 12px;font:inherit;font-size:16px;color:var(--ink);background:#fff}.specification-fields .spec-photo-request{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;line-height:1.6;font-weight:500;margin:18px 0 0;cursor:pointer}.specification-fields .spec-photo-request input{width:18px;height:18px;margin:3px 0 0;flex:0 0 18px;accent-color:var(--ink)}@media(max-width:540px){.spec-fields-grid{grid-template-columns:1fr}}</style>

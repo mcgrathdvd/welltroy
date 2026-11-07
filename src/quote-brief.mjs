@@ -5,7 +5,7 @@ import { specificationFields, specificationLabels, detailPhotoRequest } from './
 export const briefProducts = {
   'poly-mailers': 'Poly Mailers',
   'poly-bubble-mailers': 'Poly Bubble Mailers',
-  'zipper-bags': 'Zipper Bags',
+  'zipper-bags': 'Garment Zipper Bags',
   'metallic-bubble-mailers': 'Metallic & Holographic Bubble Mailers'
 };
 export const finishChoices = {
