@@ -1,4 +1,5 @@
 MAILER LABEL AND SAMPLE CHECK RECORD
+Updated: 7 November 2026
 Blank buyer worksheet - complete with your actual sample information.
 
 Project / packing use:
@@ -18,6 +19,18 @@ Application and handling checks agreed with the packing team:
 Adhesion, lifting and wrinkle observations:
 Scanner used and barcode reading observations:
 Photograph / evidence references:
+
+BUBBLE MAILER SAMPLE - COMPLETE EACH RELEVANT CHECK
+Check method, conditions and acceptance criteria agreed:
+Usable opening / inner dimensions / complete packed-item fit:
+Outer film or paper / liner description / seam observations:
+Flap and adhesive / packing method / closure observations:
+Artwork version / finish and color reference / observed differences:
+Label placement / adhesion / scanning observations:
+For EACH check: accepted for this check / change required / not checked or pending:
+Required correction, owner and recheck record:
+Sample differs from proposed bulk construction or print process:
+Complete-pack protection assessment requested / outstanding:
 
 Unresolved changes and who will confirm them:
 Recheck required after a size, material, surface or artwork change:

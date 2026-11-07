@@ -1,0 +1,40 @@
+WELLTROY - BUBBLE MAILER QUOTE COMPARISON
+Updated: 7 November 2026
+Blank buyer record. Enter actual supplier replies; no prices are prefilled.
+Guide: https://welltroy.com/guides/compare-custom-mailer-quotes/#bubble-delivery
+
+ONE SPECIFICATION FOR ALL REPLIES
+Product / construction / material:
+Minimum usable inner size, units and agreed tolerance:
+Outer size and flap / sample reference:
+Finish / color / artwork version / print sides:
+Exact bag quantity for this comparison:
+Destination country and postal code:
+Required arrival date:
+
+COPY THIS BLOCK FOR QUOTE A, B OR ANOTHER QUANTITY TIER
+Supplier / quote identifier / date / validity:
+Currency:
+Confirmed bag quantity (state pieces, not cartons):
+Unit bag price and total product amount:
+Print / plate / setup items included or separate:
+Sample type, scope, charges and courier arrangement:
+Bags per carton and total carton count:
+Carton outer dimensions and weight, with units:
+Bulk freight and service included in this offer:
+Destination charges: included / excluded / estimated / pending:
+Other confirmed charges in the same currency:
+Confirmed total for the stated scope:
+Pending amounts or unresolved differences:
+Conditional cost per bag: confirmed same-scope total / confirmed bag quantity:
+Production start milestone and estimated production interval:
+Dispatch / transit / arrival assumptions:
+Differences from the common specification:
+
+BEFORE COMPARING TOTALS
+Resolve product, sample, packing, destination and delivery-scope differences.
+Keep currencies separate unless you explicitly agree a conversion basis.
+Mark an unknown fee as pending, never as zero.
+Do not treat a provisional total as a final delivered cost while charges remain open.
+Delivery of empty bags to your business is separate from postage for filled parcels.
+Keep the reviewed quote with the approved sample and specification version.
