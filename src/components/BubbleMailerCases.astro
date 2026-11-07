@@ -1,6 +1,6 @@
 ---
 import { getProductVisual } from "../product-images.mjs";
-import { orderTerms } from "../ordering.mjs";
+import { orderTerms, coreOrderPolicy } from "../ordering.mjs";
 import lumiereSource from "../assets/new-products/bubble-mailer-lumiere-case.png";
 import verdantSource from "../assets/new-products/bubble-mailer-verdant-case.png";
 const [lumiere, verdant] = await Promise.all([getProductVisual(lumiereSource),getProductVisual(verdantSource)]);
@@ -39,9 +39,9 @@ const methods = [
   <div class="container">
     <p class="eyebrow">Plan your packaging project</p>
     <h2 id="bubble-project-heading">Custom Poly Bubble Mailers for Boxed Beauty &amp; Accessories</h2>
-    <p class="muted">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-10-31">31 October 2026</time></p>
+    <p class="muted">By <a href="/about/">Welltroy</a> · Updated <time datetime="2026-11-07">7 November 2026</time></p>
     <h3>Can I start with 500 printed bubble mailers for a beauty or accessory brand?</h3>
-    <p class="lead">Yes, eligible Welltroy configurations start at 500 pieces per confirmed size, color and design. Use your complete retail carton or accessory box to confirm usable inner space, film, bubble liner, closure and printing. A small logo order and an all-over custom print can have different setup and minimum requirements.</p>
+    <p class="lead">The MOQ for bubble mailers is {coreOrderPolicy.pieces} pieces. {coreOrderPolicy.breakdown} Use your complete retail carton or accessory box to confirm usable space, film, bubble liner, closure and printing. A small logo and an all-over design can require different production processes and setup.</p>
     <h3>How Do I Choose a Bubble Mailer for a Boxed Jewelry Order?</h3>
     <p>Measure the complete retail box, inserts and contents, including thickness and weight. Ask for usable inner dimensions, then test insertion, sealing and the filled pack. Do not choose from the bare jewelry item or outside bag dimensions alone; confirm the actual contents and protection needs before approval.</p>
     <div class="bubble-project-grid">

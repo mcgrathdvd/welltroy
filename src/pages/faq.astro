@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
-import { orderTerms } from "../ordering.mjs";
+import { orderTerms, coreOrderPolicy } from "../ordering.mjs";
 import { site } from "../data.mjs";
 import { buyerAnswers } from "../buyer-answers.mjs";
 
@@ -9,7 +9,7 @@ const groups = [
   { id: "buyer-answers", title: "Custom Mailer Buying Answers", items: buyerAnswers },
   { id: "ordering", title: "Ordering & Quotation", guide: { href: "/guides/custom-mailer-sample-approval/", label: "Use the sample approval checklist" }, items: [
     { q: "What details do you need to quote?", a: "Send the product type or catalogue model, size or packed dimensions, estimated quantity, printing needs and destination country. If the size is uncertain, describe what you plan to pack." },
-    { q: "What is the minimum order quantity?", a: "Most bags and mailers start at 500 pieces for eligible specifications. Honeycomb paper starts at 1 roll (1 pc). Thermal labels start at 500 units; confirm whether the quoted unit is a roll or fanfold pack and how many labels it contains." },
+    { q: "What is the minimum order quantity?", a: `${coreOrderPolicy.summary} ${coreOrderPolicy.breakdown} Other product minimums vary: honeycomb paper starts at 1 roll (1 pc); thermal labels start at 500 units, with the roll or fanfold unit and labels per unit confirmed separately.` },
     { q: "Can I order several packaging products together?", a: "Select Multiple products on the enquiry form, then list each product, size and quantity in the requirements field. Minimum quantities apply to each product, not to the combined enquiry total." },
     { q: "Can I request a sample?", a: orderTerms.sample },
     { q: "Is the sample shipping also free?", a: "Free samples do not automatically include delivery. Confirm whether you need an existing product sample or a custom printed sample, what is included, and any courier charge before dispatch." },

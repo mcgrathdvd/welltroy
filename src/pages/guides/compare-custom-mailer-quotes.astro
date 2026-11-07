@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { coreOrderPolicy } from '../../core-order-policy.mjs';
 import { site } from "../../data.mjs";
 import { orderTerms } from "../../ordering.mjs";
 const path = "/guides/compare-custom-mailer-quotes/";
@@ -11,7 +12,7 @@ const fields = [
   ["Outer and usable dimensions", "Are units, flap allowance and measurement directions clear?"],
   ["Material and thickness", "What exactly is included in the measurement?"],
   ["Artwork and print sides", "Are colors, coverage, placement and printing method included?"],
-  ["Quantity per size/design", "Does the minimum apply to each configuration?"],
+  ["Quantity per size/design", "Is the quantity breakdown by size, color and artwork agreed?"],
   ["Sample route", "Stock sample, artwork proof or custom printed sample?"],
   ["Production start milestone", "Which approvals or payments start the schedule?"],
   ["Delivery scope", "Which destination, service and charges are included?"],
@@ -24,7 +25,7 @@ const fields = [
     <p>This worksheet is for custom poly shipping bags, poly bubble mailers and metallic bubble mailers. Compare each offered construction separately: an unpadded shipping bag and a bubble-lined bag are different specifications, even when their quoted outer dimensions match.</p>
     <h2>What Should I Include When Requesting a Custom Shipping Bag Quote?</h2>
     <p>Identify the exact mailer format and state whether your dimensions are outer or usable inner dimensions. Include the packed product, quantity per size and design, artwork, intended finish, sample needs and destination. Use consistent units and mark requirements that are still open.</p>
-    <p>The <a href="/guides/custom-packaging-500-pieces/#poly-cost">poly mailer cost and MOQ guide</a> helps you prepare an itemized initial enquiry and confirm minimums by version. This comparison worksheet is for the next step: checking whether the replies describe the same order.</p>
+    <p>The <a href="/guides/custom-packaging-500-pieces/#poly-cost">poly mailer cost and MOQ guide</a> helps you prepare an itemized initial enquiry and confirm the order breakdown. This comparison worksheet is for the next step: checking whether the replies describe the same order.</p>
     <p>For an initial itemized request, add quantities to compare and your destination postal code in the product brief: <a href="/products/poly-mailers/#quote-delivery-checks">poly mailers</a>, <a href="/products/poly-bubble-mailers/#quote-delivery-checks">poly bubble mailers</a> or <a href="/products/metallic-bubble-mailers/#quote-delivery-checks">metallic and holographic bubble mailers</a>. Keep each requested quantity tied to the same size, material and artwork.</p>
     <h2 id="worksheet">What Should I Compare in Poly or Bubble Mailer Quotes Before Price?</h2>
     <p>Copy the written terms from each quotation into this worksheet. “To confirm” marks an unanswered field; it is not a supplier offer or a price estimate.</p>
@@ -54,7 +55,7 @@ const fields = [
     <p>Confirm your required arrival date and destination with the supplier. See <a href="/ordering/">samples, payment and delivery terms</a> for the current Welltroy process.</p>
     <h2 id="approval">Resolve Exceptions Before Approval</h2>
     <p>Ask for a revised written quotation when you change size, artwork, material, quantity or delivery scope. Keep the final specification, <a href="/guides/custom-mailer-sample-approval/">sample approval record</a> and quotation together, with a version and date for each.</p>
-    <p>Eligible Welltroy specifications start from 500 pieces; confirm the minimum for each size and design. To request a comparison-ready proposal, send the same specification and destination through our enquiry form.</p><a class="button" href="/quote/?product=multiple-products#quote-form" data-quote-placement="content">Request a detailed quotation</a>
+    <p>{coreOrderPolicy.summary} {coreOrderPolicy.breakdown} To request a comparison-ready proposal, send the same specification and destination through our enquiry form.</p><a class="button" href="/quote/?product=multiple-products#quote-form" data-quote-placement="content">Request a detailed quotation</a>
   </article><aside class="side-card"><p class="eyebrow">Related checklists</p><h2>From Brief to Approval</h2><div class="guide-options"><a href="/guides/custom-packaging-500-pieces/"><strong>Prepare your enquiry</strong><span>Write a specification for an initial quote</span></a><a href="/guides/custom-mailer-sample-approval/"><strong>Approve the sample</strong><span>Check fit, artwork and the retained reference</span></a><a href="/guides/choose-a-mailer/"><strong>Choose a mailer</strong><span>Compare flexible and cushioned formats</span></a></div><a class="text-link" href="/guides/">All buying guides →</a></aside></div></section>
 </Layout>
 <style>.approval-guide-hero{padding-block:52px 44px}.approval-guide-hero h1{font-size:clamp(2.15rem,4.3vw,3.5rem);line-height:1.16;text-wrap:balance;max-width:1000px}.article-main h2{font-size:clamp(1.65rem,2.8vw,2.1rem);line-height:1.25;text-wrap:balance}.article-main h3{line-height:1.3;margin-top:28px}.side-card h2{font-size:1.5rem;line-height:1.25}.quote-scope-formula{margin:26px 0;padding:24px;background:var(--cream);border:1px solid var(--line);border-radius:12px}.quote-scope-formula strong{color:var(--orange)}.quote-scope-formula p{font-weight:650;line-height:1.6}.quote-scope-formula span{font-size:.9rem;line-height:1.65;color:var(--muted)}@media(max-width:600px){.approval-guide-hero{padding-block:34px 30px}.article-main .button{white-space:normal;text-align:center}}.article-main{min-width:0}.article-main table{min-width:700px}.article-main th[scope="row"]{width:24%;vertical-align:top}.article-main td{vertical-align:top;min-width:100px}.article-main td:last-child{min-width:220px}.article-main li{margin:0 0 10px}h2[id]{scroll-margin-top:120px}</style>
