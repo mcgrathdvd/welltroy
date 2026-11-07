@@ -4,15 +4,21 @@ import { orderTerms } from './ordering.mjs';
 // confirmed in the quotation; source links point to the supporting site detail.
 export const buyerAnswers = [
   {
+    id: 'garment-inner-and-outer',
+    q: 'How do garment zipper bags and shipping mailers work together?',
+    a: 'Garment zipper bags hold folded clothing as inner packaging. Welltroy mainly supplies frosted bags with slider zippers; clear bags are also available. Use a PE poly mailer as the outer pack for suitable soft goods, or assess a bubble mailer when cushioning is needed. Measure the complete inner pack before selecting the outer mailer.',
+    href: '/guides/apparel-inner-bags-and-shipping-mailers/', label: 'Plan garment inner bags and outer mailers'
+  },
+  {
     id: 'mailer-range',
     q: 'Which custom mailers does Welltroy supply?',
-    a: 'Welltroy supplies poly mailers for soft, non-fragile goods, poly bubble mailers with an inner cushioning layer, and metallic or holographic bubble mailers. Choose the format around your complete packed item, then confirm usable inner dimensions, material, printing and closure with a sample.',
+    a: 'Welltroy supplies PE poly mailers for soft, non-fragile goods and cushioned bubble mailers with plastic or kraft-paper exteriors. Metallic and holographic bubble mailer finishes are also available. Choose the format around your complete packed item, then confirm usable inner dimensions, material, printing and closure with a sample.',
     href: '/guides/choose-a-mailer/', label: 'Compare the three mailer ranges'
   },
   {
     id: 'custom-mailer-minimum',
-    q: 'Can I order 500 custom printed mailers?',
-    a: 'Eligible Welltroy poly, poly bubble and metallic bubble mailer specifications start from 500 pieces per confirmed size, color and design. Send the quantity for each version so we can confirm its minimum. Splitting 500 pieces across versions does not automatically qualify, and full-coverage printing or a different construction may have different requirements.',
+    q: 'What is the MOQ for mailers and garment zipper bags?',
+    a: 'The MOQ is 500 pieces for Welltroy poly mailers, bubble mailers and garment zipper bags. List the quantity for each size, color and design so we can confirm how the order is split, the available printing route and setup costs. A 500-piece MOQ does not establish every material and print combination.',
     href: '/guides/custom-packaging-500-pieces/', label: 'Check the 500-piece enquiry requirements'
   },
   {
@@ -53,5 +59,5 @@ export const buyerAnswers = [
   }
 ];
 
-export const homeBuyerAnswers = ['custom-mailer-minimum', 'free-design-timing', 'free-samples-delivery']
+export const homeBuyerAnswers = ['garment-inner-and-outer', 'custom-mailer-minimum', 'free-samples-delivery']
   .map(id => buyerAnswers.find(answer => answer.id === id));

@@ -13,6 +13,7 @@ import apparelSource from "../assets/new-products/poly-mailers-apparel-packing.j
 import lumiereSource from "../assets/new-products/bubble-mailer-lumiere-case.png";
 const [apparelCase, lumiereCase] = await Promise.all([getProductVisual(apparelSource), getProductVisual(lumiereSource)]);
 const homeFaq = homeBuyerAnswers;
+const coreProducts = ['poly-mailers', 'poly-bubble-mailers', 'zipper-bags'].map(slug => products.find(product => product.slug === slug));
 
 const organization = {
   "@context": "https://schema.org", "@type": "Organization", "@id": `${site.origin}/#organization`, name: site.name, legalName: site.legalName, url: site.origin,
@@ -22,7 +23,7 @@ const organization = {
 };
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: homeFaq.slice(0, 3).map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
 ---
-<Layout title="Custom Poly & Bubble Mailers | MOQ 500 | Welltroy" description="Source custom poly, poly bubble and metallic bubble mailers from Welltroy. Eligible orders from 500 pieces, free initial design and sample support." schemas={[organization, faqSchema]}>
+<Layout title="Custom Mailers & Garment Zipper Bags | MOQ 500 | Welltroy" description="Source PE poly mailers, poly and kraft bubble mailers, and frosted or clear garment slider bags from Welltroy. Custom logo printing. MOQ 500 pieces." schemas={[organization, faqSchema]}>
   <section class="hero-wide">
     <div class="hero-wide-media"><picture><source media="(max-width: 640px)" srcset="/images/hero-mobile-480.webp 480w, /images/hero-mobile-800.webp 800w" sizes="100vw" /><img src="/images/hero-wide-selected.webp" srcset="/images/hero-wide-1280.webp 1280w, /images/hero-wide-selected.webp 1983w" sizes="100vw" alt="An illustrative arrangement of mailers, pouches, labels, wrap and paper bags" width="1983" height="793" fetchpriority="high" decoding="async" /></picture></div>
     <div class="container hero-wide-inner">
@@ -41,17 +42,17 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
   <section class="hero-stats" aria-label="Starting order and sample information">
     <div class="container">
       <div class="hero-stats-grid">
-        <div><span>Mailer MOQ</span><strong>500+</strong></div>
+        <div><span>Core product MOQ</span><strong>500+</strong></div>
         <div><span>Design draft</span><strong>24 hours</strong></div>
         <div><span>Sample production</span><strong>From 3 days</strong></div>
         <div><span>Sample delivery target</span><strong>7 days</strong></div>
       </div>
-      <p>*500 pieces for eligible bags and mailers; honeycomb paper starts at 1 roll (1 pc). Samples are free. Sample timing starts after specifications and artwork are confirmed; delivery depends on destination. Confirm shipping arrangements and thermal label sales units in your quotation.</p>
+      <p>*MOQ: 500 pieces for poly mailers, bubble mailers and garment zipper bags. Confirm the quantity breakdown by size, color and design. Other product minimums vary; honeycomb paper starts at 1 roll (1 pc). Samples are free. Sample timing starts after specifications and artwork are confirmed; delivery depends on destination. Confirm shipping arrangements and thermal label sales units in your quotation.</p>
     </div>
   </section>
 
 
-  <section class="section section-soft home-products"><div class="container"><div class="section-head"><div><p class="eyebrow">Product range</p><h2>Explore Our Packaging</h2><p class="lead">Find the format for your goods. Explore sizes and custom options on each product page.</p></div></div><div class="product-grid">{products.slice(0, 6).map((product) => <ProductCard product={product} compactMobile />)}</div><div class="button-row"><a class="button button-secondary" href="/products/">Browse the complete range</a><a class="text-link" href="#customer-projects">See customer projects ↓</a><a class="text-link" href="/catalogue/">Current product guide →</a><a class="text-link" href={catalogue.path} download>Download the 2025 catalogue (PDF) ↓</a></div></div></section>
+  <section class="section section-soft home-products"><div class="container"><div class="section-head"><div><p class="eyebrow">Product range</p><h2>Three Packaging Ranges for E-commerce Orders</h2><p class="lead">Choose an outer shipping bag, bubble cushioning or a garment inner bag. Compare materials, usable sizes, closure and logo options before requesting a quote.</p></div></div><div class="product-grid">{coreProducts.map((product) => <ProductCard product={product} compactMobile />)}</div><p>Prefer a paper exterior with bubble cushioning? <a class="text-link" href="/products/yellow-kraft-bubble-mailers/">Explore kraft bubble mailers →</a></p><div class="button-row"><a class="button button-secondary" href="/products/">Browse the complete range</a><a class="text-link" href="#customer-projects">See customer projects ↓</a><a class="text-link" href="/catalogue/">Current product guide →</a><a class="text-link" href={catalogue.path} download>Download the 2025 catalogue (PDF) ↓</a></div></div></section>
 
 
   <section class="section home-projects" id="customer-projects" aria-labelledby="customer-projects-heading">

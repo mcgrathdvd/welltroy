@@ -38,7 +38,7 @@ const searchTitles = {
   'biodegradable-mailers': 'Biodegradable Mailers | Sizes & Material Details | Welltroy',
   'poly-bubble-mailers': 'Custom Poly Bubble Mailers | MOQ 500 | Welltroy',
   'metallic-bubble-mailers': 'Custom Metallic & Holographic Bubble Mailers | Welltroy',
-  'zipper-bags': 'Custom Zipper Bags for Clothing | Sizes & Logo | Welltroy',
+  'zipper-bags': 'Frosted & Clear Garment Zipper Bags | MOQ 500 | Welltroy',
   'kraft-paper-bags': 'Custom Kraft Paper Bags | Sizes & Logo Printing | Welltroy',
   'paper-gift-bags': 'Custom Paper Gift Bags | Sizes & Printing | Welltroy',
   'stand-up-pouches': 'Custom Stand-up Pouches | Sizes & Packaging Options | Welltroy',
@@ -51,14 +51,14 @@ const pageHeading = {
   'poly-mailers': 'Custom Printed Poly Mailers',
   'poly-bubble-mailers': 'Custom Poly Bubble Mailers',
   'metallic-bubble-mailers': 'Custom Metallic & Holographic Bubble Mailers',
-  'zipper-bags': 'Custom Zipper Bags for Clothing & Accessories'
+  'zipper-bags': 'Custom Frosted & Clear Zipper Bags for Clothing'
 }[product.slug] || product.name;
 const primaryMailerSlugs = ["poly-mailers", "poly-bubble-mailers", "metallic-bubble-mailers"];
 // Published content-update dates; keep the corresponding sitemap entries aligned.
 const publishedContentDates = {
-  "poly-mailers": "2026-11-05",
-  "poly-bubble-mailers": "2026-11-05",
-  "zipper-bags": "2026-11-05",
+  "poly-mailers": "2026-11-07",
+  "poly-bubble-mailers": "2026-11-07",
+  "zipper-bags": "2026-11-07",
   "metallic-bubble-mailers": "2026-11-05",
   "honeycomb-paper-rolls": "2026-11-01",
   "colored-honeycomb-paper-rolls": "2026-11-01"
@@ -71,7 +71,12 @@ const mailerComparison = [
 ];
 const suppliedVisuals = { "poly-mailers": polyPackingSource, "poly-bubble-mailers": bubbleCaseSource };
 const visual = await getProductVisual(suppliedVisuals[product.slug] || product.imageSource);
-const related = products.filter((item) => item.group === product.group && item.slug !== product.slug).sort((a, b) => Number(b.slug === product.parentSlug) - Number(a.slug === product.parentSlug)).slice(0, 3);
+const coreRelated = {
+  'poly-mailers': ['zipper-bags', 'poly-bubble-mailers', 'yellow-kraft-bubble-mailers'],
+  'poly-bubble-mailers': ['yellow-kraft-bubble-mailers', 'poly-mailers', 'zipper-bags'],
+  'zipper-bags': ['poly-mailers', 'poly-bubble-mailers', 'yellow-kraft-bubble-mailers']
+};
+const related = coreRelated[product.slug]?.map(slug => products.find(item => item.slug === slug)) || products.filter((item) => item.group === product.group && item.slug !== product.slug).sort((a, b) => Number(b.slug === product.parentSlug) - Number(a.slug === product.parentSlug)).slice(0, 3);
 // These made-to-order ranges have no public price or product-specific ratings.
 // Describe the catalogue page without claiming eligibility for Product rich results.
 const pageSchema = {
