@@ -1,0 +1,34 @@
+---
+import {documentProducts, documentCategories} from '../document-request.mjs';
+---
+<section class="document-builder" id="document-request-builder" data-document-builder aria-labelledby="document-builder-heading">
+  <h3 id="document-builder-heading">Build a Product-Specific Document Request</h3>
+  <p>Choose what you need to review, or describe the question if you do not know the document name. Availability and applicability are confirmed for your proposed product.</p>
+  <noscript><p class="alert">Use the blank request below to copy your requirements into an enquiry or email.</p></noscript>
+  <div data-document-ui hidden>
+    <form data-document-form>
+      <div class="document-fields">
+        <div><label for="document-product">Packaging product</label><select id="document-product" name="product">{Object.entries(documentProducts).map(([value,label])=><option value={value}>{label}</option>)}</select></div>
+        <div><label for="document-destination">Destination market (optional)</label><input id="document-destination" name="destination" maxlength="160" placeholder="Country or market, if known" /></div>
+      </div>
+      <fieldset><legend>What would you like to request?</legend><p class="document-help">Choose one or more, or describe your requirement below.</p><div class="document-categories">{Object.entries(documentCategories).map(([value,label])=><label><input type="checkbox" name="categories" value={value} /><span>{label}</span></label>)}</div></fieldset>
+      <div class="document-fields">
+        <div><label for="document-use">Contents / intended use (optional)</label><input id="document-use" name="intendedUse" maxlength="200" placeholder="e.g. inner bags for folded clothing" /></div>
+        <div><label for="document-timing">Required timing (optional)</label><input id="document-timing" name="timing" maxlength="100" placeholder="When you need to review the documents" /></div>
+        <div class="document-wide"><label for="document-requirement">Requirement, claim or scope to address (optional)</label><textarea id="document-requirement" name="requirement" maxlength="600" rows="4" placeholder="Describe the material, finished product, site, test, buyer requirement or document scope you need to clarify. Avoid contact details or confidential information here."></textarea></div>
+      </div>
+      <details><summary>Add size and estimated quantity (optional)</summary><div class="document-fields"><div><label for="document-size">Model / size</label><input id="document-size" name="size" maxlength="160" placeholder="Model, dimensions with units, or ask for advice" /></div><div><label for="document-quantity">Estimated quantity</label><input id="document-quantity" name="quantity" maxlength="100" placeholder="An estimate, or Not sure" /></div></div></details>
+      <label for="document-summary">Review Your Document Request</label><textarea id="document-summary" class="document-summary" data-document-summary readonly rows="12"></textarea>
+      <div class="button-row"><button class="button" type="submit" data-document-continue disabled>Continue to Enquiry →</button><button class="button button-secondary" type="button" data-document-copy>Copy request</button><button class="text-link" type="button" data-document-clear>Clear request</button></div>
+      <p class="document-help">This step does not send a request. Add contact details and any attachments on the next page. Your selections stay in this browser tab for up to 24 hours. <a href="/privacy/#quote-brief-storage">Storage details</a></p>
+      <p data-document-status role="status" aria-live="polite">Choose a category or describe a requirement to continue.</p>
+      <a class="text-link" data-document-fallback href="/quote/?product=not-sure#quote-form" hidden>Open a blank enquiry to paste your request →</a>
+    </form>
+  </div>
+</section>
+<style>
+ .document-builder{border:1px solid var(--line);border-radius:14px;padding:26px;background:white;margin:26px 0;min-width:0;scroll-margin-top:110px}.document-builder h3{margin-top:0}.document-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:18px 0}.document-fields>div{min-width:0}.document-builder label{display:block;font-weight:650;font-size:.9rem;margin-bottom:7px}.document-builder input:not([type=checkbox]),.document-builder select,.document-builder textarea{box-sizing:border-box;width:100%;min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}.document-wide{grid-column:1/-1}.document-builder fieldset{border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}.document-builder legend{font-weight:700;padding:0 6px}.document-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.document-categories label{display:flex;align-items:flex-start;gap:10px;font-weight:500;line-height:1.5;margin:0}.document-categories input{margin-top:4px;flex:0 0 18px;width:18px;height:18px;accent-color:var(--ink)}.document-help{font-size:.85rem;color:var(--muted);line-height:1.6}.document-summary{margin:6px 0 18px;line-height:1.7;resize:vertical}.document-builder details{margin:18px 0}.document-builder summary{cursor:pointer}.document-builder button:disabled{opacity:.55;cursor:not-allowed}.document-builder .button-row{flex-wrap:wrap}.document-builder [hidden]{display:none}@media(max-width:600px){.document-builder{padding:18px}.document-fields,.document-categories{grid-template-columns:1fr}.document-builder fieldset{padding:14px}.document-builder .button{width:100%;white-space:normal}}
+</style>
+<style>
+  .document-builder button.text-link{border:0;background:transparent;font:inherit;padding:8px 0;cursor:pointer}
+</style>
