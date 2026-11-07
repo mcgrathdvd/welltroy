@@ -1,3 +1,4 @@
+import { initializeDocumentRequests } from './document-request.js';
 import { selectionGuidance } from "./quote-options.mjs";
 import { initializeQuoteBrief } from "./quote-brief.js";
 import { initializeAnalytics, track } from "./analytics.js";
@@ -534,3 +535,4 @@ if (quoteForm) {
 }
 
 initializeQuoteBrief();
+initializeDocumentRequests();
