@@ -162,7 +162,7 @@ if (quoteForm) {
   quoteForm.addEventListener("welltroy:brief-applied", () => {
     prefilledSize = true;
     lastSizeProduct = productSelect.value;
-    sizeHelp.textContent = "Imported from your product brief. Review the dimensions before sending.";
+    sizeHelp.textContent = "Imported from your saved brief. Review the dimensions before sending.";
   });
   sizeInput.addEventListener('input', () => {
     prefilledSize = false;
