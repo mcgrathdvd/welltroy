@@ -10,6 +10,7 @@ export const orderTerms = {
 };
 
 export function minimumOrder(slug) {
+  if (['poly-mailers', 'poly-bubble-mailers', 'metallic-bubble-mailers', 'yellow-kraft-bubble-mailers', 'zipper-bags'].includes(slug)) return '500 pieces; confirm the breakdown by size, color and design';
   if (['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls'].includes(slug)) return 'From 1 roll (1 pc)';
   if (slug === 'thermal-labels') return 'From 500 units; confirm roll or fanfold configuration';
   if (slug === 'custom-stand-up-pouches') return '1,000 pieces shown in supplier example; confirm by specification';
