@@ -25,16 +25,16 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 ---
 <Layout title="Custom Mailers & Garment Zipper Bags | MOQ 500 | Welltroy" description="Source PE poly mailers, poly and kraft bubble mailers, and frosted or clear garment slider bags from Welltroy. Custom logo printing. MOQ 500 pieces." schemas={[organization, faqSchema]}>
   <section class="hero-wide">
-    <div class="hero-wide-media"><img src={apparelCase.image} srcset={apparelCase.imageSrcSet} sizes="(max-width: 900px) 100vw, 58vw" alt="A printed poly mailer used to pack folded clothing in a Welltroy apparel project" width={apparelCase.imageWidth} height={apparelCase.imageHeight} fetchpriority="high" decoding="async" /></div>
+    <div class="hero-wide-media"><picture><source media="(max-width: 640px)" srcset="/images/hero-mobile-480.webp 480w, /images/hero-mobile-800.webp 800w" sizes="100vw" /><img src="/images/hero-wide-selected.webp" srcset="/images/hero-wide-1280.webp 1280w, /images/hero-wide-selected.webp 1983w" sizes="100vw" alt="An illustrative arrangement of mailers, pouches, labels, wrap and paper bags" width="1983" height="793" fetchpriority="high" decoding="async" /></picture></div>
     <div class="container hero-wide-inner">
-      <p class="hero-wide-eyebrow">Packaging factory · MOQ 500 pieces*</p>
-      <h1><span>Custom Mailers &amp;</span>{" "}<span>Garment Zipper Bags</span></h1>
-      <p class="hero-wide-lead">Pack folded clothing, protect products and prepare e-commerce orders. Choose PE poly mailers, cushioned bubble mailers or frosted and clear garment slider bags.</p>
+      <p class="hero-wide-eyebrow">Packaging factory · Custom orders from 500 pieces*</p>
+      <h1><span>Custom Poly &amp;</span>{" "}<span>Bubble Mailers</span></h1>
+      <p class="hero-wide-lead">Custom shipping bags for apparel, beauty and e-commerce brands. Poly, poly bubble and metallic bubble mailers.</p>
       <div class="hero-category-links" aria-label="Popular packaging products">
-        <a href="/products/poly-mailers/">Poly Mailers</a>
-        <a href="/products/poly-bubble-mailers/">Poly Bubble Mailers</a>
-        <a href="/products/yellow-kraft-bubble-mailers/">Kraft Bubble Mailers</a>
-        <a href="/products/zipper-bags/">Garment Zipper Bags</a>
+        <a href="/products/#group-1">Mailers</a>
+        <a href="/products/stand-up-pouches/">Pouches</a>
+        <a href="/products/kraft-paper-bags/">Paper Bags</a>
+        <a href="/products/#group-3">Labels &amp; Wrap</a>
       </div>
       <div class="button-row hero-wide-actions"><a class="button" href="/quote/#quote-form" data-quote-placement="hero">Request a Custom Quote <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="/products/">View Products <span aria-hidden="true">↗</span></a></div>
     </div>
@@ -92,17 +92,4 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 <style>
   #customer-projects{scroll-margin-top:100px}.home-project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.home-project-card{min-width:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface,#fff);display:flex;flex-direction:column}.home-project-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#faf8f5}.home-project-copy{padding:24px;display:flex;flex-direction:column;flex:1}.home-project-copy h3{margin:0 0 12px;font-size:1.35rem}.home-project-copy p{margin-top:0}.home-project-copy .text-link{margin-top:auto;padding-top:8px;align-self:flex-start}.home-project-note{max-width:880px;margin:24px 0 0;color:var(--muted);font-size:.9rem}
   @media(max-width:760px){.home-project-grid{grid-template-columns:minmax(0,1fr);gap:24px}.home-project-copy{padding:20px}}
-</style>
-
-<style>
-  .hero-wide::after { background: linear-gradient(90deg, #153828 0%, #153828 38%, rgba(21,56,40,.9) 46%, rgba(21,56,40,.12) 65%, transparent 80%); }
-  .hero-wide-media { left: 42%; }
-  .hero-wide-media img { object-position: center 66%; }
-  .hero-wide h1 { max-width: 580px; font-size: clamp(2.7rem, 3.8vw, 3.7rem); }
-  @media (max-width: 900px) {
-    .hero-wide::after { background: rgba(12,35,24,.78); }
-    .hero-wide-media { left: 0; opacity: 1; }
-    .hero-wide-media img { object-position: center; }
-    .hero-wide h1 { font-size: clamp(2rem, 6.8vw, 3.2rem); }
-  }
 </style>
