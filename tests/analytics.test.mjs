@@ -1,8 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {readdirSync} from 'node:fs';
 import {createTracker,sanitizeEvent,safePath,confirmedQuote,errorCategory,readChoice,saveChoice,sourceInfo,productSlugs} from '../src/analytics-core.mjs';
 import {products} from '../src/product-data.mjs';
-import {buyerLinkAction,projectForQuote} from '../src/buyer-actions.mjs';
+import {buyerLinkAction,projectForQuote,buyerResources} from '../src/buyer-actions.mjs';
 
 test('product allowlist matches all actual catalogue pages',()=>{
   assert.deepEqual([...productSlugs].sort(),products.map(p=>p.slug).sort());
@@ -237,6 +238,79 @@ test('runtime buyer link events require consent and trusted uncancelled clicks',
     assert.equal(sent().filter(x=>x[1]==='buyer_resource_download').length,1);
     env.reject.listeners.click();
     env.listeners.click(click());await Promise.resolve();assert.equal(window.dataLayer.length,0);
+  } finally {env.restore();}
+});
+
+test('all published buyer templates have one fixed download identifier and packaging scope',()=>{
+  const expected = [
+    ['poly-mailer-logo-brief','poly-mailers','poly-mailer-logo-quote-brief.txt'],
+    ['clothing-fit-record','poly-mailers','clothing-mailer-fit-record.txt'],
+    ['bubble-mailer-brief','poly-bubble-mailers','bubble-mailer-quote-brief.txt'],
+    ['packaging-quality-brief','multiple-products','packaging-quality-review-brief.txt'],
+    ['mailer-sample-check','multiple-products','mailer-label-and-sample-check.txt'],
+    ['bubble-quote-comparison','poly-bubble-mailers','bubble-mailer-quote-comparison.txt'],
+    ['garment-selection-brief','multiple-products','garment-bag-selection-brief.txt'],
+    ['garment-sample-record','zipper-bags','garment-bag-sample-approval.txt'],
+    ['garment-pack-quote-comparison','multiple-products','garment-inner-outer-quote-comparison.txt']
+  ];
+  assert.deepEqual([...buyerResources].map(([id,r])=>[id,r.product,r.path.split('/').pop()]),expected);
+  assert.deepEqual(readdirSync(new URL('../public/downloads/',import.meta.url)).sort(),expected.map(x=>x[2]).sort());
+  assert.equal(new Set([...buyerResources.values()].map(r=>r.path)).size,buyerResources.size);
+  for (const [id,product,file] of expected) {
+    const action=buyerLinkAction(`/downloads/${file}?email=private@example.com#artwork`,'https://welltroy.com');
+    assert.deepEqual(action,{name:'buyer_resource_download',details:{resource_id:id}});
+    const event=sanitizeEvent(action.name,{...action.details,product_slug:'buyer@example.com',filename:'private.pdf'},'/guides/?token=private');
+    assert.equal(event.product_slug,product);
+    assert.deepEqual(Object.keys(event).sort(),['page_path','page_location','page_title','resource_id','product_slug'].sort());
+    assert.equal(JSON.stringify(event).includes('private'),false);
+  }
+});
+
+test('brief kinds accept only fixed product/document labels on brief events',()=>{
+  for (const name of ['quote_brief_start','quote_brief_continue']) {
+    for (const brief_type of ['product','document']) {
+      const event=sanitizeEvent(name,{brief_type,product_slug:'zipper-bags',categories:['private category'],notes:'private notes',postalCode:'private destination'},'/materials-and-documents/?email=private#private');
+      assert.deepEqual(event,{page_path:'/materials-and-documents/',page_location:'https://welltroy.com/materials-and-documents/',page_title:'Welltroy',product_slug:'zipper-bags',brief_type});
+    }
+    for (const brief_type of [undefined,null,'','buyer@example.com','constructor','Product',['product']]) {
+      assert.equal(Object.hasOwn(sanitizeEvent(name,{brief_type},'/quote/'),'brief_type'),false);
+    }
+  }
+  assert.equal(Object.hasOwn(sanitizeEvent('quote_submit_success',{brief_type:'document'},'/quote/'),'brief_type'),false);
+});
+
+test('runtime covers every buyer resource after consent and blocks them again on withdrawal',async()=>{
+  const env=await environment({pathname:'/guides/'});
+  try {
+    const link={href:'',dataset:{}};
+    const click=()=>({isTrusted:true,button:0,defaultPrevented:false,target:{closest:s=>s==='a[href]'?link:null}});
+    const fire=async()=>{env.listeners.click(click());await Promise.resolve();};
+    for (const resource of buyerResources.values()) {link.href=`https://welltroy.com${resource.path}?buyer=private#private`;await fire();}
+    assert.equal(env.scripts.length,0);assert.equal(window.dataLayer,undefined);
+    env.accept.listeners.click();
+    for (const resource of buyerResources.values()) {link.href=`https://welltroy.com${resource.path}?buyer=private#private`;await fire();}
+    const sent=()=>window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event'&&x[1]==='buyer_resource_download');
+    assert.deepEqual(sent().map(x=>x[2].resource_id),[...buyerResources.keys()]);
+    assert.equal(JSON.stringify(sent()).includes('private'),false);
+    for (const href of ['https://other.invalid/downloads/garment-bag-sample-approval.txt','https://welltroy.com/downloads/private.pdf']) {link.href=href;await fire();}
+    assert.equal(sent().length,buyerResources.size);
+    env.reject.listeners.click();
+    for (const resource of buyerResources.values()) {link.href=`https://welltroy.com${resource.path}`;await fire();}
+    assert.equal(window.dataLayer.length,0);
+  } finally {env.restore();}
+});
+
+test('runtime brief categories share the existing consent gate without transmitting request text',async()=>{
+  const env=await environment({pathname:'/materials-and-documents/'});
+  try {
+    const details={product_slug:'zipper-bags',brief_type:'document',categories:['Private certification request'],requirement:'Private notes',destination:'Private address'};
+    assert.equal(env.mod.track('quote_brief_start',details),false);assert.equal(env.scripts.length,0);
+    env.accept.listeners.click();
+    for (const brief_type of ['product','document']) for (const name of ['quote_brief_start','quote_brief_continue']) assert.equal(env.mod.track(name,{...details,brief_type}),true);
+    const sent=window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event'&&x[1].startsWith('quote_brief_'));
+    assert.deepEqual(sent.map(x=>x[2].brief_type),['product','product','document','document']);
+    assert.equal(JSON.stringify(sent).includes('Private'),false);
+    env.reject.listeners.click();assert.equal(env.mod.track('quote_brief_continue',details),false);
   } finally {env.restore();}
 });
 
