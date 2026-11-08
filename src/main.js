@@ -1,3 +1,4 @@
+import { initializeDocumentRequests } from './document-request.js';
 import { selectionGuidance } from "./quote-options.mjs";
 import { initializeQuoteBrief } from "./quote-brief.js";
 import { initializeAnalytics, track } from "./analytics.js";
@@ -161,7 +162,7 @@ if (quoteForm) {
   quoteForm.addEventListener("welltroy:brief-applied", () => {
     prefilledSize = true;
     lastSizeProduct = productSelect.value;
-    sizeHelp.textContent = "Imported from your product brief. Review the dimensions before sending.";
+    sizeHelp.textContent = "Imported from your saved brief. Review the dimensions before sending.";
   });
   sizeInput.addEventListener('input', () => {
     prefilledSize = false;
@@ -534,3 +535,4 @@ if (quoteForm) {
 }
 
 initializeQuoteBrief();
+initializeDocumentRequests();
