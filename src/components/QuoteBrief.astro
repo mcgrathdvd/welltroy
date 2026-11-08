@@ -1,5 +1,7 @@
 ---
 import { products } from '../data.mjs';
+import { catalogueModels } from '../catalogue-models.mjs';
+import { comparisonProducts } from '../packed-size.mjs';
 import { briefProducts, finishChoices, printChoices, sideChoices, sampleChoices } from '../quote-brief.mjs';
 import QuoteDeliveryFields from './QuoteDeliveryFields.astro';
 import PackedSizeComparison from './PackedSizeComparison.astro';
@@ -8,24 +10,26 @@ import { specificationFields } from '../bag-specification.mjs';
 import { minimumOrder } from '../ordering.mjs';
 const { product } = Astro.props;
 const isMetallic = product.slug === 'metallic-bubble-mailers';
-const isBubble = product.slug === 'poly-bubble-mailers' || isMetallic;
-const hasSizeComparison = !isMetallic;
+const isKraft = product.slug === 'yellow-kraft-bubble-mailers';
+const isBubble = product.slug === 'poly-bubble-mailers' || isMetallic || isKraft;
+const hasCatalogueModels = Boolean(catalogueModels[product.slug]?.length);
+const hasSizeComparison = comparisonProducts.includes(product.slug);
 const isZipper = product.slug === 'zipper-bags';
 const hasSpecificationFields = Boolean(specificationFields[product.slug]);
 const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefProducts, p.slug)).map(p => [p.slug, p.sizes]));
 ---
 <section class="section brief-section" id="quote-brief" aria-labelledby="brief-heading" data-quote-brief data-product={product.slug}>
   <div class="container">
-    <div class="section-head"><div><p class="eyebrow">Plan your custom order</p><h2 id="brief-heading">Build Your {product.name} Quote Brief</h2><p class="lead">Choose a catalogue model, describe a custom size or ask for help. Review your selections, then add contact details on the enquiry page.</p></div></div>
-    <p class="brief-context">Catalogue dimensions are outer measurements, not guaranteed usable space. {isZipper ? 'Confirm the opening and zipper construction, and include any outer shipping packaging in your plan.' : isBubble ? 'Allow for the bubble lining, opening and adhesive flap when checking the complete pack.' : 'Measure the finished pack with inner bags, wrapping and inserts included.'} Minimum order: {minimumOrder(product.slug)}. The offered material and printing combination is confirmed in your quotation.</p>
+    <div class="section-head"><div><p class="eyebrow">Plan your custom order</p><h2 id="brief-heading">Build Your {isKraft ? 'Kraft Bubble Mailer' : product.name} Quote Brief</h2><p class="lead">{hasCatalogueModels ? 'Choose a catalogue model, describe a custom size or ask for help.' : 'Describe your packed item or required usable dimensions, or ask for sizing advice.'} Review your selections, then add contact details on the enquiry page.</p></div></div>
+    <p class="brief-context">{hasCatalogueModels ? 'Catalogue dimensions are outer measurements, not guaranteed usable space.' : 'This range has no numbered catalogue size table. The offered outer size, usable space and opening are confirmed for your order.'} {isZipper ? 'Confirm the opening and zipper construction, and include any outer shipping packaging in your plan.' : isBubble ? 'Allow for the bubble lining, opening and adhesive flap when checking the complete pack.' : 'Measure the finished pack with inner bags, wrapping and inserts included.'} Minimum order: {minimumOrder(product.slug)}. The offered material and printing combination is confirmed in your quotation.</p>
     <noscript><p class="alert">Enable JavaScript to build and carry your brief, or <a href={`/quote/?product=${product.slug}#quote-form`}>enter your requirements directly on the enquiry page</a>.</p></noscript>
     {hasSizeComparison && <PackedSizeComparison product={product} />}
     <div class="brief-layout" data-brief-ui hidden>
       <form id="brief-selection-form" class="brief-form" data-brief-form>
         <fieldset><legend><span>1</span> Size &amp; contents</legend>
           <div class="brief-fields">
-            <div class="field brief-wide"><label for="brief-size-mode">How would you like to choose a size?</label><select id="brief-size-mode" name="sizeMode"><option value="help">Help me choose a size</option><option value="catalogue">Compare a catalogue model</option><option value="custom">I have a custom size</option></select></div>
-            <div class="field brief-wide" data-brief-catalogue-field hidden><label for="brief-model">Catalogue model / outer size</label><select id="brief-model" name="model" disabled><option value="">Please select a model</option>{product.sizes.map(([model, size]) => <option value={model}>{model} — {size}</option>)}</select><small>Listed in the 2025 catalogue. Ask us to confirm current availability and usable inner dimensions.</small></div>
+            <div class="field brief-wide"><label for="brief-size-mode">How would you like to choose a size?</label><select id="brief-size-mode" name="sizeMode"><option value="help">Help me choose a size</option>{hasCatalogueModels && <option value="catalogue">Compare a catalogue model</option>}<option value="custom">I have a custom size</option></select></div>
+            <div class="field brief-wide" data-brief-catalogue-field hidden><label for="brief-model">Catalogue model / outer size</label><select id="brief-model" name="model" disabled><option value="">Please select a model</option>{hasCatalogueModels && product.sizes.map(([model, size]) => <option value={model}>{model} — {size}</option>)}</select><small>Listed in the 2025 catalogue. Ask us to confirm current availability and usable inner dimensions.</small></div>
             <div class="field brief-wide" data-brief-custom-field hidden><label for="brief-custom-size">Your required bag dimensions</label><input id="brief-custom-size" name="customSize" maxlength="160" placeholder={isZipper ? "Width × height, in cm or inches" : "Width × body length + flap, in cm or inches"} disabled /><small>Include units and say whether these are outer or usable inner measurements. {isZipper && 'For inner height, say whether you measured below the zipper.'}</small></div>
             <div class="field"><label for="brief-goods">What are you packing? (optional)</label><input id="brief-goods" name="goods" maxlength="160" placeholder={isZipper ? 'e.g. one folded T-shirt per bag' : 'e.g. a folded hoodie with an inner bag'} /></div>
             <div class="field"><label for="brief-packed-size">Packed item dimensions (optional)</label><input id="brief-packed-size" name="packedSize" maxlength="160" placeholder="Width × length × thickness, with units" /><small>This records your measurements; it does not calculate or guarantee fit.</small></div>
@@ -41,7 +45,7 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
             <div class="field"><label for="brief-destination">Destination country / port</label><input id="brief-destination" name="destination" maxlength="160" placeholder="e.g. United States, Los Angeles" /><small>You can leave this open and add it on the enquiry page.</small></div>
           </div>
           <details class="brief-more"><summary>{hasSpecificationFields ? 'Add specification checks, samples & timing (optional)' : 'Add material, sample & timing preferences (optional)'}</summary><div class="brief-fields">
-            {!isZipper && <div class="field brief-wide"><label for="brief-material">{isBubble ? 'Outer film / cushioning preference' : isZipper ? 'Material / thickness / zipper preference' : 'Material / single-wall thickness preference'}</label><input id="brief-material" name="material" maxlength="160" placeholder="Describe your preference, or leave it for our advice" /><small>Preferences are requests for review, not confirmed available configurations.</small></div>}
+            {!isZipper && <div class="field brief-wide"><label for="brief-material">{isKraft ? 'Kraft paper / bubble lining preference' : isBubble ? 'Outer film / cushioning preference' : isZipper ? 'Material / thickness / zipper preference' : 'Material / single-wall thickness preference'}</label><input id="brief-material" name="material" maxlength="160" placeholder="Describe your preference, or leave it for our advice" /><small>Preferences are requests for review, not confirmed available configurations.</small></div>}
             {hasSpecificationFields && <SpecificationBriefFields slug={product.slug} />}
             <div class="field"><label for="brief-sample">Sample preference</label><select id="brief-sample" name="sample">{Object.entries(sampleChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
             <div class="field"><label for="brief-timing">Target timing</label><input id="brief-timing" name="timing" maxlength="100" placeholder="Required arrival date or timing target" /></div>
