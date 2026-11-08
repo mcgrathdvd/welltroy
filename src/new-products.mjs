@@ -1,4 +1,4 @@
-import { orderTerms } from "./ordering.mjs";
+import { orderTerms, coreOrderPolicy } from "./ordering.mjs";
 const mailing = "Mailing & Protective Packaging";
 const retail = "Retail & Product Packaging";
 const packing = "Packing & Fulfillment Supplies";
@@ -47,8 +47,9 @@ export const additionalProducts = [
     highlights: ["Yellow kraft exterior", "Bubble cushioning", "Adhesive sealing flap", "Custom logo printing"],
     sizes: [["Exterior", "Yellow kraft paper"], ["Lining", "Bubble cushioning; confirm thickness"], ["Closure", "Peel-and-seal flap"], ["Dimensions", "Confirm both outer and usable inner dimensions"]],
     applications: ["Accessories", "Small gifts", "Beauty product cartons", "Books and compact items"],
-    specNeeds: ["Usable inner dimensions", "Paper weight and bubble structure", "Flap and adhesive details", "Printing artwork", "Packed product and shipping method"],
-    faqs: [{ q: "Are outer dimensions the same as usable inner dimensions?", a: "The liner and sealed edges reduce the usable space. Ask for inner measurements before choosing a size for a thick or boxed product." }, customFaq, sampleFaq]
+    specNeeds: ["Packed item dimensions, units and required usable opening", "Kraft paper specification and bubble structure", "Peel-and-seal flap and adhesive details", "Artwork, print sides and sample requirements", "Quantity by size/design, destination and timing"],
+    relatedGuide: { title: "Compare kraft and poly bubble mailer construction", href: "/guides/kraft-vs-poly-bubble-mailers/" },
+    faqs: [{ q: "Are outer dimensions the same as usable inner dimensions?", a: "The liner and sealed edges reduce the usable space. Ask for inner measurements before choosing a size for a thick or boxed product." }, { q: "What is the minimum order for kraft bubble mailers?", a: coreOrderPolicy.summary + ' ' + coreOrderPolicy.breakdown }, { q: "Are these the same as plain kraft padded mailers?", a: "This page describes a kraft-paper exterior with bubble cushioning. The separate plain kraft padded range requires confirmation of its proposed lining; compare the actual construction and usable space before treating the formats as equivalent." }, customFaq, sampleFaq]
   },
   {
     slug: "custom-stand-up-pouches", name: "Custom Stand Up Pouches", group: retail,

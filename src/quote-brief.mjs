@@ -1,10 +1,11 @@
 import { catalogueModels } from './catalogue-models.mjs';
-import { comparisonMeasurements, packedDimensionsText, comparisonBriefText } from './packed-size.mjs';
+import { comparisonProducts, comparisonMeasurements, packedDimensionsText, comparisonBriefText } from './packed-size.mjs';
 import { specificationFields, specificationLabels, detailPhotoRequest } from './bag-specification.mjs';
 
 export const briefProducts = {
   'poly-mailers': 'Poly Mailers',
   'poly-bubble-mailers': 'Poly Bubble Mailers',
+  'yellow-kraft-bubble-mailers': 'Kraft Bubble Mailers',
   'zipper-bags': 'Garment Zipper Bags',
   'metallic-bubble-mailers': 'Metallic & Holographic Bubble Mailers'
 };
@@ -46,8 +47,10 @@ const cleanText = (value, max) => typeof value === 'string'
 export function normalizeBrief(value) {
   if (!value || !Object.hasOwn(briefProducts, value.product)) return null;
   const result = { product: value.product };
-  result.sizeMode = ['catalogue', 'custom', 'help'].includes(value.sizeMode) ? value.sizeMode : 'help';
-  result.model = result.sizeMode === 'catalogue' && catalogueModels[value.product].includes(value.model) ? value.model : '';
+  const models = catalogueModels[value.product] || [];
+  const modes = models.length ? ['catalogue', 'custom', 'help'] : ['custom', 'help'];
+  result.sizeMode = modes.includes(value.sizeMode) ? value.sizeMode : 'help';
+  result.model = result.sizeMode === 'catalogue' && models.includes(value.model) ? value.model : '';
   for (const [key, max] of Object.entries(textLimits)) result[key] = cleanText(value[key], max);
   for (const key of specificationFields[result.product] || []) result[key] = cleanText(value[key], 160);
   if (specificationFields[result.product]) result.detailPhotos = value.detailPhotos === true || value.detailPhotos === 'yes';
@@ -63,7 +66,7 @@ export function normalizeBrief(value) {
   result.itemizedQuote = value.itemizedQuote === true || value.itemizedQuote === 'yes';
   result.sample = Object.hasOwn(sampleChoices, value.sample) ? value.sample : 'not-sure';
   const measurement = comparisonMeasurements(value.comparison);
-  if (measurement && result.packedSize === packedDimensionsText(measurement)
+  if (comparisonProducts.includes(result.product) && measurement && result.packedSize === packedDimensionsText(measurement)
     && ((result.sizeMode === 'catalogue' && result.model && value.comparison.model === result.model)
       || (result.sizeMode === 'help' && !value.comparison.model))) {
     result.comparison = { ...measurement, model: result.model };

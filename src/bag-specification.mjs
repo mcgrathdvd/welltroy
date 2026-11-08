@@ -1,5 +1,6 @@
 export const specificationFields = {
   'poly-bubble-mailers': ['innerSize', 'closure', 'liner', 'packout'],
+  'yellow-kraft-bubble-mailers': ['innerSize', 'closure', 'liner', 'packout'],
   'zipper-bags': ['innerSize', 'closure', 'appearance', 'packout']
 };
 export const specificationLabels = {
@@ -11,10 +12,26 @@ export const specificationLabels = {
 };
 export function detailPhotoRequest(product) {
   if (product === 'poly-bubble-mailers') return 'Please advise which detail photos are available for this bubble mailer: usable opening, outer film and lining, flap/adhesive and bundle/carton packing.';
+  if (product === 'yellow-kraft-bubble-mailers') return 'Please advise which detail photos are available for this kraft bubble mailer: usable opening, kraft-paper exterior and bubble lining, flap/adhesive and bundle/carton packing.';
   if (product === 'zipper-bags') return 'Please advise which detail photos are available for this zipper bag: usable space below the closure, zipper/opening, surface/printing and bundle/carton packing.';
   return '';
 }
 export const bagSpecifications = {
+  'yellow-kraft-bubble-mailers': {
+    title: 'Confirm the Construction for Your Custom Kraft Bubble Mailer',
+    intro: 'Start with your packed item or requested usable inner size. The published range confirms a kraft-paper exterior, bubble cushioning and a peel-and-seal flap; agree the actual dimensions, paper, lining, artwork and quantity for your order.',
+    rows: [
+      ['Size and opening', 'No numbered catalogue size table is published for this kraft bubble range.', 'Give packed width, length and thickness with units, or a usable inner-size target. Confirm the offered outer size, clear opening, flap and tolerance.'],
+      ['Paper exterior', 'Yellow kraft-paper exterior.', 'Request the offered paper specification and weight. Confirm the surface and printing for your own order.'],
+      ['Bubble lining', 'Bubble cushioning is part of this format; numerical thickness is not published.', 'Confirm liner material and structure, usable space and any thickness measurement with units and method. Paper weight, film gauge and overall thickness are separate measurements.'],
+      ['Closure', 'Self-adhesive peel-and-seal flap.', 'Confirm flap length, adhesive arrangement and the closure around the complete packed item.'],
+      ['Logo and artwork', 'Custom logo printing can be requested.', 'Send artwork, print sides, color references, coverage and placement. Confirm the offered print process and physical sample.'],
+      ['Quantity and packing', 'MOQ: 500 pieces for this core bubble-mailer format.', 'List quantity by size, color and design; agree the split, pieces per bundle/carton, carton dimensions and delivery scope in your quote.']
+    ],
+    photoIntro: 'The product image is an appearance reference, not an inner-size measurement or lining test. Ask which close-ups and filled samples are available for your selected construction.',
+    photoLink: null, photoLabel: null,
+    guide: '/guides/kraft-vs-poly-bubble-mailers/#usable-size', guideLabel: 'Compare paper and film exteriors and usable dimensions'
+  },
   'poly-bubble-mailers': {
     title: 'Compare the Specifications for Your Custom Bubble Mailer',
     intro: 'Choose a confirmed catalogue outer size or request a custom size. Use the project references to prepare your brief, then confirm usable space, film, lining, closure, printing and packing together for your order.',
