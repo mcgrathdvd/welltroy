@@ -72,6 +72,9 @@ export function sanitizeEvent(name, details, path, title) {
     if (!productSlugs.has(details?.product_slug)) return null;
     result.product_slug = details.product_slug;
   } else if (name.startsWith('quote_')) result.product_slug = safeProduct(details?.product_slug);
+  if (['quote_brief_start','quote_brief_continue'].includes(name) && ['product','document'].includes(details?.brief_type)) {
+    result.brief_type = details.brief_type;
+  }
   if (name === 'quote_submit_error') result.error_category = errors.has(details?.error_category) ? details.error_category : 'delivery_unconfirmed';
   if (name === 'whatsapp_click') result.contact_stage = 'outbound';
   if (name === 'quote_cta_click') {

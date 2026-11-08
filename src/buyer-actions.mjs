@@ -7,7 +7,13 @@ export const customerProjects = new Map([
 export const buyerResources = new Map([
   ['poly-mailer-logo-brief', {product:'poly-mailers', path:'/downloads/poly-mailer-logo-quote-brief.txt'}],
   ['clothing-fit-record', {product:'poly-mailers', path:'/downloads/clothing-mailer-fit-record.txt'}],
-  ['bubble-mailer-brief', {product:'poly-bubble-mailers', path:'/downloads/bubble-mailer-quote-brief.txt'}]
+  ['bubble-mailer-brief', {product:'poly-bubble-mailers', path:'/downloads/bubble-mailer-quote-brief.txt'}],
+  ['packaging-quality-brief', {product:'multiple-products', path:'/downloads/packaging-quality-review-brief.txt'}],
+  ['mailer-sample-check', {product:'multiple-products', path:'/downloads/mailer-label-and-sample-check.txt'}],
+  ['bubble-quote-comparison', {product:'poly-bubble-mailers', path:'/downloads/bubble-mailer-quote-comparison.txt'}],
+  ['garment-selection-brief', {product:'multiple-products', path:'/downloads/garment-bag-selection-brief.txt'}],
+  ['garment-sample-record', {product:'zipper-bags', path:'/downloads/garment-bag-sample-approval.txt'}],
+  ['garment-pack-quote-comparison', {product:'multiple-products', path:'/downloads/garment-inner-outer-quote-comparison.txt'}]
 ]);
 
 export function buyerLinkAction(href, origin) {

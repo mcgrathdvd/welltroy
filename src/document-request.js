@@ -45,7 +45,7 @@ function initializeBuilder(root) {
     render();
     saveDocumentRequest(storage,current());
     status.textContent='Review the request below. Nothing has been sent.';
-    if (event.isTrusted && !started) started=track('quote_brief_start',{product_slug:current().product});
+    if (event.isTrusted && !started) started=track('quote_brief_start',{product_slug:current().product,brief_type:'document'});
   });
   form.addEventListener('submit',event=>{
     event.preventDefault();
@@ -56,7 +56,7 @@ function initializeBuilder(root) {
       fallback.hidden=false;
       summary.focus();summary.select();return;
     }
-    if (event.isTrusted) track('quote_brief_continue',{product_slug:request.product});
+    if (event.isTrusted) track('quote_brief_continue',{product_slug:request.product,brief_type:'document'});
     window.location.assign(`/quote/?product=${request.product}&document=1#quote-form`);
   });
   root.querySelector('[data-document-copy]').addEventListener('click',async()=>{

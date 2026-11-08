@@ -71,7 +71,7 @@ function initializeBuilder(root) {
     render();
     saveBrief(storage, current());
     status.textContent = comparison.model ? `${comparison.model} and comparison assumptions added. Review before continuing.` : 'Packed measurements added for sizing advice.';
-    if (trusted && !started) started = track('quote_brief_start', { product_slug: product });
+    if (trusted && !started) started = track('quote_brief_start', { product_slug: product, brief_type: 'product' });
     if (trusted && comparison.model) track('select_size', { product_slug: product, model: comparison.model });
   }});
   const changed = event => {
@@ -80,7 +80,7 @@ function initializeBuilder(root) {
     saveBrief(storage, current());
     status.textContent = '';
     fallback.hidden = true;
-    if (event.isTrusted && !started) started = track('quote_brief_start', { product_slug: product });
+    if (event.isTrusted && !started) started = track('quote_brief_start', { product_slug: product, brief_type: 'product' });
     if (event.isTrusted && event.type === 'change' && event.target.name === 'model' && current().model) {
       track('select_size', { product_slug: product, model: current().model });
     }
@@ -107,7 +107,7 @@ function initializeBuilder(root) {
       photoRequest.checked = true;
       render(); saveBrief(storage, current());
       status.textContent = 'A request about available detail photos was added to your brief. Review the specifications before continuing.';
-      if (event.isTrusted && !started) started = track('quote_brief_start', { product_slug: product });
+      if (event.isTrusted && !started) started = track('quote_brief_start', { product_slug: product, brief_type: 'product' });
     }
   }));
   document.querySelectorAll('[data-add-brief-model]').forEach(link => {
@@ -118,7 +118,7 @@ function initializeBuilder(root) {
       render();
       saveBrief(storage, current());
       status.textContent = `${current().model} added. Check the remaining selections before continuing.`;
-      if (event.isTrusted && !started) started = track('quote_brief_start', { product_slug: product });
+      if (event.isTrusted && !started) started = track('quote_brief_start', { product_slug: product, brief_type: 'product' });
       if (event.isTrusted) track('select_size', { product_slug: product, model: current().model });
       form.elements.model.focus({ preventScroll: true });
     });
@@ -132,7 +132,7 @@ function initializeBuilder(root) {
       summary.select();
       return;
     }
-    if (event.isTrusted) track('quote_brief_continue', { product_slug: product });
+    if (event.isTrusted) track('quote_brief_continue', { product_slug: product, brief_type: 'product' });
     // Carry only fixed routing labels in the URL. Measurements and free text stay in this tab.
     window.location.assign(`/quote/?product=${product}&brief=1#quote-form`);
   });
