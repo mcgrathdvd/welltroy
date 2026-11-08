@@ -1,4 +1,5 @@
 import { additionalProducts } from "./new-products.mjs";
+import { coreOrderPolicy } from "./core-order-policy.mjs";
 
 // Single-wall options supplied by Welltroy; 1 mil = 25.4 microns.
 export const polyMailerThicknessOptions = [60, 70, 80, 90, 100].map(microns => ({
@@ -111,7 +112,7 @@ export const catalogueProducts = [
     name: "Metallic Bubble Mailers",
     group: "Mailing & Protective Packaging",
     eyebrow: "Protective packaging with visual impact",
-    intro: "Welltroy supplies metallic reflective and holographic bubble mailers, with samples available for both finishes. Compare nine catalogue outer sizes, then confirm usable inner space, the exact finish and logo printing for your product. Eligible specifications start from 500 pieces per confirmed configuration.",
+    intro: `Welltroy supplies metallic reflective and holographic bubble mailers, with samples available for both finishes. Compare nine catalogue outer sizes, then confirm usable inner space, the exact finish and logo printing for your product. ${coreOrderPolicy.quantityHelp}`,
     meta: "Custom metallic and holographic bubble mailers with MOQ 500 pieces. Compare nine catalogue sizes, finish samples and logo printing; confirm your order breakdown.",
     highlights: ["9 catalogue sizes", "Metallic & holographic finishes", "Internal cushioning", "Samples for both finishes"],
     sizeLabel: "Outer dimension (Width × Length + Flap)",

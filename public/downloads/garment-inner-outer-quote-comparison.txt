@@ -1,0 +1,83 @@
+WELLTROY — GARMENT INNER BAG AND OUTER MAILER QUOTE COMPARISON
+Updated: 8 November 2026
+Guide: https://welltroy.com/guides/compare-custom-mailer-quotes/#garment-quotes
+Blank buyer worksheet. Enter actual written supplier replies; no prices or
+approved specifications are prefilled. Copy the reply block for each offer.
+
+COMMON REQUIREMENT — ONE RECORD PER BAG VERSION OR PACKING COMBINATION
+Project / garment group / garment SKUs:
+Folded garment dimensions, units and inserts:
+Garments per inner bag and inner bags per customer order:
+Required arrival date:
+Destination country, ZIP / postal code and delivery point:
+
+INNER GARMENT BAG — KEEP ITS QUANTITY AND SPECIFICATION SEPARATE
+Bag version / catalogue model / common specification revision:
+Material / grade requested; single-wall thickness and measurement convention:
+Usable inner width between seams and height below zipper, with units:
+Frosted / clear finish reference and visibility requirement:
+Slider zipper or another offered closure to review:
+Artwork version, print sides, colors and placement:
+SKU label / barcode trial and any requested warning wording or hole positions:
+Required pieces for each size, color and artwork version:
+Alternative quantities for exactly the same version, if needed:
+Retained sample / proof reference and unresolved sample checks:
+
+OUTER SHIPPING PACK — OPTIONAL; QUOTE AS A SEPARATE PRODUCT
+Closed inner pack dimensions including inserts, with units:
+Number of inner packs per shipment / customer-order combination:
+Outer mailer type, material, usable space and closure:
+Outer artwork version and print sides:
+Required outer-bag pieces for each size and design:
+Confirmed inner-to-outer sample / packing-rule reference:
+Do not assume one inner bag equals one outer mailer or combine their quantities
+to establish the minimum for either product. Confirm the quoted breakdown.
+
+COPY THIS BLOCK FOR QUOTE A / QUOTE B / ANOTHER QUANTITY OPTION
+Supplier / written quotation identifier / revision / date / validity:
+Currency and requested quantity option:
+Differences from the common requirement:
+
+Inner bag: offered material / grade / thickness convention:
+Inner bag: offered usable size / finish / closure / artwork reference:
+Inner bag: confirmed pieces by version / unit price / product amount:
+Inner bag: sample route, scope, open checks and courier arrangement:
+
+Outer bag: offered construction / usable size / closure / artwork reference:
+Outer bag: confirmed pieces by version / unit price / product amount:
+Outer bag: sample and full-pack checks, if required:
+
+Setup / printing / tooling: included or separate, amount and applicable version:
+Repeat-order setup treatment, if stated:
+Packing: pieces per carton, carton count, dimensions and weights with units:
+Bulk freight: destination, service and amount or pending status:
+Destination charges: included / excluded / estimated / pending, with scope:
+Other charges: item, amount and which product or order it applies to:
+Shared charge: which product(s) it covers and where it is counted once:
+Confirmed total for the stated scope and currency:
+Unknown amounts, exclusions and specification differences still open:
+
+Design approval / sample approval / payment milestones:
+Production start event and estimated interval:
+Dispatch / transit assumptions and required arrival date to confirm:
+Quotation owner / next question / revised reply due date:
+
+REVIEW BEFORE COMPARING TOTALS
+- Compare the same inner-bag version and outer-pack combination.
+- Keep PE/PVC, thickness conventions, usable space, finish and zipper details
+  explicit. A frosted or clear finish alone does not identify the construction.
+- Keep pieces per bag version separate from cartons and order combinations.
+- List setup, sample, packing and delivery items once for their stated scope.
+- Keep different currencies separate until a comparison basis is agreed.
+- Mark an unknown charge or unchecked specification as pending, not zero.
+- A combined order total is not the unit price of one component bag.
+- Record sample references and resolve differences in a revised written quote.
+
+NEXT STEP
+Garment bags only: https://welltroy.com/quote/?product=zipper-bags#quote-form
+Inner and outer products: https://welltroy.com/quote/?product=multiple-products#quote-form
+Attach the completed TXT record to your enquiry, subject to current file limits.
+Sample review: https://welltroy.com/guides/custom-mailer-sample-approval/#garment-sample-trial
+Current MOQ, sample and ordering conditions: https://welltroy.com/ordering/
+
+This worksheet is not a quotation, cost estimate, supply commitment or order.
