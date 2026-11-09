@@ -102,3 +102,9 @@ const breadcrumbs = {
     </div>
   </section>
 </Layout>
+
+<style>
+  .article-main :is(h2, h3, .guide-callout)[id] {
+    scroll-margin-block-start: calc(var(--header-height, 80px) + 16px);
+  }
+</style>
