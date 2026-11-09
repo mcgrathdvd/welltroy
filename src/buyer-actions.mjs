@@ -13,7 +13,8 @@ export const buyerResources = new Map([
   ['bubble-quote-comparison', {product:'poly-bubble-mailers', path:'/downloads/bubble-mailer-quote-comparison.txt'}],
   ['garment-selection-brief', {product:'multiple-products', path:'/downloads/garment-bag-selection-brief.txt'}],
   ['garment-sample-record', {product:'zipper-bags', path:'/downloads/garment-bag-sample-approval.txt'}],
-  ['garment-pack-quote-comparison', {product:'multiple-products', path:'/downloads/garment-inner-outer-quote-comparison.txt'}]
+  ['garment-pack-quote-comparison', {product:'multiple-products', path:'/downloads/garment-inner-outer-quote-comparison.txt'}],
+  ['bulk-packaging-arrival-inspection', {product:'multiple-products', path:'/downloads/bulk-packaging-arrival-inspection.txt'}]
 ]);
 
 export function buyerLinkAction(href, origin) {
