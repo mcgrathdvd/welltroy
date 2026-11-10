@@ -1,0 +1,110 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data.mjs";
+
+const path = "/guides/bulk-packaging-arrival-inspection/";
+const title = "How to Inspect a Bulk Packaging Order on Arrival";
+const description = "Check cartons, quantities, dimensions, printing and closures when your packaging arrives. Download an inspection record for mailers and garment bags.";
+const published = "2026-11-09";
+const recordPath = "/downloads/bulk-packaging-arrival-inspection.txt";
+const article = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  author: { "@id": `${site.origin}/#organization` },
+  publisher: { "@id": `${site.origin}/#organization` },
+  mainEntityOfPage: `${site.origin}${path}`,
+  datePublished: published,
+  inLanguage: "en"
+};
+const breadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${site.origin}/` },
+    { "@type": "ListItem", position: 2, name: "Buying Guides", item: `${site.origin}/guides/` },
+    { "@type": "ListItem", position: 3, name: "Bulk packaging arrival inspection", item: `${site.origin}${path}` }
+  ]
+};
+---
+<Layout title="Bulk Packaging Arrival Inspection Checklist | Welltroy" description={description} canonicalPath={path} schemas={[article, breadcrumbs]} quoteProduct="multiple-products">
+  <section class="page-hero approval-guide-hero">
+    <div class="container">
+      <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Arrival inspection</div>
+      <p class="eyebrow">Receiving a bulk packaging order</p>
+      <h1>{title}</h1>
+      <p class="lead">Start with the carton labels and quantities, then check the bags against the written specification and the approved sample for each version. Record the affected cartons and keep them available if a difference needs review.</p>
+      <p class="muted">By Welltroy · <time datetime={published}>9 November 2026</time></p>
+      <div class="button-row">
+        <a class="button" href={recordPath} download>Download the Inspection Record (TXT)</a>
+        <a class="text-link" href="#record-issues">What to report if something differs →</a>
+      </div>
+      <nav class="anchor-links" aria-label="In this guide">
+        <a href="#before-receiving">Prepare references</a>
+        <a href="#check-cartons">Check cartons</a>
+        <a href="#inspect-bags">Inspect bags</a>
+        <a href="#bubble-mailer-checks">Bubble mailers</a>
+        <a href="#record-issues">Record issues</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container article-layout">
+      <article class="article-main">
+        <h2 id="before-receiving">1. Pull the Approved Specification and Sample</h2>
+        <p>Keep the order reference, packing list, approved sample and final artwork revision together. List each bag version by product, size, finish or color, artwork and quantity. Confirm who will inspect, which cartons or units will be checked, the check methods and tolerances, and how soon to report any differences. Use the sampling and acceptance terms agreed for the order.</p>
+        <p>Preparing an order? Use the <a href="/guides/custom-mailer-sample-approval/#record">sample approval record</a> to identify the reference you will use at receiving. Request any needed <a href="/materials-and-documents/#document-request-builder">sample or order inspection documents</a> for the agreed specification.</p>
+
+        <h2 id="check-cartons">2. Check Carton Labels, Counts and Visible Damage</h2>
+        <ol>
+          <li>Compare the number of cartons and each carton label with the packing list. Identify the bag versions, bundle counts and any batch identifiers provided.</li>
+          <li>Photograph damaged cartons and shipping labels before unpacking them. Keep the affected goods and packaging available for review.</li>
+          <li>Follow the agreed sampling method to verify pieces per bundle or carton. Record how many pieces and cartons you actually checked for each version.</li>
+        </ol>
+
+        <h2 id="inspect-bags">3. Check the Bags by Version</h2>
+        <p>Use the agreed tools, units and measurement points. Compare the color, print position and print sides against the approved artwork and physical sample. Where a material, film gauge or paper weight is part of the specification, check the agreed measurement or supporting record for that layer.</p>
+
+        <h3 id="poly-mailer-checks">Poly Mailers</h3>
+        <p>Compare outer width, body length and the separate flap with the written specification. Load the intended item or an agreed test pack and check usable space, seams and the adhesive closure. Measure the film per the agreed single-wall method when thickness is part of the inspection. <a href="/products/poly-mailers/">Review poly mailer specifications →</a></p>
+
+        <h3 id="bubble-mailer-checks">Bubble Mailers</h3>
+        <p>Identify the ordered exterior and finish, then check the bubble liner and seam condition against the approved reference. Check usable inner width, length and opening with the complete packed item. Confirm that it can be inserted and the flap seals as agreed. Record exterior film gauge or paper weight separately from overall thickness including the bubbles when these are part of the specification.</p>
+        <p>Use the approved reference for the <a href="/products/poly-bubble-mailers/">plastic</a>, <a href="/products/yellow-kraft-bubble-mailers/">kraft</a> or <a href="/products/metallic-bubble-mailers/">metallic or holographic</a> version ordered. If the order includes a protection check, use the agreed packed item, method and acceptance criteria. <a href="/guides/kraft-vs-poly-bubble-mailers/#usable-size">Review the bubble mailer size and lining guide →</a></p>
+
+        <h3 id="garment-bag-checks">Garment Zipper Bags</h3>
+        <p>Check the finish and artwork with the actual folded garment and inserts. Confirm usable space below the closure, check the zipper type against the approved sample and test loading and full reclosure. Keep the completed inner pack as the reference when it will be used with an outer mailer. <a href="/guides/apparel-inner-bags-and-shipping-mailers/#closure-comparison">Compare garment bag closures →</a></p>
+
+        <h2 id="record-issues">4. Record Differences and Arrange a Review</h2>
+        <p>Record the affected bag version, carton or batch, agreed requirement, actual finding and photo reference. Keep the number checked, the number found affected in the check, and any quantity still under review in separate fields. Identify and set aside the affected goods while the parties review the finding.</p>
+        <div class="guide-callout" id="inspection-record">
+          <h3>Keep One Record for Each Bag Version</h3>
+          <p>Use the blank record for the agreed criteria, checks, photos and follow-up. Before ordering, complete the sampling and acceptance fields with the supplier or inspection team.</p>
+          <div class="button-row">
+            <a class="button" href={recordPath} download>Download the Blank Inspection Record (TXT)</a>
+            <a class="text-link" href="/ordering/#quality">Contact Welltroy about an existing order →</a>
+          </div>
+        </div>
+      </article>
+
+      <aside class="side-card">
+        <p class="eyebrow">Before you order</p>
+        <h2>Agree How the Order Will Be Checked</h2>
+        <p>Share the intended pack, the specification to verify and any inspection record your receiving team needs.</p>
+        <div class="guide-options">
+          <a href="/guides/custom-mailer-sample-approval/"><strong>Approve a sample</strong><span>Keep a physical reference and its written revision.</span></a>
+          <a href="/ordering/#quality"><strong>Review quality feedback</strong><span>Find the information to send for an existing order.</span></a>
+          <a href="/materials-and-documents/#document-request-builder"><strong>Request inspection documents</strong><span>Confirm what evidence is available for your proposed packaging.</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .article-main :is(h2, h3, .guide-callout)[id] {
+    scroll-margin-block-start: calc(var(--header-height, 80px) + 16px);
+  }
+</style>

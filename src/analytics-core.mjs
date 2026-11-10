@@ -24,6 +24,7 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/guides/custom-mailer-sample-approval/',
   '/guides/metallic-vs-holographic-bubble-mailers/',
   '/guides/compare-custom-mailer-quotes/',
+  '/guides/bulk-packaging-arrival-inspection/',
   '/industries/apparel-poly-mailers/',
   '/industries/retail-event-paper-bags/',
   '/industries/retail-stand-up-pouches/',

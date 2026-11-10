@@ -1,0 +1,47 @@
+WELLTROY - BULK PACKAGING ARRIVAL INSPECTION RECORD
+Blank buyer worksheet. Complete one copy for each bag version.
+Guide: https://welltroy.com/guides/bulk-packaging-arrival-inspection/
+
+ORDER AND REFERENCES
+Order reference:
+Bag product / size / color or finish / artwork version:
+Approved specification and sample reference:
+Expected pieces and cartons for this version:
+Carton or batch identifiers, if provided:
+Receiving and inspection dates:
+Inspector or team:
+
+AGREED CHECKS
+Sampling method and quantity:
+Measurement tools, points and units:
+Acceptance criteria and tolerances:
+Reporting deadline and responsible contact:
+
+CARTONS AND COUNTS
+Cartons received / cartons checked:
+Carton label, version and packing list match:
+Pieces per checked bundle or carton:
+Visible damage, affected carton identifiers and label/photo references:
+
+BAG CHECKS
+Each line: agreed requirement | actual observation | status | photo or sample reference.
+Outer dimensions and separate flap (where applicable):
+Usable opening and inner size / packed item used:
+Material and agreed thickness or paper-weight checks:
+Bubble liner condition (where applicable):
+Finish, color, artwork revision and print placement:
+Seams and closure with the actual packed item:
+Any other agreed check:
+
+FINDINGS AND FOLLOW-UP
+Pieces checked:
+Pieces found affected in those checks:
+Quantity still under review:
+Affected carton or batch identifiers:
+Difference, photo references and retained goods:
+Next action, responsible party and review date:
+Decision / open item:
+
+Use your written order specification, approved sample and agreed sampling
+criteria. Use the quality contact at https://welltroy.com/ordering/#quality
+to review a finding about an existing Welltroy order.

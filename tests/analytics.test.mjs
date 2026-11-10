@@ -162,7 +162,7 @@ test('runtime size and catalogue clicks produce filtered funnel events without b
 });
 
 test('new buying guides track only public paths and still require consent',()=>{
-  for(const path of ['/guides/','/materials-and-documents/','/guides/verify-packaging-bag-factory/','/guides/custom-mailer-sample-approval/','/guides/compare-custom-mailer-quotes/','/guides/metallic-vs-holographic-bubble-mailers/']) {
+  for(const path of ['/guides/','/materials-and-documents/','/guides/verify-packaging-bag-factory/','/guides/custom-mailer-sample-approval/','/guides/compare-custom-mailer-quotes/','/guides/metallic-vs-holographic-bubble-mailers/','/guides/bulk-packaging-arrival-inspection/']) {
     const events=[]; let consent=false;
     const track=createTracker({canSend:()=>consent,send:(name,data)=>events.push({name,data}),getPath:()=>`${path}?email=buyer@example.com#private-approval`});
     assert.equal(track('page_view'),false);
@@ -251,7 +251,8 @@ test('all published buyer templates have one fixed download identifier and packa
     ['bubble-quote-comparison','poly-bubble-mailers','bubble-mailer-quote-comparison.txt'],
     ['garment-selection-brief','multiple-products','garment-bag-selection-brief.txt'],
     ['garment-sample-record','zipper-bags','garment-bag-sample-approval.txt'],
-    ['garment-pack-quote-comparison','multiple-products','garment-inner-outer-quote-comparison.txt']
+    ['garment-pack-quote-comparison','multiple-products','garment-inner-outer-quote-comparison.txt'],
+    ['bulk-packaging-arrival-inspection','multiple-products','bulk-packaging-arrival-inspection.txt']
   ];
   assert.deepEqual([...buyerResources].map(([id,r])=>[id,r.product,r.path.split('/').pop()]),expected);
   assert.deepEqual(readdirSync(new URL('../public/downloads/',import.meta.url)).sort(),expected.map(x=>x[2]).sort());
