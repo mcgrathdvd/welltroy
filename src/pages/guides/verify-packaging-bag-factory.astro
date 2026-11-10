@@ -15,7 +15,7 @@ Quality checks and supporting documents requested:
 Confidentiality or recording restrictions:
 Unresolved questions and follow-up contact:`;
 const emailHref = `mailto:${site.email}?subject=${encodeURIComponent('Packaging supplier verification and walkthrough enquiry')}`;
-const article = {'@context':'https://schema.org','@type':'Article',headline:title,author:{'@id':`${site.origin}/#organization`},publisher:{'@id':`${site.origin}/#organization`},mainEntityOfPage:`${site.origin}${path}`,datePublished:'2026-11-02',dateModified:'2026-11-07',inLanguage:'en'};
+const article = {'@context':'https://schema.org','@type':'Article',headline:title,author:{'@id':`${site.origin}/#organization`},publisher:{'@id':`${site.origin}/#organization`},mainEntityOfPage:`${site.origin}${path}`,datePublished:'2026-11-02',dateModified:'2026-11-10',inLanguage:'en'};
 const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.origin},{'@type':'ListItem',position:2,name:'Buying Guides',item:`${site.origin}/guides/`},{'@type':'ListItem',position:3,name:'Verify a packaging factory',item:`${site.origin}${path}`}]};
 ---
 <Layout title={`${title} | Welltroy`} description="Verify a packaging bag supplier's legal entity, production scope, walkthrough, samples and supporting documents. Use a checklist before approving an order." canonicalPath={path} schemas={[article,breadcrumbs]} contactContext="Packaging supplier verification and walkthrough enquiry">
@@ -23,8 +23,8 @@ const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',it
     <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Factory verification</div>
     <p class="eyebrow">Supplier checks for packaging buyers</p><h1>{title}</h1>
     <p class="lead">Verify the contracting company, identify who performs each production step, review the relevant site and equipment, and check a sample against a written specification. Connect those findings to the material documents, inspection plan and quotation for your actual order.</p>
-    <p class="muted">By Welltroy · Updated <time datetime="2026-11-07">7 November 2026</time></p>
-    <nav class="anchor-links" aria-label="In this guide"><a href="#checklist">Verification checklist</a><a href="#identity">Company and site</a><a href="#production">Production scope</a><a href="#walkthrough">Video walkthrough</a><a href="#samples">Sample and records</a><a href="#documents">Documents</a><a href="#request">Prepare a request</a></nav>
+    <p class="muted">By Welltroy · Updated <time datetime="2026-11-10">10 November 2026</time></p>
+    <nav class="anchor-links" aria-label="In this guide"><a href="#checklist">Verification checklist</a><a href="#identity">Company and site</a><a href="#production">Production scope</a><a href="#bubble-mailer-supplier">Bubble mailer checks</a><a href="#walkthrough">Video walkthrough</a><a href="#samples">Sample and records</a><a href="#documents">Documents</a><a href="#request">Prepare a request</a></nav>
   </div></section>
   <section class="section"><div class="container article-layout"><article class="article-main">
     <h2 id="checklist">What Should I Check Before Choosing a Packaging Bag Supplier?</h2>
@@ -47,6 +47,19 @@ const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',it
     <p>Describe the production route for the actual product. Ask the supplier to map your selected material, printing and bag-making steps, including any subcontracted work and the controls used for it.</p>
     <ul><li><strong>Printed poly mailers:</strong> distinguish printing on an existing bag from a route that prints film before bag making. Ask who performs the selected process and where the artwork and finished bag are checked.</li><li><strong>Poly bubble mailers:</strong> confirm who supplies or makes the outer film and bubble construction, and who performs the final printing, bag assembly and closure checks.</li><li><strong>Clothing zipper bags:</strong> confirm the bag construction, zipper or closure fitting, any holes and printed details, and the final size and closure checks.</li></ul>
     <p>A supplier can coordinate several operations. Record which party is responsible for the offered specification, sample approval, changes and any quality follow-up. Do not infer ownership, capacity or the process used for your order from a photograph of equipment alone.</p>
+    <p>For clothing inner bags, use the <a href="/products/zipper-bags/#quote-brief">garment bag brief</a> to record the intended garment, usable space below the closure and the finish and zipper you want the supplier to review.</p>
+
+    <h2 id="bubble-mailer-supplier">What Should an Importer Check Before Choosing a Bubble Mailer Supplier?</h2>
+    <p>Match the offered construction, the filled sample and the delivered quotation for the same bubble mailer version. Give each supplier the same packed item dimensions and weight, quantity by size and design, destination and required arrival date.</p>
+    <ol>
+      <li><strong>Confirm who supplies and checks each part.</strong> Ask who is responsible for the exterior, bubble liner, adhesive flap, printing and final inspection. Request the specification and any available supporting documents for the exact construction offered.</li>
+      <li><strong>Check the actual filled sample.</strong> Confirm the usable inner width, length and opening. Insert the item with its retail box and wrapping, close the flap and check the complete pack under the agreed handling conditions. Record the sample and artwork versions.</li>
+      <li><strong>Agree what the quote and bulk checks cover.</strong> Compare setup, sample courier and bulk delivery charges on the same basis. Record the carton packing, agreed inspection checks and how differences from the approved sample will be handled.</li>
+    </ol>
+    <div class="button-row">
+      <a class="button" href="/products/poly-bubble-mailers/#quote-brief">Build a Bubble Mailer Quote Brief</a>
+      <a class="text-link" href="/materials-and-documents/?product=poly-bubble-mailers#document-request-builder">Request Evidence for the Offered Construction →</a>
+    </div>
 
     <h2 id="walkthrough">What Should I Ask to See in a Live Factory Walkthrough?</h2>
     <p>Agree the purpose, location, participants, time zone, duration and recording permissions first. Ask whether the operations relevant to your proposed order can be shown at that time. A supplier may need to protect other customers' artwork or production records.</p>
