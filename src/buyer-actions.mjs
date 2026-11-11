@@ -14,7 +14,8 @@ export const buyerResources = new Map([
   ['garment-selection-brief', {product:'multiple-products', path:'/downloads/garment-bag-selection-brief.txt'}],
   ['garment-sample-record', {product:'zipper-bags', path:'/downloads/garment-bag-sample-approval.txt'}],
   ['garment-pack-quote-comparison', {product:'multiple-products', path:'/downloads/garment-inner-outer-quote-comparison.txt'}],
-  ['bulk-packaging-arrival-inspection', {product:'multiple-products', path:'/downloads/bulk-packaging-arrival-inspection.txt'}]
+  ['bulk-packaging-arrival-inspection', {product:'multiple-products', path:'/downloads/bulk-packaging-arrival-inspection.txt'}],
+  ['single-wall-film-thickness', {product:'multiple-products', path:'/downloads/single-wall-film-thickness-record.txt'}]
 ]);
 
 export function buyerLinkAction(href, origin) {

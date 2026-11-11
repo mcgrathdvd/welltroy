@@ -252,7 +252,8 @@ test('all published buyer templates have one fixed download identifier and packa
     ['garment-selection-brief','multiple-products','garment-bag-selection-brief.txt'],
     ['garment-sample-record','zipper-bags','garment-bag-sample-approval.txt'],
     ['garment-pack-quote-comparison','multiple-products','garment-inner-outer-quote-comparison.txt'],
-    ['bulk-packaging-arrival-inspection','multiple-products','bulk-packaging-arrival-inspection.txt']
+    ['bulk-packaging-arrival-inspection','multiple-products','bulk-packaging-arrival-inspection.txt'],
+    ['single-wall-film-thickness','multiple-products','single-wall-film-thickness-record.txt']
   ];
   assert.deepEqual([...buyerResources].map(([id,r])=>[id,r.product,r.path.split('/').pop()]),expected);
   assert.deepEqual(readdirSync(new URL('../public/downloads/',import.meta.url)).sort(),expected.map(x=>x[2]).sort());

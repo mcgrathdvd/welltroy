@@ -1,0 +1,57 @@
+WELLTROY - SINGLE-WALL FILM THICKNESS CHECK RECORD
+Updated: 11 November 2026
+Guide: https://welltroy.com/guides/mailer-size-for-clothing/#film-thickness-check
+Poly mailers: https://welltroy.com/quote/?product=poly-mailers#quote-form
+Garment bags: https://welltroy.com/quote/?product=zipper-bags#quote-form
+
+Use one record for each bag version and agreed check method.
+This blank planning record is not an inspection report, acceptance specification
+or statement of compliance. Complete the method and acceptance fields with the
+supplier or inspection team before checking. Leave unknown items for review.
+
+1. BAG AND AGREED REQUIREMENT
+Product / bag version / model:
+Order / sample / batch / carton reference:
+Material and surface finish:
+Specification revision / approved sample reference:
+Measurement basis (identify one bag panel and the area or construction measured):
+Target thickness and units:
+Agreed limits / tolerance and units:
+Agreed decision rule, including any required calculations:
+
+2. AGREED METHOD AND SELECTION
+Method / procedure reference and revision:
+Instrument / instrument ID:
+Calibration reference / status:
+Sample preparation and measurement conditions:
+For contact methods, agreed contact conditions and compression control:
+Bags to check / bag selection plan:
+Measurement points / location plan or drawing reference:
+Number of readings agreed:
+How seams, folds, closures, printed or textured areas are treated:
+Method and acceptance terms confirmed by / date:
+
+3. INDIVIDUAL READINGS - add rows as needed for the agreed plan
+Bag ID | Point ID / location | Reading | Unit | Observation / photo reference
+       |                     |         |      |
+       |                     |         |      |
+       |                     |         |      |
+       |                     |         |      |
+
+Any agreed average / minimum / maximum calculation (keep all readings above):
+Differences in method, units or measurement basis requiring review:
+
+4. REVIEW AND DECISION
+Inspector / date:
+Number of bags and readings actually checked:
+Result against the agreed decision rule (accepted / review needed / pending):
+Open questions / affected reference / supporting photos:
+Review agreed by / date / follow-up:
+
+One wall means one bag panel; it can contain bonded material layers. Front and
+back together, folds, seam overlaps and closures are different constructions.
+This record does not supply a default tolerance or sampling plan. Its blank rows
+do not prescribe the number of readings. Confirm a method suitable for the actual
+film and surface. Bubble exterior film, liner and overall thickness including
+bubbles require separate definitions; this record gives no bubble thickness value
+or cushioning rating. Keep the completed record with the specification and sample.
