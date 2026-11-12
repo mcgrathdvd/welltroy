@@ -3,6 +3,7 @@ import { selectionGuidance } from "./quote-options.mjs";
 import { initializeQuoteBrief } from "./quote-brief.js";
 import { initializeAnalytics, track } from "./analytics.js";
 import { confirmedQuote, errorCategory } from "./analytics-core.mjs";
+import { initializeQuoteRecovery } from './quote-recovery.mjs';
 initializeAnalytics();
 
 const emailDialog = document.querySelector('[data-email-dialog]');
@@ -206,6 +207,7 @@ if (quoteForm) {
   const dropzone = quoteForm.querySelector('[data-upload-zone]');
   const fileList = quoteForm.querySelector('[data-upload-list]');
   const fileStatus = quoteForm.querySelector('[data-upload-status]');
+  const quoteRecovery = initializeQuoteRecovery(quoteForm);
   const fileExtensions = new Set(['png', 'jpg', 'jpeg', 'webp', 'pdf', 'ai', 'psd', 'docx', 'xlsx', 'txt', 'csv']);
   const maxFileBytes = 10 * 1024 * 1024;
   let selectedFiles = [];
@@ -225,6 +227,7 @@ if (quoteForm) {
       remove.textContent = 'Remove';
       remove.setAttribute('aria-label', `Remove ${file.name}`);
       remove.addEventListener('click', () => {
+        quoteRecovery.clear();
         selectedFiles.splice(index, 1);
         renderFiles();
         fileInput.focus();
@@ -251,6 +254,7 @@ if (quoteForm) {
       fileStatus.textContent = error;
       fileStatus.dataset.state = 'error';
     } else {
+      if (next.length !== selectedFiles.length) quoteRecovery.clear();
       selectedFiles = next;
       renderFiles();
     }
@@ -409,6 +413,7 @@ if (quoteForm) {
       const value = key === 'product' ? (productSelect.value ? productSelect.selectedOptions[0].textContent : '') : input.value.trim();
       return `${label}: ${value || 'Not specified'}`;
     });
+    lines.unshift(...quoteRecovery.copyLines());
     lines.push(`Files to attach separately: ${selectedFiles.map((file) => file.name).join(', ') || 'None'}`);
     const text = lines.join('\n');
     const copyStatus = quoteForm.querySelector('[data-copy-status]');
@@ -461,6 +466,7 @@ if (quoteForm) {
   quoteForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!ready || sending || completed || !quoteForm.reportValidity()) return;
+    quoteRecovery.clear();
     sending = true;
     hasSubmissionError = false;
     fallback.open = false;
@@ -487,6 +493,7 @@ if (quoteForm) {
       analyticsFailure = errorCategory(response.status);
       const result = await response.json();
       if (!response.ok || !result.ok) {
+        quoteRecovery.setFailure(response, result);
         emailUnavailable = result.code === 'EMAIL_SERVICE_UNAVAILABLE';
         failureMessage = result.message || (response.status < 500 ? 'Your enquiry could not be submitted. Check your details and complete a new security check.' : failureMessage);
         throw new Error();
