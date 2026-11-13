@@ -1,4 +1,4 @@
-import {documentProducts, normalizeDocumentRequest, documentRequestReady, documentRequestText, documentQuoteFields, saveDocumentRequest, readDocumentRequest, clearDocumentRequest} from './document-request.mjs';
+import {documentProducts, normalizeDocumentRequest, documentRequestReady, documentRequestFromReview, documentRequestText, documentQuoteFields, saveDocumentRequest, readDocumentRequest, clearDocumentRequest} from './document-request.mjs';
 import {fieldsAfterProductChange, quoteFieldsAreEmpty} from './quote-brief.mjs';
 import {track} from './analytics.js';
 const session = () => {try {return window.sessionStorage;} catch {return null;}};
@@ -34,6 +34,16 @@ function initializeBuilder(root) {
     const data=new FormData(form);
     return normalizeDocumentRequest({...Object.fromEntries(data.entries()),categories:data.getAll('categories')});
   };
+  if (params.get('review')==='factory') {
+    if (documentRequestReady(current())) {
+      status.textContent='Your existing request has been kept. To add factory verification, select the company identity and production responsibilities category below and review your scope.';
+    } else {
+      const suggested=documentRequestFromReview(current(),'factory');
+      form.querySelectorAll('[name="categories"]').forEach(field=>field.checked=suggested.categories.includes(field.value));
+      form.elements.requirement.value=suggested.requirement;
+      status.textContent='Company and production verification scope added from your link. Review it below; add walkthrough availability only if you need it. Nothing has been sent.';
+    }
+  }
   const render=()=>{
     const request=current();
     summary.value=documentRequestText(request);

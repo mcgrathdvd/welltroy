@@ -1,10 +1,32 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeDocumentRequest,documentRequestReady,documentRequestText,documentQuoteFields,saveDocumentRequest,readDocumentRequest,clearDocumentRequest} from '../src/document-request.mjs';
+import {normalizeDocumentRequest,documentRequestReady,documentRequestFromReview,documentRequestText,documentQuoteFields,saveDocumentRequest,readDocumentRequest,clearDocumentRequest} from '../src/document-request.mjs';
 import {fieldsAfterProductChange,quoteFieldsAreEmpty} from '../src/quote-brief.mjs';
 import {sanitizeEvent} from '../src/analytics-core.mjs';
 const base={product:'zipper-bags',categories:['material','inspection'],requirement:'Confirm the material and inspection record for our proposed frosted slider bag.',destination:'United States',intendedUse:'Inner packaging for folded clothing'};
 const memory=()=>{const data=new Map();return {data,getItem:key=>data.get(key)??null,setItem:(key,value)=>data.set(key,value),removeItem:key=>data.delete(key)};};
+
+test('a fixed factory review link proposes company and process scope without promising a visit',()=>{
+ const request=documentRequestFromReview({product:'poly-bubble-mailers',destination:'United States',size:'To discuss'},'factory');
+ assert.deepEqual(request.categories,['factory']);assert.equal(request.destination,'United States');
+ const fields=documentQuoteFields(request);
+ assert.equal(fields.product,'poly-bubble-mailers');assert.equal(fields.size,'To discuss');
+ for(const text of ['contracting legal entity','subcontracted','supporting records'])assert.ok(fields.message.includes(text));
+ assert.ok(!fields.message.includes('Site walkthrough or independent inspection availability and scope'));
+});
+
+test('factory review links keep substantive drafts and ignore arbitrary review values',()=>{
+ for(const draft of [base,{product:'poly-mailers',categories:['report']},{product:'not-sure',requirement:'Keep my question'}])assert.deepEqual(documentRequestFromReview(draft,'factory'),normalizeDocumentRequest(draft));
+ for(const review of ['walkthrough','__proto__','private@example.com','https://other.invalid'])assert.deepEqual(documentRequestFromReview({product:'not-sure'},review),normalizeDocumentRequest({product:'not-sure'}));
+ assert.equal(documentRequestFromReview({product:'unknown'},'factory'),null);
+});
+
+test('factory and optional walkthrough requests retain their scope through draft storage and quote import',()=>{
+ const request={...documentRequestFromReview({product:'zipper-bags'},'factory'),categories:['factory','walkthrough'],timing:'Propose dates and time zone'};
+ const storage=memory();assert.ok(saveDocumentRequest(storage,request,100));
+ const fields=documentQuoteFields(readDocumentRequest(storage,101));
+ for(const text of ['Company identity, production site and process responsibilities','Site walkthrough or independent inspection availability and scope','Propose dates and time zone','not confirmation that a document is available'])assert.ok(fields.message.includes(text));
+});
 
 test('document requests reject unknown products and filter categories while bounding scope text',()=>{
  assert.equal(normalizeDocumentRequest({...base,product:'__proto__'}),null);

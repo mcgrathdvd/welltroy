@@ -1,0 +1,104 @@
+WELLTROY - PACKAGING SUPPLIER VERIFICATION RECORD
+Updated: 13 November 2026
+Guide: https://welltroy.com/guides/verify-packaging-bag-factory/#verification-record
+Prepare a request: https://welltroy.com/materials-and-documents/?review=factory#document-request-builder
+
+Use one working record per supplier and proposed packaging version. Keep the
+underlying records and written replies with this worksheet. Blank fields are
+unresolved, not evidence of approval. This is not a certificate, audit report,
+inspection standard or confirmation of any supplier's identity or capability.
+
+PROJECT AND REVIEW SCOPE
+Buyer project / review reference:
+Supplier trading name / contracting legal entity:
+Proposed product / material / construction / bag version:
+Specification / artwork / sample reference and revision:
+Estimated quantity by size and design:
+Intended contents / use / destination market:
+Review date / reviewer:
+Next purchasing milestone and date, if agreed:
+
+STATUS KEY - use one for each check, with a stated scope:
+- Not requested
+- Requested
+- Received but not reviewed
+- Reviewed with open items
+- Reviewed for the stated scope
+A received reply is not a completed review. Record what was actually checked.
+
+1. COMPANY AND LOCATION
+Requested: registered legal entity and identifier, contracting company and
+relevant site address; distinguish office, warehouse and production functions.
+Status / date:
+Source or document / identifier / version / date:
+Company, site and product scope actually reviewed:
+Finding / consistency with quotation and other records:
+Open question / next action:
+Responsible person / follow-up due date:
+
+2. PRODUCTION RESPONSIBILITIES
+Requested: who handles material sourcing, printing, conversion or assembly,
+closure fitting, inspection and packing for the proposed bag; identify
+subcontracted steps and the party responsible for changes and quality follow-up.
+Status / date:
+Source or document / identifier / version / date:
+Operations, locations and offered construction actually reviewed:
+Finding / steps not yet confirmed:
+Open question / next action:
+Responsible person / follow-up due date:
+
+3. SITE WALKTHROUGH OR VISIT
+Requested, if needed: location, relevant operations, participants, availability,
+dates and time zone, access and recording permissions, scope and any charges.
+Status / date (or reason this check is outside the review scope):
+Source or agreed arrangements / date:
+Site / operations actually observed; distinguish live work from explanation:
+Finding / areas or records not reviewed:
+Open question / next action:
+Responsible person / follow-up due date:
+
+4. SAMPLE AND SPECIFICATION
+Requested: proposed material and construction, outer and usable inner size,
+thickness convention, closure, artwork and filled-sample checks for the actual
+contents. Keep the approved version and any differences together.
+Status / date:
+Sample / specification / artwork identifier and revision:
+Checks and agreed criteria actually reviewed:
+Finding / differences from the proposed specification:
+Open question / next action:
+Responsible person / follow-up due date:
+
+5. QUALITY AND MATERIAL EVIDENCE
+Requested: relevant inspection responsibilities and records, full material or
+test documents, issuer, subject, site where applicable, method, date, current
+status and limitations. Check the exact proposed construction and requirement.
+Status / date:
+Source / record identifier / issuer / version / date:
+Product, material, site, batch and requirement actually covered:
+Finding / limitations / missing pages / status verification source:
+Open question / next action:
+Responsible person / follow-up due date:
+
+6. QUOTATION AND FOLLOW-UP
+Requested: entity and product references, quantity per version, setup and
+sampling charges, approval milestones, delivery scope and written handling of
+changes or differences from the approved sample.
+Status / date:
+Quotation / written reply identifier / revision / date:
+Scope actually reviewed against specification and sample:
+Finding / inconsistent or missing terms:
+Open question / next action:
+Responsible person / follow-up due date:
+
+REVIEW DECISION AND NEXT ACTIONS
+Checks outside this review's scope and reason:
+Unresolved items required before the next purchasing milestone:
+Action / required record / owner / due date (repeat as needed):
+Buyer decision for the stated scope / reviewer / date:
+Related quotation, sample approval and inspection-plan references:
+When this review must be revisited (material, site, process or version change):
+
+A photograph, walkthrough, sample, management-system certificate and material
+test each answer different questions. No worksheet status automatically approves
+a supplier or establishes the performance of a future order. Confirm the
+relevant available evidence and retain your own review decision.

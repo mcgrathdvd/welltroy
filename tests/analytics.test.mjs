@@ -243,6 +243,7 @@ test('runtime buyer link events require consent and trusted uncancelled clicks',
 
 test('all published buyer templates have one fixed download identifier and packaging scope',()=>{
   const expected = [
+    ['supplier-verification-record','multiple-products','packaging-supplier-verification-record.txt'],
     ['poly-mailer-logo-brief','poly-mailers','poly-mailer-logo-quote-brief.txt'],
     ['clothing-fit-record','poly-mailers','clothing-mailer-fit-record.txt'],
     ['bubble-mailer-brief','poly-bubble-mailers','bubble-mailer-quote-brief.txt'],

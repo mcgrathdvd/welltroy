@@ -5,6 +5,7 @@ export const customerProjects = new Map([
   ['verdant-studio', {product:'poly-bubble-mailers', section:'verdant-case'}]
 ]);
 export const buyerResources = new Map([
+  ['supplier-verification-record', {product:'multiple-products', path:'/downloads/packaging-supplier-verification-record.txt'}],
   ['poly-mailer-logo-brief', {product:'poly-mailers', path:'/downloads/poly-mailer-logo-quote-brief.txt'}],
   ['clothing-fit-record', {product:'poly-mailers', path:'/downloads/clothing-mailer-fit-record.txt'}],
   ['bubble-mailer-brief', {product:'poly-bubble-mailers', path:'/downloads/bubble-mailer-quote-brief.txt'}],

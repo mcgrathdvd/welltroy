@@ -15,7 +15,7 @@ Quality checks and supporting documents requested:
 Confidentiality or recording restrictions:
 Unresolved questions and follow-up contact:`;
 const emailHref = `mailto:${site.email}?subject=${encodeURIComponent('Packaging supplier verification and walkthrough enquiry')}`;
-const article = {'@context':'https://schema.org','@type':'Article',headline:title,author:{'@id':`${site.origin}/#organization`},publisher:{'@id':`${site.origin}/#organization`},mainEntityOfPage:`${site.origin}${path}`,datePublished:'2026-11-02',dateModified:'2026-11-10',inLanguage:'en'};
+const article = {'@context':'https://schema.org','@type':'Article',headline:title,author:{'@id':`${site.origin}/#organization`},publisher:{'@id':`${site.origin}/#organization`},mainEntityOfPage:`${site.origin}${path}`,datePublished:'2026-11-02',dateModified:'2026-11-13',inLanguage:'en'};
 const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.origin},{'@type':'ListItem',position:2,name:'Buying Guides',item:`${site.origin}/guides/`},{'@type':'ListItem',position:3,name:'Verify a packaging factory',item:`${site.origin}${path}`}]};
 ---
 <Layout title={`${title} | Welltroy`} description="Verify a packaging bag supplier's legal entity, production scope, walkthrough, samples and supporting documents. Use a checklist before approving an order." canonicalPath={path} schemas={[article,breadcrumbs]} contactContext="Packaging supplier verification and walkthrough enquiry">
@@ -23,8 +23,8 @@ const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',it
     <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Buying Guides</a> / Factory verification</div>
     <p class="eyebrow">Supplier checks for packaging buyers</p><h1>{title}</h1>
     <p class="lead">Verify the contracting company, identify who performs each production step, review the relevant site and equipment, and check a sample against a written specification. Connect those findings to the material documents, inspection plan and quotation for your actual order.</p>
-    <p class="muted">By Welltroy · Updated <time datetime="2026-11-10">10 November 2026</time></p>
-    <nav class="anchor-links" aria-label="In this guide"><a href="#checklist">Verification checklist</a><a href="#identity">Company and site</a><a href="#production">Production scope</a><a href="#bubble-mailer-supplier">Bubble mailer checks</a><a href="#walkthrough">Video walkthrough</a><a href="#samples">Sample and records</a><a href="#documents">Documents</a><a href="#request">Prepare a request</a></nav>
+    <p class="muted">By Welltroy · Updated <time datetime="2026-11-13">13 November 2026</time></p>
+    <nav class="anchor-links" aria-label="In this guide"><a href="#checklist">Verification checklist</a><a href="#verification-record">Review record</a><a href="#identity">Company and site</a><a href="#production">Production scope</a><a href="#bubble-mailer-supplier">Bubble mailer checks</a><a href="#walkthrough">Video walkthrough</a><a href="#samples">Sample and records</a><a href="#documents">Documents</a><a href="#request">Prepare a request</a></nav>
   </div></section>
   <section class="section"><div class="container article-layout"><article class="article-main">
     <h2 id="checklist">What Should I Check Before Choosing a Packaging Bag Supplier?</h2>
@@ -38,6 +38,19 @@ const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',it
       <tr><th scope="row">Quality and materials</th><td>Inspection responsibilities, applicable records and product-specific material or test documents.</td><td>Product and site covered, method, date, agreed acceptance criteria and document issuer.</td></tr>
       <tr><th scope="row">Quotation and follow-up</th><td>Entity names, quantity per version, charges, approval milestones and delivery scope.</td><td>Resolve inconsistent details through an established contact and retain the written explanation.</td></tr>
     </tbody></table></div>
+
+    <section class="verification-record guide-callout" aria-labelledby="verification-record">
+      <p class="eyebrow">An editable supplier review</p>
+      <h2 id="verification-record">Keep an Evidence and Follow-up Record</h2>
+      <p>Use one record per supplier and proposed packaging version. The blank worksheet follows the six checks above and gives each check space for the source, date, scope, findings, next action, responsible person and due date.</p>
+      <ol>
+        <li><strong>Separate a reply from a reviewed record.</strong> Mark each check as not requested, requested, received but not reviewed, reviewed with open items, or reviewed for the stated scope. Name the record or observation behind your status.</li>
+        <li><strong>Describe what remains open.</strong> For example, a workshop photo may be available while the production location and responsibility for the proposed bag still need confirmation. Record the exact question rather than treating the photo as a completed site review.</li>
+        <li><strong>Record your next purchasing decision.</strong> Identify which gaps must be resolved before sample approval, an order or another buyer-defined milestone. Keep the responsible person and follow-up date beside each gap.</li>
+      </ol>
+      <div class="button-row"><a class="button button-secondary" href="/downloads/packaging-supplier-verification-record.txt" download>Download Blank Supplier Review Record (TXT)</a><a class="text-link" href="/materials-and-documents/?review=factory#document-request-builder">Prepare a Company and Production Evidence Request →</a></div>
+      <p class="muted">This is a buyer's working record. A completed checklist is not a certificate or an automatic approval; retain the underlying evidence and your own review decision.</p>
+    </section>
 
     <h2 id="identity">Confirm the Company and the Production Location Separately</h2>
     <p>Request the registered company name and registration identifier, then compare them with the supplier's quotation and company documents. For a company registered in China, ask for its registered Chinese name so you can use the <a href="https://www.gsxt.gov.cn/index.html" target="_blank" rel="noopener noreferrer">official National Enterprise Credit Information Publicity System ↗</a>. The State Administration for Market Regulation publishes information about access to this system. <a href="https://www.samr.gov.cn/xw/zj/art/2023/art_e99bd2ba2c374ae5831d18b50b48f6e8.html" target="_blank" rel="noopener noreferrer">Official registry guidance ↗</a></p>
@@ -82,7 +95,8 @@ const breadcrumbs = {'@context':'https://schema.org','@type':'BreadcrumbList',it
     <p>Use these public references to prepare your questions. Ask us to confirm the relevant production location, process responsibilities and available supporting documents for your project. A live walkthrough, site visit or independent inspection needs a separate availability and scope discussion.</p>
 
     <h2 id="request">Prepare a Factory Verification or Walkthrough Request</h2>
-    <p>Copy this brief into your enquiry or email. Include your packaging product and the checks you want to discuss. Mark undecided dimensions and quantities as open.</p>
+    <p>Use the <a href="/materials-and-documents/?review=factory#document-request-builder">company and production evidence request builder</a> to start with a suggested scope, then choose your product and add the questions from your review record. An existing request draft is kept for you to review. You can separately select walkthrough or independent inspection availability if needed; dates, access and scope require confirmation.</p>
+    <p>For email or a manual enquiry, copy this brief and include the checks you want to discuss. Mark undecided dimensions and quantities as open.</p>
     <pre class="verification-brief">{brief}</pre>
     <div class="button-row"><a class="button" href={emailHref}>Ask About a Factory Walkthrough</a><a class="button button-secondary" href="/quote/?product=not-sure#quote-form" data-quote-placement="content">Send Packaging and Verification Requirements</a></div>
     <p class="muted">For the online form, paste the brief into Packaging and printing requirements. A request starts a discussion; confirm the date, location, scope and any charges separately.</p>
