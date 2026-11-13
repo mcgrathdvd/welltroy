@@ -6,6 +6,8 @@ import { site } from '../data.mjs';
 const path = '/materials-and-documents/';
 const title = 'Packaging Certificates, Reports & Material Evidence';
 const documentTypes = [
+  { name: 'Company and production responsibility confirmation', request: 'Contracting legal entity, relevant production location, who performs each proposed step, subcontracted work and available supporting records.', match: 'Connect the reply to the company and production route offered for your bag. Record any unresolved identity, site or responsibility questions.' },
+  { name: 'Walkthrough or independent inspection scope', request: 'Relevant location and operations, availability, dates and time zone, access, confidentiality, scope and any charges.', match: 'Distinguish a site introduction from inspection of a particular order. Confirm arrangements separately before relying on them.' },
   { name: 'Material or specification confirmation', request: 'Proposed material, layers or components, thickness convention or paper weight, and product reference.', match: 'Connect the description to your selected bag construction and specification version.' },
   { name: 'Product or material test report', request: 'Report identifier, issuer, sample description, method, conditions, date and stated results.', match: 'Check which material or finished product was tested and which of your requirements the report addresses.' },
   { name: 'Management-system certificate', request: 'Certificate holder, number, standard, scope, covered locations, issuer and current status.', match: 'Identify the certified entity and scope. Review product-specific evidence separately.' },
@@ -24,7 +26,7 @@ Document language and required timing:
 Existing document identifier or reference, if any:
 Open questions and follow-up contact:`;
 const emailHref = `mailto:${site.email}?subject=${encodeURIComponent('Packaging material and supporting document enquiry')}`;
-const webpage = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': `${site.origin}${path}#webpage`, url: `${site.origin}${path}`, name: title, description: 'Welltroy certificate and test report overview, production references and a product-specific document request checklist.', datePublished: '2026-11-02', dateModified: '2026-11-07', inLanguage: 'en', isPartOf: { '@id': `${site.origin}/#website` }, publisher: { '@id': `${site.origin}/#organization` } };
+const webpage = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': `${site.origin}${path}#webpage`, url: `${site.origin}${path}`, name: title, description: 'Welltroy certificate and test report overview, production references and a product-specific document request checklist.', datePublished: '2026-11-02', dateModified: '2026-11-13', inLanguage: 'en', isPartOf: { '@id': `${site.origin}/#website` }, publisher: { '@id': `${site.origin}/#organization` } };
 const breadcrumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Home', item: site.origin },
   { '@type': 'ListItem', position: 2, name: 'Documents and material evidence', item: `${site.origin}${path}` }

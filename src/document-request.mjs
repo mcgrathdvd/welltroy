@@ -5,6 +5,8 @@ export const documentProducts = Object.fromEntries([
   ...coreOrderProducts.map(product => [product.slug, product.name])
 ]);
 export const documentCategories = {
+  factory: 'Company identity, production site and process responsibilities',
+  walkthrough: 'Site walkthrough or independent inspection availability and scope',
   material: 'Material or specification confirmation',
   report: 'Product or material test report',
   system: 'Management-system certificate scope',
@@ -26,6 +28,12 @@ export function normalizeDocumentRequest(input) {
 export function documentRequestReady(input) {
   const request=normalizeDocumentRequest(input);
   return !!request && (request.categories.length > 0 || !!request.requirement);
+}
+// Only fixed public review links can suggest a scope. Keep any substantive draft.
+export function documentRequestFromReview(input, review) {
+  const request=normalizeDocumentRequest(input);
+  if (!request || review!=='factory' || documentRequestReady(request)) return request;
+  return normalizeDocumentRequest({...request, categories:['factory'], requirement:'Please confirm the contracting legal entity and relevant production location, who performs the proposed material, printing, bag-making and inspection steps, and which steps are subcontracted. Identify the available supporting records and any scope that still needs clarification.'});
 }
 export function documentRequestText(input) {
   const request=normalizeDocumentRequest(input);
