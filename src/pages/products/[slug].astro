@@ -75,6 +75,14 @@ const mailerComparison = [
 ];
 const suppliedVisuals = { "poly-mailers": polyPackingSource, "poly-bubble-mailers": bubbleCaseSource };
 const visual = await getProductVisual(suppliedVisuals[product.slug] || product.imageSource);
+// These mobile images use object-fit:contain inside a clamp(160px,46vw,210px)-high box.
+// Describe the painted image width so high-density phones do not fetch a box-width variant.
+const coreMobileImage = ['poly-mailers', 'poly-bubble-mailers', 'zipper-bags'].includes(product.slug);
+const imageRatio = visual.imageWidth / visual.imageHeight;
+const mobileImageSize = coreMobileImage
+  ? `min(calc(100vw - 30px), clamp(${(160 * imageRatio).toFixed(2)}px, ${(46 * imageRatio).toFixed(2)}vw, ${(210 * imageRatio).toFixed(2)}px))`
+  : 'calc(100vw - 28px)';
+const heroImageSizes = `(max-width: 640px) ${mobileImageSize}, (max-width: 980px) min(560px, calc(100vw - 40px)), (max-width: 1220px) 44vw, 494px`;
 const coreRelated = {
   'poly-mailers': ['zipper-bags', 'poly-bubble-mailers', 'yellow-kraft-bubble-mailers'],
   'poly-bubble-mailers': ['yellow-kraft-bubble-mailers', 'poly-mailers', 'zipper-bags'],
@@ -122,7 +130,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
       </div>
       <div class="product-visual">
         <a class="page-product-image" href={visual.imageFull} target="_blank" rel="noopener" aria-label={`View a larger image of ${product.name}`}>
-          <img src={visual.image} srcset={visual.imageSrcSet} sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 980px) min(560px, calc(100vw - 40px)), (max-width: 1220px) 44vw, 494px" alt={imageDescription} width={visual.imageWidth} height={visual.imageHeight} fetchpriority="high" decoding="async" />
+          <img src={visual.image} srcset={visual.imageSrcSet} sizes={heroImageSizes} alt={imageDescription} width={visual.imageWidth} height={visual.imageHeight} fetchpriority="high" decoding="async" />
           <span class="image-zoom-label">View larger product image ↗</span>
         </a>
         <p class="product-image-note">{imageNote}</p>
