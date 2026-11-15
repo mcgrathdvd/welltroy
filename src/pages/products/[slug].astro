@@ -7,6 +7,7 @@ import OrderSummary from "../../components/OrderSummary.astro";
 import PolyMailerPrinting from "../../components/PolyMailerPrinting.astro";
 import BubbleMailerCases from "../../components/BubbleMailerCases.astro";
 import MailerOrderOptions from "../../components/MailerOrderOptions.astro";
+import BulkMailerOrders from "../../components/BulkMailerOrders.astro";
 import QuoteBrief from "../../components/QuoteBrief.astro";
 import BagSpecificationChecks from "../../components/BagSpecificationChecks.astro";
 import { bagSpecifications } from "../../bag-specification.mjs";
@@ -59,8 +60,8 @@ const pageHeading = {
 const primaryMailerSlugs = ["poly-mailers", "poly-bubble-mailers", "metallic-bubble-mailers"];
 // Published content-update dates; keep the corresponding sitemap entries aligned.
 const publishedContentDates = {
-  "poly-mailers": "2026-11-11",
-  "poly-bubble-mailers": "2026-11-11",
+  "poly-mailers": "2026-11-15",
+  "poly-bubble-mailers": "2026-11-15",
   "yellow-kraft-bubble-mailers": "2026-11-08",
   "zipper-bags": "2026-11-11",
   "metallic-bubble-mailers": "2026-11-08",
@@ -150,6 +151,7 @@ const imageNote = suppliedImageCopy[product.slug]?.note ?? product.imageNote ?? 
   <div class="container section-tight" id="product-features"><div class="highlight-grid">{product.highlights.map((highlight) => <div class="highlight">{highlight}</div>)}</div></div>
   {hasQuoteBrief && <QuoteBrief product={product} />}
   {primaryMailerSlugs.includes(product.slug) && <MailerOrderOptions slug={product.slug} />}
+  {["poly-mailers", "poly-bubble-mailers"].includes(product.slug) && <BulkMailerOrders slug={product.slug} />}
   {["poly-mailers", "metallic-bubble-mailers", "zipper-bags"].includes(product.slug) && <MailerBuyerProjects slug={product.slug} />}
   {secondaryProject && <SecondaryBuyerProjects slug={product.slug} />}
   {product.gallery?.length > 0 && <div id="product-gallery"><ProductGallery product={product} /></div>}

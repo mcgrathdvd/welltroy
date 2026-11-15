@@ -87,19 +87,28 @@ function initializeBuilder(root) {
   };
   form.addEventListener('input', changed);
   form.addEventListener('change', changed);
+  const revealWhenReady = target => {
+    const reveal = () => requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: 'instant' }));
+    if (document.readyState === 'complete') reveal();
+    else window.addEventListener('load', reveal, { once: true });
+  };
   const openSpecificationFields = () => {
-    if (['#brief-specification-checks', '#brief-sample'].includes(location.hash)) root.querySelector('.brief-more').open = true;
+    if (['#brief-specification-checks', '#brief-sample', '#brief-notes'].includes(location.hash)) {
+      root.querySelector('.brief-more').open = true;
+      if (location.hash === '#brief-notes') revealWhenReady(form.elements.notes);
+    }
     if (location.hash === '#quote-delivery-checks') {
       const delivery = root.querySelector('[data-brief-delivery]');
       delivery.open = true;
       // Native fragment/scroll restoration may run while the brief is still hidden.
-      const revealDelivery = () => requestAnimationFrame(() => delivery.scrollIntoView({ block: 'start', behavior: 'instant' }));
-      if (document.readyState === 'complete') revealDelivery();
-      else window.addEventListener('load', revealDelivery, { once: true });
+      revealWhenReady(delivery);
     }
   };
   window.addEventListener('hashchange', openSpecificationFields);
   openSpecificationFields();
+  document.querySelectorAll('[data-open-delivery-brief]').forEach(link => link.addEventListener('click', () => {
+    root.querySelector('[data-brief-delivery]').open = true;
+  }));
   document.querySelectorAll('[data-open-spec-brief]').forEach(link => link.addEventListener('click', event => {
     root.querySelector('.brief-more').open = true;
     const photoRequest = form.elements.namedItem('detailPhotos');
