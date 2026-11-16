@@ -1,5 +1,6 @@
 import {catalogueModels} from './catalogue-models.mjs';
 import {customerProjects,buyerResources} from './buyer-actions.mjs';
+import {googleSearchDomains} from './google-search-domains.mjs';
 
 export const productSlugs = new Set([
   'poly-mailers','biodegradable-mailers','poly-bubble-mailers','metallic-bubble-mailers',
@@ -55,11 +56,22 @@ export function sourceInfo(referrer, currentOrigin) {
   // paths, search terms or arbitrary private referrer URLs.
   try {
     const u = new URL(referrer);
+    if (u.protocol === 'android-app:') {
+      // Google documents this native-app referrer. Map only its exact public
+      // search route to a web origin GA can recognise; never send the app URL.
+      const googleApp = u.hostname === 'com.google.android.googlequicksearchbox'
+        && !u.username && !u.password && !u.port
+        && ['/https/www.google.com','/https/www.google.com/'].includes(u.pathname);
+      return googleApp
+        ? {entry_source:'organic_search',page_referrer:'https://www.google.com'}
+        : {entry_source:'direct_or_unknown',page_referrer:''};
+    }
     if (!['https:','http:'].includes(u.protocol)) throw Error();
     if (u.origin === currentOrigin) return { entry_source:'internal', page_referrer:'' };
     const h = u.hostname.replace(/^www\./,'');
     const ai = /(^|\.)(chatgpt\.com|chat\.openai\.com|perplexity\.ai|copilot\.microsoft\.com|claude\.ai|gemini\.google\.com)$/.test(h);
-    const search = /(^|\.)(google\.(com|co\.uk|com\.au|ca|de|fr|cn)|bing\.com|duckduckgo\.com|search\.yahoo\.com)$/.test(h);
+    const googleSearch = !u.port && !u.username && !u.password && googleSearchDomains.has(h);
+    const search = googleSearch || /(^|\.)(bing\.com|duckduckgo\.com|search\.yahoo\.com)$/.test(h);
     const social = /(^|\.)(linkedin\.com|pinterest\.com|facebook\.com|instagram\.com|youtube\.com|t\.co)$/.test(h);
     return {entry_source:ai ? 'ai_referral' : search ? 'organic_search' : social ? 'social' : 'referral',page_referrer:ai || search || social ? u.origin : ''};
   } catch { return {entry_source:'direct_or_unknown',page_referrer:''}; }
