@@ -54,6 +54,27 @@ test('referrers lose search terms; arbitrary private referrer paths and hosts ar
  assert.equal(sourceInfo('https://google.com.evil.invalid/search','https://welltroy.com').entry_source,'referral');
 });
 
+test('Google country search origins are recognised without sending search terms',()=>{
+ for (const host of ['www.google.com','www.google.co.uk','www.google.com.au','www.google.de','www.google.fr','www.google.nl','www.google.it','www.google.es','www.google.ie','www.google.com.hk','www.google.co.jp','google.co.nz']) {
+  assert.deepEqual(sourceInfo(`https://${host}/search?q=buyer@example.com#private`,'https://welltroy.com'),{entry_source:'organic_search',page_referrer:`https://${host}`});
+ }
+});
+
+test('Google Search matching rejects lookalikes, unknown domains and non-search services',()=>{
+ for (const referrer of ['https://google.nl.evil.invalid/search','https://fakegoogle.nl/','https://google.example/','https://google.not-a-real-country/','https://google.com.au.private.example/','https://docs.google.com/document/private','https://sites.google.com/customer/private','https://accounts.google.com/private','https://www.google.nl:8443/search','https://buyer:secret@www.google.nl/search']) {
+  assert.deepEqual(sourceInfo(referrer,'https://welltroy.com'),{entry_source:'referral',page_referrer:''});
+ }
+});
+
+test('Google Android app referrers use a fixed public search origin only for the documented app route',()=>{
+ for (const suffix of ['', '/', '?q=buyer@example.com#private']) {
+  assert.deepEqual(sourceInfo(`android-app://com.google.android.googlequicksearchbox/https/www.google.com${suffix}`,'https://welltroy.com'),{entry_source:'organic_search',page_referrer:'https://www.google.com'});
+ }
+ for (const referrer of ['android-app://com.google.android.googlequicksearchbox.evil/https/www.google.com','android-app://com.google.android.googlequicksearchbox/https/www.google.com.evil.invalid','android-app://com.google.android.googlequicksearchbox/https/private.example','android-app://com.other.app/https/www.google.com']) {
+  assert.deepEqual(sourceInfo(referrer,'https://welltroy.com'),{entry_source:'direct_or_unknown',page_referrer:''});
+ }
+});
+
 test('recognised AI referrals retain only public origins and reject lookalike domains',()=>{
  for(const origin of ['https://chatgpt.com','https://chat.openai.com','https://www.perplexity.ai','https://copilot.microsoft.com','https://claude.ai','https://gemini.google.com']){
   assert.deepEqual(sourceInfo(`${origin}/conversation/private-id?q=buyer@example.com#private`,'https://welltroy.com'),{entry_source:'ai_referral',page_referrer:origin});
@@ -124,6 +145,24 @@ test('runtime AI attribution waits for consent and never includes conversation p
   env.reject.listeners.click();
   assert.equal(env.mod.track('quote_start'),false);
  } finally {env.restore();}
+});
+
+test('runtime country and Android search attribution waits for consent and emits one sanitized page view',async()=>{
+ for (const [referrer,origin] of [['https://www.google.nl/search?q=buyer@example.com#private','https://www.google.nl'],['https://www.google.it/search?q=private','https://www.google.it'],['android-app://com.google.android.googlequicksearchbox/https/www.google.com?q=buyer@example.com','https://www.google.com']]) {
+  const env=await environment({referrer});
+  try {
+   assert.equal(env.scripts.length,0);assert.equal(window.dataLayer,undefined);
+   env.accept.listeners.click();env.accept.listeners.click();
+   const queue=window.dataLayer.map(x=>Array.from(x));
+   const pages=queue.filter(x=>x[0]==='event'&&x[1]==='page_view');
+   assert.equal(env.scripts.length,1);assert.equal(pages.length,1);
+   assert.equal(pages[0][2].entry_source,'organic_search');assert.equal(pages[0][2].page_referrer,origin);
+   assert.equal(queue.find(x=>x[0]==='set')[1].page_referrer,origin);
+   assert.equal(JSON.stringify(queue).includes('buyer@example.com'),false);
+   assert.equal(JSON.stringify(queue).includes('q=private'),false);
+   env.reject.listeners.click();assert.equal(env.mod.track('quote_start'),false);assert.equal(window.dataLayer.length,0);
+  } finally {env.restore();}
+ }
 });
 
 test('runtime reads campaign storage only after consent and configures public attribution before events',async()=>{
