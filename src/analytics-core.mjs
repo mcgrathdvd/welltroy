@@ -1,5 +1,5 @@
 import {catalogueModels} from './catalogue-models.mjs';
-import {customerProjects,buyerResources} from './buyer-actions.mjs';
+import {customerProjects,buyerResources,mailerPathSection} from './buyer-actions.mjs';
 import {googleSearchDomains} from './google-search-domains.mjs';
 
 export const productSlugs = new Set([
@@ -33,7 +33,7 @@ const fixedPaths = new Set(['/', '/products/','/quote/','/industries/','/why-wel
   '/industries/beauty-holographic-bubble-mailers/']);
 const names = new Set(['page_view','view_product','quote_start','quote_submit_success',
   'quote_submit_error','whatsapp_click','email_click','quote_cta_click','select_size','download_catalogue','sample_interest',
-  'customer_project_open','buyer_resource_download','quote_brief_start','quote_brief_continue','size_comparison']);
+  'customer_project_open','buyer_resource_download','mailer_path_click','quote_brief_start','quote_brief_continue','size_comparison']);
 const errors = new Set(['request_rejected','service_unavailable','delivery_unconfirmed']);
 const placements = new Set(['header','hero','product-hero','product-size','product-details','product-bottom','footer','sticky-desktop','sticky-mobile','content','product-project','industry-hero','industry-plan','customer-project']);
 const sampleTypes = new Set(['existing','custom','none']);
@@ -109,6 +109,12 @@ export function sanitizeEvent(name, details, path, title) {
     if (!resource) return null;
     result.resource_id = details.resource_id;
     result.product_slug = resource.product;
+  }
+  if (name === 'mailer_path_click') {
+    const section = mailerPathSection(cleanPath, details?.product_slug);
+    if (!section) return null;
+    result.product_slug = details.product_slug;
+    result.destination_section = section;
   }
   if (name === 'size_comparison') {
     if (!['poly-mailers','poly-bubble-mailers','zipper-bags'].includes(details?.product_slug)) return null;

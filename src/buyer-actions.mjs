@@ -19,10 +19,34 @@ export const buyerResources = new Map([
   ['single-wall-film-thickness', {product:'multiple-products', path:'/downloads/single-wall-film-thickness-record.txt'}]
 ]);
 
-export function buyerLinkAction(href, origin) {
+const mailerPaths = new Map([
+  ['/products/', new Map([
+    ['poly-mailers', 'poly-mailer-printing'],
+    ['poly-bubble-mailers', 'specification-checks']
+  ])],
+  ['/guides/choose-a-mailer/', new Map([
+    ['poly-mailers', 'quote-brief'],
+    ['poly-bubble-mailers', 'quote-brief'],
+    ['metallic-bubble-mailers', 'quote-brief']
+  ])],
+  ['/industries/beauty-holographic-bubble-mailers/', new Map([
+    ['metallic-bubble-mailers', 'quote-brief']
+  ])]
+]);
+
+export function mailerPathSection(sourcePath, product) {
+  return mailerPaths.get(sourcePath)?.get(product);
+}
+
+export function buyerLinkAction(href, origin, sourcePath) {
   try {
     const url = new URL(href, origin);
     if (!['http:','https:'].includes(url.protocol) || url.origin !== origin) return null;
+    const product = url.pathname.match(/^\/products\/([^/]+)\/$/)?.[1];
+    const section = mailerPathSection(sourcePath, product);
+    if (section && url.hash === `#${section}` && !url.username && !url.password) {
+      return {name:'mailer_path_click', details:{product_slug:product}};
+    }
     for (const [projectId, project] of customerProjects) {
       if (url.pathname === `/products/${project.product}/` && url.hash === `#${project.section}`) {
         return {name:'customer_project_open', details:{project_id:projectId}};

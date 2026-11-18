@@ -251,6 +251,40 @@ test('project and resource events derive public products and discard private met
   assert.equal(mismatch.placement,'content');assert.equal(mismatch.project_id,undefined);
 });
 
+test('mailer path clicks require an approved source and exact destination section',()=>{
+  const origin = 'https://welltroy.com';
+  const action = buyerLinkAction('/products/poly-bubble-mailers/?email=private#specification-checks', origin, '/products/');
+  assert.deepEqual(action, {name:'mailer_path_click', details:{product_slug:'poly-bubble-mailers'}});
+  assert.deepEqual(sanitizeEvent(action.name, {...action.details, destination_section:'private', email:'buyer@example.com'}, '/products/?private'), {
+    page_path:'/products/', page_location:origin+'/products/', page_title:'Welltroy',
+    product_slug:'poly-bubble-mailers', destination_section:'specification-checks'
+  });
+  assert.equal(buyerLinkAction('/products/poly-bubble-mailers/#quote-brief', origin, '/products/'), null);
+  assert.equal(buyerLinkAction('/products/poly-bubble-mailers/#specification-checks', origin, '/guides/choose-a-mailer/'), null);
+  assert.equal(buyerLinkAction('https://other.invalid/products/poly-bubble-mailers/#specification-checks', origin, '/products/'), null);
+  assert.equal(sanitizeEvent(action.name, action.details, '/quote/'), null);
+});
+
+test('guide to product brief clicks reach analytics only with consent and remain separate from brief starts',async()=>{
+  const env = await environment({pathname:'/guides/choose-a-mailer/'});
+  try {
+    const link = {href:'https://welltroy.com/products/metallic-bubble-mailers/#quote-brief', dataset:{}};
+    const click = {isTrusted:true, button:0, defaultPrevented:false, target:{closest:s=>s==='a[href]'?link:null}};
+    env.listeners.click(click);
+    await Promise.resolve();
+    assert.equal(window.dataLayer, undefined);
+    env.accept.listeners.click();
+    env.listeners.click(click);
+    await Promise.resolve();
+    const events = window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event' && x[1]!=='page_view');
+    assert.equal(events.length, 1);
+    assert.equal(events[0][1], 'mailer_path_click');
+    assert.equal(events[0][2].product_slug, 'metallic-bubble-mailers');
+    assert.equal(events[0][2].destination_section, 'quote-brief');
+    assert.equal(click.defaultPrevented, false);
+  } finally {env.restore();}
+});
+
 test('runtime buyer link events require consent and trusted uncancelled clicks',async()=>{
   const env=await environment({pathname:'/'});
   try {
