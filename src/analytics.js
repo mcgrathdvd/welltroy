@@ -105,7 +105,7 @@ export function initializeAnalytics() {
         if (event.defaultPrevented) return;
         try {
           const url = new URL(link.href);
-          const action = buyerLinkAction(link.href, location.origin);
+          const action = buyerLinkAction(link.href, location.origin, location.pathname);
           if (action) track(action.name, action.details);
           if (url.protocol === 'mailto:') track('email_click');
           if (url.hostname === 'wa.me') track('whatsapp_click');
