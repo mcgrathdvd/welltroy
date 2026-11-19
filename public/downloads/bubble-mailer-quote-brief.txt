@@ -1,6 +1,8 @@
 WELLTROY - BUBBLE MAILER QUOTE AND SAMPLE BRIEF
-Updated: 6 November 2026
+Updated: 19 November 2026
 Fit guide: https://welltroy.com/guides/choose-a-mailer/#bubble-fit-record
+Size screening example: https://welltroy.com/guides/choose-a-mailer/#bubble-size-example
+Sample checks: https://welltroy.com/guides/custom-mailer-sample-approval/#bubble-sample-trial
 Finish guide: https://welltroy.com/guides/metallic-vs-holographic-bubble-mailers/
 Poly bubble enquiry: https://welltroy.com/quote/?product=poly-bubble-mailers#quote-form
 Metallic / holographic enquiry: https://welltroy.com/quote/?product=metallic-bubble-mailers#quote-form
@@ -21,6 +23,7 @@ Shipping route and handling concerns:
 2. PROPOSED MAILER
 Range: kraft bubble / poly bubble / metallic bubble / holographic bubble / please recommend:
 Catalogue model or proposed size:
+Outer-size tool result, if used (candidate / packed thickness / extra allowance / units):
 Minimum usable inner width and length requested, with units:
 Supplier-confirmed usable opening, inner size, measurement method and tolerance:
 Outer width x body length + flap, if known:
@@ -59,13 +62,18 @@ Sample differences from proposed bulk material or printing:
 
 6. SAMPLE RECORD - COMPLETE AFTER CHECKING AN ACTUAL SAMPLE
 Sample identifier, artwork version and check date:
-Confirmed usable dimensions and units:
-Actual contents insert without forcing:
-Flap seals correctly and seams / liner are not strained:
+How this sample differs from the proposed bulk bag, if applicable:
+Measured outer width x body length + flap (with units):
+Measured clear opening width (with units):
+Measured usable inner width x usable inner length (with units):
+Measurement points, method, agreed tolerance and photo reference:
+Did the complete packed item enter without forcing? Record orientation and any obstruction:
+Did the filled flap reach and seal as intended? Record liner or seam strain:
 Complete-pack protection checks, conditions and results:
 Finish appearance at changing angles:
 Logo and label adhesion / readability observations:
-Outstanding changes and approval reference:
+Fit and closure decision (accepted for this check / change required / pending):
+Follow-up owner, recheck needed and approval reference:
 
 Outer dimensions are not usable inner space. A bubble layer or reflective
 finish does not establish a protection rating. Agree the complete pack and
