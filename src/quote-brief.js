@@ -88,14 +88,21 @@ function initializeBuilder(root) {
   form.addEventListener('input', changed);
   form.addEventListener('change', changed);
   const revealWhenReady = target => {
-    const reveal = () => requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: 'instant' }));
+    const hash = location.hash;
+    const reveal = () => requestAnimationFrame(() => {
+      if (location.hash === hash) target.scrollIntoView({ block: 'start', behavior: 'instant' });
+    });
     if (document.readyState === 'complete') reveal();
     else window.addEventListener('load', reveal, { once: true });
   };
   const openSpecificationFields = () => {
+    const more = root.querySelector('.brief-more');
     if (['#brief-specification-checks', '#brief-sample', '#brief-notes'].includes(location.hash)) {
-      root.querySelector('.brief-more').open = true;
-      if (location.hash === '#brief-notes') revealWhenReady(form.elements.notes);
+      const target = more.querySelector(location.hash);
+      if (target) {
+        more.open = true;
+        revealWhenReady(target);
+      }
     }
     if (location.hash === '#quote-delivery-checks') {
       const delivery = root.querySelector('[data-brief-delivery]');
@@ -111,6 +118,8 @@ function initializeBuilder(root) {
   }));
   document.querySelectorAll('[data-open-spec-brief]').forEach(link => link.addEventListener('click', event => {
     root.querySelector('.brief-more').open = true;
+    // Clicking the same fragment again does not fire a hashchange event.
+    if (link.hash === location.hash) openSpecificationFields();
     const photoRequest = form.elements.namedItem('detailPhotos');
     if (link.hasAttribute('data-request-detail-photos') && photoRequest) {
       photoRequest.checked = true;
