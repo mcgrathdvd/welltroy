@@ -86,14 +86,14 @@ test('recognised AI referrals retain only public origins and reject lookalike do
  assert.deepEqual(sourceInfo('https://welltroy.com/products/poly-mailers/','https://welltroy.com'),{entry_source:'internal',page_referrer:''});
 });
 
-async function environment({id='G-TEST12345',hostname='welltroy.com',choice=null,search='',pathname='/quote/',referrer='https://www.google.com/search?q=private'}={}) {
+async function environment({id='G-TEST12345',hostname='welltroy.com',choice=null,search='',pathname='/quote/',hash='',referrer='https://www.google.com/search?q=private',session=new Map()}={}) {
  const saved={window:globalThis.window,document:globalThis.document,location:globalThis.location};
  const node=()=>({hidden:true,listeners:{},addEventListener(name,fn){this.listeners[name]=fn;},focus(){this.focused=true;}});
  const accept=node(),reject=node(),settings=node(),banner=node();
  banner.querySelector=(s)=>s==='[data-analytics-accept]'?accept:s==='[data-analytics-reject]'?reject:reject;
- const scripts=[],deletedCookies=[],sessionReads=[],session=new Map(),listeners={};let stored=choice?JSON.stringify({choice,expires:Date.now()+100000}):null;
+ const scripts=[],deletedCookies=[],sessionReads=[],listeners={};let stored=choice?JSON.stringify({choice,expires:Date.now()+100000}):null;
  globalThis.window={localStorage:{getItem:()=>stored,setItem:(k,v)=>{stored=v;}},get sessionStorage(){sessionReads.push(true);return {getItem:k=>session.get(k),setItem:(k,v)=>session.set(k,v),removeItem:k=>session.delete(k)};}};
- globalThis.location={hostname,origin:`https://${hostname}`,pathname,search,reload(){this.reloaded=true;}};
+ globalThis.location={hostname,origin:`https://${hostname}`,pathname,search,hash,reload(){this.reloaded=true;}};
  globalThis.document={referrer,
   querySelector:(s)=>s==='[data-analytics-config]'?{dataset:{measurementId:id,pageTitle:'Request a Packaging Quote | Welltroy'}}:s==='[data-analytics-banner]'?banner:s==='[data-analytics-settings]'?settings:null,
   createElement:()=>({}),head:{append(s){scripts.push(s);}},addEventListener(name,fn){listeners[name]=fn;},
@@ -265,24 +265,47 @@ test('mailer path clicks require an approved source and exact destination sectio
   assert.equal(sanitizeEvent(action.name, action.details, '/quote/'), null);
 });
 
-test('guide to product brief clicks reach analytics only with consent and remain separate from brief starts',async()=>{
+test('same-tab brief links send once from the destination with the original attribution',async()=>{
   const env = await environment({pathname:'/guides/choose-a-mailer/'});
   try {
-    const link = {href:'https://welltroy.com/products/metallic-bubble-mailers/#quote-brief', dataset:{}};
+    const link = {
+      href:'https://welltroy.com/products/metallic-bubble-mailers/#quote-brief', dataset:{},
+      hasAttribute:()=>false, relList:{contains:()=>false}
+    };
     const click = {isTrusted:true, button:0, defaultPrevented:false, target:{closest:s=>s==='a[href]'?link:null}};
     env.listeners.click(click);
     await Promise.resolve();
     assert.equal(window.dataLayer, undefined);
+    assert.equal(env.session.size, 0);
     env.accept.listeners.click();
     env.listeners.click(click);
     await Promise.resolve();
-    const events = window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event' && x[1]!=='page_view');
-    assert.equal(events.length, 1);
-    assert.equal(events[0][1], 'mailer_path_click');
-    assert.equal(events[0][2].product_slug, 'metallic-bubble-mailers');
-    assert.equal(events[0][2].destination_section, 'quote-brief');
+    assert.equal(window.dataLayer.some(x=>x[1]==='mailer_path_click'), false);
+    assert.ok(env.session.has('welltroy:mailer-path-click'));
+    assert.doesNotMatch(env.session.get('welltroy:mailer-path-click'), /q=private/);
     assert.equal(click.defaultPrevented, false);
+    env.listeners.click({...click,ctrlKey:true});
+    await Promise.resolve();
+    assert.equal(window.dataLayer.filter(x=>x[1]==='mailer_path_click').length, 1);
   } finally {env.restore();}
+  const destination = {
+    pathname:'/products/metallic-bubble-mailers/', hash:'#quote-brief', choice:'granted',
+    referrer:'https://welltroy.com/guides/choose-a-mailer/', session:env.session
+  };
+  for (const [run, expected] of [[0,1],[1,0]]) {
+    const page = await environment(destination);
+    try {
+      const events = window.dataLayer.filter(x=>x[0]==='event' && x[1]==='mailer_path_click');
+      assert.equal(events.length, expected, `visit ${run}`);
+      if (expected) assert.deepEqual(events[0][2], {
+        page_path:'/guides/choose-a-mailer/', page_location:'https://welltroy.com/guides/choose-a-mailer/',
+        page_title:'Request a Packaging Quote | Welltroy', product_slug:'metallic-bubble-mailers',
+        destination_section:'quote-brief', entry_source:'organic_search', page_referrer:'https://www.google.com',
+        send_to:'G-TEST12345'
+      });
+      assert.equal(window.dataLayer.some(x=>x[1]==='quote_brief_start'), false);
+    } finally {page.restore();}
+  }
 });
 
 test('runtime buyer link events require consent and trusted uncancelled clicks',async()=>{
