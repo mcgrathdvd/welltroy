@@ -22,6 +22,15 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
   <div class="container">
     <div class="section-head"><div><p class="eyebrow">Plan your custom order</p><h2 id="brief-heading">Build Your {isKraft ? 'Kraft Bubble Mailer' : product.name} Quote Brief</h2><p class="lead">{hasCatalogueModels ? 'Choose a catalogue model, describe a custom size or ask for help.' : 'Describe your packed item or required usable dimensions, or ask for sizing advice.'} Review your selections, then add contact details on the enquiry page.</p></div></div>
     <p class="brief-context">{hasCatalogueModels ? 'Catalogue dimensions are outer measurements, not guaranteed usable space.' : 'This range has no numbered catalogue size table. The offered outer size, usable space and opening are confirmed for your order.'} {isZipper ? 'Confirm the opening and zipper construction, and include any outer shipping packaging in your plan.' : isBubble ? 'Allow for the bubble lining, opening and adhesive flap when checking the complete pack.' : 'Measure the finished pack with inner bags, wrapping and inserts included.'} Minimum order: {minimumOrder(product.slug)}. The offered material and printing combination is confirmed in your quotation.</p>
+    {isMetallic && <div class="brief-context">
+      <h3>Choose a Finish and Sample</h3>
+      <ul>
+        <li><strong>Metallic reflective:</strong> select this for a reflective color such as silver. Include the color and gloss you want.</li>
+        <li><strong>Holographic:</strong> select this for an effect that changes with the viewing angle. Describe the pattern or color shift and attach a reference photo on the enquiry page.</li>
+        <li><strong>Compare both:</strong> request the same bag size and artwork for both finishes where available. Use an existing sample to assess the surface, or ask about a printed sample to check logo contrast and shipping-label placement.</li>
+      </ul>
+      <p>Ask which samples match the proposed production specification and confirm delivery arrangements before approval.</p>
+    </div>}
     <noscript><p class="alert">Enable JavaScript to build and carry your brief, or <a href={`/quote/?product=${product.slug}#quote-form`}>enter your requirements directly on the enquiry page</a>.</p></noscript>
     {hasSizeComparison && <PackedSizeComparison product={product} />}
     <div class="brief-layout" data-brief-ui hidden>
@@ -37,7 +46,18 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
         </fieldset>
         <fieldset><legend><span>2</span> {isZipper ? 'Finish, zipper & printing' : isMetallic ? 'Finish, printing & order' : 'Printing & order'}</legend>
           <div class="brief-fields">
-            {isMetallic && <><div class="field"><label for="brief-finish">Surface effect to review</label><select id="brief-finish" name="finish">{Object.entries(finishChoices).map(([value,label]) => <option value={value}>{label}</option>)}</select><small>Both finishes can be discussed. Exact effects, size and printing are confirmed for your configuration.</small></div><div class="field"><label for="brief-finish-reference">Finish reference / sample checks (optional)</label><input id="brief-finish-reference" name="finishReference" maxlength="160" placeholder="Describe color, effect, logo or label checks" /><small>Add a reference image on the enquiry page; confirm the surface on a physical sample.</small></div></>}
+            {isMetallic && <>
+              <div class="field">
+                <label for="brief-finish">Surface effect to review</label>
+                <select id="brief-finish" name="finish" aria-describedby="brief-finish-help">{Object.entries(finishChoices).map(([value,label]) => <option value={value}>{label}</option>)}</select>
+                <small id="brief-finish-help">If comparing both finishes, add your preferred sample type below.</small>
+              </div>
+              <div class="field">
+                <label for="brief-finish-reference">Finish reference / sample checks (optional)</label>
+                <input id="brief-finish-reference" name="finishReference" maxlength="160" placeholder="Describe color, effect, logo or label checks" aria-describedby="brief-finish-reference-help" />
+                <small id="brief-finish-reference-help">Add a reference image on the enquiry page. Approve the surface on a physical sample.</small>
+              </div>
+            </>}
             {isZipper && <SpecificationBriefFields slug={product.slug} primary />}
             <div class="field"><label for="brief-printing">Printing preference</label><select id="brief-printing" name="printing">{Object.entries(printChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
             <div class="field" data-brief-sides-field><label for="brief-sides">Printed sides</label><select id="brief-sides" name="sides">{Object.entries(sideChoices).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
