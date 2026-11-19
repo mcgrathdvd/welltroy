@@ -8,8 +8,11 @@ import PackedSizeComparison from './PackedSizeComparison.astro';
 import SpecificationBriefFields from './SpecificationBriefFields.astro';
 import { specificationFields } from '../bag-specification.mjs';
 import { minimumOrder } from '../ordering.mjs';
+import { getProductVisual } from '../product-images.mjs';
+import holographicDetails from '../assets/new-products/holographic-bubble-mailer-details.png';
 const { product } = Astro.props;
 const isMetallic = product.slug === 'metallic-bubble-mailers';
+const finishVisual = isMetallic ? await getProductVisual(holographicDetails) : null;
 const isKraft = product.slug === 'yellow-kraft-bubble-mailers';
 const isBubble = product.slug === 'poly-bubble-mailers' || isMetallic || isKraft;
 const hasCatalogueModels = Boolean(catalogueModels[product.slug]?.length);
@@ -22,14 +25,22 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
   <div class="container">
     <div class="section-head"><div><p class="eyebrow">Plan your custom order</p><h2 id="brief-heading">Build Your {isKraft ? 'Kraft Bubble Mailer' : product.name} Quote Brief</h2><p class="lead">{hasCatalogueModels ? 'Choose a catalogue model, describe a custom size or ask for help.' : 'Describe your packed item or required usable dimensions, or ask for sizing advice.'} Review your selections, then add contact details on the enquiry page.</p></div></div>
     <p class="brief-context">{hasCatalogueModels ? 'Catalogue dimensions are outer measurements, not guaranteed usable space.' : 'This range has no numbered catalogue size table. The offered outer size, usable space and opening are confirmed for your order.'} {isZipper ? 'Confirm the opening and zipper construction, and include any outer shipping packaging in your plan.' : isBubble ? 'Allow for the bubble lining, opening and adhesive flap when checking the complete pack.' : 'Measure the finished pack with inner bags, wrapping and inserts included.'} Minimum order: {minimumOrder(product.slug)}. The offered material and printing combination is confirmed in your quotation.</p>
-    {isMetallic && <div class="brief-context">
-      <h3>Choose a Finish and Sample</h3>
-      <ul>
-        <li><strong>Metallic reflective:</strong> select this for a reflective color such as silver. Include the color and gloss you want.</li>
-        <li><strong>Holographic:</strong> select this for an effect that changes with the viewing angle. Describe the pattern or color shift and attach a reference photo on the enquiry page.</li>
-        <li><strong>Compare both:</strong> request the same bag size and artwork for both finishes where available. Use an existing sample to assess the surface, or ask about a printed sample to check logo contrast and shipping-label placement.</li>
-      </ul>
-      <p>Ask which samples match the proposed production specification and confirm delivery arrangements before approval.</p>
+    {finishVisual && <div class="brief-finish-layout">
+      <div class="brief-context">
+        <h3>Choose a Finish and Sample</h3>
+        <ul>
+          <li><strong>Metallic reflective:</strong> select this for a reflective color such as silver. Include the color and gloss you want.</li>
+          <li><strong>Holographic:</strong> select this for an effect that changes with the viewing angle. Describe the pattern or color shift and attach a reference photo on the enquiry page.</li>
+          <li><strong>Compare both:</strong> request the same bag size and artwork for both finishes where available. Use an existing sample to assess the surface, or ask about a printed sample to check logo contrast and shipping-label placement.</li>
+        </ul>
+        <p>Ask which samples match the proposed production specification and confirm delivery arrangements before approval.</p>
+      </div>
+      <figure class="brief-finish-figure">
+        <a href={finishVisual.imageFull} aria-label="View full-size holographic bubble mailer illustration">
+          <img src={finishVisual.image} srcset={finishVisual.imageSrcSet} sizes="(max-width: 460px) calc(100vw - 40px), (max-width: 760px) 420px, (max-width: 1040px) calc(42vw - 17px), 420px" width={finishVisual.imageWidth} height={finishVisual.imageHeight} loading="lazy" decoding="async" alt="Silver holographic bubble mailer showing outer width, body length, flap, bubble lining, sealed edges and the peel-and-seal closure." />
+        </a>
+        <figcaption>Illustration based on reference images. Confirm the finish and dimensions on your sample.</figcaption>
+      </figure>
     </div>}
     <noscript><p class="alert">Enable JavaScript to build and carry your brief, or <a href={`/quote/?product=${product.slug}#quote-form`}>enter your requirements directly on the enquiry page</a>.</p></noscript>
     {hasSizeComparison && <PackedSizeComparison product={product} />}
@@ -92,6 +103,14 @@ const catalogue = Object.fromEntries(products.filter(p => Object.hasOwn(briefPro
 <style>
   :global(#brief-notes),:global(#brief-sample),:global(#quote-delivery-checks){scroll-margin-top:125px}
   .brief-section{scroll-margin-top:100px;background:var(--cream)}.brief-section .section-head{margin-bottom:16px}.brief-context{max-width:950px;color:var(--muted);font-size:.94rem;line-height:1.7;margin-bottom:28px}
+  .brief-finish-layout{display:grid;grid-template-columns:minmax(0,1fr) min(420px,42%);gap:28px;align-items:start;margin-bottom:28px}
+  .brief-finish-layout .brief-context{margin-bottom:0}
+  .brief-finish-figure{width:100%;max-width:420px;margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper)}
+  .brief-finish-figure a{display:block}
+  .brief-finish-figure a:focus-visible{outline-offset:-3px}
+  .brief-finish-figure img{width:100%;height:auto}
+  .brief-finish-figure figcaption{padding:12px 16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+  @media(max-width:760px){.brief-finish-layout{grid-template-columns:1fr;gap:16px}}
   .brief-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:start}.brief-layout[hidden],.brief-section [hidden]{display:none}
   .brief-form,.brief-review{min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}.brief-form fieldset{border:0;min-width:0;margin:0;padding:0}.brief-form fieldset+fieldset{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
   .brief-form legend{font-weight:700;font-size:1.1rem;margin-bottom:18px;padding:0}.brief-form legend span{display:inline-grid;place-items:center;background:var(--ink);color:#fff;border-radius:50%;width:28px;height:28px;margin-right:8px;font-size:.85rem}
