@@ -8,6 +8,7 @@ const bubble = product.slug === 'poly-bubble-mailers';
   <div class="comparison-content">
     <h3>Compare {product.name} Outer Sizes</h3>
     <p>Measure the complete pack, including wrapping and inserts. This tool shortlists catalogue sizes for review; confirm usable inner space and test a filled sample before ordering.</p>
+    {bubble && <p><a class="text-link" href="/guides/choose-a-mailer/#bubble-size-example">See a worked bubble mailer sizing example →</a></p>}
     <form data-size-form class="size-form">
       <div class="size-fields">
         <div><label for="packed-unit">Measurement unit</label><select id="packed-unit" name="unit"><option value="cm">Centimeters (cm)</option><option value="in">Inches (in)</option></select></div>
