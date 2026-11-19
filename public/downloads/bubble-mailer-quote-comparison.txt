@@ -1,7 +1,8 @@
 WELLTROY - BUBBLE MAILER QUOTE COMPARISON
-Updated: 7 November 2026
+Updated: 19 November 2026
 Blank buyer record. Enter actual supplier replies; no prices are prefilled.
 Guide: https://welltroy.com/guides/compare-custom-mailer-quotes/#bubble-delivery
+Worked example: https://welltroy.com/guides/compare-custom-mailer-quotes/#bubble-quote-example
 
 ONE SPECIFICATION FOR ALL REPLIES
 Product / construction / material:
@@ -16,15 +17,17 @@ COPY THIS BLOCK FOR QUOTE A, B OR ANOTHER QUANTITY TIER
 Supplier / quote identifier / date / validity:
 Currency:
 Confirmed bag quantity (state pieces, not cartons):
-Unit bag price and total product amount:
-Print / plate / setup items included or separate:
-Sample type, scope, charges and courier arrangement:
+Product price basis (per bag / per carton) and confirmed product subtotal:
+Print / plate / setup charges (included / separate / pending):
+Which setup or sample charges recur on a repeat order:
+Sample type and what it represents:
+Sample preparation charge and sample courier charge (record separately):
 Bags per carton and total carton count:
 Carton outer dimensions and weight, with units:
-Bulk freight and service included in this offer:
+Bulk freight, service and exact delivery point:
 Destination charges: included / excluded / estimated / pending:
 Other confirmed charges in the same currency:
-Confirmed total for the stated scope:
+Confirmed subtotal for the stated scope (list which items it includes):
 Pending amounts or unresolved differences:
 Conditional cost per bag: confirmed same-scope total / confirmed bag quantity:
 Production start milestone and estimated production interval:
@@ -33,6 +36,8 @@ Differences from the common specification:
 
 BEFORE COMPARING TOTALS
 Resolve product, sample, packing, destination and delivery-scope differences.
+If priced per carton, confirm bags per carton and the carton count before converting.
+Count each charge once. Separate first-order costs from repeat-order charges.
 Keep currencies separate unless you explicitly agree a conversion basis.
 Mark an unknown fee as pending, never as zero.
 Do not treat a provisional total as a final delivered cost while charges remain open.
