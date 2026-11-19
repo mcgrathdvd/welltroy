@@ -1,4 +1,4 @@
-import {createTracker,validMeasurementId,safePath,safeTitle,productSlugs,sourceInfo,readChoice,saveChoice} from './analytics-core.mjs';
+import {createTracker,sanitizeEvent,validMeasurementId,safePath,safeTitle,productSlugs,sourceInfo,readChoice,saveChoice} from './analytics-core.mjs';
 import {campaignForVisit,clearCampaign} from './campaigns.mjs';
 import {buyerLinkAction,projectForQuote} from './buyer-actions.mjs';
 
@@ -6,6 +6,8 @@ let tracker = () => false;
 let initialized = false;
 export const track = (name,details) => tracker(name,details);
 const allDenied = {analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'};
+const pendingMailerPath = 'welltroy:mailer-path-click';
+const mailerPathLifetime = 30_000;
 
 export function initializeAnalytics() {
   if (initialized) return;
@@ -29,9 +31,28 @@ export function initializeAnalytics() {
     const title = safeTitle(config.dataset.pageTitle);
     let campaign = {};
     const canSend = () => choice === 'granted' && loaded;
-    tracker = createTracker({canSend,getPath:() => location.pathname,getTitle:() => title,send:(name,params) => {
-      gtag('event',name,{...params,...campaign,entry_source:campaign.campaign_source ? 'campaign' : source.entry_source,page_referrer:source.page_referrer,send_to:id});
-    }});
+    const send = (name, params, eventSource = source) => {
+      gtag('event',name,{...params,...campaign,entry_source:campaign.campaign_source ? 'campaign' : eventSource.entry_source,page_referrer:eventSource.page_referrer,send_to:id});
+    };
+    tracker = createTracker({canSend,getPath:() => location.pathname,getTitle:() => title,send});
+    const sendArrivingMailerClick = session => {
+      try {
+        const raw = session?.getItem(pendingMailerPath);
+        if (!raw) return;
+        session.removeItem(pendingMailerPath);
+        const pending = JSON.parse(raw);
+        const age = Date.now() - pending.at;
+        if (!Number.isFinite(pending.at) || age < 0 || age > mailerPathLifetime) return;
+        const params = sanitizeEvent('mailer_path_click',{product_slug:pending.product},pending.from,pending.title);
+        if (!params || location.pathname !== '/products/' + params.product_slug + '/' || location.hash !== '#' + params.destination_section) return;
+        const referrer = new URL(document.referrer);
+        if (referrer.origin !== location.origin || referrer.pathname !== params.page_path) return;
+        const eventSource = pending.referrer
+          ? sourceInfo(pending.referrer,location.origin)
+          : {entry_source:['internal','referral'].includes(pending.source) ? pending.source : 'direct_or_unknown',page_referrer:''};
+        send('mailer_path_click',params,eventSource);
+      } catch { /* Storage or a missing referrer must not interfere with navigation. */ }
+    };
     const view = () => {
       if (viewed || !safePath(location.pathname) || !canSend()) return;
       viewed = true;
@@ -57,6 +78,7 @@ export function initializeAnalytics() {
       script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
       document.head.append(script);
       loaded = true;
+      sendArrivingMailerClick(session);
       view();
     };
     const clearCookies = () => {
@@ -84,7 +106,8 @@ export function initializeAnalytics() {
         try { clearCampaign(window.sessionStorage); } catch { /* optional storage */ }
         clearCookies();
         // A loaded third-party script cannot be unloaded. Reload into the blocked state.
-        if (loaded) location.reload();
+      try { window.sessionStorage.removeItem(pendingMailerPath); } catch { /* optional storage */ }
+      if (loaded) location.reload();
       }
       if (next === 'granted' || !loaded) settings.focus({preventScroll:true});
     };
@@ -106,7 +129,21 @@ export function initializeAnalytics() {
         try {
           const url = new URL(link.href);
           const action = buyerLinkAction(link.href, location.origin, location.pathname);
-          if (action) track(action.name, action.details);
+          if (action) {
+            const target = (link.target || document.querySelector('base[target]')?.target || '_self').toLowerCase();
+            // A same-tab navigation can discard a Google tag event before it is sent.
+            // Carry this one click to the destination and keep the native link behavior.
+            if (action.name === 'mailer_path_click' && canSend() && target === '_self' && !url.search
+              && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey
+              && !link.hasAttribute('download') && !link.relList.contains('noreferrer')) {
+              try {
+                window.sessionStorage.setItem(pendingMailerPath,JSON.stringify({
+                  at:Date.now(),from:location.pathname,title,product:action.details.product_slug,
+                  source:source.entry_source,referrer:source.page_referrer
+                }));
+              } catch { track(action.name,action.details); }
+            } else track(action.name,action.details);
+          }
           if (url.protocol === 'mailto:') track('email_click');
           if (url.hostname === 'wa.me') track('whatsapp_click');
           if (url.origin === location.origin && url.pathname === '/quote/') {
