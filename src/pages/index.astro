@@ -11,9 +11,15 @@ import { homeBuyerAnswers } from "../buyer-answers.mjs";
 import { getProductVisual } from "../product-images.mjs";
 import apparelSource from "../assets/new-products/poly-mailers-apparel-packing.jpg";
 import lumiereSource from "../assets/new-products/bubble-mailer-lumiere-case.png";
+import heroMobileSmall from "../assets/home/hero-mobile-480.webp";
+import heroMobileLarge from "../assets/home/hero-mobile-800.webp";
+import heroDesktopSmall from "../assets/home/hero-wide-1280.webp";
+import heroDesktopLarge from "../assets/home/hero-wide-selected.webp";
 const [apparelCase, lumiereCase] = await Promise.all([getProductVisual(apparelSource), getProductVisual(lumiereSource)]);
 const homeFaq = homeBuyerAnswers;
 const coreProducts = ['poly-mailers', 'poly-bubble-mailers', 'zipper-bags'].map(slug => products.find(product => product.slug === slug));
+const heroMobileSrcset = `${heroMobileSmall.src} ${heroMobileSmall.width}w, ${heroMobileLarge.src} ${heroMobileLarge.width}w`;
+const heroDesktopSrcset = `${heroDesktopSmall.src} ${heroDesktopSmall.width}w, ${heroDesktopLarge.src} ${heroDesktopLarge.width}w`;
 
 const organization = {
   "@context": "https://schema.org", "@type": "Organization", "@id": `${site.origin}/#organization`, name: site.name, legalName: site.legalName, url: site.origin,
@@ -25,7 +31,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 ---
 <Layout title="Custom Mailers & Garment Zipper Bags | MOQ 500 | Welltroy" description="Source PE poly mailers, poly and kraft bubble mailers, and frosted or clear garment slider bags from Welltroy. Custom logo printing. MOQ 500 pieces." schemas={[organization, faqSchema]}>
   <section class="hero-wide">
-    <div class="hero-wide-media"><picture><source media="(max-width: 640px)" srcset="/images/hero-mobile-480.webp 480w, /images/hero-mobile-800.webp 800w" sizes="100vw" /><img src="/images/hero-wide-selected.webp" srcset="/images/hero-wide-1280.webp 1280w, /images/hero-wide-selected.webp 1983w" sizes="100vw" alt="An illustrative arrangement of mailers, pouches, labels, wrap and paper bags" width="1983" height="793" fetchpriority="high" decoding="async" /></picture></div>
+    <div class="hero-wide-media">
+      <picture>
+        <source media="(max-width: 640px)" srcset={heroMobileSrcset} sizes="100vw" />
+        <img src={heroDesktopLarge.src} srcset={heroDesktopSrcset} sizes="100vw" alt="An illustrative arrangement of mailers, pouches, labels, wrap and paper bags" width={heroDesktopLarge.width} height={heroDesktopLarge.height} fetchpriority="high" decoding="async" />
+      </picture>
+    </div>
     <div class="container hero-wide-inner">
       <p class="hero-wide-eyebrow">Packaging factory · Custom orders from 500 pieces*</p>
       <h1><span>Custom Poly &amp;</span>{" "}<span>Bubble Mailers</span></h1>
