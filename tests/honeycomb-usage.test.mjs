@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { calculateHoneycombUsage as plan } from '../src/honeycomb-usage.mjs';
-import { honeycombQuoteQuantity } from '../src/quote-options.mjs';
+import { honeycombQuoteQuantity, selectionGuidance } from '../src/quote-options.mjs';
 
 const inputs = { rollMetres: 50, drawCentimetres: 80, allowancePercent: 0, packs: 125 };
 
@@ -14,6 +14,18 @@ test('only valid whole roll estimates can prefill a honeycomb paper quote', () =
     assert.equal(honeycombQuoteQuantity(product, bad), '');
   }
   assert.equal(honeycombQuoteQuantity('kraft-padded-mailers', '3'), '');
+});
+
+test('both honeycomb roll enquiries ask for roll width and unexpanded length', () => {
+  for (const product of ['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls']) {
+    const guidance = selectionGuidance(product);
+    assert.match(guidance.sizePlaceholder, /cm wide × .* m unexpanded/);
+    assert.match(guidance.sizeHelp, /availability/);
+    assert.match(guidance.quantityHelp, /quantity in rolls/);
+    assert.match(guidance.placeholder, /interleaf or dispenser/);
+    assert.equal(guidance.required, false);
+  }
+  assert.equal(selectionGuidance('thermal-labels').sizePlaceholder, undefined);
 });
 
 test('does not pool leftover cuts across rolls', () => {
