@@ -1,8 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { calculateHoneycombUsage as plan } from '../src/honeycomb-usage.mjs';
+import { honeycombQuoteQuantity } from '../src/quote-options.mjs';
 
 const inputs = { rollMetres: 50, drawCentimetres: 80, allowancePercent: 0, packs: 125 };
+
+test('only valid whole roll estimates can prefill a honeycomb paper quote', () => {
+  const product = 'honeycomb-paper-rolls';
+  assert.equal(honeycombQuoteQuantity(product, '1'), '1 roll');
+  assert.equal(honeycombQuoteQuantity(product, '3'), '3 rolls');
+  assert.equal(honeycombQuoteQuantity(product, '10000000'), '10000000 rolls');
+  for (const bad of [null, '', '0', '-1', '1.5', '001', '10000001', '3 rolls', '1e2']) {
+    assert.equal(honeycombQuoteQuantity(product, bad), '');
+  }
+  assert.equal(honeycombQuoteQuantity('kraft-padded-mailers', '3'), '');
+});
 
 test('does not pool leftover cuts across rolls', () => {
   assert.deepEqual(plan(inputs), { allowedDrawCentimetres: 80, packsPerRoll: 62, rollsNeeded: 3 });
