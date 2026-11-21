@@ -119,6 +119,7 @@ export const additionalProducts = [
     sizes: [["Exterior shown", "Plain brown kraft paper"], ["Cushioning", "Select and confirm the lining structure"], ["Closure", "Adhesive strip with release liner"], ["Dimensions", "Outer dimensions and usable inner space confirmed in quote"]],
     applications: ["Small accessories", "Documents and stationery", "Compact retail orders", "Gift shipments"],
     specNeeds: ["Packed product dimensions", "Lining and cushioning requirement", "Paper specification", "Flap and seal details", "Printing and carton quantity"],
+    relatedGuide: { title: "Compare kraft mailer lining and usable dimensions", href: "/guides/kraft-vs-poly-bubble-mailers/#compare" },
     faqs: [{ q: "Which cushioning liner should I choose?", a: "Share the packed product and shipping conditions. We can review a suitable padded construction and confirm the exact lining before quotation." }, customFaq, sampleFaq]
   },
   {
