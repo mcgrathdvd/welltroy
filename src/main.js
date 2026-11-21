@@ -157,7 +157,10 @@ if (quoteForm) {
   const sizeInput = quoteForm.querySelector('[name="size"]');
   if (productSelect.value && requestedSize) sizeInput.value = requestedSize.slice(0, 160);
   const sizeHelp = quoteForm.querySelector('[data-size-help]');
-  const defaultSizeHelp = 'Confirm the model or dimensions for the selected product.';
+  const defaultSizeHelp = sizeHelp.textContent;
+  const defaultSizePlaceholder = sizeInput.placeholder;
+  const selectedSizeHelp = () => selectionGuidance(productSelect.value).sizeHelp ?? defaultSizeHelp;
+  sizeHelp.textContent = selectedSizeHelp();
   let prefilledSize = Boolean(productSelect.value && requestedSize);
   let lastSizeProduct = productSelect.value;
   quoteForm.addEventListener("welltroy:brief-applied", () => {
@@ -167,18 +170,18 @@ if (quoteForm) {
   });
   sizeInput.addEventListener('input', () => {
     prefilledSize = false;
-    sizeHelp.textContent = defaultSizeHelp;
+    sizeHelp.textContent = selectedSizeHelp();
   });
   productSelect.addEventListener('change', () => {
     if (productSelect.value === lastSizeProduct) return;
     if (sizeInput.value.trim()) {
       if (prefilledSize) {
         sizeInput.value = '';
-        sizeHelp.textContent = 'Product changed. Choose a model or enter dimensions for the new product; the previous product model was cleared.';
+        sizeHelp.textContent = `Product changed. The previous size was cleared. ${selectedSizeHelp()}`;
       } else {
         sizeHelp.textContent = 'Product changed. Your entered size was kept; please confirm it applies to the new product.';
       }
-    } else sizeHelp.textContent = defaultSizeHelp;
+    } else sizeHelp.textContent = selectedSizeHelp();
     prefilledSize = false;
     lastSizeProduct = productSelect.value;
   });
@@ -189,6 +192,7 @@ if (quoteForm) {
     quoteForm.querySelector('[data-product-help]').textContent = guidance.help;
     quoteForm.querySelector('[data-quantity-help]').textContent = guidance.quantityHelp;
     quoteForm.querySelector('[data-message-label]').textContent = guidance.message;
+    sizeInput.placeholder = guidance.sizePlaceholder ?? defaultSizePlaceholder;
     quantityInput.placeholder = guidance.quantity;
     messageInput.placeholder = guidance.placeholder;
     messageInput.required = guidance.required;
@@ -450,7 +454,7 @@ if (quoteForm) {
     quoteForm.reset();
     prefilledSize = false;
     lastSizeProduct = productSelect.value;
-    sizeHelp.textContent = defaultSizeHelp;
+    sizeHelp.textContent = selectedSizeHelp();
     selectedFiles = [];
     renderFiles();
     updateGuidance();

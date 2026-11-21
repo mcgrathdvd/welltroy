@@ -18,6 +18,16 @@ test('core product guidance preserves optional enquiries while giving product-sp
   assert.match(selectionGuidance('honeycomb-paper-rolls').quantityHelp,/1 roll/);
 });
 
+test('plain kraft padded mailer guidance asks for usable dimensions and a proposed lining', () => {
+  const guidance = selectionGuidance('kraft-padded-mailers');
+  assert.match(guidance.sizePlaceholder, /usable inner space/);
+  assert.match(guidance.sizeHelp, /usable opening/);
+  assert.match(guidance.placeholder, /lining or cushioning/);
+  assert.match(guidance.quantityHelp, /eligible specifications/);
+  assert.equal(guidance.required, false);
+  assert.equal(selectionGuidance('yellow-kraft-bubble-mailers').sizePlaceholder, undefined);
+});
+
 test('garment options survive the product draft and arrive as editable enquiry requests without contact data', () => {
   const data=new Map();
   const storage={getItem:key=>data.get(key)??null,setItem:(key,value)=>data.set(key,value),removeItem:key=>data.delete(key)};
