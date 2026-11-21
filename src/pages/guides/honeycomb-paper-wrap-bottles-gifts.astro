@@ -33,6 +33,7 @@ const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList
         <p id="usage-example-note" class="muted" hidden>Example only: a 50 m roll, 80 cm per pack, 10% extra paper and 120 packs. Replace these figures with your own trial and quoted specification.</p>
         <p id="usage-error" role="alert" hidden></p>
         <div id="usage-result" class="usage-result" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+        <p><a id="usage-quote" href="/quote/?product=honeycomb-paper-rolls#quote-form" data-quote-placement="content" hidden>Use this roll estimate in an enquiry →</a></p>
       </form>
       <noscript><p>For the calculator, enable JavaScript. You can also calculate manually: complete packs per roll = round down (roll length in cm ÷ paper per pack including allowance); whole rolls = round up (order quantity ÷ complete packs per roll).</p></noscript>
       <p>Planning estimate only. Short rolls, startup waste, packing variation and damaged paper can change the result. Check the quoted length basis and allow for your operation; the result does not establish protective performance.</p>
@@ -56,24 +57,30 @@ const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList
   const error = document.querySelector<HTMLElement>('#usage-error');
   const note = document.querySelector<HTMLElement>('#usage-example-note');
   const example = document.querySelector<HTMLButtonElement>('#usage-example');
-  if (form && result && error && note && example) {
+  const quote = document.querySelector<HTMLAnchorElement>('#usage-quote');
+  if (form && result && error && note && example && quote) {
     const number = new Intl.NumberFormat('en', { maximumFractionDigits: 2 });
     const calculate = () => {
       result.hidden = true;
       error.hidden = true;
+      quote.hidden = true;
       const data = new FormData(form);
       try {
         if ([...data.values()].some(value => String(value).trim() === '')) throw new RangeError('Complete all four fields. Enter 0 if no extra paper allowance is needed.');
         const plan = calculateHoneycombUsage({ rollMetres: Number(data.get('rollMetres')), drawCentimetres: Number(data.get('drawCentimetres')), allowancePercent: Number(data.get('allowancePercent')), packs: Number(data.get('packs')) });
         result.textContent = `Paper per pack with allowance: ${number.format(plan.allowedDrawCentimetres)} cm\nComplete packs per roll: ${number.format(plan.packsPerRoll)}\nWhole rolls for this order: ${number.format(plan.rollsNeeded)}`;
         result.hidden = false;
+        if (note.hidden) {
+          quote.href = `/quote/?product=honeycomb-paper-rolls&rolls=${plan.rollsNeeded}#quote-form`;
+          quote.hidden = false;
+        }
       } catch (problem) {
         error.textContent = problem instanceof Error ? problem.message : 'Check the measurements and units.';
         error.hidden = false;
       }
     };
     form.addEventListener('submit', event => { event.preventDefault(); calculate(); });
-    form.addEventListener('input', () => { result.hidden = true; error.hidden = true; note.hidden = true; });
+    form.addEventListener('input', () => { result.hidden = true; error.hidden = true; note.hidden = true; quote.hidden = true; });
     example.addEventListener('click', () => {
       const values = { rollMetres: '50', drawCentimetres: '80', allowancePercent: '10', packs: '120' };
       for (const [name, value] of Object.entries(values)) {

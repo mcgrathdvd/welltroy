@@ -5,6 +5,13 @@ export const assistedChoices = [
   { slug: 'not-sure', name: 'Not sure — help me choose' }
 ];
 
+export function honeycombQuoteQuantity(product, rolls) {
+  if (product !== 'honeycomb-paper-rolls' || !/^[1-9][0-9]{0,7}$/.test(rolls ?? '')) return '';
+  const count = Number(rolls);
+  if (count > 10_000_000) return '';
+  return count === 1 ? '1 roll' : `${count} rolls`;
+}
+
 export function selectionGuidance(slug) {
   if (slug === 'multiple-products') return {
     help: 'List each product, size and quantity in the requirements below.',

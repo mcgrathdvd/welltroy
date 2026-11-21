@@ -1,5 +1,5 @@
 import { initializeDocumentRequests } from './document-request.js';
-import { selectionGuidance } from "./quote-options.mjs";
+import { honeycombQuoteQuantity, selectionGuidance } from "./quote-options.mjs";
 import { initializeQuoteBrief } from "./quote-brief.js";
 import { initializeAnalytics, track } from "./analytics.js";
 import { confirmedQuote, errorCategory } from "./analytics-core.mjs";
@@ -186,6 +186,18 @@ if (quoteForm) {
     lastSizeProduct = productSelect.value;
   });
   const quantityInput = quoteForm.querySelector('[name="quantity"]');
+  const estimatedRolls = honeycombQuoteQuantity(productSelect.value, quoteParams.get('rolls'));
+  if (estimatedRolls) {
+    quantityInput.value = estimatedRolls;
+    let quantityFromCalculator = true;
+    quantityInput.addEventListener('input', () => { quantityFromCalculator = false; }, { once: true });
+    productSelect.addEventListener('change', () => {
+      if (quantityFromCalculator && productSelect.value !== requestedProduct && quantityInput.value === estimatedRolls) {
+        quantityInput.value = '';
+        quantityFromCalculator = false;
+      }
+    });
+  }
   const messageInput = quoteForm.querySelector('[name="message"]');
   const updateGuidance = () => {
     const guidance = selectionGuidance(productSelect.value);
