@@ -22,6 +22,16 @@ export function selectionGuidance(slug) {
     placeholder: 'Tell us about your goods, approximate size or weight, shipping or retail use, and any branding needs.',
     required: true
   };
+  if (slug === 'kraft-padded-mailers') return {
+    help: 'Plain kraft-paper exterior. Tell us what you are packing and any cushioning needs so we can confirm the proposed lining.',
+    sizePlaceholder: 'e.g. 25 × 32 cm usable inner space',
+    sizeHelp: 'Enter usable inner width × length with units. In the requirements below, note the usable opening and any lining preference.',
+    quantity: 'e.g. 500 pieces, or Not sure',
+    quantityHelp: 'From 500 pieces for eligible specifications. List quantities by size and design.',
+    message: 'Product specifications and printing requirements',
+    placeholder: 'Include packed item dimensions and weight, required opening, lining or cushioning preferences, flap and seal, artwork and carton packing needs.',
+    required: false
+  };
   const core = {
     'zipper-bags': {
       help: 'For folded clothing: frosted is the main finish; clear bags are also available. Slider zippers are the primary closure. Add a separate outer mailer for shipping.',
