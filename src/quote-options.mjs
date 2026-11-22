@@ -68,12 +68,21 @@ export function selectionGuidance(slug) {
     message: 'Product specifications and printing requirements',
     required: false
   };
-  const rolls = ['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls'].includes(slug);
+  if (['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls'].includes(slug)) return {
+    help: 'Confirm the roll width, unexpanded length and paper specification for your wrapping trial.',
+    sizePlaceholder: 'e.g. 38 cm wide × 50 m unexpanded',
+    sizeHelp: 'State the preferred roll width and unexpanded length with units. Confirm availability for that combination.',
+    quantity: 'e.g. 1 roll',
+    quantityHelp: 'Honeycomb paper starts at 1 roll (1 pc). Enter the quantity in rolls.',
+    message: 'Roll specifications and packing requirements',
+    placeholder: 'Include the preferred color, paper weight, any interleaf or dispenser needs, and measured paper used per packed item if available.',
+    required: false
+  };
   const labels = slug === 'thermal-labels';
   return {
     help: 'Choose a product, or select an assisted enquiry above if you need help.',
-    quantity: rolls ? 'e.g. 1 roll' : labels ? 'e.g. 500 rolls; specify labels per roll' : 'e.g. 1,000 pieces',
-    quantityHelp: labels ? 'Specify rolls or fanfold packs and labels per unit; the sales unit will be confirmed.' : rolls ? 'Honeycomb paper starts at 1 roll (1 pc). Enter the quantity in rolls.' : 'Most bags and mailers start at 500 pieces. An estimate is welcome.',
+    quantity: labels ? 'e.g. 500 rolls; specify labels per roll' : 'e.g. 1,000 pieces',
+    quantityHelp: labels ? 'Specify rolls or fanfold packs and labels per unit; the sales unit will be confirmed.' : 'Most bags and mailers start at 500 pieces. An estimate is welcome.',
     message: 'Packaging and printing requirements',
     placeholder: 'Tell us what you are packing, preferred material, colors, logo printing and required schedule.',
     required: false
