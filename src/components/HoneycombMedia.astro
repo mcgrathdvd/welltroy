@@ -1,0 +1,60 @@
+---
+import expanded from "../assets/honeycomb/expanding-paper.jpg";
+import gifts from "../assets/honeycomb/wrapped-gifts.jpg";
+import steps from "../assets/honeycomb/wrapping-steps.jpg";
+import dispenser from "../assets/honeycomb/two-roll-dispenser.jpg";
+import { getProductVisual } from "../product-images.mjs";
+
+const { variant } = Astro.props;
+const productViews = [
+  { source: expanded, crop: [37.5, 22, 60, 33], alt: "Hands stretching brown paper to open the honeycomb cells", caption: "Pull the paper gently to open the cells before wrapping." },
+  { source: gifts, crop: [2, 26, 96, 71], alt: "Gift boxes wrapped in expanded kraft honeycomb paper and tied with ribbon", caption: "Gift presentation example with kraft honeycomb paper." }
+];
+const guideViews = [
+  { source: steps, crop: [3, 21, 44, 28.7], alt: "A kraft roll with honeycomb paper drawn out on a table", caption: "1. Draw out paper and open the cells." },
+  { source: steps, crop: [52, 21, 44, 28.7], alt: "Hands wrapping an item in expanded paper", caption: "2. Wrap with enough overlap to keep the layer in place." },
+  { source: steps, crop: [3, 59, 44, 29], alt: "Hands separating the paper at the end of a wrap", caption: "3. Separate the sheet and record the paper used." },
+  { source: steps, crop: [52, 59, 44, 29], alt: "Wrapped items and paper fill arranged inside a box", caption: "4. Place the wrapped item in the carton and check for movement." },
+  { source: dispenser, crop: [4, 26, 90, 47], alt: "Bench dispenser holding a brown honeycomb paper roll and white interleaf", caption: "Two-roll dispenser example. Confirm the roll and core fit, interleaf and accessories in your quote." }
+];
+const photos = variant === "guide" ? guideViews : productViews;
+const views = await Promise.all(photos.map(async ({ source, crop, alt, caption }) => {
+  const [x, y, width, height] = crop;
+  return {
+    alt, caption, visual: await getProductVisual(source),
+    sizes: `(max-width: 640px) calc(${10000 / width}vw - ${6000 / width}px), 960px`,
+    frameStyle: `--crop-ratio:${source.width * width} / ${source.height * height}; --image-width:${10000 / width}%; --image-left:${-100 * x / width}%; --image-top:${-100 * y / height}%`
+  };
+}));
+---
+<div class="honeycomb-media">
+  <div class="honeycomb-photos">
+    {views.map(({ visual, alt, caption, frameStyle, sizes }) => (
+      <figure>
+        <div class="photo-frame" style={frameStyle}>
+          <img src={visual.image} srcset={visual.imageSrcSet} sizes={sizes} alt={alt} width={visual.imageWidth} height={visual.imageHeight} loading="lazy" decoding="async" />
+        </div>
+        <figcaption>{caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+  {variant === "rolls" && (
+    <figure class="honeycomb-video" id="wrapping-demo">
+      <video controls playsinline preload="none" poster="/media/honeycomb-paper-demo.webp" aria-label="Silent demonstration of honeycomb paper expanding and wrapping">
+        <source src="/media/honeycomb-paper-demo.webm" type="video/webm" />
+        <a href="/media/honeycomb-paper-demo.webm">Open the honeycomb paper demonstration video</a>
+      </video>
+      <figcaption>Silent supplier demonstration of the paper opening and the first wrap. Follow the <a href="/guides/honeycomb-paper-wrap-bottles-gifts/#steps">illustrated wrapping steps</a> for a packing trial.</figcaption>
+    </figure>
+  )}
+</div>
+<style>
+  .honeycomb-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  figure { margin: 0; min-width: 0; padding: 12px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); }
+  .photo-frame { position: relative; overflow: hidden; aspect-ratio: var(--crop-ratio); border-radius: 9px; }
+  .photo-frame img { position: absolute; max-width: none; width: var(--image-width); height: auto; left: var(--image-left); top: var(--image-top); }
+  figcaption { margin-top: 10px; color: var(--muted); font-size: .9rem; }
+  .honeycomb-video { max-width: 760px; margin-top: 16px; scroll-margin-top: 110px; }
+  video { display: block; width: 100%; aspect-ratio: 16 / 7; background: var(--ink); border-radius: 9px; }
+  @media (max-width: 640px) { .honeycomb-photos { grid-template-columns: 1fr; } }
+</style>
