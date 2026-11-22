@@ -25,7 +25,8 @@ test('both honeycomb roll enquiries ask for roll width and unexpanded length', (
     assert.match(guidance.placeholder, /interleaf or dispenser/);
     assert.equal(guidance.required, false);
   }
-  assert.equal(selectionGuidance('thermal-labels').sizePlaceholder, undefined);
+  assert.match(selectionGuidance('thermal-labels').sizeHelp, /across the feed and length along the feed/);
+  assert.match(selectionGuidance('thermal-labels').quantityHelp, /rolls or fanfold packs and labels per unit/);
 });
 
 test('does not pool leftover cuts across rolls', () => {

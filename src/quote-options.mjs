@@ -78,11 +78,20 @@ export function selectionGuidance(slug) {
     placeholder: 'Include the preferred color, paper weight, any interleaf or dispenser needs, and measured paper used per packed item if available.',
     required: false
   };
-  const labels = slug === 'thermal-labels';
+  if (slug === 'thermal-labels') return {
+    help: 'Give your printer model and current media reference so we can check the proposed label specification.',
+    sizePlaceholder: 'e.g. 100 × 150 mm (across × along feed)',
+    sizeHelp: 'Enter label width across the feed and length along the feed. You can include a catalogue TL reference.',
+    quantity: 'e.g. 40 rolls × 500 labels',
+    quantityHelp: 'Specify rolls or fanfold packs and labels per unit; the sales unit will be confirmed.',
+    message: 'Printer, media and application requirements',
+    placeholder: 'Include printer model, print mode, gap or black-mark sensing, roll core and outer diameter or fanfold format, application surface and temperature.',
+    required: false
+  };
   return {
     help: 'Choose a product, or select an assisted enquiry above if you need help.',
-    quantity: labels ? 'e.g. 500 rolls; specify labels per roll' : 'e.g. 1,000 pieces',
-    quantityHelp: labels ? 'Specify rolls or fanfold packs and labels per unit; the sales unit will be confirmed.' : 'Most bags and mailers start at 500 pieces. An estimate is welcome.',
+    quantity: 'e.g. 1,000 pieces',
+    quantityHelp: 'Most bags and mailers start at 500 pieces. An estimate is welcome.',
     message: 'Packaging and printing requirements',
     placeholder: 'Tell us what you are packing, preferred material, colors, logo printing and required schedule.',
     required: false
