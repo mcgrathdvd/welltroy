@@ -1,6 +1,17 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {selectionGuidance} from '../src/quote-options.mjs';
+
+test('all stand-up pouch options ask for the fill and seal without a mailer minimum', () => {
+  for (const product of ['stand-up-pouches', 'custom-stand-up-pouches', 'printed-snack-pouches', 'white-nut-pouches']) {
+    const guidance = selectionGuidance(product);
+    assert.match(guidance.sizeHelp, /bottom gusset.*folded or fully open/);
+    assert.match(guidance.placeholder, /fill weight or volume.*initial seal/);
+    assert.match(guidance.quantityHelp, /per size and artwork version/);
+    assert.doesNotMatch(guidance.quantityHelp, /500/);
+    assert.equal(guidance.required, false);
+  }
+});
 import {briefQuoteFields, saveBrief, readBrief} from '../src/quote-brief.mjs';
 
 test('core product guidance preserves optional enquiries while giving product-specific specification prompts', () => {
