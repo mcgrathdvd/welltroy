@@ -1,0 +1,28 @@
+WELLTROY - STAND-UP POUCH FILL AND SEAL TRIAL
+Use one record for each contents SKU and pouch construction under trial.
+Guide: https://welltroy.com/guides/custom-stand-up-pouch-specification/#buyer-project
+
+PRODUCT AND POUCH
+Contents SKU and sample reference:
+Target fill weight or volume, units and actual trial fill:
+Pouch reference, construction and dieline revision:
+Width, total height and bottom gusset (state folded or fully open):
+Artwork version, zipper or window, if applicable:
+
+FILLING AND INITIAL SEAL
+Filling site, equipment or manual method and trial date:
+Number filled and number checked:
+Filling opening, headspace and product in the seal area:
+Sealing equipment and actual settings used:
+Agreed seal check method, acceptance criteria and observations:
+Filled base and shelf stability; opening and reclosure, if applicable:
+Photo IDs and retained sample references:
+
+REVIEW AND APPROVAL
+Storage and handling conditions represented in this trial:
+Documents requested for the proposed construction, use and destination:
+Quantity per size and artwork version:
+Observed differences, required changes and retest owner:
+Decision, unresolved checks, approver and date:
+
+Keep the filled sample and the agreed specification with this record.
