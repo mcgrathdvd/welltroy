@@ -16,7 +16,7 @@ const article = {
   publisher: { "@id": `${site.origin}/#organization` },
   mainEntityOfPage: `${site.origin}${path}`,
   datePublished: published,
-  dateModified: "2026-11-22",
+  dateModified: "2026-11-23",
   inLanguage: "en"
 };
 const breadcrumbs = {
@@ -36,7 +36,7 @@ const breadcrumbs = {
       <p class="eyebrow">Receiving a bulk packaging order</p>
       <h1>{title}</h1>
       <p class="lead">Start with the carton labels and quantities, then check the bags against the written specification and the approved sample for each version. Record the affected cartons and keep them available if a difference needs review.</p>
-      <p class="muted">By Welltroy · Updated <time datetime="2026-11-22">22 November 2026</time></p>
+      <p class="muted">By Welltroy · Updated <time datetime="2026-11-23">23 November 2026</time></p>
       <div class="button-row">
         <a class="button" href={recordPath} download>Download the Inspection Record (TXT)</a>
         <a class="text-link" href="#record-issues">What to report if something differs →</a>
@@ -47,6 +47,7 @@ const breadcrumbs = {
         <a href="#inspect-bags">Inspect bags</a>
         <a href="#bubble-mailer-checks">Bubble mailers</a>
         <a href="#kraft-padded-checks">Kraft padded mailers</a>
+        <a href="#stand-up-pouch-checks">Stand-up pouches</a>
         <a href="#record-issues">Record issues</a>
       </nav>
     </div>
@@ -87,6 +88,14 @@ const breadcrumbs = {
 
         <h3 id="garment-bag-checks">Garment Zipper Bags</h3>
         <p>Check the finish and artwork with the actual folded garment and inserts. Confirm usable space below the closure, check the zipper type against the approved sample and test loading and full reclosure. Keep the completed inner pack as the reference when it will be used with an outer mailer. <a href="/guides/apparel-inner-bags-and-shipping-mailers/#closure-comparison">Compare garment bag closures →</a></p>
+
+        <h3 id="stand-up-pouch-checks">Stand-up Pouches</h3>
+        <ol>
+          <li>Match carton and bundle labels to the order, artwork version and approved sample. Compare the print sides and any zipper, notch or window with the agreed dieline.</li>
+          <li>Measure width, total height and bottom gusset using the approved measurement points. Keep the same folded or fully open gusset convention used on the order.</li>
+          <li>Where the receiving plan includes a fill trial, use the agreed contents, target fill and sealing setup. Compare opening, headspace, base stability and the initial seal with the approved sample. Record any difference by pouch version and carton or batch.</li>
+        </ol>
+        <p>Use the <a href="/downloads/stand-up-pouch-fill-trial.txt" download>fill and seal trial record (TXT)</a> for the filled sample and the arrival record below for the cartons and quantities checked.</p>
 
         <h2 id="record-issues">4. Record Differences and Arrange a Review</h2>
         <p>Record the affected bag version, carton or batch, agreed requirement, actual finding and photo reference. Keep the number checked, the number found affected in the check, and any quantity still under review in separate fields. Identify and set aside the affected goods while the parties review the finding.</p>
