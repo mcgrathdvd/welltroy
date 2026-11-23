@@ -11,7 +11,7 @@ export const secondaryIndustryPlans = [
     eyebrow:'Retail and event handover', productSlug:'paper-gift-bags',productName:'Paper & Gift Bags',imageKey:'paper',
     imageAlt:'Welltroy illustration of paper carrier bags for retail and gift presentation',
     imageNote:'Paper bag illustration. Paper, handle, finish and load capacity are confirmed for the selected order.',
-    datePublished:'2026-10-31',dateModified:'2026-10-31',
+    datePublished:'2026-10-31',dateModified:'2026-11-23',
     intro:'For boutique owners, retail purchasing teams and event agencies choosing bags customers carry away: start with the actual purchase or gift set, then match the bag, handle and print to the load, brand presentation and handover date. Kraft and colored gift bags can serve the same buyer at different presentation levels.',
     answerQuestion:'Should a boutique choose kraft paper bags or paper gift bags?',
     answer:'Choose by the packed item and presentation brief. Compare kraft bags when a natural paper appearance suits the brand, and paper gift bags when color and presentation are central. Neither name specifies handle strength or paper weight. Test the loaded bag and approve the print on the chosen paper before placing the order.',
