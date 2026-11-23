@@ -17,7 +17,8 @@ export const buyerResources = new Map([
   ['garment-pack-quote-comparison', {product:'multiple-products', path:'/downloads/garment-inner-outer-quote-comparison.txt'}],
   ['bulk-packaging-arrival-inspection', {product:'multiple-products', path:'/downloads/bulk-packaging-arrival-inspection.txt'}],
   ['single-wall-film-thickness', {product:'multiple-products', path:'/downloads/single-wall-film-thickness-record.txt'}],
-  ['thermal-label-print-trial', {product:'thermal-labels', path:'/downloads/thermal-label-print-trial.txt'}]
+  ['thermal-label-print-trial', {product:'thermal-labels', path:'/downloads/thermal-label-print-trial.txt'}],
+  ['stand-up-pouch-fill-trial', {product:'custom-stand-up-pouches', path:'/downloads/stand-up-pouch-fill-trial.txt'}]
 ]);
 
 const mailerPaths = new Map([
