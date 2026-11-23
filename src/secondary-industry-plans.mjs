@@ -65,7 +65,7 @@ export const secondaryIndustryPlans = [
     eyebrow:'Retail product and filling projects',productSlug:'stand-up-pouches',productName:'Stand-up Pouches',imageKey:'pouch',
     imageAlt:'Welltroy stand-up pouch format illustration in several sizes',
     imageNote:'Pouch illustration. Contents, filled capacity, material structure and suitability are confirmed per specification.',
-    datePublished:'2026-10-31',dateModified:'2026-10-31',
+    datePublished:'2026-10-31',dateModified:'2026-11-23',
     intro:'For craft and accessory brands, specialty snack teams and the people who fill their products: define what goes into each pouch and who approves the filled pack. Begin with the contents and sales format, then confirm usable capacity, material, closure, artwork and documents for the selected application.',
     answerQuestion:'What does a retail brand need before ordering stand-up pouches?',
     answer:'Provide the contents, target fill amount, storage conditions, filling and sealing process, artwork versions and destination market. Confirm size with the real product in a sample, then agree the material structure and required evidence. A flat size, zipper or pouch photo does not establish capacity, shelf life or suitability for food.',
