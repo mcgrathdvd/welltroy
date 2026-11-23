@@ -1,0 +1,30 @@
+WELLTROY - THERMAL LABEL PRINT AND APPLICATION TRIAL
+Complete one record per printer, label version and application surface.
+Product checks: https://welltroy.com/products/thermal-labels/#thermal-label-fit
+
+PRINTER AND MEDIA
+Printer make, exact model and print mode:
+Current label reference and proposed sample reference:
+Label width across feed x length along feed (with units):
+Media width including backing and sensing method (gap, mark or other):
+Roll core inside diameter, roll outside diameter and winding direction:
+Fanfold stack size and feed arrangement, if applicable:
+Printer settings used for the trial and ribbon reference, if applicable:
+
+PRINT, SCAN AND APPLY
+Job or template, barcode type and scanner used:
+Number printed and number checked:
+Feed, alignment and print observations:
+Barcode scan results and any unreadable labels:
+Application surface and temperature when applied:
+Expected storage or handling conditions and time before checking:
+Adhesion and legibility observations after handling:
+Agreed acceptance criteria, photo references and open issues:
+
+QUOTE AND APPROVAL
+Rolls or fanfold packs and labels per unit:
+Total labels, units per carton and any separate sample/courier charges:
+Approved supplier specification and label revision:
+Decision, changes to retest, reviewer and date:
+
+Keep the agreed specification and the approved print sample with this record.

@@ -16,7 +16,8 @@ export const buyerResources = new Map([
   ['garment-sample-record', {product:'zipper-bags', path:'/downloads/garment-bag-sample-approval.txt'}],
   ['garment-pack-quote-comparison', {product:'multiple-products', path:'/downloads/garment-inner-outer-quote-comparison.txt'}],
   ['bulk-packaging-arrival-inspection', {product:'multiple-products', path:'/downloads/bulk-packaging-arrival-inspection.txt'}],
-  ['single-wall-film-thickness', {product:'multiple-products', path:'/downloads/single-wall-film-thickness-record.txt'}]
+  ['single-wall-film-thickness', {product:'multiple-products', path:'/downloads/single-wall-film-thickness-record.txt'}],
+  ['thermal-label-print-trial', {product:'thermal-labels', path:'/downloads/thermal-label-print-trial.txt'}]
 ]);
 
 const mailerPaths = new Map([
