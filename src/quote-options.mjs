@@ -88,6 +88,16 @@ export function selectionGuidance(slug) {
     placeholder: 'Include printer model, print mode, gap or black-mark sensing, roll core and outer diameter or fanfold format, application surface and temperature.',
     required: false
   };
+  if (['stand-up-pouches', 'custom-stand-up-pouches', 'printed-snack-pouches', 'white-nut-pouches'].includes(slug)) return {
+    help: 'Tell us what goes in the pouch and how you plan to fill and seal it. If you have made a filled sample, include its dimensions or reference.',
+    sizePlaceholder: 'e.g. 160 × 230 mm + 80 mm bottom gusset',
+    sizeHelp: 'Give width, total height and bottom gusset with units. State whether the gusset is folded or fully open, or enter the catalogue reference.',
+    quantity: 'e.g. 2,000 pouches per artwork version',
+    quantityHelp: 'List pieces per size and artwork version. Confirm the minimum for the proposed structure and print route.',
+    message: 'Contents, filling and sealing requirements',
+    placeholder: 'Include contents, fill weight or volume, headspace, filling method, initial seal, zipper or window, storage and shelf-life target, and any documentation required for your destination.',
+    required: false
+  };
   return {
     help: 'Choose a product, or select an assisted enquiry above if you need help.',
     quantity: 'e.g. 1,000 pieces',
