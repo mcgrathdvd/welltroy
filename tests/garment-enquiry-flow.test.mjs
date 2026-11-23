@@ -2,6 +2,16 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {selectionGuidance} from '../src/quote-options.mjs';
 
+test('retail paper bag quotes capture the formed base and loaded carrying use', () => {
+  for (const product of ['kraft-paper-bags', 'paper-gift-bags']) {
+    const guidance = selectionGuidance(product);
+    assert.match(guidance.sizeHelp, /formed base depth/);
+    assert.match(guidance.placeholder, /maximum weight.*handle preference/);
+    assert.match(guidance.quantityHelp, /split by delivery location/);
+    assert.equal(guidance.required, false);
+  }
+});
+
 test('all stand-up pouch options ask for the fill and seal without a mailer minimum', () => {
   for (const product of ['stand-up-pouches', 'custom-stand-up-pouches', 'printed-snack-pouches', 'white-nut-pouches']) {
     const guidance = selectionGuidance(product);

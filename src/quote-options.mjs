@@ -98,6 +98,16 @@ export function selectionGuidance(slug) {
     placeholder: 'Include contents, fill weight or volume, headspace, filling method, initial seal, zipper or window, storage and shelf-life target, and any documentation required for your destination.',
     required: false
   };
+  if (slug === 'kraft-paper-bags' || slug === 'paper-gift-bags') return {
+    help: 'Share the complete packed purchase or gift kit, including its box or tissue, and the maximum weight the bag will carry.',
+    sizePlaceholder: 'e.g. 25 × 12 × 30 cm (width × depth × height)',
+    sizeHelp: 'Enter your target width, formed base depth and height with units, or give a catalogue reference. Include the packed item dimensions separately.',
+    quantity: 'e.g. 1,000 bags per size and design',
+    quantityHelp: 'List quantities by size, color and artwork. For event orders, give the split by delivery location and the required arrival date.',
+    message: 'Packed load, handles and printing requirements',
+    placeholder: 'Include packed item dimensions and maximum weight, handle preference, any reinforcement, paper color, artwork and required arrival date. Tell us if you need a loaded sample.',
+    required: false
+  };
   return {
     help: 'Choose a product, or select an assisted enquiry above if you need help.',
     quantity: 'e.g. 1,000 pieces',
