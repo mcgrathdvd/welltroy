@@ -1,0 +1,27 @@
+WELLTROY - RETAIL PAPER BAG LOADED SAMPLE RECORD
+Use one record per bag construction and packed purchase or gift kit.
+Guide: https://welltroy.com/guides/custom-paper-bag-size-handles-printing/#handles
+
+BAG AND LOAD
+Bag reference, size and sample revision:
+Paper color and specification, handle attachment and reinforcement:
+Packed contents, including outer box, tissue or inserts:
+Packed item width x depth x height, units and total carried weight:
+Bag opening, formed base width and depth, usable height and units:
+Artwork version and print position:
+
+LOADED TRIAL
+Samples checked, intended carry conditions and checks agreed:
+Insertion and removal, opening clearance and fit at the base:
+Handle comfort and movement at the attachment points:
+Condition of the rim, base, folds and seams after carrying:
+Print appearance on the selected paper and photo references:
+Observations, required changes and what to retest:
+
+QUOTE AND APPROVAL
+Approved sample and specification reference:
+Quantity per size, color and artwork:
+Delivery location split and required arrival dates:
+Decision, open items, reviewer and date:
+
+Use the measured load and carry conditions when comparing samples.
