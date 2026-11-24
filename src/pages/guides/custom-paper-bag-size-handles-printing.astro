@@ -1,6 +1,12 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { site } from "../../data.mjs";
+import { products, site } from "../../data.mjs";
+const sizeChartModels = ['KP01-V', 'KP06-V', 'KP12-H', 'PB01-V', 'PB09-H', 'PB10-H'];
+const sizeChart = products
+  .filter(product => product.slug === 'kraft-paper-bags' || product.slug === 'paper-gift-bags')
+  .flatMap(product => product.sizes
+    .filter(([model]) => sizeChartModels.includes(model))
+    .map(([model, dimensions]) => ({ model, dimensions, name: product.name, slug: product.slug })));
 const path = "/guides/custom-paper-bag-size-handles-printing/";
 const title = "Choosing Custom Paper Bags: Size, Handles and Printing";
 const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, author: { "@type": "Organization", name: "Welltroy" }, publisher: { "@type": "Organization", name: "Welltroy" }, mainEntityOfPage: `${site.origin}${path}`, datePublished: "2026-10-20", dateModified: "2026-11-24" };
@@ -17,6 +23,22 @@ const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList
       <tr><td>Base depth</td><td>A box may fit through the top but not rest flat</td><td>Check the formed base with a sample</td></tr>
       <tr><td>Height and handles</td><td>Overfilled bags may not close or carry comfortably</td><td>Check the item below the handle area</td></tr>
     </tbody></table></div>
+    <h3>Paper Bag Size Chart: Catalogue Examples</h3>
+    <p>Use these six examples to compare vertical and horizontal bags. Dimensions are shown in the order printed in the catalogue. Confirm the measurement order, usable opening and formed base with the supplier before choosing a size.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Paper bag catalogue size chart">
+      <table>
+        <thead><tr><th scope="col">Model and orientation</th><th scope="col">Listed dimensions</th><th scope="col">Product range</th></tr></thead>
+        <tbody>
+          {sizeChart.map(row => (
+            <tr>
+              <th scope="row">{row.model} · {row.model.endsWith('-V') ? 'Vertical' : 'Horizontal'}</th>
+              <td>{row.dimensions}</td>
+              <td><a href={`/products/${row.slug}/`}>{row.name}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
     <h2 id="example">Worked Example: A Boxed Retail Gift</h2>
     <p>Suppose a boxed gift measures 22 × 8 × 20 cm. The <a href="/products/kraft-paper-bags/">Kraft Paper Bags</a> catalogue lists KP06-V at 25 × 13 × 32 cm and KP12-H at 30 × 10 × 25 cm. These are two formats to ask about, not confirmed fits: the catalogue page does not establish usable inner dimensions or a measurement order for every model. If the supplier confirms width × depth × height, the horizontal option has less nominal depth clearance. Test both with the real box, including any tissue, before ordering.</p>
     <p>For a colored presentation bag, compare the <a href="/products/paper-gift-bags/">Paper &amp; Gift Bags</a> range separately. Its PB09-H catalogue entry is 32 × 11 × 27 cm, but color, paper, handles and usable measurements need their own specification. Do not assume the kraft and gift-bag models share a construction just because their listed dimensions are similar.</p>
