@@ -16,7 +16,7 @@ const article = {
   publisher: { "@id": `${site.origin}/#organization` },
   mainEntityOfPage: `${site.origin}${path}`,
   datePublished: published,
-  dateModified: "2026-11-23",
+  dateModified: "2026-11-24",
   inLanguage: "en"
 };
 const breadcrumbs = {
@@ -36,7 +36,7 @@ const breadcrumbs = {
       <p class="eyebrow">Receiving a bulk packaging order</p>
       <h1>{title}</h1>
       <p class="lead">Start with the carton labels and quantities, then check the bags against the written specification and the approved sample for each version. Record the affected cartons and keep them available if a difference needs review.</p>
-      <p class="muted">By Welltroy · Updated <time datetime="2026-11-23">23 November 2026</time></p>
+      <p class="muted">By Welltroy · Updated <time datetime="2026-11-24">24 November 2026</time></p>
       <div class="button-row">
         <a class="button" href={recordPath} download>Download the Inspection Record (TXT)</a>
         <a class="text-link" href="#record-issues">What to report if something differs →</a>
@@ -99,6 +99,14 @@ const breadcrumbs = {
 
         <h2 id="record-issues">4. Record Differences and Arrange a Review</h2>
         <p>Record the affected bag version, carton or batch, agreed requirement, actual finding and photo reference. Keep the number checked, the number found affected in the check, and any quantity still under review in separate fields. Identify and set aside the affected goods while the parties review the finding.</p>
+        <h3 id="inspection-count-example">Example: Report a Difference Found in a Sample</h3>
+        <p>An illustrative order contains 1,000 bags in 10 cartons of 100. The receiving team checks 40 bags across cartons C03 and C04. Three have an adhesive strip that lifts during the agreed closure check.</p>
+        <dl>
+          <dt><strong>Pieces checked</strong></dt><dd>40 across C03 and C04.</dd>
+          <dt><strong>Pieces found affected</strong></dt><dd>3 of the 40 checked. Record the individual findings and photo references.</dd>
+          <dt><strong>Quantity held for review</strong></dt><dd>200 pieces in C03 and C04, including the checked bags and the three affected pieces.</dd>
+        </dl>
+        <p>Report the observation as 3 of 40 checked. Agree whether to extend the check or keep the identified cartons on hold before recording a decision for the order.</p>
         <div class="guide-callout" id="inspection-record">
           <h3>Keep One Record for Each Bag Version</h3>
           <p>Use the blank record for the agreed criteria, checks, photos and follow-up. Before ordering, complete the sampling and acceptance fields with the supplier or inspection team.</p>

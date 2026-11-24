@@ -38,7 +38,7 @@ Any other agreed check:
 FINDINGS AND FOLLOW-UP
 Pieces checked:
 Pieces found affected in those checks:
-Quantity still under review:
+Quantity held pending review and whether it includes pieces already checked:
 Affected carton or batch identifiers:
 Difference, photo references and retained goods:
 Next action, responsible party and review date:
