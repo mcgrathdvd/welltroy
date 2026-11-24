@@ -1,5 +1,5 @@
 import {
-  briefProducts, normalizeBrief, briefText, briefQuoteFields,
+  briefProducts, finishChoices, normalizeBrief, briefText, briefQuoteFields,
   readBrief, saveBrief, clearBrief, fieldsAfterProductChange, quoteFieldsAreEmpty
 } from './quote-brief.mjs';
 import { track } from './analytics.js';
@@ -61,6 +61,18 @@ function initializeBuilder(root) {
     if (saved.material || saved.finishReference || saved.innerSize || saved.closure || saved.liner || saved.appearance || saved.packout || saved.detailPhotos || saved.timing || saved.notes || saved.sample !== 'not-sure') root.querySelector('.brief-more').open = true;
   }
   if (saved && (saved.alternativeQuantities || saved.postalCode || saved.deliveryScope !== 'not-sure' || saved.itemizedQuote)) root.querySelector('[data-brief-delivery]').open = true;
+  if (product === 'metallic-bubble-mailers') {
+    const requestedFinish = new URLSearchParams(location.search).get('finish');
+    const field = form.elements.finish;
+    if (requestedFinish && requestedFinish !== 'not-sure' && Object.hasOwn(finishChoices, requestedFinish)) {
+      if (field.value === 'not-sure') {
+        field.value = requestedFinish;
+        status.textContent = 'A finish from the buying guide has been selected. Review it before continuing.';
+      } else if (field.value !== requestedFinish) {
+        status.textContent = 'Your saved finish has been kept. Change the finish below if you want to compare a different option.';
+      }
+    }
+  }
   render();
   root.querySelector('[data-brief-ui]').hidden = false;
   initializePackedSize(root, { product, catalogue: catalogue[product], saved: selectedComparison, choose: (comparison, trusted) => {
