@@ -137,7 +137,7 @@ export const industryPlans = [...secondaryIndustryPlans,
   },
   {
     "slug": "beauty-holographic-bubble-mailers",
-    "dateModified": "2026-11-07",
+    "dateModified": "2026-11-24",
     "title": "Holographic Bubble Mailers for Beauty Brands",
     "seoTitle": "Holographic Bubble Mailers for Beauty Brands | Welltroy",
     "description": "Plan metallic or holographic bubble mailers for beauty launches. Compare boxed products, finish references, usable inner space, label checks and sample approval.",
