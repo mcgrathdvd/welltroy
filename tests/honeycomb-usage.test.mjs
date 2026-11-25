@@ -6,12 +6,13 @@ import { honeycombQuoteQuantity, selectionGuidance } from '../src/quote-options.
 const inputs = { rollMetres: 50, drawCentimetres: 80, allowancePercent: 0, packs: 125 };
 
 test('only valid whole roll estimates can prefill a honeycomb paper quote', () => {
-  const product = 'honeycomb-paper-rolls';
-  assert.equal(honeycombQuoteQuantity(product, '1'), '1 roll');
-  assert.equal(honeycombQuoteQuantity(product, '3'), '3 rolls');
-  assert.equal(honeycombQuoteQuantity(product, '10000000'), '10000000 rolls');
-  for (const bad of [null, '', '0', '-1', '1.5', '001', '10000001', '3 rolls', '1e2']) {
-    assert.equal(honeycombQuoteQuantity(product, bad), '');
+  for (const product of ['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls']) {
+    assert.equal(honeycombQuoteQuantity(product, '1'), '1 roll');
+    assert.equal(honeycombQuoteQuantity(product, '3'), '3 rolls');
+    assert.equal(honeycombQuoteQuantity(product, '10000000'), '10000000 rolls');
+    for (const bad of [null, '', '0', '-1', '1.5', '001', '10000001', '3 rolls', '1e2']) {
+      assert.equal(honeycombQuoteQuantity(product, bad), '');
+    }
   }
   assert.equal(honeycombQuoteQuantity('kraft-padded-mailers', '3'), '');
 });
