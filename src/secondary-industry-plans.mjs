@@ -119,7 +119,7 @@ export const secondaryIndustryPlans = [
     eyebrow:'Homeware and gift packing operations',productSlug:'honeycomb-paper-rolls',productName:'Honeycomb Paper Rolls',imageKey:'wrap',
     imageAlt:'Expanded honeycomb paper wrapping shown around a product as an application example',
     imageNote:'Wrapping application photograph. The image does not establish transit test results or the required layers for your item.',
-    datePublished:'2026-10-31',dateModified:'2026-10-31',
+    datePublished:'2026-10-31',dateModified:'2026-11-25',
     intro:'For handmade gift sellers, homeware brands and warehouse packing teams comparing roll supplies: assess the wrapping method as part of the complete pack. Approve the coverage and handling routine, then compare paper consumption, roll configuration and replenishment needs.',
     answerQuestion:'How should a homeware seller choose honeycomb paper rolls?',
     answer:'Start with 1 complete roll (1 pc) for a packing trial. Record the width, unexpanded cut length, overlap and any interleaf, then test the actual item in its intended carton and inserts. Use measured consumption to plan repeat quantities. Honeycomb wrap is one packing layer; it does not by itself establish protection for glass or ceramics.',
