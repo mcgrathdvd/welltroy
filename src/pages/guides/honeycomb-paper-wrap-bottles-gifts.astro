@@ -38,7 +38,7 @@ const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList
         <p id="usage-error" role="alert" hidden></p>
         <div id="usage-result" class="usage-result" role="status" aria-live="polite" aria-atomic="true" hidden></div>
         <div id="usage-quote-options" hidden>
-          <p>Carry the estimate to the roll you tested. Confirm the same width, unexpanded length and paper specification in the quotation.</p>
+          <p>Carry the estimated quantity and unexpanded roll length to the roll you tested. Add the tested width and paper specification to your enquiry.</p>
           <div class="usage-actions">
             <a id="usage-quote" href="/quote/?product=honeycomb-paper-rolls#quote-form" data-estimate-product="honeycomb-paper-rolls" data-quote-placement="content">Use estimate for regular rolls →</a>
             <a href="/quote/?product=colored-honeycomb-paper-rolls#quote-form" data-estimate-product="colored-honeycomb-paper-rolls" data-quote-placement="content">Use estimate for colored rolls →</a>
@@ -78,12 +78,18 @@ const breadcrumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList
       const data = new FormData(form);
       try {
         if ([...data.values()].some(value => String(value).trim() === '')) throw new RangeError('Complete all four fields. Enter 0 if no extra paper allowance is needed.');
-        const plan = calculateHoneycombUsage({ rollMetres: Number(data.get('rollMetres')), drawCentimetres: Number(data.get('drawCentimetres')), allowancePercent: Number(data.get('allowancePercent')), packs: Number(data.get('packs')) });
+        const rollMetres = Number(data.get('rollMetres'));
+        const plan = calculateHoneycombUsage({ rollMetres, drawCentimetres: Number(data.get('drawCentimetres')), allowancePercent: Number(data.get('allowancePercent')), packs: Number(data.get('packs')) });
         result.textContent = `Paper per pack with allowance: ${number.format(plan.allowedDrawCentimetres)} cm\nComplete packs per roll: ${number.format(plan.packsPerRoll)}\nWhole rolls for this order: ${number.format(plan.rollsNeeded)}`;
         result.hidden = false;
         if (note.hidden) {
           for (const link of quoteLinks) {
-            link.href = `/quote/?product=${link.dataset.estimateProduct}&rolls=${plan.rollsNeeded}#quote-form`;
+            const params = new URLSearchParams({
+              product: link.dataset.estimateProduct ?? '',
+              rolls: String(plan.rollsNeeded),
+              size: `${rollMetres} m unexpanded roll length`
+            });
+            link.href = `/quote/?${params}#quote-form`;
           }
           quoteOptions.hidden = false;
         }
