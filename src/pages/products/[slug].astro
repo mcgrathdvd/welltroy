@@ -73,8 +73,8 @@ const publishedContentDates = {
   "paper-gift-bags": "2026-11-23",
   "zipper-bags": "2026-11-11",
   "metallic-bubble-mailers": "2026-11-24",
-  "honeycomb-paper-rolls": "2026-11-22",
-  "colored-honeycomb-paper-rolls": "2026-11-22"
+  "honeycomb-paper-rolls": "2026-11-25",
+  "colored-honeycomb-paper-rolls": "2026-11-25"
 };
 const contentModified = publishedContentDates[product.slug] || (secondaryProject || product.slug === 'colored-honeycomb-paper-rolls' ? "2026-10-31" : primaryMailerSlugs.includes(product.slug) ? "2026-10-30" : undefined);
 const mailerComparison = [
@@ -168,6 +168,7 @@ const imageNote = honeycombVariant === "colors" ? "Photographed color examples. 
         <div class="section-head"><div><p class="eyebrow">Product views</p><h2 id="honeycomb-gallery-title">{honeycombVariant === "colors" ? "Paper Colors & Gift Wrapping" : "Honeycomb Paper in Use"}</h2></div></div>
         <HoneycombMedia variant={honeycombVariant} />
         <p><a class="text-link" href="/guides/honeycomb-paper-wrap-bottles-gifts/#steps">See the illustrated wrapping and buying guide →</a></p>
+        <p><a class="text-link" href="/downloads/honeycomb-paper-packing-trial.txt" download>Download the packing trial record (TXT) ↓</a> Check coverage and paper used with the roll you plan to order.</p>
       </div>
     </section>
   ) : product.gallery?.length > 0 && <div id="product-gallery"><ProductGallery product={product} /></div>}
