@@ -20,7 +20,8 @@ export const buyerResources = new Map([
   ['thermal-label-print-trial', {product:'thermal-labels', path:'/downloads/thermal-label-print-trial.txt'}],
   ['stand-up-pouch-fill-trial', {product:'custom-stand-up-pouches', path:'/downloads/stand-up-pouch-fill-trial.txt'}],
   ['retail-paper-bag-loaded-sample', {product:'multiple-products', path:'/downloads/retail-paper-bag-loaded-sample.txt'}],
-  ['bubble-mailer-finish-sample-comparison', {product:'metallic-bubble-mailers', path:'/downloads/bubble-mailer-finish-sample-comparison.txt'}]
+  ['bubble-mailer-finish-sample-comparison', {product:'metallic-bubble-mailers', path:'/downloads/bubble-mailer-finish-sample-comparison.txt'}],
+  ['honeycomb-paper-packing-trial', {product:'honeycomb-paper-rolls', path:'/downloads/honeycomb-paper-packing-trial.txt'}]
 ]);
 
 const mailerPaths = new Map([
