@@ -6,7 +6,7 @@ export const assistedChoices = [
 ];
 
 export function honeycombQuoteQuantity(product, rolls) {
-  if (product !== 'honeycomb-paper-rolls' || !/^[1-9][0-9]{0,7}$/.test(rolls ?? '')) return '';
+  if (!['honeycomb-paper-rolls', 'colored-honeycomb-paper-rolls'].includes(product) || !/^[1-9][0-9]{0,7}$/.test(rolls ?? '')) return '';
   const count = Number(rolls);
   if (count > 10_000_000) return '';
   return count === 1 ? '1 roll' : `${count} rolls`;
