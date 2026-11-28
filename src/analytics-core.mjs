@@ -126,7 +126,7 @@ export function sanitizeEvent(name, details, path, title) {
     result.model = details.model;
   }
   if (name === 'download_catalogue') {
-    if (!['2025-pdf','current-guide-print'].includes(details?.document)) return null;
+    if (!['2025-pdf','2026-pdf','current-guide-print'].includes(details?.document)) return null;
     result.document = details.document;
   }
   if (name === 'sample_interest') {

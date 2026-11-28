@@ -196,7 +196,10 @@ test('runtime size and catalogue clicks produce filtered funnel events without b
   assert.equal(JSON.stringify(sent).includes('private'),false);assert.equal(event.defaultPrevented,false);
   link.href='https://welltroy.com/catalog/Welltroy-Product-Catalog-2025.pdf';link.dataset={};
   env.listeners.click(click());await Promise.resolve();
-  assert.equal(window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event'&&x[1]==='download_catalogue').length,1);
+  link.href='https://welltroy.com/catalog/Welltroy-Product-Catalog-2026.pdf';
+  env.listeners.click(click());await Promise.resolve();
+  const downloads=window.dataLayer.map(x=>Array.from(x)).filter(x=>x[0]==='event'&&x[1]==='download_catalogue');
+  assert.deepEqual(downloads.map(([, , details])=>details.document),['2025-pdf','2026-pdf']);
  } finally {env.restore();}
 });
 

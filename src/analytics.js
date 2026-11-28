@@ -1,6 +1,7 @@
 import {createTracker,sanitizeEvent,validMeasurementId,safePath,safeTitle,productSlugs,sourceInfo,readChoice,saveChoice} from './analytics-core.mjs';
 import {campaignForVisit,clearCampaign} from './campaigns.mjs';
 import {buyerLinkAction,projectForQuote} from './buyer-actions.mjs';
+import {catalogue} from './ordering.mjs';
 
 let tracker = () => false;
 let initialized = false;
@@ -153,7 +154,8 @@ export function initializeAnalytics() {
             track('quote_cta_click',{product_slug:slug,placement:projectId ? 'customer-project' : link.dataset.quotePlacement,project_id:projectId});
             if (link.dataset.model) track('select_size',{product_slug:slug,model:link.dataset.model});
           }
-          if (url.origin === location.origin && url.pathname === '/catalog/Welltroy-Product-Catalog-2025.pdf') track('download_catalogue',{document:'2025-pdf'});
+          if (url.origin === location.origin && url.pathname === catalogue.path) track('download_catalogue',{document:'2026-pdf'});
+          if (url.origin === location.origin && url.pathname === catalogue.archivePath) track('download_catalogue',{document:'2025-pdf'});
         } catch { /* no analytics for invalid links */ }
       });
     });
