@@ -2,8 +2,9 @@ import { coreOrderPolicy, isCoreOrderProduct } from './core-order-policy.mjs';
 export { coreOrderPolicy, coreOrderProducts } from './core-order-policy.mjs';
 
 export const catalogue = {
-  path: '/catalog/Welltroy-Product-Catalog-2025.pdf',
-  label: '2025 Welltroy product catalogue'
+  path: '/catalog/Welltroy-Product-Catalog-2026.pdf',
+  label: '2026 Welltroy product catalogue',
+  archivePath: '/catalog/Welltroy-Product-Catalog-2025.pdf'
 };
 
 export const orderTerms = {
